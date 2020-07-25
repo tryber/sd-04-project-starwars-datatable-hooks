@@ -1,59 +1,63 @@
+/* eslint-disable no-await-in-loop */
 import React from 'react';
-import { cleanup, fireEvent, render, screen } from '@testing-library/react';
-import { act } from 'react-dom/test-utils';
-
-import App from './App';
+import { render, cleanup } from '@testing-library/react';
+import { fireEvent } from '@testing-library/dom';
+import { Provider } from 'react-redux';
+import 'mutationobserver-shim';
+import { applyMiddleware, createStore } from 'redux';
+import thunk from 'redux-thunk';
 import testData from './testData';
+import App from './App';
+import reducer from './reducers';
 
-const ROW_ROLE_SELECTOR = 'row';
-const COLUMN_ROLE_SELECTOR = 'columnheader';
-const INPUT_FILTER_NAME_SELECTOR = 'name-filter';
-const COLUMN_FILTER_SELECTOR = 'column-filter';
-const COMPARISON_FILTER_SELECTOR = 'comparison-filter';
-const VALUE_FILTER_SELECTOR = 'value-filter';
-const BUTTON_FILTER_SELECTOR = 'button-filter';
-const REMOVE_FILTER_SELECTOR = 'filter';
-const SORT_COLUMN_SELECTOR = 'column-sort';
-const SORT_ORDER_ASC_SELECTOR = 'column-sort-input-asc';
-const SORT_ORDER_DESC_SELECTOR = 'column-sort-input-desc';
-const SORT_APPLY_SELECTOR = 'column-sort-button';
-const PLANET_NAME_SELECTOR = 'planet-name';
+const getStore = (initialState) => {
+  if (!initialState) return createStore(reducer, applyMiddleware(thunk));
+  return createStore(reducer, initialState, applyMiddleware(thunk));
+};
+
+const renderApp = (initialState) => {
+  const store = getStore(initialState);
+
+  return {
+    ...render(
+      <Provider store={store}>
+        <App />
+      </Provider>,
+    ),
+    store,
+  };
+};
 
 const mockFetch = () => {
-  jest.spyOn(global, 'fetch')
-    .mockImplementation(() => Promise.resolve({
-      status: 200,
-      ok: true,
-      json: () => Promise.resolve(testData)
-    }));
-}
+  const apiResponse = Promise.resolve({
+    json: () => Promise.resolve(testData),
+    ok: true,
+  });
+  global.fetch = jest.fn(() => apiResponse);
+};
 
-describe('Fazer uma requisição para o endpoint `/planets` da API de Star Wars e preencher uma tabela com os dados retornados, com exceção dos da coluna `residents`', () => {
+describe('1 - Fazer uma requisição para o endpoint /planets da API de Star Wars e preencher uma tabela com os dados retornados, com exceção dos da coluna residents', () => {
   beforeAll(mockFetch);
   beforeEach(cleanup);
 
-  it('realiza uma requisição para a API', async () => {
-    await act(async () => {
-      render(<App />);
-    });
-    expect(global.fetch).toHaveBeenCalled();
+  test('it calls SWAPI', () => {
+    renderApp();
+    expect(fetch).toHaveBeenCalled();
   });
 
-  it('preenche a tabela com os dados retornados', async () => {
-    await act(async () => {
-      render(<App />);
-    });
+  test('it uses SWAPI data', async () => {
+    const { findByText, findAllByText } = renderApp();
     const planets = testData.results;
-    for(let planetIndex in planets) {
-      const name = await screen.findByText(planets[planetIndex].name);
-      const rotationPeriod = await screen.findAllByText(planets[planetIndex].rotation_period);
-      const orbitalPeriod = await screen.findAllByText(planets[planetIndex].orbital_period);
-      const diameter = await screen.findAllByText(planets[planetIndex].diameter);
-      const climate = await screen.findAllByText(planets[planetIndex].climate);
-      const gravity = await screen.findAllByText(planets[planetIndex].gravity);
-      const terrain = await screen.findAllByText(planets[planetIndex].terrain);
-      const surfaceWater = await screen.findAllByText(planets[planetIndex].surface_water);
-      const population = await screen.findAllByText(planets[planetIndex].population);
+    for (let planetIndex = 0; planetIndex < planets.length; planetIndex += 1) {
+      const name = await findByText(planets[planetIndex].name);
+      const rotationPeriod = await findAllByText(planets[planetIndex].rotation_period);
+      const orbitalPeriod = await findAllByText(planets[planetIndex].orbital_period);
+      const diameter = await findAllByText(planets[planetIndex].diameter);
+      const climate = await findAllByText(planets[planetIndex].climate);
+      const gravity = await findAllByText(planets[planetIndex].gravity);
+      const terrain = await findAllByText(planets[planetIndex].terrain);
+      const surfaceWater = await findAllByText(planets[planetIndex].surface_water);
+      const population = await findAllByText(planets[planetIndex].population);
 
       expect(name).toBeInTheDocument();
       expect(rotationPeriod.length).toBeGreaterThanOrEqual(1);
@@ -64,302 +68,409 @@ describe('Fazer uma requisição para o endpoint `/planets` da API de Star Wars 
       expect(terrain.length).toBeGreaterThanOrEqual(1);
       expect(surfaceWater.length).toBeGreaterThanOrEqual(1);
       expect(population.length).toBeGreaterThanOrEqual(1);
-    };
+    }
   });
 
-  it('renderiza uma tabela com 13 colunas', async () => {
-    await act(async () => {
-      render(<App />);
-    });
-    // a requisição (mock) retorna 14 chaves em cada planeta, mas a chave `residents` não deve ser exibida totalizando 13 colunas
-    expect(await screen.findAllByRole(COLUMN_ROLE_SELECTOR)).toHaveLength(13);
+  test('it renders a table with 13 columns', async () => {
+    const { findAllByRole } = renderApp();
+    const tableHeaders = await findAllByRole('columnheader');
+    expect(tableHeaders).toHaveLength(13);
   });
 
-  it('renderiza uma tabela com 11 linhas', async () => {
-    await act(async () => {
-      render(<App />);
-    });
-    // a requisição (mock) retorna 10 planetas, somando com mais um linha do header totalizando 11 linhas
-    expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(11);
+  test('it renders a table with 11 rows', async () => {
+    const { findAllByRole, findByText } = renderApp();
+    await findByText(testData.results[0].name);
+    const tableRows = await findAllByRole('row');
+    expect(tableRows).toHaveLength(11);
   });
 });
 
-// describe('Sua página deve ter um campo de texto que filtra a tabela para somente exibir planetas cujos nomes incluam o texto digitado', () => {
-//   beforeAll(mockFetch);
-//   beforeEach(cleanup);
+describe('2 - Sua página deve ter um campo de texto que filtra a tabela para somente exibir planetas cujos nomes incluam o texto digitado', () => {
+  beforeAll(mockFetch);
+  beforeEach(cleanup);
 
-//   it('renderiza campo de texto para filtro de nomes', async () => {
-//     await act(async () => {
-//       render(<App />);
-//     });
-//     expect(await screen.findByTestId(INPUT_FILTER_NAME_SELECTOR)).toBeInTheDocument();
-//   });
+  test('should have a input field for name filters', async () => {
+    const { findByTestId } = renderApp();
+    const filterField = await findByTestId('name-filter');
+    expect(filterField).toBeInTheDocument();
+  });
 
-//   it('filtra planetas que possuem a letra "o" no nome', async () => {
-//     await act(async () => {
-//       render(<App />);
-//       const input = await screen.findByTestId(INPUT_FILTER_NAME_SELECTOR);
-//       fireEvent.change(input, { target: { value: 'o' } });
-//     });
+  test('input filter should change results', async () => {
+    const { findAllByRole, findByTestId, findByText } = renderApp();
+    const filterField = await findByTestId('name-filter');
 
-//     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(8);
-//     const planetNames = ['Coruscant', 'Dagobah', 'Endor', 'Hoth', 'Kamino', 'Naboo', 'Tatooine'];
-//     for (let planetName of planetNames) {
-//       expect(await screen.findByText(planetName)).toBeInTheDocument();
-//     }
-//   });
+    fireEvent.change(filterField, { target: { value: 'o' } });
+    let tableRows = await findAllByRole('row');
+    expect(tableRows).toHaveLength(8);
+    expect(await findByText('Coruscant')).toBeInTheDocument();
+    expect(await findByText('Dagobah')).toBeInTheDocument();
+    expect(await findByText('Endor')).toBeInTheDocument();
+    expect(await findByText('Hoth')).toBeInTheDocument();
+    expect(await findByText('Kamino')).toBeInTheDocument();
+    expect(await findByText('Naboo')).toBeInTheDocument();
+    expect(await findByText('Tatooine')).toBeInTheDocument();
 
-//   it('filtra planetas que possuem a letra "oo" no nome', async () => {
-//     await act(async () => {
-//       render(<App />);
-//       const input = await screen.findByTestId(INPUT_FILTER_NAME_SELECTOR);
-//       fireEvent.change(input, { target: { value: 'oo' } });
-//     });
+    fireEvent.change(filterField, { target: { value: 'oo' } });
+    tableRows = await findAllByRole('row');
+    expect(tableRows).toHaveLength(3);
+    expect(await findByText('Naboo')).toBeInTheDocument();
+    expect(await findByText('Tatooine')).toBeInTheDocument();
 
-//     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(3);
-//     const planetNames = ['Naboo', 'Tatooine'];
-//     for (let planetName of planetNames) {
-//       expect(await screen.findByText(planetName)).toBeInTheDocument();
-//     }
-//   });
+    fireEvent.change(filterField, { target: { value: '' } });
+  });
 
-//   it('realiza vários filtros em sequência', async () => {
-//     await act(async () => {
-//       render(<App />);
-//       const input = await screen.findByTestId(INPUT_FILTER_NAME_SELECTOR);
-//       fireEvent.change(input, { target: { value: 'o' } });
-//     });
-//     let planetNames = [];
-//     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(8);
-//     planetNames = ['Coruscant', 'Dagobah', 'Endor', 'Hoth', 'Kamino', 'Naboo', 'Tatooine'];
-//     for (let planetName of planetNames) {
-//       expect(await screen.findByText(planetName)).toBeInTheDocument();
-//     }
+  test('should change store filter values', async () => {
+    const { findByTestId, store } = renderApp();
+    const filterField = await findByTestId('name-filter');
+    fireEvent.change(filterField, { target: { value: 'o' } });
+    expect(store.getState().filters.filterByName.name).toEqual('o');
+    fireEvent.change(filterField, { target: { value: 'oo' } });
+    expect(store.getState().filters.filterByName.name).toEqual('oo');
+    fireEvent.change(filterField, { target: { value: '' } });
+    expect(store.getState().filters.filterByName.name).toEqual('');
+  });
+});
 
-//     await act(async () => {
-//       const input = await screen.findByTestId(INPUT_FILTER_NAME_SELECTOR);
-//       fireEvent.change(input, { target: { value: 'oo' } });
-//     });
-//     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(3);
-//     planetNames = ['Naboo', 'Tatooine'];
-//     for (let planetName of planetNames) {
-//       expect(await screen.findByText(planetName)).toBeInTheDocument();
-//     }
+describe('3 - Sua página deve ter um filtro para valores numéricos', () => {
+  beforeAll(mockFetch);
+  beforeEach(cleanup);
 
-//     await act(async () => {
-//       const input = await screen.findByTestId(INPUT_FILTER_NAME_SELECTOR);
-//       fireEvent.change(input, { target: { value: '' } });
-//     });
-//     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(11);
-//     planetNames = ['Alderaan', 'Bespin', 'Coruscant', 'Dagobah', 'Endor', 'Hoth', 'Kamino', 'Naboo', 'Tatooine', 'Yavin IV'];
-//     for (let planetName of planetNames) {
-//       expect(await screen.findByText(planetName)).toBeInTheDocument();
-//     }
-//   });
-// });
+  test('should have the column selection filter', async () => {
+    const { findByTestId } = renderApp();
 
-// describe('Sua página deve ter um filtro para valores numéricos', () => {
-//   beforeAll(mockFetch);
-//   beforeEach(cleanup);
+    const columnFilter = await findByTestId('column-filter');
 
-//   it('renderiza o filtro de coluna', async () => {
-//     await act(async () => {
-//       render(<App />);
-//     });
+    expect(columnFilter).toHaveProperty('nodeName', 'SELECT');
 
-//     const column = await screen.findByTestId(COLUMN_FILTER_SELECTOR);
-//     expect(column).toHaveProperty('nodeName', 'SELECT');
-//     const columns = ['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
-//     const foundColumnFilter = Array.from(column.children).map(child => {
-//       expect(child).toHaveProperty('nodeName', 'OPTION');
-//       return child.innerHTML;
-//     });
-//     expect(foundColumnFilter).toEqual(expect.arrayContaining(columns));
-//   });
+    expect(columnFilter.children).toHaveLength(6);
 
-//   it('renderiza o filtro de comparação', async () => {
-//     await act(async () => {
-//       render(<App />);
-//     });
+    const expectedColumnFilters = [
+      'population',
+      'orbital_period',
+      'diameter',
+      'rotation_period',
+      'surface_water',
+    ];
 
-//     const column = await screen.findByTestId(COMPARISON_FILTER_SELECTOR);
-//     expect(column).toHaveProperty('nodeName', 'SELECT');
-//     const columns = ['maior que', 'igual a', 'menor que'];
-//     const foundComparisonFilter = Array.from(column.children).map(child => {
-//       expect(child).toHaveProperty('nodeName', 'OPTION');
-//       return child.innerHTML;
-//     });
-//     expect(foundComparisonFilter).toEqual(expect.arrayContaining(columns));
-//   });
+    const foundColumnFilterArray = [];
 
-//   it('renderiza o campo para o valor do filtro', async () => {
-//     await act(async () => {
-//       render(<App />);
-//     });
+    for (let index = 0; index < columnFilter.children.length; index += 1) {
+      const item = columnFilter.children[index];
+      expect(item).toHaveProperty('nodeName', 'OPTION');
+      foundColumnFilterArray.push(item.innerHTML);
+    }
 
-//     expect(await screen.findByTestId(VALUE_FILTER_SELECTOR)).toHaveProperty('nodeName', 'INPUT');
-//   });
+    expect(foundColumnFilterArray).toEqual(expect.arrayContaining(expectedColumnFilters));
+  });
 
-//   it('renderiza o botão para executar a filtragem', async () => {
-//     await act(async () => {
-//       render(<App />);
-//     });
+  test('should have the comparison selection filter', async () => {
+    const { findByTestId } = renderApp();
 
-//     expect(await screen.findByTestId(BUTTON_FILTER_SELECTOR)).toHaveProperty('nodeName', 'BUTTON');
-//   });
+    const comparisonFilter = await findByTestId('comparison-filter');
 
-//   it('filtra utilizando a comparação "menor que"', async () => {
-//     await act(async () => {
-//       render(<App />);
-//     });
+    expect(comparisonFilter).toHaveProperty('nodeName', 'SELECT');
 
-//     fireEvent.change(await screen.findByTestId(COLUMN_FILTER_SELECTOR), { target: { value: 'surface_water' }});
-//     fireEvent.change(await screen.findByTestId(COMPARISON_FILTER_SELECTOR), { target: { value: 'menor que' }});
-//     fireEvent.change(await screen.findByTestId(VALUE_FILTER_SELECTOR), { target: { value: '40' }});
-//     fireEvent.click(await screen.findByTestId(BUTTON_FILTER_SELECTOR));
+    expect(comparisonFilter.children).toHaveLength(4);
 
-//     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(7);
-//   });
+    const expectedColumnComparisons = [
+      'maior que',
+      'igual a',
+      'menor que',
+    ];
 
-//   it('filtra utilizando a comparação "maior que"', async () => {
-//     await act(async () => {
-//       render(<App />);
-//     });
+    const foundComparisonFilterArray = [];
 
-//     fireEvent.change(await screen.findByTestId(COLUMN_FILTER_SELECTOR), { target: { value: 'diameter' }});
-//     fireEvent.change(await screen.findByTestId(COMPARISON_FILTER_SELECTOR), { target: { value: 'maior que' }});
-//     fireEvent.change(await screen.findByTestId(VALUE_FILTER_SELECTOR), { target: { value: '8900' }});
-//     fireEvent.click(await screen.findByTestId(BUTTON_FILTER_SELECTOR));
+    for (let index = 0; index < comparisonFilter.children.length; index += 1) {
+      const item = comparisonFilter.children[index];
+      expect(item).toHaveProperty('nodeName', 'OPTION');
+      foundComparisonFilterArray.push(item.innerHTML);
+    }
 
-//     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(8);
-//   });
+    expect(foundComparisonFilterArray).toEqual(expect.arrayContaining(expectedColumnComparisons));
+  });
 
-//   it('filtra utilizando a comparação "igual a"', async () => {
-//     await act(async () => {
-//       render(<App />);
-//     });
+  test('should have the value input filter', async () => {
+    const { findByTestId } = renderApp();
 
-//     fireEvent.change(await screen.findByTestId(COLUMN_FILTER_SELECTOR), { target: { value: 'population' }});
-//     fireEvent.change(await screen.findByTestId(COMPARISON_FILTER_SELECTOR), { target: { value: 'igual a' }});
-//     fireEvent.change(await screen.findByTestId(VALUE_FILTER_SELECTOR), { target: { value: '200000' }});
-//     fireEvent.click(await screen.findByTestId(BUTTON_FILTER_SELECTOR));
+    const valueFilter = await findByTestId('value-filter');
 
-//     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(2);
-//   });
-// });
+    expect(valueFilter).toHaveProperty('nodeName', 'INPUT');
+  });
 
-// describe('Sua página não deve utilizar filtros repetidos', () => {
-//   beforeAll(mockFetch);
-//   beforeEach(cleanup);
+  test('should have the filter button', async () => {
+    const { findByTestId } = renderApp();
 
-//   it('filtra por população e o remove das opções', async () => {
-//     await act(async () => {
-//       render(<App />);
-//     });
+    const buttonFilter = await findByTestId('button-filter');
 
-//     let column = null;
-//     let foundColumnFilter = null;
+    expect(buttonFilter).toHaveProperty('nodeName', 'BUTTON');
+  });
 
-//     column = await screen.findByTestId(COLUMN_FILTER_SELECTOR);
-//     expect(column).toHaveProperty('nodeName', 'SELECT');
-//     foundColumnFilter = Array.from(column.children).map(child => {
-//       expect(child).toHaveProperty('nodeName', 'OPTION');
-//       return child.innerHTML;
-//     });
-//     expect(foundColumnFilter).toEqual(expect.arrayContaining(['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water']));
+  test('should filter with less than', async () => {
+    const { findByTestId, findAllByRole, store } = renderApp();
 
-//     fireEvent.change(await screen.findByTestId(COLUMN_FILTER_SELECTOR), { target: { value: 'population' }});
-//     fireEvent.change(await screen.findByTestId(COMPARISON_FILTER_SELECTOR), { target: { value: 'maior que' }});
-//     fireEvent.change(await screen.findByTestId(VALUE_FILTER_SELECTOR), { target: { value: '8000' }});
-//     fireEvent.click(await screen.findByTestId(BUTTON_FILTER_SELECTOR));
-//     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(8);
+    const columnFilter = await findByTestId('column-filter');
+    const comparisonFilter = await findByTestId('comparison-filter');
+    const valueFilter = await findByTestId('value-filter');
+    const buttonFilter = await findByTestId('button-filter');
 
-//     column = await screen.findByTestId(COLUMN_FILTER_SELECTOR);
-//     expect(column).toHaveProperty('nodeName', 'SELECT');
-//     foundColumnFilter = Array.from(column.children).map(child => {
-//       expect(child).toHaveProperty('nodeName', 'OPTION');
-//       return child.innerHTML;
-//     });
-//     expect(foundColumnFilter).toEqual(expect.arrayContaining(['orbital_period', 'diameter', 'rotation_period', 'surface_water']));
-//   });
-// });
+    fireEvent.change(columnFilter, { target: { value: 'surface_water' } });
+    fireEvent.change(comparisonFilter, { target: { value: 'menor que' } });
+    fireEvent.change(valueFilter, { target: { value: '40' } });
+    fireEvent.click(buttonFilter);
 
-// describe('Cada filtro de valores numéricos deve ter um ícone de `X` que, ao ser clicado, o apaga e desfaz suas filtragens dos dados da tabela', () => {
-//   beforeAll(mockFetch);
-//   beforeEach(cleanup);
+    const tableRows = await findAllByRole('row');
+    expect(tableRows).toHaveLength(7);
 
-//   const removeFilter = async () => {
-//     const filters = await screen.findAllByTestId(REMOVE_FILTER_SELECTOR);
-//     fireEvent.click(filters[0].querySelector('button'));
-//   };
+    const expectedFilters = [
+      { column: 'surface_water', comparison: 'menor que', value: '40' },
+    ];
+    expect(store.getState().filters.filterByNumericValues).toEqual(expectedFilters);
+  });
 
-//   it('adiciona e remove um filtro', async () => {
-//     await act(async () => {
-//       render(<App />);
-//     });
-//     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(11);
+  test('should filter with greather than', async () => {
+    const initialState = getStore().getState();
+    const initial = {
+      ...initialState,
+      filters:
+      {
+        ...initialState.filters,
+        filterByNumericValues:
+        [
+          { column: 'surface_water', comparison: 'menor que', value: '40' },
+        ],
+      },
+    };
+    const { findByTestId, findAllByRole, store } = renderApp(initial);
 
-//     fireEvent.change(await screen.findByTestId(COLUMN_FILTER_SELECTOR), { target: { value: 'diameter' }});
-//     fireEvent.change(await screen.findByTestId(COMPARISON_FILTER_SELECTOR), { target: { value: 'maior que' }});
-//     fireEvent.change(await screen.findByTestId(VALUE_FILTER_SELECTOR), { target: { value: '8900' }});
-//     fireEvent.click(await screen.findByTestId(BUTTON_FILTER_SELECTOR));
-//     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(8);
+    const columnFilter = await findByTestId('column-filter');
+    const comparisonFilter = await findByTestId('comparison-filter');
+    const valueFilter = await findByTestId('value-filter');
+    const buttonFilter = await findByTestId('button-filter');
 
-//     await removeFilter();
+    fireEvent.change(columnFilter, { target: { value: 'diameter' } });
+    fireEvent.change(comparisonFilter, { target: { value: 'maior que' } });
+    fireEvent.change(valueFilter, { target: { value: '8900' } });
+    fireEvent.click(buttonFilter);
 
-//     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(11);
-//   });
+    const tableRows = await findAllByRole('row');
 
-//   it('adiciona e remove dois filtros', async () => {
-//     await act(async () => {
-//       render(<App />);
-//     });
-//     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(11);
+    expect(tableRows).toHaveLength(5);
 
-//     fireEvent.change(await screen.findByTestId(COLUMN_FILTER_SELECTOR), { target: { value: 'diameter' }});
-//     fireEvent.change(await screen.findByTestId(COMPARISON_FILTER_SELECTOR), { target: { value: 'maior que' }});
-//     fireEvent.change(await screen.findByTestId(VALUE_FILTER_SELECTOR), { target: { value: '8900' }});
-//     fireEvent.click(await screen.findByTestId(BUTTON_FILTER_SELECTOR));
-//     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(8);
+    const expectedFilters = [
+      { column: 'surface_water', comparison: 'menor que', value: '40' },
+      { column: 'diameter', comparison: 'maior que', value: '8900' },
+    ];
+    expect(store.getState().filters.filterByNumericValues).toEqual(expectedFilters);
+  });
 
-//     fireEvent.change(await screen.findByTestId(COLUMN_FILTER_SELECTOR), { target: { value: 'population' }});
-//     fireEvent.change(await screen.findByTestId(COMPARISON_FILTER_SELECTOR), { target: { value: 'menor que' }});
-//     fireEvent.change(await screen.findByTestId(VALUE_FILTER_SELECTOR), { target: { value: '1000000' }});
-//     fireEvent.click(await screen.findByTestId(BUTTON_FILTER_SELECTOR));
-//     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(3);
+  test('should filter with equal to', async () => {
+    const initialState = getStore().getState();
 
-//     await removeFilter();
+    const initial = {
+      ...initialState,
+      filters:
+      {
+        ...initialState.filters,
+        filterByNumericValues:
+        [
+          { column: 'surface_water', comparison: 'menor que', value: '40' },
+          { column: 'diameter', comparison: 'maior que', value: '8900' }
+        ],
+      },
+    };
 
-//     await removeFilter();
+    const {
+      findByTestId,
+      findAllByRole,
+      findByText,
+      store,
+    } = renderApp(initial);
 
-//     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(11);
-//   });
-// });
+    const columnFilter = await findByTestId('column-filter');
+    const comparisonFilter = await findByTestId('comparison-filter');
+    const valueFilter = await findByTestId('value-filter');
+    const buttonFilter = await findByTestId('button-filter');
 
-// describe('As colunas da tabela devem ser ordenáveis de forma ascendente ou descendente', () => {
-//   beforeAll(mockFetch);
-//   beforeEach(cleanup);
+    fireEvent.change(columnFilter, { target: { value: 'population' } });
+    fireEvent.change(comparisonFilter, { target: { value: 'igual a' } });
+    fireEvent.change(valueFilter, { target: { value: '200000' } });
+    fireEvent.click(buttonFilter);
 
-//   it('verifica ordenação inicial', async () => {
-//     await act(async () => {
-//       render(<App />);
-//     });
-//     const expected = ['Alderaan', 'Bespin', 'Coruscant', 'Dagobah', 'Endor', 'Hoth', 'Kamino', 'Naboo', 'Tatooine', 'Yavin IV' ];
-//     const planets = await screen.findAllByTestId(PLANET_NAME_SELECTOR);
-//     const actual = planets.map(planet => planet.innerHTML);
-//     expect(actual).toEqual(expected);
-//   });
+    const tableRows = await findAllByRole('row');
 
-//   it('ordena os planetas do mais populoso para o menos populoso', async () => {
-//     await act(async () => {
-//       render(<App />);
-//     });
-//     fireEvent.change(await screen.findByTestId(SORT_COLUMN_SELECTOR), { target: { value: 'orbital_period' }});
-//     fireEvent.click(await screen.findByTestId(SORT_ORDER_DESC_SELECTOR));
-//     fireEvent.click(await screen.findByTestId(SORT_APPLY_SELECTOR));
-//     const expected = ['Bespin', 'Yavin IV', 'Hoth', 'Kamino', 'Endor', 'Coruscant', 'Alderaan', 'Dagobah', 'Naboo', 'Tatooine'];
-//     const planets = await screen.findAllByTestId(PLANET_NAME_SELECTOR);
-//     const actual = planets.map(planet => planet.innerHTML);
-//     expect(actual).toEqual(expected);
-//   });
-// });
+    expect(tableRows).toHaveLength(2);
+    expect(await findByText('Tatooine')).toBeInTheDocument();
+
+    const expectedFilters = [
+      { column: 'surface_water', comparison: 'menor que', value: '40' },
+      { column: 'diameter', comparison: 'maior que', value: '8900' },
+      { column: 'population', comparison: 'igual a', value: '200000' },
+    ];
+    expect(store.getState().filters.filterByNumericValues).toEqual(expectedFilters);
+  });
+});
+
+describe('4 -  Sua página deverá ser carregada com somente um filtro de valores numéricos', () => {
+  test('check avaiable filters', async () => {
+    const initialState = getStore().getState();
+
+    const initial = {
+      ...initialState,
+      filters:
+      {
+        ...initialState.filters,
+        filterByNumericValues:
+        [
+          { column: 'surface_water', comparison: 'menor que', value: '40' },
+          { column: 'diameter', comparison: 'maior que', value: '8900' },
+          { column: 'population', comparison: 'igual a', value: '200000' },
+        ],
+      },
+    };
+
+    const { findByTestId } = renderApp(initial);
+
+    const columnFilter = await findByTestId('column-filter');
+
+    expect(columnFilter.children).toHaveLength(3);
+
+    const expectedColumnFilters = [
+      'orbital_period',
+      'rotation_period',
+    ];
+
+    const foundColumnFilterArray = [];
+
+    for (let index = 0; index < columnFilter.children.length; index += 1) {
+      const filter = columnFilter.children[index];
+      foundColumnFilterArray.push(filter.innerHTML);
+    }
+
+    expect(foundColumnFilterArray).toEqual(expect.arrayContaining(expectedColumnFilters));
+  });
+});
+
+describe('5 - Cada filtro de valores numéricos deve ter um ícone de X que, ao ser clicado, o apaga e desfaz suas filtragens dos dados da tabela', () => {
+  test('should show the previously selected filters', async () => {
+    const initialState = getStore().getState();
+
+    const initial = {
+      ...initialState,
+      filters:
+      {
+        ...initialState.filters,
+        filterByNumericValues:
+        [
+          { column: 'surface_water', comparison: 'menor que', value: '40' },
+          { column: 'diameter', comparison: 'maior que', value: '8900' },
+          { column: 'population', comparison: 'igual a', value: '200000' },
+        ],
+      },
+    };
+
+    const { findAllByTestId } = renderApp(initial);
+    const selectedFilters = await findAllByTestId('filter');
+    expect(selectedFilters).toHaveLength(3);
+  });
+
+  test('each filter should have a X button that removes the filter', async () => {
+    const initialState = getStore().getState();
+
+    const initial = {
+      ...initialState,
+      filters:
+      {
+        ...initialState.filters,
+        filterByNumericValues:
+        [
+          { column: 'surface_water', comparison: 'menor que', value: '40' },
+          { column: 'diameter', comparison: 'maior que', value: '8900' },
+          { column: 'population', comparison: 'igual a', value: '200000' },
+        ],
+      },
+    };
+
+    const { findAllByTestId, queryAllByTestId, store } = renderApp(initial);
+    let selectedFilters = await findAllByTestId('filter');
+    let removeButton = selectedFilters[0].querySelector('button');
+
+    fireEvent.click(removeButton);
+
+    selectedFilters = await findAllByTestId('filter');
+    removeButton = selectedFilters[0].querySelector('button');
+    fireEvent.click(removeButton);
+
+    selectedFilters = await findAllByTestId('filter');
+    removeButton = selectedFilters[0].querySelector('button');
+    fireEvent.click(removeButton);
+
+    selectedFilters = queryAllByTestId('filter');
+
+    expect(selectedFilters).toHaveLength(0);
+    expect(store.getState().filters.filterByNumericValues).toHaveLength(0);
+  });
+});
+
+describe('6 - As colunas da tabela devem ser ordenáveis de forma ascendente ou descendente', () => {
+  test('check planet table starting order', async () => {
+    let sortedPlanets = [];
+
+    for (let index = 0; index < testData.results.length; index += 1) {
+      const planet = testData.results[index];
+      sortedPlanets.push(planet.name);
+    }
+
+    sortedPlanets = sortedPlanets.sort();
+
+    const { findAllByRole, findByText, store } = renderApp();
+    await findByText(testData.results[0].name);
+    const rows = await findAllByRole('row');
+    const appPlanetList = [];
+
+    for (let index = 0; index < rows.length; index += 1) {
+      const row = rows[index];
+      appPlanetList.push(row.children[0].innerHTML);
+    }
+
+    appPlanetList.shift();
+    expect(sortedPlanets).toEqual(appPlanetList);
+    expect(store.getState().filters.order.column).toEqual('Name');
+    expect(store.getState().filters.order.sort).toEqual('ASC');
+  });
+
+  test('change table order', async () => {
+    let sortedPlanets = [];
+
+    for (let index = 0; index < testData.results.length; index += 1) {
+      const planet = testData.results[index];
+      sortedPlanets.push(parseInt(planet.diameter, 10));
+    }
+
+    sortedPlanets = sortedPlanets.sort((a, b) => a - b);
+
+    const { findByTestId, findAllByTestId, findAllByRole } = renderApp();
+    const columnSort = await findByTestId('column-sort');
+    const sortButton = await findByTestId('column-sort-button');
+    const sortInput = await findAllByTestId('column-sort-input');
+
+    fireEvent.change(columnSort, { target: { value: 'diameter' } });
+
+    const ascInput = sortInput.filter((input) => input.value === 'DESC')[0];
+
+    fireEvent.click(ascInput);
+
+    fireEvent.click(sortButton);
+
+    const rows = await findAllByRole('row');
+    const appPlanetList = [];
+
+    for (let index = 0; index < rows.length; index += 1) {
+      const row = rows[index];
+      appPlanetList.push(parseInt(row.children[3].innerHTML, 10));
+    }
+
+    appPlanetList.shift();
+
+    expect(appPlanetList).toEqual(sortedPlanets.reverse());
+  });
+});
