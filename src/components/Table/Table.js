@@ -65,22 +65,18 @@ const Table = () => {
     SWAPI: { loading, data },
     filters: {
       filterByName: { name },
-      filterByNumericValues,
-      order,
     },
   } = context;
 
-  const renderTableHead = () => {
-    return (
-      <thead>
-        <tr>
-          {thead.map((th) => (
-            <th key={th}>{th}</th>
-          ))}
-        </tr>
-      </thead>
-    );
-  };
+  const renderTableHead = () => (
+    <thead>
+      <tr>
+        {thead.map((th) => (
+          <th key={th}>{th}</th>
+        ))}
+      </tr>
+    </thead>
+  );
 
   const renderTableBody = () => {
     // const { thead } = this.state;

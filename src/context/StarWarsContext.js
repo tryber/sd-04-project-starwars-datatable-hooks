@@ -1,4 +1,6 @@
 import React, { createContext, useState } from 'react';
+import PropTypes from 'prop-types';
+
 import fetchSWAPI from '../services/fetchSWAPI';
 
 export const StarWarsContext = createContext();
@@ -30,3 +32,7 @@ const StarWarsContextProvider = ({ children }) => {
 };
 
 export default StarWarsContextProvider;
+
+StarWarsContextProvider.propTypes = {
+  children: PropTypes.any,
+};

@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+// import { connect } from 'react-redux';
+// import PropTypes from 'prop-types';
 // import { getSWAPI } from '../actions';
 
 import { StarWarsContext } from '../context/StarWarsContext';
