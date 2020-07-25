@@ -1,7 +1,4 @@
 import React, { useContext } from 'react';
-// import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
-// import { filterByNumericValues } from '../../actions/index';
 import { StarWarsContext } from '../../context/StarWarsContext';
 
 const initialColumnOptions = [
@@ -24,7 +21,6 @@ const FilterByNumericValues = () => {
     functions,
   } = useContext(StarWarsContext);
 
-  // const { filteredColumns } = props;
   const [column, setColumn] = React.useState('');
   const [comparison, setComparison] = React.useState('');
   const [value, setValue] = React.useState('');
@@ -55,14 +51,4 @@ const FilterByNumericValues = () => {
   );
 };
 
-// const mapStateToProps = (state) => ({
-//   filteredColumns: state.filters.filterByNumericValues,
-// });
-
 export default FilterByNumericValues;
-// export default connect(mapStateToProps, { filterByNumericValues })(FilterByNumericValues);
-
-// FilterByNumericValues.propTypes = {
-//   filterByNumericValues: PropTypes.func.isRequired,
-//   filteredColumns: PropTypes.arrayOf(PropTypes.object).isRequired,
-// };

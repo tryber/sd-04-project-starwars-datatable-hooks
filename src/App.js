@@ -1,14 +1,15 @@
 import React from 'react';
-
-import './App.css';
-import Table from './components/Table/Table';
-import GetSWAPI from './components/GetSWAPI';
-import FilterByName from './components/FilterByName/FilterByName';
-import FilterByNumericValues from './components/FilterByNumericValues/FilterByNumericValues';
-import NumericFilters from './components/NumericFilters/NumericFilters';
-import Order from './components/Order/Order';
-
 import StarWarsContext from './context/StarWarsContext';
+import {
+  FilterByName,
+  FilterByNumericValues,
+  NumericFilters,
+  Order,
+  GetSWAPI,
+  Table,
+} from './components';
+import './App.css';
+
 
 function App() {
   return (
