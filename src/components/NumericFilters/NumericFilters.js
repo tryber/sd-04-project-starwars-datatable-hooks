@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { resetFilter } from '../../actions';
+// import { connect } from 'react-redux';
+// import PropTypes from 'prop-types';
+// import { resetFilter } from '../../actions';
 import { StarWarsContext } from '../../context/StarWarsContext';
 
 const NumericFilters = (props) => {

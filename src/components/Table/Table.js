@@ -79,13 +79,6 @@ const Table = () => {
   );
 
   const renderTableBody = () => {
-    // const { thead } = this.state;
-    // const { inputName } = this.props;
-
-    // const filteredByNamePlanets = this.filterPlanetsByName(inputName);
-    // const filteredPlanets = this.filterPlanetsByNumericValues(filteredByNamePlanets);
-
-    // const filteredSortedPlanets = this.sortPlanets(filteredPlanets);
 
     const filteredByNamePlanets = filterPlanetsByName(data, name);
     const filteredPlanets = filterPlanetsByNumericValues(

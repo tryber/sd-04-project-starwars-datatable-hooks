@@ -18,13 +18,13 @@ const columnsToRender = (columnsNotRender) => {
   return initialColumnOptions.filter((columnOption) => !usedColumns.includes(columnOption));
 };
 
-const FilterByNumericValues = (props) => {
+const FilterByNumericValues = () => {
   const {
     filters: { filterByNumericValues: numericFilters },
     functions,
   } = useContext(StarWarsContext);
 
-  const { filteredColumns } = props;
+  // const { filteredColumns } = props;
   const [column, setColumn] = React.useState('');
   const [comparison, setComparison] = React.useState('');
   const [value, setValue] = React.useState('');
