@@ -1,73 +1,76 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import './Table.css';
+import { StarWarsContext } from '../../context/StarWarsContext';
 
-class Table extends React.Component {
-  constructor(props) {
-    super(props);
+const thead = [
+  'name',
+  'climate',
+  'created',
+  'diameter',
+  'edited',
+  'films',
+  'gravity',
+  'orbital_period',
+  'population',
+  'rotation_period',
+  'surface_water',
+  'terrain',
+  'url',
+];
 
-    this.state = {
-      thead: [
-        'name',
-        'climate',
-        'created',
-        'diameter',
-        'edited',
-        'films',
-        'gravity',
-        'orbital_period',
-        'population',
-        'rotation_period',
-        'surface_water',
-        'terrain',
-        'url',
-      ],
-    };
-  }
+const filterPlanetsByName = (planets, input) => {
+  if (input === '') return planets;
+  return planets.filter(({ name }) => name.toLowerCase().includes(input.toLowerCase()));
+};
 
-  filterPlanetsByName(input) {
-    const { data } = this.props;
-    if (input === '') return data;
-    return data.filter(({ name }) => name.toLowerCase().includes(input.toLowerCase()));
-  }
+// const filterPlanetsByNumericValues = (planets) => {
+//   const { filterNumericValues } = this.props;
+//   if (filterNumericValues.length === 0) return planets;
+//   return filterNumericValues.reduce((filteredPlanetsArray, filterNumericValue) => {
+//     const { column, comparison, value } = filterNumericValue;
+//     return filteredPlanetsArray.filter((planet) => {
+//       switch (comparison) {
+//         case 'maior que':
+//           return Number(planet[column]) > Number(value);
+//         case 'menor que':
+//           return Number(planet[column]) < Number(value);
+//         case 'igual a':
+//           return Number(planet[column]) === Number(value);
+//         default:
+//           return false;
+//       }
+//     });
+//   }, planets);
+// };
 
-  filterPlanetsByNumericValues(planets) {
-    const { filterNumericValues } = this.props;
-    if (filterNumericValues.length === 0) return planets;
-    return filterNumericValues.reduce((filteredPlanetsArray, filterNumericValue) => {
-      const { column, comparison, value } = filterNumericValue;
-      return filteredPlanetsArray.filter((planet) => {
-        switch (comparison) {
-          case 'maior que':
-            return Number(planet[column]) > Number(value);
-          case 'menor que':
-            return Number(planet[column]) < Number(value);
-          case 'igual a':
-            return Number(planet[column]) === Number(value);
-          default:
-            return false;
-        }
-      });
-    }, planets);
-  }
+// const sortPlanets = (planets) => {
+//   if (planets.length === 0) return planets;
+//   const { orderColumn, orderSort } = this.props;
+//   const planetKey = orderColumn.toLowerCase();
 
-  sortPlanets(planets = [...this.props.data]) {
-    if (planets.length === 0) return planets;
-    const { orderColumn, orderSort } = this.props;
-    const planetKey = orderColumn.toLowerCase();
+//   if (isNaN(planets[0][planetKey])) {
+//     planets.sort((a, b) => (a[planetKey] > b[planetKey] ? 1 : -1));
+//   } else {
+//     planets.sort((a, b) => a[planetKey] - b[planetKey]);
+//   }
+//   if (orderSort === 'DESC') planets.reverse();
+//   return planets;
+// };
 
-    if (isNaN(planets[0][planetKey])) {
-      planets.sort((a, b) => (a[planetKey] > b[planetKey] ? 1 : -1));
-    } else {
-      planets.sort((a, b) => a[planetKey] - b[planetKey]);
-    }
-    if (orderSort === 'DESC') planets.reverse();
-    return planets;
-  }
+const Table = () => {
+  const context = useContext(StarWarsContext);
+  const {
+    SWAPI: { loading, data },
+    filters: {
+      filterByName: { name },
+      filterByNumericValues,
+      order,
+    },
+  } = context;
 
-  renderTableHead() {
-    const { thead } = this.state;
+  const renderTableHead = () => {
     return (
       <thead>
         <tr>
@@ -77,20 +80,21 @@ class Table extends React.Component {
         </tr>
       </thead>
     );
-  }
+  };
 
-  renderTableBody() {
-    const { thead } = this.state;
-    const { inputName } = this.props;
+  const renderTableBody = () => {
+    // const { thead } = this.state;
+    // const { inputName } = this.props;
 
-    const filteredByNamePlanets = this.filterPlanetsByName(inputName);
-    const filteredPlanets = this.filterPlanetsByNumericValues(filteredByNamePlanets);
+    // const filteredByNamePlanets = this.filterPlanetsByName(inputName);
+    // const filteredPlanets = this.filterPlanetsByNumericValues(filteredByNamePlanets);
 
-    const filteredSortedPlanets = this.sortPlanets(filteredPlanets);
+    // const filteredSortedPlanets = this.sortPlanets(filteredPlanets);
 
+    const filteredByNamePlanets = filterPlanetsByName(data, name);
     return (
       <tbody>
-        {filteredSortedPlanets.map((planet) => (
+        {filteredByNamePlanets.map((planet) => (
           <tr key={planet.name}>
             {thead.map((th) => (
               <td key={`${planet.name} ${th}`}>{planet[th]}</td>
@@ -99,21 +103,19 @@ class Table extends React.Component {
         ))}
       </tbody>
     );
-  }
+  };
 
-  render() {
-    const { loading, data } = this.props;
-    if (loading || !data) return <div>loading...</div>;
-    return (
-      <div className="table-container">
-        <table>
-          {this.renderTableHead()}
-          {this.renderTableBody()}
-        </table>
-      </div>
-    );
-  }
-}
+  if (loading || !data) return <div>loading...</div>;
+
+  return (
+    <div className="table-container">
+      <table>
+        {renderTableHead()}
+        {renderTableBody()}
+      </table>
+    </div>
+  );
+};
 
 const mapStateToProps = (state) => ({
   data: state.SWAPI.data,

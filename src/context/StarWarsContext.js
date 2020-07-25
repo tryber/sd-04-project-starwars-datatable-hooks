@@ -1,5 +1,32 @@
-import { createContext } from 'react';
+import React, { createContext, useState } from 'react';
+import fetchSWAPI from '../services/fetchSWAPI';
 
-const StarWarsContext = createContext();
+export const StarWarsContext = createContext();
 
-export default StarWarsContext;
+const StarWarsContextProvider = ({ children }) => {
+  const [SWAPIState, setSWAPIState] = useState({ loading: false, data: [] });
+  const [filtersState, setFiltersState] = useState({
+    filterByName: { name: '' },
+    filterByNumericValues: [],
+    order: { column: 'Name', sort: 'ASC' },
+  });
+
+  const getSWAPI = async (endpoint) => {
+    setSWAPIState({ ...SWAPIState, loading: true });
+    return fetchSWAPI(endpoint).then((data) => {
+      setSWAPIState({ data, loading: false });
+    });
+  };
+
+  const filterByName = (name) => setFiltersState({ ...filtersState, filterByName: { name } });
+
+  const SWAPI = { ...SWAPIState };
+  const filters = { ...filtersState };
+  const functions = { getSWAPI, filterByName };
+
+  const Context = { SWAPI, filters, functions };
+
+  return <StarWarsContext.Provider value={Context}>{children}</StarWarsContext.Provider>;
+};
+
+export default StarWarsContextProvider;

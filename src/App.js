@@ -1,5 +1,6 @@
 import React from 'react';
 
+import StarWarsContext from './context/StarWarsContext';
 import './App.css';
 import Table from './components/Table/Table';
 import GetSWAPI from './components/GetSWAPI';
@@ -11,12 +12,14 @@ import Order from './components/Order/Order';
 function App() {
   return (
     <div className="App">
-      <FilterByName />
-      <FilterByNumericValues />
-      <NumericFilters />
-      <Order />
-      <Table />
-      <GetSWAPI />
+      <StarWarsContext>
+        <FilterByName />
+        <FilterByNumericValues />
+        <NumericFilters />
+        <Order />
+        <Table />
+        <GetSWAPI />
+      </StarWarsContext>
     </div>
   );
 }

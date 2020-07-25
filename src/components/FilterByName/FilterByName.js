@@ -1,22 +1,27 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { filterByName } from '../../actions';
+import React, { useContext } from 'react';
+// import PropTypes from 'prop-types';
 
-class FilterByName extends React.Component {
-  render() {
-    return (
-      <input
-        type="text"
-        data-testid="name-filter"
-        onChange={(e) => this.props.filterByName(e.target.value)}
-      />
-    );
-  }
-}
+// import { connect } from 'react-redux';
+// import { filterByName } from '../../actions';
 
-export default connect(null, { filterByName })(FilterByName);
+import { StarWarsContext } from '../../context/StarWarsContext';
 
-FilterByName.propTypes = {
-  filterByName: PropTypes.func.isRequired,
+const FilterByName = () => {
+  const context = useContext(StarWarsContext);
+
+  return (
+    <input
+      type="text"
+      data-testid="name-filter"
+      onChange={(e) => context.functions.filterByName(e.target.value)}
+    />
+  );
 };
+
+export default FilterByName;
+
+// export default connect(null, { filterByName })(FilterByName);
+
+// FilterByName.propTypes = {
+//   filterByName: PropTypes.func.isRequired,
+// };

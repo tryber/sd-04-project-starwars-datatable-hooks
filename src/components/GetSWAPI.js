@@ -1,25 +1,24 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getSWAPI } from '../actions';
+// import { getSWAPI } from '../actions';
 
-class GetSWAPI extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+import { StarWarsContext } from '../context/StarWarsContext';
 
-  componentDidMount() {
-    this.props.getSWAPI('planets');
-  }
+const GetSWAPI = () => {
+  const context = useContext(StarWarsContext);
 
-  render() {
-    return <div />;
-  }
-}
+  useEffect(() => {
+    context.functions.getSWAPI('planets');
+  }, []);
 
-export default connect(null, { getSWAPI })(GetSWAPI);
-
-GetSWAPI.propTypes = {
-  getSWAPI: PropTypes.func.isRequired,
+  return <div />;
 };
+
+export default GetSWAPI;
+
+// export default connect(null, { getSWAPI })(GetSWAPI);
+
+// GetSWAPI.propTypes = {
+//   getSWAPI: PropTypes.func.isRequired,
+// };
