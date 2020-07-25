@@ -37,7 +37,9 @@ const mapDispatchToProps = (dispatch) => ({
   reset: (filters) => dispatch(resetFilter(filters)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(NumericFilters);
+export default NumericFilters;
+
+// export default connect(mapStateToProps, mapDispatchToProps)(NumericFilters);
 
 NumericFilters.propTypes = {
   numericFilters: PropTypes.arrayOf(

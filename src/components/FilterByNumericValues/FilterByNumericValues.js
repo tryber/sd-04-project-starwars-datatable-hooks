@@ -53,7 +53,8 @@ const mapStateToProps = (state) => ({
   filteredColumns: state.filters.filterByNumericValues,
 });
 
-export default connect(mapStateToProps, { filterByNumericValues })(FilterByNumericValues);
+export default FilterByNumericValues;
+// export default connect(mapStateToProps, { filterByNumericValues })(FilterByNumericValues);
 
 FilterByNumericValues.propTypes = {
   filterByNumericValues: PropTypes.func.isRequired,

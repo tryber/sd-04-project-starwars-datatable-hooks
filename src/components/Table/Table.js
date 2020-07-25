@@ -122,7 +122,9 @@ const mapStateToProps = (state) => ({
   orderSort: state.filters.order.sort,
 });
 
-export default connect(mapStateToProps)(Table);
+export default Table;
+
+// export default connect(mapStateToProps)(Table);
 
 Table.propTypes = {
   loading: PropTypes.bool.isRequired,
