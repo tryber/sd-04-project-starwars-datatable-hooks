@@ -17,7 +17,7 @@ function App() {
         <FilterByName />
         <FilterByNumericValues />
         <NumericFilters />
-        {/* <Order /> */}
+        <Order />
         <Table />
         <GetSWAPI />
       </div>

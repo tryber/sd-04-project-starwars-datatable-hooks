@@ -44,17 +44,17 @@ const filterPlanetsByNumericValues = (planets, filters) => {
   }, planets);
 };
 
-const sortPlanets = (planets) => {
+const sortPlanets = (planets, column, sort) => {
   if (planets.length === 0) return planets;
-  const { orderColumn, orderSort } = this.props;
-  const planetKey = orderColumn.toLowerCase();
+  // const { orderColumn, orderSort } = this.props;
+  const planetKey = column.toLowerCase();
 
   if (isNaN(planets[0][planetKey])) {
     planets.sort((a, b) => (a[planetKey] > b[planetKey] ? 1 : -1));
   } else {
     planets.sort((a, b) => a[planetKey] - b[planetKey]);
   }
-  if (orderSort === 'DESC') planets.reverse();
+  if (sort === 'DESC') planets.reverse();
   return planets;
 };
 
@@ -64,6 +64,7 @@ const Table = () => {
     filters: {
       filterByName: { name },
       filterByNumericValues,
+      order: { column, sort },
     },
   } = useContext(StarWarsContext);
 
@@ -91,13 +92,20 @@ const Table = () => {
       filteredByNamePlanets,
       filterByNumericValues,
     );
+    const filteredSortedPlanets = sortPlanets(filteredPlanets, column, sort);
     return (
       <tbody>
         {filteredPlanets.map((planet) => (
           <tr key={planet.name}>
-            {thead.map((th) => (
-              <td key={`${planet.name} ${th}`}>{planet[th]}</td>
-            ))}
+            {thead.map((th) => {
+              if (th === 'name')
+                return (
+                  <td data-testid="planet-name" key={`${planet.name} ${th}`}>
+                    {planet[th]}
+                  </td>
+                );
+              return <td key={`${planet.name} ${th}`}>{planet[th]}</td>;
+            })}
           </tr>
         ))}
       </tbody>
@@ -129,31 +137,31 @@ export default Table;
 
 // export default connect(mapStateToProps)(Table);
 
-Table.propTypes = {
-  loading: PropTypes.bool.isRequired,
-  inputName: PropTypes.string.isRequired,
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string,
-      rotation_period: PropTypes.string,
-      orbital_period: PropTypes.string,
-      diameter: PropTypes.string,
-      climate: PropTypes.string,
-      gravity: PropTypes.string,
-      terrain: PropTypes.string,
-      surface_water: PropTypes.string,
-      population: PropTypes.string,
-      films: PropTypes.arrayOf(PropTypes.string),
-      created: PropTypes.string,
-    }),
-  ).isRequired,
-  filterNumericValues: PropTypes.arrayOf(
-    PropTypes.shape({
-      column: PropTypes.string,
-      comparison: PropTypes.string,
-      value: PropTypes.any,
-    }),
-  ).isRequired,
-  orderColumn: PropTypes.string.isRequired,
-  orderSort: PropTypes.string.isRequired,
-};
+// Table.propTypes = {
+//   loading: PropTypes.bool.isRequired,
+//   inputName: PropTypes.string.isRequired,
+//   data: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       name: PropTypes.string,
+//       rotation_period: PropTypes.string,
+//       orbital_period: PropTypes.string,
+//       diameter: PropTypes.string,
+//       climate: PropTypes.string,
+//       gravity: PropTypes.string,
+//       terrain: PropTypes.string,
+//       surface_water: PropTypes.string,
+//       population: PropTypes.string,
+//       films: PropTypes.arrayOf(PropTypes.string),
+//       created: PropTypes.string,
+//     }),
+//   ).isRequired,
+//   filterNumericValues: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       column: PropTypes.string,
+//       comparison: PropTypes.string,
+//       value: PropTypes.any,
+//     }),
+//   ).isRequired,
+//   orderColumn: PropTypes.string.isRequired,
+//   orderSort: PropTypes.string.isRequired,
+// };

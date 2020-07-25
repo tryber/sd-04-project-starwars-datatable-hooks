@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { orderColumn } from '../../actions';
+import { StarWarsContext } from '../../context/StarWarsContext';
 
 const columns = [
   'name',
@@ -19,65 +20,62 @@ const columns = [
   'url',
 ];
 
-class Order extends React.Component {
-  constructor(props) {
-    super(props);
+const Order = () => {
+  const {
+    functions: { sortColumn },
+  } = useContext(StarWarsContext);
 
-    this.state = { column: 'name', sort: 'ASC' };
-  }
+  const [column, setColumn] = useState('name');
+  const [sort, setSort] = useState('ASC');
 
-  renderSortInputs() {
+  const renderSortInputs = () => {
     return (
       <div>
         <input
-          data-testid="column-sort-input"
+          data-testid="column-sort-input-asc"
           type="radio"
           name="order"
           value="ASC"
           id="ASC"
-          onClick={(e) => this.setState({ sort: e.target.value })}
+          onClick={(e) => setSort(e.target.value)}
         />
         <label htmlFor="ASC">ASC</label>
         <input
-          data-testid="column-sort-input"
+          data-testid="column-sort-input-desc"
           type="radio"
           name="order"
           value="DESC"
           id="DESC"
-          onClick={(e) => this.setState({ sort: e.target.value })}
+          onClick={(e) => setSort(e.target.value)}
         />
         <label htmlFor="DESC">DESC</label>
       </div>
     );
-  }
+  };
 
-  render() {
-    const { column, sort } = this.state;
-    return (
-      <div className="order">
-        <select
-          data-testid="column-sort"
-          onChange={(e) => this.setState({ column: e.target.value })}
-        >
-          {columns.map((col) => (
-            <option key={col}>{col}</option>
-          ))}
-        </select>
-        {this.renderSortInputs()}
-        <button
-          data-testid="column-sort-button"
-          type="button"
-          onClick={() => this.props.orderColumn(column, sort)}
-        >
-          order
-        </button>
-      </div>
-    );
-  }
-}
-
-export default connect(null, { orderColumn })(Order);
-
-Order.propTypes = {
-  orderColumn: PropTypes.func.isRequired,
+  return (
+    <div className="order">
+      <select data-testid="column-sort" onChange={(e) => setColumn(e.target.value)}>
+        {columns.map((col) => (
+          <option key={col}>{col}</option>
+        ))}
+      </select>
+      {renderSortInputs()}
+      <button
+        data-testid="column-sort-button"
+        type="button"
+        onClick={() => sortColumn(column, sort)}
+      >
+        order
+      </button>
+    </div>
+  );
 };
+
+export default Order;
+
+// export default connect(null, { orderColumn })(Order);
+
+// Order.propTypes = {
+//   orderColumn: PropTypes.func.isRequired,
+// };
