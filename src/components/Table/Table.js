@@ -87,7 +87,7 @@ const Table = () => {
     const filteredSortedPlanets = sortPlanets(filteredPlanets, column, sort);
     return (
       <tbody>
-        {filteredPlanets.map((planet) => (
+        {filteredSortedPlanets.map((planet) => (
           <tr key={planet.name}>
             {thead.map((th) => {
               if (th === 'name') {

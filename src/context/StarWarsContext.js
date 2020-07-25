@@ -28,8 +28,8 @@ const StarWarsContextProvider = ({ children }) => {
       filterByNumericValues: [...filtersState.filterByNumericValues, { column, comparison, value }],
     });
 
-  const resetNumericFilters = (filterByNumericValues) =>
-    setFiltersState({ ...filtersState, filterByNumericValues });
+  const resetNumericFilters = (numericValues) =>
+    setFiltersState({ ...filtersState, filterByNumericValues: numericValues });
 
   const sortColumn = (column, sort) =>
     setFiltersState({ ...filtersState, order: { column, sort } });
