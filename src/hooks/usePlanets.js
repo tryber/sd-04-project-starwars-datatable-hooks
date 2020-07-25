@@ -9,6 +9,7 @@ const usePlanets = () => {
   useEffect(() => {
     getData().then((data) => {
       data.results.forEach((planet) => {
+        // eslint-disable-next-line no-param-reassign
         delete planet.residents;
       });
       setPlanets(data.results);

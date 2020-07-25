@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import usePlanets from '../hooks/usePlanets';
 import useFilters from '../hooks/useFilters';
 
@@ -18,8 +19,9 @@ const Content = ({ data, filterName }) => {
   );
 };
 
-export default function Table(props) {
+export default function Table() {
   const [[planets], [headers]] = usePlanets();
+  console.log(planets)
   const [{ filterName }] = useFilters();
   return (
     <table className="table table-dark">
@@ -33,4 +35,9 @@ export default function Table(props) {
       <Content data={planets} filterName={filterName} />
     </table>
   );
+}
+
+Content.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  filterName: PropTypes.string.isRequired,
 }
