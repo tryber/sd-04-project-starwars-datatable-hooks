@@ -4,7 +4,7 @@ import React, { useContext } from 'react';
 // import { resetFilter } from '../../actions';
 import { StarWarsContext } from '../../context/StarWarsContext';
 
-const NumericFilters = (props) => {
+const NumericFilters = () => {
   const {
     filters: { filterByNumericValues },
     functions: { resetNumericFilters },

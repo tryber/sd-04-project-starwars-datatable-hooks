@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+// import { connect } from 'react-redux';
+// import PropTypes from 'prop-types';
 import './Table.css';
 import { StarWarsContext } from '../../context/StarWarsContext';
 
@@ -58,6 +58,16 @@ const sortPlanets = (planets, column, sort) => {
   return planets;
 };
 
+const renderTableHead = () => (
+  <thead>
+    <tr>
+      {thead.map((th) => (
+        <th key={th}>{th}</th>
+      ))}
+    </tr>
+  </thead>
+);
+
 const Table = () => {
   const {
     SWAPI: { loading, data },
@@ -68,18 +78,7 @@ const Table = () => {
     },
   } = useContext(StarWarsContext);
 
-  const renderTableHead = () => (
-    <thead>
-      <tr>
-        {thead.map((th) => (
-          <th key={th}>{th}</th>
-        ))}
-      </tr>
-    </thead>
-  );
-
   const renderTableBody = () => {
-
     const filteredByNamePlanets = filterPlanetsByName(data, name);
     const filteredPlanets = filterPlanetsByNumericValues(
       filteredByNamePlanets,
@@ -91,12 +90,13 @@ const Table = () => {
         {filteredPlanets.map((planet) => (
           <tr key={planet.name}>
             {thead.map((th) => {
-              if (th === 'name')
+              if (th === 'name') {
                 return (
                   <td data-testid="planet-name" key={`${planet.name} ${th}`}>
                     {planet[th]}
                   </td>
                 );
+              }
               return <td key={`${planet.name} ${th}`}>{planet[th]}</td>;
             })}
           </tr>

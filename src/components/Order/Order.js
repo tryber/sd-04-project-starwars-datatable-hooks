@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { orderColumn } from '../../actions';
+// import { connect } from 'react-redux';
+// import PropTypes from 'prop-types';
+// import { orderColumn } from '../../actions';
 import { StarWarsContext } from '../../context/StarWarsContext';
 
 const columns = [
@@ -28,30 +28,28 @@ const Order = () => {
   const [column, setColumn] = useState('name');
   const [sort, setSort] = useState('ASC');
 
-  const renderSortInputs = () => {
-    return (
-      <div>
-        <input
-          data-testid="column-sort-input-asc"
-          type="radio"
-          name="order"
-          value="ASC"
-          id="ASC"
-          onClick={(e) => setSort(e.target.value)}
-        />
-        <label htmlFor="ASC">ASC</label>
-        <input
-          data-testid="column-sort-input-desc"
-          type="radio"
-          name="order"
-          value="DESC"
-          id="DESC"
-          onClick={(e) => setSort(e.target.value)}
-        />
-        <label htmlFor="DESC">DESC</label>
-      </div>
-    );
-  };
+  const renderSortInputs = () => (
+    <div>
+      <input
+        data-testid="column-sort-input-asc"
+        type="radio"
+        name="order"
+        value="ASC"
+        id="ASC"
+        onClick={(e) => setSort(e.target.value)}
+      />
+      <label htmlFor="ASC">ASC</label>
+      <input
+        data-testid="column-sort-input-desc"
+        type="radio"
+        name="order"
+        value="DESC"
+        id="DESC"
+        onClick={(e) => setSort(e.target.value)}
+      />
+      <label htmlFor="DESC">DESC</label>
+    </div>
+  );
 
   return (
     <div className="order">
