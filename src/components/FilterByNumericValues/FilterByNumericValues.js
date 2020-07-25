@@ -1,7 +1,8 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { filterByNumericValues } from '../../actions/index';
+import React, { useContext } from 'react';
+// import { connect } from 'react-redux';
+// import PropTypes from 'prop-types';
+// import { filterByNumericValues } from '../../actions/index';
+import { StarWarsContext } from '../../context/StarWarsContext';
 
 const initialColumnOptions = [
   'population',
@@ -18,6 +19,11 @@ const columnsToRender = (columnsNotRender) => {
 };
 
 const FilterByNumericValues = (props) => {
+  const {
+    filters: { filterByNumericValues: numericFilters },
+    functions,
+  } = useContext(StarWarsContext);
+
   const { filteredColumns } = props;
   const [column, setColumn] = React.useState('');
   const [comparison, setComparison] = React.useState('');
@@ -27,7 +33,7 @@ const FilterByNumericValues = (props) => {
     <div className="filter-by-numbers">
       <select data-testid="column-filter" onChange={(e) => setColumn(e.target.value)}>
         <option>SELECT</option>
-        {columnsToRender(filteredColumns).map((columnOption) => (
+        {columnsToRender(numericFilters).map((columnOption) => (
           <option key={columnOption}>{columnOption}</option>
         ))}
       </select>
@@ -41,7 +47,7 @@ const FilterByNumericValues = (props) => {
       <button
         data-testid="button-filter"
         type="button"
-        onClick={() => props.filterByNumericValues(column, comparison, value)}
+        onClick={() => functions.filterByNumericValues(column, comparison, value)}
       >
         Filter
       </button>
@@ -49,14 +55,14 @@ const FilterByNumericValues = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  filteredColumns: state.filters.filterByNumericValues,
-});
+// const mapStateToProps = (state) => ({
+//   filteredColumns: state.filters.filterByNumericValues,
+// });
 
 export default FilterByNumericValues;
 // export default connect(mapStateToProps, { filterByNumericValues })(FilterByNumericValues);
 
-FilterByNumericValues.propTypes = {
-  filterByNumericValues: PropTypes.func.isRequired,
-  filteredColumns: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
+// FilterByNumericValues.propTypes = {
+//   filterByNumericValues: PropTypes.func.isRequired,
+//   filteredColumns: PropTypes.arrayOf(PropTypes.object).isRequired,
+// };

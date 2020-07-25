@@ -15,9 +15,9 @@ function App() {
     <StarWarsContext>
       <div className="App">
         <FilterByName />
-        {/* <FilterByNumericValues />
+        <FilterByNumericValues />
         <NumericFilters />
-        <Order /> */}
+        {/* <Order /> */}
         <Table />
         <GetSWAPI />
       </div>

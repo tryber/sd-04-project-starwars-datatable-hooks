@@ -22,9 +22,18 @@ const StarWarsContextProvider = ({ children }) => {
 
   const filterByName = (name) => setFiltersState({ ...filtersState, filterByName: { name } });
 
+  const filterByNumericValues = (column, comparison, value) =>
+    setFiltersState({
+      ...filtersState,
+      filterByNumericValues: [...filtersState.filterByNumericValues, { column, comparison, value }],
+    });
+
+  const resetNumericFilters = (filterByNumericValues) =>
+    setFiltersState({ ...filtersState, filterByNumericValues });
+
   const SWAPI = { ...SWAPIState };
   const filters = { ...filtersState };
-  const functions = { getSWAPI, filterByName };
+  const functions = { getSWAPI, filterByName, filterByNumericValues, resetNumericFilters };
 
   const Context = { SWAPI, filters, functions };
 

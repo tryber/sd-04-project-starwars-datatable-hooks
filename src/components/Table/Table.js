@@ -25,48 +25,47 @@ const filterPlanetsByName = (planets, input) => {
   return planets.filter(({ name }) => name.toLowerCase().includes(input.toLowerCase()));
 };
 
-// const filterPlanetsByNumericValues = (planets) => {
-//   const { filterNumericValues } = this.props;
-//   if (filterNumericValues.length === 0) return planets;
-//   return filterNumericValues.reduce((filteredPlanetsArray, filterNumericValue) => {
-//     const { column, comparison, value } = filterNumericValue;
-//     return filteredPlanetsArray.filter((planet) => {
-//       switch (comparison) {
-//         case 'maior que':
-//           return Number(planet[column]) > Number(value);
-//         case 'menor que':
-//           return Number(planet[column]) < Number(value);
-//         case 'igual a':
-//           return Number(planet[column]) === Number(value);
-//         default:
-//           return false;
-//       }
-//     });
-//   }, planets);
-// };
+const filterPlanetsByNumericValues = (planets, filters) => {
+  if (filters.length === 0) return planets;
+  return filters.reduce((filteredPlanetsArray, filterNumericValue) => {
+    const { column, comparison, value } = filterNumericValue;
+    return filteredPlanetsArray.filter((planet) => {
+      switch (comparison) {
+        case 'maior que':
+          return Number(planet[column]) > Number(value);
+        case 'menor que':
+          return Number(planet[column]) < Number(value);
+        case 'igual a':
+          return Number(planet[column]) === Number(value);
+        default:
+          return false;
+      }
+    });
+  }, planets);
+};
 
-// const sortPlanets = (planets) => {
-//   if (planets.length === 0) return planets;
-//   const { orderColumn, orderSort } = this.props;
-//   const planetKey = orderColumn.toLowerCase();
+const sortPlanets = (planets) => {
+  if (planets.length === 0) return planets;
+  const { orderColumn, orderSort } = this.props;
+  const planetKey = orderColumn.toLowerCase();
 
-//   if (isNaN(planets[0][planetKey])) {
-//     planets.sort((a, b) => (a[planetKey] > b[planetKey] ? 1 : -1));
-//   } else {
-//     planets.sort((a, b) => a[planetKey] - b[planetKey]);
-//   }
-//   if (orderSort === 'DESC') planets.reverse();
-//   return planets;
-// };
+  if (isNaN(planets[0][planetKey])) {
+    planets.sort((a, b) => (a[planetKey] > b[planetKey] ? 1 : -1));
+  } else {
+    planets.sort((a, b) => a[planetKey] - b[planetKey]);
+  }
+  if (orderSort === 'DESC') planets.reverse();
+  return planets;
+};
 
 const Table = () => {
-  const context = useContext(StarWarsContext);
   const {
     SWAPI: { loading, data },
     filters: {
       filterByName: { name },
+      filterByNumericValues,
     },
-  } = context;
+  } = useContext(StarWarsContext);
 
   const renderTableHead = () => (
     <thead>
@@ -88,9 +87,13 @@ const Table = () => {
     // const filteredSortedPlanets = this.sortPlanets(filteredPlanets);
 
     const filteredByNamePlanets = filterPlanetsByName(data, name);
+    const filteredPlanets = filterPlanetsByNumericValues(
+      filteredByNamePlanets,
+      filterByNumericValues,
+    );
     return (
       <tbody>
-        {filteredByNamePlanets.map((planet) => (
+        {filteredPlanets.map((planet) => (
           <tr key={planet.name}>
             {thead.map((th) => (
               <td key={`${planet.name} ${th}`}>{planet[th]}</td>
@@ -113,14 +116,14 @@ const Table = () => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  data: state.SWAPI.data,
-  loading: state.SWAPI.loading,
-  inputName: state.filters.filterByName.name,
-  filterNumericValues: state.filters.filterByNumericValues,
-  orderColumn: state.filters.order.column,
-  orderSort: state.filters.order.sort,
-});
+// const mapStateToProps = (state) => ({
+//   data: state.SWAPI.data,
+//   loading: state.SWAPI.loading,
+//   inputName: state.filters.filterByName.name,
+//   filterNumericValues: state.filters.filterByNumericValues,
+//   orderColumn: state.filters.order.column,
+//   orderSort: state.filters.order.sort,
+// });
 
 export default Table;
 
