@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 import usePlanets from '../hooks/usePlanets';
 import useFilters from '../hooks/useFilters';
 
-const Content = ({ data, filterName }) => {
-  return (
-    <tbody>
-      {data
+const Content = ({ data, filterName }) => (
+  <tbody>
+    {data
       .filter((planet) => planet.name.toLowerCase().includes(filterName.toLowerCase()))
       .map((planet) => (
         <tr key={planet.orbital_period}>
@@ -15,13 +14,11 @@ const Content = ({ data, filterName }) => {
           ))}
         </tr>
       ))}
-    </tbody>
-  );
-};
+  </tbody>
+);
 
 export default function Table() {
   const [[planets], [headers]] = usePlanets();
-  console.log(planets)
   const [{ filterName }] = useFilters();
   return (
     <table className="table table-dark">
@@ -40,4 +37,4 @@ export default function Table() {
 Content.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
   filterName: PropTypes.string.isRequired,
-}
+};
