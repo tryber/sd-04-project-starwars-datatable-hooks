@@ -34,5 +34,5 @@ const StarWarsContextProvider = ({ children }) => {
 export default StarWarsContextProvider;
 
 StarWarsContextProvider.propTypes = {
-  children: PropTypes.any,
+  children: PropTypes.element.isRequired,
 };
