@@ -1,8 +1,6 @@
 import React, { useContext } from 'react';
-// import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
-import './Table.css';
 import { StarWarsContext } from '../../context/StarWarsContext';
+import './Table.css';
 
 const thead = [
   'name',
@@ -46,7 +44,6 @@ const filterPlanetsByNumericValues = (planets, filters) => {
 
 const sortPlanets = (planets, column, sort) => {
   if (planets.length === 0) return planets;
-  // const { orderColumn, orderSort } = this.props;
   const planetKey = column.toLowerCase();
 
   if (isNaN(planets[0][planetKey])) {
@@ -117,44 +114,4 @@ const Table = () => {
   );
 };
 
-// const mapStateToProps = (state) => ({
-//   data: state.SWAPI.data,
-//   loading: state.SWAPI.loading,
-//   inputName: state.filters.filterByName.name,
-//   filterNumericValues: state.filters.filterByNumericValues,
-//   orderColumn: state.filters.order.column,
-//   orderSort: state.filters.order.sort,
-// });
-
 export default Table;
-
-// export default connect(mapStateToProps)(Table);
-
-// Table.propTypes = {
-//   loading: PropTypes.bool.isRequired,
-//   inputName: PropTypes.string.isRequired,
-//   data: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       name: PropTypes.string,
-//       rotation_period: PropTypes.string,
-//       orbital_period: PropTypes.string,
-//       diameter: PropTypes.string,
-//       climate: PropTypes.string,
-//       gravity: PropTypes.string,
-//       terrain: PropTypes.string,
-//       surface_water: PropTypes.string,
-//       population: PropTypes.string,
-//       films: PropTypes.arrayOf(PropTypes.string),
-//       created: PropTypes.string,
-//     }),
-//   ).isRequired,
-//   filterNumericValues: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       column: PropTypes.string,
-//       comparison: PropTypes.string,
-//       value: PropTypes.any,
-//     }),
-//   ).isRequired,
-//   orderColumn: PropTypes.string.isRequired,
-//   orderSort: PropTypes.string.isRequired,
-// };

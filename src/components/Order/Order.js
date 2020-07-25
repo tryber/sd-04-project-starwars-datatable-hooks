@@ -1,7 +1,4 @@
 import React, { useState, useContext } from 'react';
-// import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
-// import { orderColumn } from '../../actions';
 import { StarWarsContext } from '../../context/StarWarsContext';
 
 const columns = [
@@ -71,9 +68,3 @@ const Order = () => {
 };
 
 export default Order;
-
-// export default connect(null, { orderColumn })(Order);
-
-// Order.propTypes = {
-//   orderColumn: PropTypes.func.isRequired,
-// };

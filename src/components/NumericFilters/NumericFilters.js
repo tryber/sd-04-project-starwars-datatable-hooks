@@ -1,7 +1,4 @@
 import React, { useContext } from 'react';
-// import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
-// import { resetFilter } from '../../actions';
 import { StarWarsContext } from '../../context/StarWarsContext';
 
 const NumericFilters = () => {
@@ -35,23 +32,4 @@ const NumericFilters = () => {
   );
 };
 
-// const mapStateToProps = (state) => ({ numericFilters: state.filters.filterByNumericValues });
-
-// const mapDispatchToProps = (dispatch) => ({
-//   reset: (filters) => dispatch(resetFilter(filters)),
-// });
-
 export default NumericFilters;
-
-// export default connect(mapStateToProps, mapDispatchToProps)(NumericFilters);
-
-// NumericFilters.propTypes = {
-//   numericFilters: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       column: PropTypes.string,
-//       comparison: PropTypes.string,
-//       value: PropTypes.string,
-//     }),
-//   ).isRequired,
-//   reset: PropTypes.func.isRequired,
-// };
