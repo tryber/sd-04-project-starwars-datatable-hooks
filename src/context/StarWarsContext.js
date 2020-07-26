@@ -1,13 +1,12 @@
 import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
 
-export const StarWarsContext = createContext();
+const StarWarsContext = createContext();
 
-const StarWarsContextProvider = ({ children }) => {
+const StarWarsProvider = ({ children }) => {
   const [searchInput, setSearchInput] = useState('');
 
   const context = {
-    testContext: 'test',
     searchInput,
     setSearchInput,
   };
@@ -18,12 +17,12 @@ const StarWarsContextProvider = ({ children }) => {
   );
 };
 
-StarWarsContextProvider.propTypes = {
+StarWarsProvider.propTypes = {
   children: PropTypes.string,
 };
 
-StarWarsContextProvider.defaultProps = {
+StarWarsProvider.defaultProps = {
   children: null,
 };
 
-export default StarWarsContextProvider;
+export { StarWarsProvider, StarWarsContext} ;

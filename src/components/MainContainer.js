@@ -5,7 +5,7 @@ import Table from './Table';
 // import { connect } from 'react-redux';
 // import { fetchPlanet } from '../actions/planetActions';
 import SearchBar from './SearchBar';
-import Filter from './Filter';
+// import Filter from './Filter';
 import './MainContainer.css';
 import testData from '../testData';
 
@@ -44,9 +44,7 @@ const MainContainer = () => {
         <div className="searchbar">
           <SearchBar />
         </div>
-        <div>
-          <Filter />
-        </div>
+        <div>{/* <Filter /> */}</div>
       </div>
 
       {/* {!isLoading && ( // When API is not done Table is not rendered */}
