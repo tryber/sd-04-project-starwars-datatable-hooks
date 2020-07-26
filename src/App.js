@@ -1,17 +1,21 @@
 import React from 'react';
 import './App.css';
-import Table from './components/Table';
-import Header from './components/Header';
+import Table from './Pages/Table';
+import StarWarsProvider from './context';
+
+// import Header from './Pages/Header';
 
 // Iniciando o projeto
 
 function App() {
   return (
-    <div>
-      <Header />
-      <h1>Star Wars Planets</h1>
-      <Table />
-    </div>
+    <StarWarsProvider>
+      <div>
+        {/* <Header /> */}
+        <h1>Star Wars Planets</h1>
+        <Table />
+      </div>
+    </StarWarsProvider>
   );
 }
 

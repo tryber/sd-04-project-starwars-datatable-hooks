@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import filterPlanetsByName from '../actions/filterByName';
 import { setOrderFilter, setFilteredByOrder } from '../actions/filterByOrder';
-
 import './header.css';
+
 import {
   setNumericFilterVariables,
   setPlanetsFilteredByNumeric,
