@@ -134,13 +134,12 @@ function renderFiltersOrder(planetsData, setOrder, setFilteredPlanetsByOrder) {
 
 function Header() {
   const context = useContext(StarWarsContext);
-  const { state, setState } = context;
+  const { state, setState, filterByName } = context;
   const {
     // chaves do estado
     isFetching,
     data,
     filteredPlanets,
-    filterByName,
     filterByNumericValues,
     order,
     // funçoes que alteram o estado
@@ -160,7 +159,7 @@ function Header() {
           data-testid="name-filter"
           type="text"
           onChange={(e) => {
-            filterByName(e, data);
+            filterByName(data, e.target.value);
           }}
         />
         {renderFilterDropdown(setVariables, setFilteredPlanets, filterByNumericValues)}
@@ -180,7 +179,7 @@ function Header() {
 // });
 
 // const mapDispatchToProps = (dispatch) => ({
-//   filterByName: (e, data) => dispatch(filterPlanetsByName(data, e.target.value)),
+
 //   setVariables: (filter) => dispatch(setNumericFilterVariables(filter)),
 //   setFilteredPlanets: () => dispatch(setPlanetsFilteredByNumeric()),
 //   remove: (filterToRemove) => dispatch(removeFilter(filterToRemove)),

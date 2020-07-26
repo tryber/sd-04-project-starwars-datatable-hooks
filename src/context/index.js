@@ -32,7 +32,17 @@ export default function StarWarsProvider({ children }) {
     );
   }, []);
 
-  const Context = { state, setState };
+  function filterByName(planets, string) {
+    const filteredPlanets = planets.filter(({ name }) =>
+      name.toLowerCase().includes(string.toLowerCase()),
+    );
+    setState({
+      ...state,
+      filteredPlanets,
+      filterByName: { name: string }
+    });
+  }
+  const Context = { state, setState, filterByName };
 
   return <StarWarsContext.Provider value={Context}>{children}</StarWarsContext.Provider>;
 }
