@@ -5,6 +5,16 @@ import {
   setPlanetsFilteredByNumeric,
 } from '../services/filterByNumeric';
 
+const listOfColumns = [
+  'population',
+  'orbital_period',
+  'diameter',
+  'rotation_period',
+  'surface_water',
+];
+
+const listOfComparisons = ['maior que', 'menor que', 'igual a'];
+
 export default function RenderFilterDropdown() {
   const { data, setData } = useContext(StarWarsContext);
 
@@ -14,14 +24,6 @@ export default function RenderFilterDropdown() {
 
   const { filterByNumericValues: filtersList } = data;
 
-  const listOfColumns = [
-    'population',
-    'orbital_period',
-    'diameter',
-    'rotation_period',
-    'surface_water',
-  ];
-  const listOfComparisons = ['maior que', 'menor que', 'igual a'];
   const columns = filtersList.map((filter) => filter.column);
 
   return (

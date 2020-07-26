@@ -1,8 +1,7 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { StarWarsContext } from '../context';
 import setFilterByName from '../services/setFilterByName';
 import RenderFilterDropdown from '../components/RenderFilterDropdown';
-import RenderFiltersOrder from '../components/RenderFiltersOrder';
 import RenderFiltersSetted from '../components/RenderFiltersSetted';
 
 export default function Header() {
