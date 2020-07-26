@@ -1,11 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import filterPlanetsByName from '../services/filterByName';
-import {
-  setNumericFilterVariables,
-  setPlanetsFilteredByNumeric,
-  removeFilter,
-} from '../services/filterByNumeric';
-import { setOrderFilter, setFilteredByOrder } from '../services/filterByOrder';
+import StarWarsContext from '../context';
 
 function renderFilterDropdown(setVariables, setFilteredPlanets, filtersList) {
   const listOfColumns = [
@@ -118,61 +112,40 @@ function renderFiltersOrder(planetsData, setOrder, setFilteredPlanetsByOrder) {
 }
 
 export default function Header(props) {
+  const { data, setData } = useContext(StarWarsContext);
+
   const {
-    remove,
-    filterByName,
-    planetsData,
-    setVariables,
-    setFilteredPlanets,
-    filtersList,
     isFetching,
-    setOrder,
-    setFilteredPlanetsByOrder,
-  } = props;
-    
+    planetsData,
+    filteredPlanets,
+    filterByName,
+    filterByNumericValues,
+    order,
+  } = data;
+
   if (isFetching) return <p>Loading...</p>;
-    return (
-      <div>
-        <h4>Procurar:</h4>
-        <input
-          data-testid="name-filter"
-          type="text"
-          onChange={(e) => {
-            filterByName(e, planetsData);
-          }}
-        />
-        {renderFiltersOrder(planetsData, setOrder, setFilteredPlanetsByOrder)}
-        {renderFilterDropdown(setVariables, setFilteredPlanets, filtersList)}
-        {renderFiltersSetted(filtersList, remove, setFilteredPlanets)}
-      </div>
+  return (
+    <div>
+      <h4>Procurar:</h4>
+      <input
+        data-testid="name-filter"
+        type="text"
+        onChange={(e) => {
+          filterByName(e, planetsData);
+        }}
+      />
+      {renderFiltersOrder(planetsData, setOrder, setFilteredPlanetsByOrder)}
+      {renderFilterDropdown(setVariables, setFilteredPlanets, filterByNumericValues)}
+      {renderFiltersSetted(filterByNumericValues, remove, setFilteredPlanets)}
+    </div>
   );
 }
 
-/* const mapStateToProps = (state) => ({
-  planetsData: state.filters.planetsData,
-  isFetching: state.filters.isFetching,
-  filteredPlanets: state.filters.filteredPlanets,
-  filteredByNumeric: state.filters.filteredByNumeric,
-  filtersList: state.filters.filterByNumericValues,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  filterByName: (e, data) => dispatch(filterPlanetsByName(data, e.target.value)),
-  setVariables: (filter) => dispatch(setNumericFilterVariables(filter)),
-  setFilteredPlanets: () => dispatch(setPlanetsFilteredByNumeric()),
-  remove: (filterToRemove) => dispatch(removeFilter(filterToRemove)),
-  setOrder: (order) => dispatch(setOrderFilter(order)),
-  setFilteredPlanetsByOrder: () => dispatch(setFilteredByOrder()),
-});*/
-
-// Header.propTypes = {
-//   planetsData: PropTypes.arrayOf(PropTypes.object).isRequired,
-//   remove: PropTypes.func.isRequired,
-//   filterByName: PropTypes.func.isRequired,
-//   filtersList: PropTypes.arrayOf(PropTypes.object).isRequired,
-//   setVariables: PropTypes.func.isRequired,
-//   setFilteredPlanets: PropTypes.func.isRequired,
-//   isFetching: PropTypes.bool.isRequired,
-//   setOrder: PropTypes.func.isRequired,
-//   setFilteredPlanetsByOrder: PropTypes.func.isRequired,
-// };
+// const mapDispatchToProps = (dispatch) => ({
+//   filterByName: (e, data) => dispatch(filterPlanetsByName(data, e.target.value)),
+//   setVariables: (filter) => dispatch(setNumericFilterVariables(filter)),
+//   setFilteredPlanets: () => dispatch(setPlanetsFilteredByNumeric()),
+//   remove: (filterToRemove) => dispatch(removeFilter(filterToRemove)),
+//   setOrder: (order) => dispatch(setOrderFilter(order)),
+//   setFilteredPlanetsByOrder: () => dispatch(setFilteredByOrder()),
+// });

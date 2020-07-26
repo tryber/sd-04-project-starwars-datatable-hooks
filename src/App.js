@@ -8,7 +8,7 @@ function App() {
   return (
     <StarWarsProvider>
       <div>
-        {/* <Header /> */}
+        <Header />
         <Table />
       </div>
     </StarWarsProvider>
