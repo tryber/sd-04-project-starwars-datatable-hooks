@@ -62,7 +62,7 @@ function renderFilterDropdown(setVariables, setFilteredPlanets, filtersList) {
   );
 }
 
-function renderFiltersSetted(filtersList, removeFilter, setFilteredPlanets) {
+function renderFiltersSetted(filtersList, removeFilter) {
   return (
     <div className="filtersContainer">
       <h4>Filtros:</h4>
@@ -73,7 +73,6 @@ function renderFiltersSetted(filtersList, removeFilter, setFilteredPlanets) {
             type="button"
             onClick={() => {
               removeFilter(filter);
-              // setFilteredPlanets();
             }}
           >
             x
@@ -125,7 +124,13 @@ function renderFiltersOrder(planetsData, setOrder, setFilteredPlanetsByOrder) {
 
 function Header() {
   const context = useContext(StarWarsContext);
-  const { state, setFilterByName, setVariables, setFilteredPlanets, removeFilter } = context;
+  const {
+    state,
+    setFilterByName,
+    setVariables,
+    setFilteredPlanets,
+    removeFilter,
+  } = context;
   const {
     // chaves do estado
     isFetching,

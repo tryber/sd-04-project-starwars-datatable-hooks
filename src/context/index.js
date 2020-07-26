@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import getPlanets from '../services/getPlanets';
 
 const INITIAL_STATE = {
@@ -36,20 +37,17 @@ export default function StarWarsProvider({ children }) {
   const [state, setState] = useState(INITIAL_STATE);
 
   useEffect(() => {
-    getPlanets().then((planetsData) =>
-      setState({
-        ...state,
-        data: planetsData.results,
-        isFetching: false,
-        filteredPlanets: planetsData.results,
-      }),
-    );
+    getPlanets().then((planetsData) => setState({
+      ...state,
+      data: planetsData.results,
+      isFetching: false,
+      filteredPlanets: planetsData.results,
+    }));
   }, []);
 
   function setFilterByName(planets, string) {
-    const filteredPlanets = planets.filter(({ name }) =>
-      name.toLowerCase().includes(string.toLowerCase()),
-    );
+    const filteredPlanets = planets.filter(({ name }) => name
+      .toLowerCase().includes(string.toLowerCase()));
     setState({
       ...state,
       filteredPlanets,
@@ -80,7 +78,17 @@ export default function StarWarsProvider({ children }) {
     setState({ ...state, filterByNumericValues: newFilteredByNumericValues });
   }
 
-  const Context = { state, setState, setFilterByName, setVariables, removeFilter };
+  const Context = {
+    state,
+    setState,
+    setFilterByName,
+    setVariables,
+    removeFilter,
+  };
 
   return <StarWarsContext.Provider value={Context}>{children}</StarWarsContext.Provider>;
 }
+
+StarWarsProvider.propTypes = {
+  children: PropTypes.element.isRequired,
+};
