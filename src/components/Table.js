@@ -3,19 +3,21 @@ import StarWarsContext from '../context/StarWarsContext';
 
 const Table = () => {
   const states = useContext(StarWarsContext);
-  const { data } = states;
+  const { data, filterByName, filteredData } = states;
+  const array = filterByName.name === '' ? data : filteredData;
+  const titles = data[0] ? Object.keys(data[0]) : [];
 
   return (
     <table>
       <thead>
         <tr>
-          {Object.keys(data[0])
+          {titles
             .filter((_, index) => index !== 9)
             .map((planet) => <th key={planet}>{planet}</th>)}
         </tr>
       </thead>
       <tbody>
-        {data.map((planets) => (
+        {array.map((planets) => (
           <tr key={planets.name}>
             {Object.values(planets)
               .filter((_, index) => index !== 9)

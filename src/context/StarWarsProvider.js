@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import StarWarsContext from './StarWarsContext';
 
 const StarWarsProvider = ({ children }) => {
   const [data, setData] = useState([]);
+  const [filteredData, setDataFiltered] = useState([]);
   const [isLoading, setLoading] = useState(true);
+  const [filters, setFilters] = useState({});
+  const [filterByName, setSearch] = useState({ name: '' });
 
   const URL_BASE = 'https://swapi-trybe.herokuapp.com/api';
   const ENDPOINT = '/planets';
@@ -21,9 +25,34 @@ const StarWarsProvider = ({ children }) => {
     fetchApi();
   }, []);
 
+  useEffect(() => {
+    setFilters((prevState) => ({
+      ...prevState,
+      filterByName,
+    }));
+
+    setDataFiltered(
+      data.filter((planets) => (
+        planets.name.toLowerCase().indexOf(filterByName.name.toLowerCase()) !== -1))
+        .map((planet) => planet),
+    );
+  }, [filterByName, data]);
+
+  const handleCurrentData = (event) => {
+    event.preventDefault();
+
+    setSearch({
+      name: event.target.value,
+    });
+  };
+
   const stateValue = {
     data,
     isLoading,
+    handleCurrentData,
+    filters,
+    filterByName,
+    filteredData,
   };
 
   return (
@@ -31,6 +60,10 @@ const StarWarsProvider = ({ children }) => {
       {children}
     </StarWarsContext.Provider>
   );
+};
+
+StarWarsProvider.propTypes = {
+  children: PropTypes.func.isRequired,
 };
 
 export default StarWarsProvider;
