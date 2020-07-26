@@ -1,12 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import filterPlanetsByName from '../actions/filterByName';
+import filterPlanetsByName from '../services/filterByName';
 import {
   setNumericFilterVariables,
   setPlanetsFilteredByNumeric,
   removeFilter,
-} from '../actions/filterByNumeric';
-import { setOrderFilter, setFilteredByOrder } from '../actions/filterByOrder';
+} from '../services/filterByNumeric';
+import { setOrderFilter, setFilteredByOrder } from '../services/filterByOrder';
 
 function renderFilterDropdown(setVariables, setFilteredPlanets, filtersList) {
   const listOfColumns = [
@@ -166,14 +165,14 @@ const mapDispatchToProps = (dispatch) => ({
   setFilteredPlanetsByOrder: () => dispatch(setFilteredByOrder()),
 });*/
 
-Header.propTypes = {
-  planetsData: PropTypes.arrayOf(PropTypes.object).isRequired,
-  remove: PropTypes.func.isRequired,
-  filterByName: PropTypes.func.isRequired,
-  filtersList: PropTypes.arrayOf(PropTypes.object).isRequired,
-  setVariables: PropTypes.func.isRequired,
-  setFilteredPlanets: PropTypes.func.isRequired,
-  isFetching: PropTypes.bool.isRequired,
-  setOrder: PropTypes.func.isRequired,
-  setFilteredPlanetsByOrder: PropTypes.func.isRequired,
-};
+// Header.propTypes = {
+//   planetsData: PropTypes.arrayOf(PropTypes.object).isRequired,
+//   remove: PropTypes.func.isRequired,
+//   filterByName: PropTypes.func.isRequired,
+//   filtersList: PropTypes.arrayOf(PropTypes.object).isRequired,
+//   setVariables: PropTypes.func.isRequired,
+//   setFilteredPlanets: PropTypes.func.isRequired,
+//   isFetching: PropTypes.bool.isRequired,
+//   setOrder: PropTypes.func.isRequired,
+//   setFilteredPlanetsByOrder: PropTypes.func.isRequired,
+// };
