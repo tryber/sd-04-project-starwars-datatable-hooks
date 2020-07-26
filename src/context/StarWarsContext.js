@@ -25,4 +25,4 @@ StarWarsProvider.defaultProps = {
   children: null,
 };
 
-export { StarWarsProvider, StarWarsContext} ;
+export { StarWarsProvider, StarWarsContext };
