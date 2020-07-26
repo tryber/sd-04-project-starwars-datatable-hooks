@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 
 export default function renderTable({ tableHeaderTitles, filteredPlanets }) {
   return (
@@ -26,3 +28,8 @@ export default function renderTable({ tableHeaderTitles, filteredPlanets }) {
     </table>
   );
 }
+
+renderTable.propTypes = {
+  filteredPlanets: PropTypes.arrayOf(PropTypes.object).isRequired,
+  tableHeaderTitles: PropTypes.func.isRequired,
+};

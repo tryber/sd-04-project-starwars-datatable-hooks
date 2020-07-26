@@ -9,14 +9,13 @@
   align-items: center;
   display: flex;
   padding-left: 10px;
-}
-
-select, input, button {
-  margin-left: 10px;
-}
-
-.filtersContainer {
   white-space: pre-line;
+}
+
+select,
+input,
+button {
+  margin-left: 10px;
 }
 
 .cardFilters {
