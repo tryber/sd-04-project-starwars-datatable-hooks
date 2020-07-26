@@ -1,8 +1,8 @@
-import React, { useEffect, useContext } from 'react';
+import React from 'react';
 import './App.css';
 import Table from './pages/Table';
 import Header from './pages/Header';
-import StarWarsProvider, { StarWarsContext } from './context';
+import StarWarsProvider from './context';
 
 function App() {
   return (
