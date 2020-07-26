@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import fetchPlanets from '../actions/fetchPlanets';
 
@@ -30,7 +29,7 @@ function renderTable(tableHeaderTitles, planets) {
   );
 }
 
-class Table extends Component {
+export default function Table() {
   componentDidMount() {
     const { fetchPlanets: fetch } = this.props;
     fetch();
@@ -43,7 +42,7 @@ class Table extends Component {
     return renderTable(headerTitles, filteredPlanets);
   }
 }
-
+/*
 const mapStateToProps = (state) => ({
   planetsData: state.filters.planetsData,
   isFetching: state.filters.isFetching,
@@ -55,8 +54,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   fetchPlanets: () => dispatch(fetchPlanets()),
 });
-
-export default connect(mapStateToProps, mapDispatchToProps)(Table);
+*/
 
 Table.propTypes = {
   planetsData: PropTypes.arrayOf(PropTypes.object).isRequired,

@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import filterPlanetsByName from '../actions/filterByName';
 import {
@@ -119,20 +118,20 @@ function renderFiltersOrder(planetsData, setOrder, setFilteredPlanetsByOrder) {
   );
 }
 
-class Header extends Component {
-  render() {
-    const {
-      remove,
-      filterByName,
-      planetsData,
-      setVariables,
-      setFilteredPlanets,
-      filtersList,
-      isFetching,
-      setOrder,
-      setFilteredPlanetsByOrder,
-    } = this.props;
-    if (isFetching) return <p>Loading...</p>;
+export default function Header(props) {
+  const {
+    remove,
+    filterByName,
+    planetsData,
+    setVariables,
+    setFilteredPlanets,
+    filtersList,
+    isFetching,
+    setOrder,
+    setFilteredPlanetsByOrder,
+  } = props;
+    
+  if (isFetching) return <p>Loading...</p>;
     return (
       <div>
         <h4>Procurar:</h4>
@@ -147,11 +146,10 @@ class Header extends Component {
         {renderFilterDropdown(setVariables, setFilteredPlanets, filtersList)}
         {renderFiltersSetted(filtersList, remove, setFilteredPlanets)}
       </div>
-    );
-  }
+  );
 }
 
-const mapStateToProps = (state) => ({
+/* const mapStateToProps = (state) => ({
   planetsData: state.filters.planetsData,
   isFetching: state.filters.isFetching,
   filteredPlanets: state.filters.filteredPlanets,
@@ -166,9 +164,7 @@ const mapDispatchToProps = (dispatch) => ({
   remove: (filterToRemove) => dispatch(removeFilter(filterToRemove)),
   setOrder: (order) => dispatch(setOrderFilter(order)),
   setFilteredPlanetsByOrder: () => dispatch(setFilteredByOrder()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+});*/
 
 Header.propTypes = {
   planetsData: PropTypes.arrayOf(PropTypes.object).isRequired,
