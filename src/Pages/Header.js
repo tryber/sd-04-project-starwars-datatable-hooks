@@ -1,14 +1,6 @@
-import { StarWarsContext } from '../context/index';
 import React, { useContext } from 'react';
-// import filterPlanetsByName from '../actions/filterByName';
-// import { setOrderFilter, setFilteredByOrder } from '../actions/filterByOrder';
+import { StarWarsContext } from '../context/index';
 import './header.css';
-
-import {
-  setNumericFilterVariables,
-  setPlanetsFilteredByNumeric,
-  removeFilter,
-} from '../actions/filterByNumeric';
 
 function geratedlistOfColumns() {
   return ['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
@@ -62,7 +54,6 @@ function renderFilterDropdown(setVariables, setFilteredPlanets, filtersList) {
         type="button"
         onClick={() => {
           setVariables(generateNewFilter());
-          setFilteredPlanets();
         }}
       >
         Filtrar
@@ -71,7 +62,7 @@ function renderFilterDropdown(setVariables, setFilteredPlanets, filtersList) {
   );
 }
 
-function renderFiltersSetted(filtersList, remove, setFilteredPlanets) {
+function renderFiltersSetted(filtersList, removeFilter, setFilteredPlanets) {
   return (
     <div className="filtersContainer">
       <h4>Filtros:</h4>
@@ -81,8 +72,8 @@ function renderFiltersSetted(filtersList, remove, setFilteredPlanets) {
           <button
             type="button"
             onClick={() => {
-              remove(filter);
-              setFilteredPlanets();
+              removeFilter(filter);
+              // setFilteredPlanets();
             }}
           >
             x
@@ -134,18 +125,13 @@ function renderFiltersOrder(planetsData, setOrder, setFilteredPlanetsByOrder) {
 
 function Header() {
   const context = useContext(StarWarsContext);
-  const { state, setState, filterByName } = context;
+  const { state, setFilterByName, setVariables, setFilteredPlanets, removeFilter } = context;
   const {
     // chaves do estado
     isFetching,
     data,
-    filteredPlanets,
     filterByNumericValues,
-    order,
     // funçoes que alteram o estado
-    remove,
-    setVariables,
-    setFilteredPlanets,
     setOrder,
     setFilteredPlanetsByOrder,
   } = state;
@@ -159,32 +145,15 @@ function Header() {
           data-testid="name-filter"
           type="text"
           onChange={(e) => {
-            filterByName(data, e.target.value);
+            setFilterByName(data, e.target.value);
           }}
         />
         {renderFilterDropdown(setVariables, setFilteredPlanets, filterByNumericValues)}
         {renderFiltersOrder(data, setOrder, setFilteredPlanetsByOrder)}
       </div>
-      {renderFiltersSetted(filterByNumericValues, remove, setFilteredPlanets)}
+      {renderFiltersSetted(filterByNumericValues, removeFilter, setFilteredPlanets)}
     </div>
   );
 }
-
-// const mapStateToProps = (state) => ({
-//   planetsData: state.filters.planetsData, data
-//   filteredPlanets: state.filters.filteredPlanets,
-//   filteredByNumeric: state.filters.filteredByNumeric,
-//   filtersList: state.filters.filterByNumericValues, filterByNumericValues
-//   isFetching: state.filters.isFetching,
-// });
-
-// const mapDispatchToProps = (dispatch) => ({
-
-//   setVariables: (filter) => dispatch(setNumericFilterVariables(filter)),
-//   setFilteredPlanets: () => dispatch(setPlanetsFilteredByNumeric()),
-//   remove: (filterToRemove) => dispatch(removeFilter(filterToRemove)),
-//   setOrder: (order) => dispatch(setOrderFilter(order)),
-//   setFilteredPlanetsByOrder: () => dispatch(setFilteredByOrder()),
-// });
 
 export default Header;

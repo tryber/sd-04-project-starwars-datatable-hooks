@@ -2,11 +2,7 @@ import React from 'react';
 import './App.css';
 import Table from './Pages/Table';
 import StarWarsProvider from './context';
-
-
 import Header from './Pages/Header';
-
-// Iniciando o projeto
 
 function App() {
   return (
