@@ -3,7 +3,6 @@ import React, { createContext, useState, useEffect } from 'react';
 export const StarWarsContext = createContext();
 
 export default function StarWarsProvider({ children }) {
-
   const INITIAL_STATE = {
     isFetching: true,
     planetsData: [],

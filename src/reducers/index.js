@@ -23,19 +23,6 @@ const INITIAL_STATE = {
   },
 };
 
-const applyNumericFilters = (planets, filters) => {
-  let filteredPlanets = planets;
-  filters.forEach((filter) => {
-    const { column, comparison, value } = filter;
-    filteredPlanets = filteredPlanets.filter((planet) => {
-      if (comparison === 'maior que') return Number(planet[column]) > Number(value);
-      if (comparison === 'menor que') return Number(planet[column]) < Number(value);
-      if (comparison === 'igual a') return Number(planet[column]) === Number(value);
-      return null;
-    });
-  });
-  return filteredPlanets;
-};
 
 const applyOrderFilter = (planets, { column: columnReceived, sort }) => {
   const listOfColumns = [
