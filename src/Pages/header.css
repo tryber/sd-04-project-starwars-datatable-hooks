@@ -12,8 +12,8 @@
   white-space: pre-line;
 }
 
-select,
-input,
+select, 
+input, 
 button {
   margin-left: 10px;
 }
