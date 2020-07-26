@@ -1,11 +1,7 @@
 import { StarWarsContext } from '../context/index';
-
-// import { connect } from 'react-redux';
 import React, { useContext } from 'react';
-
-import PropTypes from 'prop-types';
-import filterPlanetsByName from '../actions/filterByName';
-import { setOrderFilter, setFilteredByOrder } from '../actions/filterByOrder';
+// import filterPlanetsByName from '../actions/filterByName';
+// import { setOrderFilter, setFilteredByOrder } from '../actions/filterByOrder';
 import './header.css';
 
 import {
@@ -136,45 +132,44 @@ function renderFiltersOrder(planetsData, setOrder, setFilteredPlanetsByOrder) {
   );
 }
 
-function Header()  {
+function Header() {
   const context = useContext(StarWarsContext);
   const { state, setState } = context;
-    const {
-      data,
-      filteredPlanets,
-      filterByNumericValues,
-      order,
-      isFetching,
-      remove,
-      filterByName,
-      planetsData,
-      setVariables,
-      setFilteredPlanets,
-      filtersList,
-      setOrder,
-      setFilteredPlanetsByOrder,
-    } = state;
+  const {
+    // chaves do estado
+    isFetching,
+    data,
+    filteredPlanets,
+    filterByName,
+    filterByNumericValues,
+    order,
+    // funçoes que alteram o estado
+    remove,
+    setVariables,
+    setFilteredPlanets,
+    setOrder,
+    setFilteredPlanetsByOrder,
+  } = state;
 
-    if (isFetching) return <p>Loading...</p>;
-    return (
-      <div>
-        <div className="container">
-          <h4>Procurar:</h4>
-          <input
-            data-testid="name-filter"
-            type="text"
-            onChange={(e) => {
-              filterByName(e, data);
-            }}
-          />
-          {renderFilterDropdown(setVariables, setFilteredPlanets, filterByNumericValues)}
-          {renderFiltersOrder(data, setOrder, setFilteredPlanetsByOrder)}
-        </div>
-        {renderFiltersSetted(filterByNumericValues, remove, setFilteredPlanets)}
+  if (isFetching) return <p>Loading...</p>;
+  return (
+    <div>
+      <div className="container">
+        <h4>Procurar:</h4>
+        <input
+          data-testid="name-filter"
+          type="text"
+          onChange={(e) => {
+            filterByName(e, data);
+          }}
+        />
+        {renderFilterDropdown(setVariables, setFilteredPlanets, filterByNumericValues)}
+        {renderFiltersOrder(data, setOrder, setFilteredPlanetsByOrder)}
       </div>
-    );
-  }
-
+      {renderFiltersSetted(filterByNumericValues, remove, setFilteredPlanets)}
+    </div>
+  );
+}
 
 // const mapStateToProps = (state) => ({
 //   planetsData: state.filters.planetsData, data
@@ -194,15 +189,3 @@ function Header()  {
 // });
 
 export default Header;
-
-// Header.propTypes = {
-//   planetsData: PropTypes.arrayOf(PropTypes.object).isRequired,
-//   remove: PropTypes.func.isRequired,
-//   filterByName: PropTypes.func.isRequired,
-//   filtersList: PropTypes.arrayOf(PropTypes.object).isRequired,
-//   setVariables: PropTypes.func.isRequired,
-//   setFilteredPlanets: PropTypes.func.isRequired,
-//   isFetching: PropTypes.bool.isRequired,
-//   setOrder: PropTypes.func.isRequired,
-//   setFilteredPlanetsByOrder: PropTypes.func.isRequired,
-// };
