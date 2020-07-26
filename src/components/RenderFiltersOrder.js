@@ -1,5 +1,4 @@
-import React from 'react'
-
+import React from 'react';
 
 export default function RenderFiltersOrder(planetsData, setOrder, setFilteredPlanetsByOrder) {
   const columns = Object.keys(planetsData[0]);

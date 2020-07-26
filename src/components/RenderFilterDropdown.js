@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { StarWarsContext } from '../context';
 import {
   setNumericFilterVariables,
@@ -12,14 +12,7 @@ export default function RenderFilterDropdown() {
     setPlanetsFilteredByNumeric(data, setData);
   }, [data.filterByNumericValues]);
 
-  const {
-    isFetching,
-    planetsData,
-    filteredPlanets,
-    filterByName,
-    filterByNumericValues: filtersList,
-    order,
-  } = data;
+  const { filterByNumericValues: filtersList } = data;
 
   const listOfColumns = [
     'population',

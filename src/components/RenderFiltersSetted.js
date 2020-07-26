@@ -1,10 +1,6 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { StarWarsContext } from '../context';
-import {
-  setNumericFilterVariables,
-  setPlanetsFilteredByNumeric,
-  removeFilter,
-} from '../services/filterByNumeric';
+import { setPlanetsFilteredByNumeric, removeFilter } from '../services/filterByNumeric';
 
 export default function RenderFiltersSetted() {
   const { data, setData } = useContext(StarWarsContext);
@@ -13,14 +9,7 @@ export default function RenderFiltersSetted() {
     setPlanetsFilteredByNumeric(data, setData);
   }, [data.filterByNumericValues]);
 
-  const {
-    isFetching,
-    planetsData,
-    filteredPlanets,
-    filterByName,
-    filterByNumericValues: filtersList,
-    order,
-  } = data;
+  const { filterByNumericValues: filtersList } = data;
   return (
     <div>
       <h4>Filtros:</h4>
