@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import RenderTable from '../components/renderTable';
 import { StarWarsContext } from '../context/index';
-import './table.css';
 
 function Table() {
   const context = useContext(StarWarsContext);

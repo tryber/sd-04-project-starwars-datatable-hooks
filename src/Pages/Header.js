@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { StarWarsContext } from '../context/index';
-import './header.css';
 
 function geratedlistOfColumns() {
   return ['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
