@@ -1,17 +1,19 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { StarWarsContext } from '../context/StarWarsContext';
 import Table from './Table';
-import { fetchPlanet } from '../actions/planetActions';
+// import PropTypes from 'prop-types';
+// import { connect } from 'react-redux';
+// import { fetchPlanet } from '../actions/planetActions';
 import SearchBar from './SearchBar';
 import Filter from './Filter';
 import './MainContainer.css';
-import { StarWarsContext } from '../context/StarWarsContext';
 import testData from '../testData';
 
 const MainContainer = () => {
-  const { searchInput } = useContext(StarWarsContext);
-
+  const { testContext, searchInput, setSearchInput } = useContext(
+    StarWarsContext,
+  );
+  // console.log('searchInput', searchInput, testContext);
   // filter the complete planet list from API according to active filters
   const planetFilter = () => {
     // const { data, filters, searchedPlanet } = this.props;
@@ -31,7 +33,7 @@ const MainContainer = () => {
     //   return filteredPlanet;
     // });
     return filteredPlanet;
-    console.log("filteredPlanet", filteredPlanet);
+    // console.log('filteredPlanet', filteredPlanet);
   };
 
   // const { data, isLoading } = this.props;

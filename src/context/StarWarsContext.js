@@ -2,10 +2,11 @@ import React, { createContext, useState } from 'react';
 
 export const StarWarsContext = createContext();
 
-export default ({ children }) => {
+const StarWarsContextProvider = ({ children }) => {
   const [searchInput, setSearchInput] = useState('');
- 
+
   const context = {
+    testContext: 'test',
     searchInput,
     setSearchInput,
   };
@@ -15,3 +16,5 @@ export default ({ children }) => {
     </StarWarsContext.Provider>
   );
 };
+
+export default StarWarsContextProvider;
