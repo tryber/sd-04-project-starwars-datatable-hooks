@@ -1,4 +1,5 @@
 import React, { createContext, useState } from 'react';
+import PropTypes from 'prop-types';
 
 export const StarWarsContext = createContext();
 
@@ -15,6 +16,14 @@ const StarWarsContextProvider = ({ children }) => {
       {children}
     </StarWarsContext.Provider>
   );
+};
+
+StarWarsContextProvider.propTypes = {
+  children: PropTypes.string,
+};
+
+StarWarsContextProvider.defaultProps = {
+  children: null,
 };
 
 export default StarWarsContextProvider;

@@ -10,16 +10,14 @@ import './MainContainer.css';
 import testData from '../testData';
 
 const MainContainer = () => {
-  const { testContext, searchInput, setSearchInput } = useContext(
-    StarWarsContext,
-  );
+  const { searchInput } = useContext(StarWarsContext);
   // console.log('searchInput', searchInput, testContext);
   // filter the complete planet list from API according to active filters
   const planetFilter = () => {
     // const { data, filters, searchedPlanet } = this.props;
 
     // const filterArray = filters.filterByNumericValues;
-    let filteredPlanet = testData.results.filter((planet) =>
+    const filteredPlanet = testData.results.filter((planet) =>
       planet.name.includes(searchInput),
     );
     // filterArray.map((filter) => {
