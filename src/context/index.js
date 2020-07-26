@@ -12,6 +12,7 @@ export default function StarWarsProvider({ children }) {
       name: '',
     },
     filterByNumericValues: [],
+
     order: {
       column: 'Name',
       sort: 'ASC',

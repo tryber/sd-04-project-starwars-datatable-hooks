@@ -3,7 +3,8 @@ import './App.css';
 import Table from './Pages/Table';
 import StarWarsProvider from './context';
 
-// import Header from './Pages/Header';
+
+import Header from './Pages/Header';
 
 // Iniciando o projeto
 
@@ -11,7 +12,7 @@ function App() {
   return (
     <StarWarsProvider>
       <div>
-        {/* <Header /> */}
+        <Header />
         <h1>Star Wars Planets</h1>
         <Table />
       </div>
