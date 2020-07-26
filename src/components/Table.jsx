@@ -54,4 +54,5 @@ export default function Table() {
 Content.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
   filterName: PropTypes.string.isRequired,
+  filterNumber: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

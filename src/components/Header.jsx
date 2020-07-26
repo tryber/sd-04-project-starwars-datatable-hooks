@@ -107,3 +107,12 @@ FilterByName.propTypes = {
   filter: PropTypes.func.isRequired,
   filterName: PropTypes.string.isRequired,
 };
+
+FilterByNumeric.propTypes = {
+  filter: PropTypes.func.isRequired,
+};
+
+NumericFilters.propTypes = {
+  filters: PropTypes.arrayOf(PropTypes.object).isRequired,
+  remove: PropTypes.func.isRequired,
+};
