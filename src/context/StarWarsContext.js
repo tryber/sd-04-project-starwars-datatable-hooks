@@ -1,6 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import planetAPI from '../services/planetApi';
 
 const StarWarsContext = createContext();
 
@@ -29,8 +28,8 @@ const StarWarsProvider = ({ children }) => {
       const response = await fetch(`${APIURL}`);
       response
         .json()
-        .then((response) => {
-          setFetchedPlanets(response.results);
+        .then((data) => {
+          setFetchedPlanets(data.results);
           setIsLoading(false);
         })
         .catch((error) => console.log(error));
