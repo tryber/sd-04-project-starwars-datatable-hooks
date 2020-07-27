@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 
 const SearchPlanet = () => {
-  const { handleInput } = useContext(StarWarsContext);
+  const { handleChange, setName } = useContext(StarWarsContext);
   return (
     <div>
       <label htmlFor="search">
@@ -13,7 +13,7 @@ const SearchPlanet = () => {
           type="text"
           name="search"
           onChange={(event) => {
-            handleInput(event.target.value);
+            handleChange(event, setName);
           }}
         />
       </label>

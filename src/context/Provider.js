@@ -8,7 +8,12 @@ const Provider = (props) => {
   const [isLoading, setIsLoading] = useState(true); // Estado para mensagem de carregamento
   const [data, setData] = useState([]); // Estado para os dados
 
-  const [name, setName] = useState(''); // Estado para atualização do input
+  const [name, setName] = useState(''); // Estado para atualização do input name
+
+  const [column, setColumn] = useState(''); // Estado para atualização do select column
+  const [comparison, setComparison] = useState(''); // Estado para atualização do select comparison
+  const [value, setValue] = useState(''); // Estado para atualização do input value
+  const [numericValues, setNumericValues] = useState([]); // Estado para atualizar valores numericos
 
   // Chamada da API
   const handleDataSuccess = (response) => {
@@ -28,17 +33,30 @@ const Provider = (props) => {
     getPlanets().then(handleDataSuccess, handleDataFailure);
   };
 
-  // Atualização do valor do input para filtar pelo nome futuramente
-  const handleInput = (inputValue) => {
-    setName(inputValue);
+  // Definição do valores para filtar pelo nome, coluna, comparação e numero futuramente
+  const handleChange = (event, setFunction) => {
+    setFunction(event.target.value);
+  };
+
+  const handleNumericValues = (column, comparison, value) => {
+    setNumericValues([...numericValues, { column, comparison, value }]);
   };
 
   const contextValue = {
     isLoading,
     data,
     getPlanets: fetchPlanets,
-    handleInput,
+    handleChange,
     name,
+    setName,
+    column,
+    setColumn,
+    comparison,
+    setComparison,
+    value,
+    setValue,
+    handleNumericValues,
+    numericValues,
   };
   const { children } = props;
 

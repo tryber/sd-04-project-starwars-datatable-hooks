@@ -4,7 +4,7 @@ import './App.css';
 import Provider from './context/Provider';
 
 import SearchPlanet from './components/SearchPlanet';
-// import ComparisonFilter from './components/ComparisonFilter';
+import ComparisonFilter from './components/ComparisonFilter';
 // import Filters from './components/Filters';
 import Table from './components/Table';
 // import OrderFilter from './components/OrderFilter';
@@ -15,9 +15,9 @@ const App = () => {
       <div className="App">
         <header className="App-header">
           <SearchPlanet />
-          {/* <OrderFilter />
+          {/* <OrderFilter /> */}
           <ComparisonFilter />
-          <Filters /> */}
+          {/* <Filters /> */}
         </header>
         <Table />
       </div>
