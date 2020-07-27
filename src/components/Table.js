@@ -108,6 +108,7 @@ const Table = () => {
           if (k !== 'residents') {
             return <th key={k}>{k}</th>;
           }
+          return null;
         })}
       </tr>
     );

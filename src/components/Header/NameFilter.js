@@ -2,11 +2,10 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import StarWarsContext from '../../context/StarWarsContext';
 
-
 const NameFilter = () => {
   const {
     filters: {
-      filterByName: {filterByName, setFilterByName},
+      filterByName: { filterByName, setFilterByName },
     },
   } = React.useContext(StarWarsContext);
   return (

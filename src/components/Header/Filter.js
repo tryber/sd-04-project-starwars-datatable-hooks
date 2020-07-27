@@ -1,10 +1,10 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import StarWarsContext from '../../context/StarWarsContext';
 
 const Filter = (props) => {
   const {
     filters: {
-      filterByNumericValues: {removeFilter},
+      filterByNumericValues: { removeFilter },
     },
   } = useContext(StarWarsContext);
   return (

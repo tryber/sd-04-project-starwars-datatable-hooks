@@ -31,7 +31,7 @@ const NumericFilter = () => {
   const [value, setValue] = React.useState(0);
   const {
     filters: {
-      filterByNumericValues: {filterByNumericValues, submitFilter},
+      filterByNumericValues: { filterByNumericValues, submitFilter },
     },
   } = useContext(StarWarsContext);
   const state = { column, comparison, value };
@@ -47,6 +47,8 @@ const NumericFilter = () => {
       case 'column':
         setColumn(e.target.value);
         break;
+      default:
+        null;
     }
   };
 

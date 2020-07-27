@@ -12,9 +12,9 @@ const StarWarsContextStore = ({ children }) => {
   const [column, setColumn] = React.useState('Name');
   const [sort, setSort] = React.useState('ASC');
 
-  const removeFilter = (column) =>
+  const removeFilter = (col) =>
     setFilterByNumericValues([
-      ...filterByNumericValues.filter((elem) => elem.column !== column),
+      ...filterByNumericValues.filter((elem) => elem.column !== col),
     ]);
 
   const submitFilter = (event, filters) => {
@@ -29,15 +29,13 @@ const StarWarsContextStore = ({ children }) => {
     ]);
   };
 
-  const submitOrder = (event, sort, column) => {
+  const submitOrder = (event, srt, column) => {
     event.preventDefault();
     setColumn(column);
-    setSort(sort);
+    setSort(srt);
   };
 
-  const getData = (endpoint) => {
-    return bzunBzun(endpoint);
-  };
+  const getData = (endpoint) => bzunBzun(endpoint);
 
   const store = {
     data: {

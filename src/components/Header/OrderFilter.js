@@ -31,6 +31,8 @@ const OrderFilter = () => {
       case 'sort':
         setSort(event.target.value);
         break;
+      default:
+        null;
     }
   };
 
