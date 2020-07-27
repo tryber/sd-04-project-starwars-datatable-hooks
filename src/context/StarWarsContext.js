@@ -21,20 +21,20 @@ export const StarWarsProvider = ({ children }) => {
   const [error, setError] = useState('');
   const [filters, setFilters] = useState(initialStateFilters);
 
-  useEffect(() => {
-    getData();
-  }, []);
-
   const getData = async () => {
     try {
       const response = await getPlanets();
       setData(response.results);
-    } catch (error) {
-      setError(error);
+    } catch (e) {
+      setError(e);
     } finally {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   const context = {
     data,
