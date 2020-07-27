@@ -29,7 +29,7 @@ const StarWarsProvider = ({ children }) => {
   };
 
   const filterByName = (name) => (
-    setFilters({...filters, filterByName: { name } })
+    setFilters({ ...filters, filterByName: { name } })
   );
 
   const context = {
