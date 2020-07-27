@@ -4,25 +4,20 @@ import StarWarsContext from './StarWarsContext';
 
 const StarWarsProvider = ({ children }) => {
   const [data, setData] = useState([]);
-  const [filteredData, setDataFiltered] = useState([]);
   const [isLoading, setLoading] = useState(true);
+  const [filteredData, setDataFiltered] = useState([]);
   const [filters, setFilters] = useState({});
   const [filterByName, setSearch] = useState({ name: '' });
 
-  const URL_BASE = 'https://swapi-trybe.herokuapp.com/api';
-  const ENDPOINT = '/planets';
-
-  const fetchApi = async () => {
-    try {
-      const request = await fetch(`${URL_BASE}${ENDPOINT}`);
-      const { results } = await request.json();
-      await setData(results);
-      await setLoading(false);
-    } catch (error) { console.log('Algo deu errado', error); }
-  };
-
   useEffect(() => {
-    fetchApi();
+    (async () => {
+      try {
+        const request = await fetch('https://swapi-trybe.herokuapp.com/api/planets');
+        const { results } = await request.json();
+        await setData(results);
+        await setLoading(false);
+      } catch (error) { console.log('Algo deu errado', error); }
+    })();
   }, []);
 
   useEffect(() => {
