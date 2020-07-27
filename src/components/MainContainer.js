@@ -5,38 +5,44 @@ import Table from './Table';
 // import { connect } from 'react-redux';
 // import { fetchPlanet } from '../actions/planetActions';
 import SearchBar from './SearchBar';
-// import Filter from './Filter';
+import Filter from './Filter';
 import './MainContainer.css';
-import testData from '../testData';
 
 const MainContainer = () => {
-  const { searchInput } = useContext(StarWarsContext);
-  // console.log('searchInput', searchInput, testContext);
+  const { searchInput, isLoading, fetchedPlanets, filterList } = useContext(
+    StarWarsContext,
+  );
+
+  const compare = (planetValue, filterValue, operator) => {
+    let result = false;
+    if (operator === 'maior que') result = planetValue > filterValue;
+    if (operator === 'menor que') result = planetValue < filterValue;
+    if (operator === 'igual a') result = planetValue === filterValue;
+    return result;
+  };
+
   // filter the complete planet list from API according to active filters
   const planetFilter = () => {
+    console.log('planetFilter Called', planetFilter);
     // const { data, filters, searchedPlanet } = this.props;
 
     // const filterArray = filters.filterByNumericValues;
-    const filteredPlanet = testData.results.filter((planet) =>
+    let filteredPlanet = fetchedPlanets.filter((planet) =>
       planet.name.includes(searchInput),
     );
-    // filterArray.map((filter) => {
-    //   filteredPlanet = filteredPlanet.filter((planet) =>
-    //     this.compare(
-    //       Number(planet[filter.column]),
-    //       Number(filter.value),
-    //       filter.comparison,
-    //     ),
-    //   );
-    //   return filteredPlanet;
-    // });
+    filterList.map((filter) => {
+      filteredPlanet = filteredPlanet.filter((planet) =>
+        compare(
+          Number(planet[filter.column]),
+          Number(filter.value),
+          filter.comparison,
+        ),
+      );
+      return filteredPlanet;
+    });
     return filteredPlanet;
-    // console.log('filteredPlanet', filteredPlanet);
   };
 
-  // const { data, isLoading } = this.props;
-  const isLoading = true;
-  const test = planetFilter(); // => Use UseEffect
   return (
     <div>
       {/* <div className="filterEmbender"> */}
@@ -44,43 +50,15 @@ const MainContainer = () => {
         <div className="searchbar">
           <SearchBar />
         </div>
-        <div>{/* <Filter /> */}</div>
+        <div>
+          <Filter />
+        </div>
       </div>
-
-      {/* {!isLoading && ( // When API is not done Table is not rendered */}
-      {isLoading && ( // When API is not done Table is not rendered
-        // <Table planets={testData.results} filteredPlanet={this.planetFilter()} />
-        <Table planets={testData.results} filteredPlanet={test} />
+      <span>{isLoading}</span>
+      {!isLoading && ( // When API is not done Table is not rendered
+        <Table planets={fetchedPlanets} filteredPlanet={planetFilter()} />
       )}
     </div>
   );
 };
 export default MainContainer;
-// }
-
-// const mapStateToProps = (state) => ({
-//   isLoading: state.planetReducer.isLoading,
-//   data: state.planetReducer.data,
-//   searchedPlanet: state.filters.filterByName.name,
-//   filters: state.filters,
-// });
-
-// const mapDispatchToProps = (dispatch) => ({
-//   getPlanet: () => dispatch(fetchPlanet()),
-// });
-
-// MainContainer.propTypes = {
-//   getPlanet: PropTypes.func.isRequired,
-//   data: PropTypes.arrayOf(PropTypes.object),
-//   searchedPlanet: PropTypes.string,
-//   isLoading: PropTypes.bool.isRequired,
-//   filters: PropTypes.shape(),
-// };
-
-// MainContainer.defaultProps = {
-//   data: [],
-//   filters: null,
-//   searchedPlanet: null,
-// };
-
-// export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);

@@ -37,7 +37,7 @@ class Table extends React.Component {
             {filteredPlanet.map((planet) => (
               <tr key={planet.name}>
                 {tableHeaders.map((header) => (
-                  <td>{planet[header]}</td>
+                  <td key={header}>{planet[header]}</td>
                 ))}
               </tr>
             ))}
