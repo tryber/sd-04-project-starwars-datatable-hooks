@@ -80,24 +80,15 @@ const inputRender = (handleInputChange, values) => (
 const Filter = () => {
   const [values, setValues] = useState({
     // set the new form value in the corresponding array
-    column: '',
-    comparison: '',
-    value: '',
-  });
-  const handleInputChange = (e) => {
-    // update the form entry
+    column: '', comparison: '', value: '' });
+  const handleInputChange = (e) => { // update the form entry
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
   };
   const { filterList, setFilterList } = useContext(StarWarsContext);
   const [colonumItemsFiltered, setColonumItemsFiltered] = useState([
-    'Coluna',
-    'population',
-    'orbital_period',
-    'diameter',
-    'rotation_period',
-    'surface_water',
-  ]);
+    'Coluna', 'population', 'orbital_period',
+    'diameter', 'rotation_period', 'surface_water' ]);
 
   const addFilter = () => {
     const { column, comparison, value } = values;
@@ -106,11 +97,7 @@ const Filter = () => {
     );
     setFilterList([
       ...filterList,
-      {
-        column,
-        comparison,
-        value,
-      },
+      { column, comparison, value },
     ]);
   };
 
@@ -125,10 +112,7 @@ const Filter = () => {
         <form>
           <div className="form-group">
             <div className="form-row">
-              {inputColumnRender(
-                handleInputChange,
-                values,
-                colonumItemsFiltered,
+              {inputColumnRender(handleInputChange, values, colonumItemsFiltered,
               )}
               {comparisonRender(handleInputChange, values, comparisonItems)}
               {inputRender(handleInputChange, values)}
