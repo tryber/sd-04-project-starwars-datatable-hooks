@@ -1,13 +1,16 @@
 import React from 'react';
 import Table from './components/Table';
 import './App.css';
+import { StarWarsProvider } from './context/StarWarsContext';
 
-function App() {
+const App = () => {
   return (
-    <div className="App-header">
-      <Table />
-    </div>
+    <StarWarsProvider>
+      <div>
+        <Table />
+      </div>
+    </StarWarsProvider>
   );
-}
+};
 
 export default App;
