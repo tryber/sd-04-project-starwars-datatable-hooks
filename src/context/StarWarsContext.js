@@ -1,5 +1,22 @@
-import { createContext } from 'react';
+import React, { createContext, useState } from 'react';
 
-const StarWarsContext = createContext();
+export const StarWarsContext = createContext();
 
-export default StarWarsContext;
+const Provider = ({ children }) => {
+  const [planet, setPlanet] = useState([]);
+  const [e, setE] = useState(true);
+
+  const mudaVouF = () => {
+    setE(!e);
+  };
+
+  const contextValue = {
+    planet,
+    e,
+    mudaVouF,
+  };
+
+  return <StarWarsContext.Provider value={contextValue}>{children}</StarWarsContext.Provider>;
+};
+
+export default Provider;
