@@ -32,7 +32,7 @@ const OrderFilter = () => {
         setSort(event.target.value);
         break;
       default:
-        null;
+        console.log('default');
     }
   };
 

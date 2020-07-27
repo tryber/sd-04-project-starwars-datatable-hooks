@@ -48,7 +48,7 @@ const NumericFilter = () => {
         setColumn(e.target.value);
         break;
       default:
-        null;
+        console.log('default');
     }
   };
 
