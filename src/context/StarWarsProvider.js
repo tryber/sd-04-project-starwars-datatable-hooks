@@ -7,10 +7,13 @@ import getPlanet from '../services/api';
 const StarWarsProvider = ({ children }) => {
   const [isFetching, setIsFetching] = useState(true);
   const [planets, setPlanets] = useState([]);
+  const [name, setName] = useState('');
 
   const context = {
     isFetching,
     planets,
+    name,
+    setName,
   };
 
   useEffect(() => {

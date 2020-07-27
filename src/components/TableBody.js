@@ -2,10 +2,11 @@ import React, { useContext } from 'react';
 import StartWarsContext from '../context/StarWarsContext';
 
 const TableBody = () => {
-  const { planets } = useContext(StartWarsContext);
+  const { planets, name } = useContext(StartWarsContext);
+  const filterName = planets.filter((planet) => planet.name.includes(name));
   return (
     <tbody>
-      {planets.map((item) => (
+      {filterName.map((item) => (
         <tr key={item.name}>
           <td>{item.name}</td>
           <td>{item.population}</td>
