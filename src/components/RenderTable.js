@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 
 function RenderTable() {
-  const { data } = useContext(StarWarsContext);
+  const { data, filters } = useContext(StarWarsContext);
   return (
     <table>
       <thead>
@@ -15,13 +15,15 @@ function RenderTable() {
         </tr>
       </thead>
       <tbody>
-        {data.map(({ residents, ...planet }) => (
-          <tr key={planet.name}>
-            {Object.values(planet).map((value) => (
-              <td key={value}>{value}</td>
-            ))}
-          </tr>
-        ))}
+        {data
+          .filter((planet) => planet.name.includes(filters.filterByName.name))
+          .map(({ residents, ...planet }) => (
+            <tr key={planet.name}>
+              {Object.values(planet).map((value) => (
+                <td key={value}>{value}</td>
+              ))}
+            </tr>
+          ))}
       </tbody>
     </table>
   );

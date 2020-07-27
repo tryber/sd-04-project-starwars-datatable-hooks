@@ -1,9 +1,13 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 import RenderTable from './RenderTable';
 
 function Table() {
-  const { isFetching, data, getPlanetsData } = useContext(StarWarsContext);
+  const { isFetching, data, getPlanetsData, filters } = useContext(
+    StarWarsContext,
+  );
+
+  // console.log(useContext(StarWarsContext));
 
   const isDataPresent = data.length > 0;
 
@@ -11,8 +15,17 @@ function Table() {
     getPlanetsData();
   }, [getPlanetsData]);
 
+  const [name, setFilterName] = useState('');
+
+  filters.filterByName.name = name;
+
   return (
     <div>
+      <input
+        type="text"
+        data-testid="name-filter"
+        onChange={(event) => setFilterName(event.target.value)}
+      />
       {isFetching && 'Loading...'}
       {!isFetching && isDataPresent && <RenderTable />}
     </div>

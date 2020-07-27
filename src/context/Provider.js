@@ -9,6 +9,11 @@ class Provider extends Component {
     this.state = {
       isFetching: false,
       data: [],
+      filters: {
+        filterByName: {
+          name: '',
+        },
+      },
     };
     this.fetchPlanets = this.fetchPlanets.bind(this);
     this.handlePlanetsDataSuccess = this.handlePlanetsDataSuccess.bind(this);
