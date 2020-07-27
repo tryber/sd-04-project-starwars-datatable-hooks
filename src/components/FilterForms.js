@@ -1,37 +1,38 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext, useState } from 'react';
+// import PropTypes from 'prop-types';
 import ShowFilters from './ShowFilters';
+import { StarWarsContext } from '../context/StarWarsContext';
 
-class FilterForms extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      column: '',
-      comparison: '',
-      number: '',
-    };
-    this.filterOptions = this.filterOptions.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+function FilterForms() {
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     column: '',
+  //     comparison: '',
+  //     number: '',
+  //   };
+  //   this.filterOptions = this.filterOptions.bind(this);
+  //   this.handleChange = this.handleChange.bind(this);
+  //   this.handleSubmit = this.handleSubmit.bind(this);
+  // }
+
+  const { submitFilterData, filterByNumericValues, options } = useContext(StarWarsContext);
+  const [localState, setLocalState] = useState({ column: '', comparison: '', number: '' });
+  function handleChange({ name, value }) {
+    setLocalState({ ...localState, [name]: value });
   }
 
-  handleChange(event) {
-    const { value, name } = event.target;
-    this.setState({ [name]: value });
-  }
-
-  handleSubmit(event) {
+  function handleSubmit(event) {
     event.preventDefault();
-    const { submitFilterData } = this.props;
-    const { column, comparison, number } = this.state;
+    const { column, comparison, number } = localState;
     // console.log(event.target.column.value);
     submitFilterData(column, comparison, number);
   }
 
-  filterOptions() {
-    const { filterByNumericValues, options } = this.props;
+  function filterOptions() {
     let newOptions = [...options];
     if (filterByNumericValues.length >= 1) {
+      console.log('filterOptions called');
       filterByNumericValues.forEach(({ column }) => {
         newOptions = newOptions.filter((option) => option !== column);
       });
@@ -39,9 +40,9 @@ class FilterForms extends React.Component {
     return newOptions;
   }
 
-  renderSelect(options, testId, name) {
+  function renderSelect(options, testId, name) {
     return (
-      <select onChange={(e) => this.handleChange(e)} data-testid={testId} name={name}>
+      <select onChange={(e) => handleChange(e.target)} data-testid={testId} name={name}>
         <option defaultChecked>{name}</option>
         {options.map((option) => (
           <option key={option} value={option}>
@@ -52,31 +53,25 @@ class FilterForms extends React.Component {
     );
   }
 
-  render() {
-    const newOptions = this.filterOptions();
-    return (
-      <div>
-        <form onSubmit={(e) => this.handleSubmit(e)}>
-          {this.renderSelect(newOptions, 'column-filter', 'column')}
-          {this.renderSelect(
-            ['maior que', 'menor que', 'igual a'],
-            'comparison-filter',
-            'comparison',
-          )}
-          <input
-            onChange={(e) => this.handleChange(e)}
-            data-testid="value-filter"
-            type="number"
-            name="number"
-          />
-          <button type="submit" data-testid="button-filter">
-            acionar filtro
-          </button>
-        </form>
-        <ShowFilters />
-      </div>
-    );
-  }
+  const newOptions = filterOptions();
+  return (
+    <div>
+      <form onSubmit={(e) => handleSubmit(e)}>
+        {renderSelect(newOptions, 'column-filter', 'column')}
+        {renderSelect(['maior que', 'menor que', 'igual a'], 'comparison-filter', 'comparison')}
+        <input
+          onChange={(e) => handleChange(e.target)}
+          data-testid="value-filter"
+          type="number"
+          name="number"
+        />
+        <button type="submit" data-testid="button-filter">
+          acionar filtro
+        </button>
+      </form>
+      <ShowFilters />
+    </div>
+  );
 }
 
 // const mapStateToProps = (state) => ({
@@ -89,10 +84,10 @@ class FilterForms extends React.Component {
 //     dispatch(saveFilterData(column, comparison, number)),
 // });
 
-FilterForms.propTypes = {
-  submitFilterData: PropTypes.func.isRequired,
-  filterByNumericValues: PropTypes.arrayOf(PropTypes.object).isRequired,
-  options: PropTypes.arrayOf(PropTypes.string).isRequired,
-};
+// FilterForms.propTypes = {
+// submitFilterData: PropTypes.func.isRequired,
+// filterByNumericValues: PropTypes.arrayOf(PropTypes.object).isRequired,
+// options: PropTypes.arrayOf(PropTypes.string).isRequired,
+// };
 
 export default FilterForms;

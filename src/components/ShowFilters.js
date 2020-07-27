@@ -1,7 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
+// import PropTypes from 'prop-types';
+import { StarWarsContext } from '../context/StarWarsContext';
 
-const ShowFilters = ({ filterByNumericValues, removeFilter }) => {
+const ShowFilters = () => {
+  const { filterByNumericValues, removeFilter } = useContext(StarWarsContext);
   if (filterByNumericValues.length >= 1) {
     return (
       <div>
@@ -30,9 +32,9 @@ const ShowFilters = ({ filterByNumericValues, removeFilter }) => {
 //   removeFilter: (column) => dispatch(remove(column)),
 // });
 
-ShowFilters.propTypes = {
-  filterByNumericValues: PropTypes.arrayOf(PropTypes.object).isRequired,
-  removeFilter: PropTypes.func.isRequired,
-};
+// ShowFilters.propTypes = {
+// filterByNumericValues: PropTypes.arrayOf(PropTypes.object).isRequired,
+// removeFilter: PropTypes.func.isRequired,
+// };
 
 export default ShowFilters;

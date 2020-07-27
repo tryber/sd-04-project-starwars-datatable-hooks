@@ -1,7 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
+// import PropTypes from 'prop-types';
 import FilterForms from './FilterForms';
 import OrderFilter from './OrderFilter';
+import { StarWarsContext } from '../context/StarWarsContext';
+import useData from '../context/useData';
 
 const comparisson = (planet, { column, comparison, value }) => {
   switch (comparison) {
@@ -16,7 +18,7 @@ const comparisson = (planet, { column, comparison, value }) => {
   }
 };
 
-const order = (column, sort, planets) => {
+const orderPlanets = (column, sort, planets) => {
   const newPlanets = [...planets];
   if (!Number(newPlanets[0][column])) {
     newPlanets.sort(function (a, b) {
@@ -41,11 +43,13 @@ const order = (column, sort, planets) => {
   return newPlanets;
 };
 
-const Table = ({ data, handleInput, inputText, filterByNumericValues, col, sort }) => {
+const Table = () => {
+  const { filterByNumericValues, filterByName, order, handleInput } = useContext(StarWarsContext);
+  const { data } = useData();
   let planets = [...data];
   if (planets.length >= 1) {
-    const newColumn = col.toLowerCase();
-    planets = order(newColumn, sort, planets);
+    const newColumn = order.column.toLowerCase();
+    planets = orderPlanets(newColumn, order.sort, planets);
   }
   const keys = data.length >= 1 ? Object.keys(data[0]) : [];
   const tableHeader = keys.filter((key) => key !== 'residents');
@@ -54,7 +58,7 @@ const Table = ({ data, handleInput, inputText, filterByNumericValues, col, sort 
       planets = planets.filter((planet) => comparisson(planet, filter));
     });
   }
-
+  const inputText = filterByName.name;
   if (inputText !== '') planets = planets.filter((planet) => planet.name.includes(inputText));
 
   return (
@@ -74,7 +78,9 @@ const Table = ({ data, handleInput, inputText, filterByNumericValues, col, sort 
           {planets.map((planet) => (
             <tr key={planet.name}>
               {tableHeader.map((column) => (
-                <td key={planet[column]}>{planet[column]}</td>
+                <td data-testid={column === 'name' ? 'planet-name' : null} key={planet[column]}>
+                  {planet[column]}
+                </td>
               ))}
             </tr>
           ))}
@@ -97,13 +103,13 @@ const Table = ({ data, handleInput, inputText, filterByNumericValues, col, sort 
 //   handleInput: (text) => dispatch(handleChange(text)),
 // });
 
-Table.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
-  handleInput: PropTypes.func.isRequired,
-  inputText: PropTypes.string.isRequired,
-  filterByNumericValues: PropTypes.arrayOf(PropTypes.object).isRequired,
-  col: PropTypes.string.isRequired,
-  sort: PropTypes.string.isRequired,
-};
+// Table.propTypes = {
+// data: PropTypes.arrayOf(PropTypes.object).isRequired,
+// handleInput: PropTypes.func.isRequired,
+// inputText: PropTypes.string.isRequired,
+// filterByNumericValues: PropTypes.arrayOf(PropTypes.object).isRequired,
+// col: PropTypes.string.isRequired,
+// sort: PropTypes.string.isRequired,
+// };
 
 export default Table;

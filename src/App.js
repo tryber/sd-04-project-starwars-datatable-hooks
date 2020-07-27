@@ -1,26 +1,23 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-
+import { StarWarsProvider } from './context/StarWarsContext';
+// import PropTypes from 'prop-types';
 import Table from './components/Table';
 
-class App extends React.Component {
+const App = () => {
   // componentDidMount() {
   //   const { fetchSwPlanets } = this.props;
   //   fetchSwPlanets();
   // }
-
-  render() {
-    return (
-      <div>
-        <Table />
-      </div>
-    );
-  }
-}
-
-App.propTypes = {
-  fetchSwPlanets: PropTypes.func.isRequired,
-  // isLoading: PropTypes.bool.isRequired,
+  return (
+    <StarWarsProvider>
+      <Table />
+    </StarWarsProvider>
+  );
 };
+
+// App.propTypes = {
+// fetchSwPlanets: PropTypes.func.isRequired,
+// isLoading: PropTypes.bool.isRequired,
+// };
 
 export default App;

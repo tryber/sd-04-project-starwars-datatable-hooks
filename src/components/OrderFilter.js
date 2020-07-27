@@ -1,33 +1,34 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
+import { StarWarsContext } from '../context/StarWarsContext';
 
-class OrderFilter extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      column: 'name',
-      sort: 'ASC',
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+function OrderFilter({ keys }) {
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     column: 'name',
+  //     sort: 'ASC',
+  //   };
+  //   this.handleChange = this.handleChange.bind(this);
+  //   this.handleSubmit = this.handleSubmit.bind(this);
+  // }
+  const { submitFilters } = useContext(StarWarsContext);
+  const [localState, setLocalState] = useState({ column: 'name', sort: 'ASC' });
+  function handleChange({ name, value }) {
+    setLocalState({ ...localState, [name]: value });
   }
 
-  handleChange({ name, value }) {
-    this.setState({ [name]: value });
-  }
-
-  handleSubmit(event) {
+  function handleSubmit(event) {
     event.preventDefault();
-    const { column, sort } = this.state;
-    const { submitFilters } = this.props;
+    const { column, sort } = localState;
     submitFilters(column, sort);
   }
 
-  renderRadioButtons() {
+  function renderRadioButtons() {
     return (
-      <div onChange={(e) => this.handleChange(e.target)} name="sort">
+      <div onChange={(e) => handleChange(e.target)} name="sort">
         <input
-          data-testid="column-sort-input"
+          data-testid="column-sort-input-asc"
           id="ASC"
           name="sort"
           type="radio"
@@ -35,38 +36,33 @@ class OrderFilter extends React.Component {
           defaultChecked
         />
         <label htmlFor="ASC">ASC</label>
-        <input data-testid="column-sort-input" id="DESC" name="sort" type="radio" value="DESC" />
+        <input
+          data-testid="column-sort-input-desc"
+          id="DESC"
+          name="sort"
+          type="radio"
+          value="DESC"
+        />
         <label htmlFor="DESC">DESC</label>
       </div>
     );
   }
 
-  render() {
-    const { keys } = this.props;
-    return (
-      <div>
-        <select
-          onChange={(e) => this.handleChange(e.target)}
-          data-testid="column-sort"
-          name="column"
-        >
-          {keys.map((key) => (
-            <option key={key} value={key}>
-              {key}
-            </option>
-          ))}
-        </select>
-        {this.renderRadioButtons()}
-        <button
-          onClick={(e) => this.handleSubmit(e)}
-          data-testid="column-sort-button"
-          type="submit"
-        >
-          Filtrar
-        </button>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <select onChange={(e) => handleChange(e.target)} data-testid="column-sort" name="column">
+        {keys.map((key) => (
+          <option key={key} value={key}>
+            {key}
+          </option>
+        ))}
+      </select>
+      {renderRadioButtons()}
+      <button onClick={(e) => handleSubmit(e)} data-testid="column-sort-button" type="submit">
+        Filtrar
+      </button>
+    </div>
+  );
 }
 
 // const mapDispatchToProps = (dispatch) => ({
@@ -75,7 +71,7 @@ class OrderFilter extends React.Component {
 
 OrderFilter.propTypes = {
   keys: PropTypes.arrayOf(PropTypes.string).isRequired,
-  submitFilters: PropTypes.func.isRequired,
+  // submitFilters: PropTypes.func.isRequired,
 };
 
 export default OrderFilter;
