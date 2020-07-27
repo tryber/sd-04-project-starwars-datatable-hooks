@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import StartWarsContext from './context/StarWarsContext';
 import Table from './components/Table';
