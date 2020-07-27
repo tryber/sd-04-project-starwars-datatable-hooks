@@ -4,12 +4,27 @@ import HeadTable from './HeadTable';
 import BodyTable from './BodyTable';
 
 const Table = () => {
-  const { data } = useContext(StarWarContext);
+  const {
+    data,
+    filters: {
+      filterByName: { name },
+    },
+  } = useContext(StarWarContext);
+
+  const toFilterPlanets = () => {
+    const filterName = data.filter((planet) => planet.name.toLowerCase().includes(name));
+    return filterName;
+  };
+
   return (
     <table>
-      <thead><HeadTable /></thead>
+      <thead>
+        <HeadTable />
+      </thead>
       <tbody>
-        {data.map((planet) => (<BodyTable key={planet.name} planet={planet} />))}
+        {toFilterPlanets().map((planet) => (
+          <BodyTable key={planet.name} planet={planet} />
+        ))}
       </tbody>
     </table>
   );

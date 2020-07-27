@@ -9,6 +9,7 @@ const StarWarsProvider = ({ children }) => {
   // 2 - useStates:
   const [data, setData] = useState([]); // inicialm. array result está vazio.
   const [isLoading, setLoading] = useState(true);
+  const [name, setName] = useState('')
 
   // 1- fazendo requisição:
   const planets = 'https://swapi-trybe.herokuapp.com/api/planets/';
@@ -29,10 +30,20 @@ const StarWarsProvider = ({ children }) => {
     })();
   }, []);
 
+  const getAndSetName = (nameUser) => {
+    setName(nameUser);
+  }
+
   // guardar os estados, métodos, fn, para serem consumidos
   const context = {
     data,
     isLoading,
+    filters: {
+      filterByName: {
+        name,
+      }
+    },
+    getAndSetName,
   };
 
   return <StarWarsContext.Provider value={context}>{children}</StarWarsContext.Provider>;
