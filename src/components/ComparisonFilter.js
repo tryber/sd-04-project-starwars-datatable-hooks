@@ -69,9 +69,7 @@ const ComparisonFilter = () => {
         data-testid="value-filter"
         onChange={(event) => handleChange(event, setValue)}
       />
-      <button data-testid="button-filter" onClick={() => filter()}>
-        Filtrar
-      </button>
+      <button data-testid="button-filter" type="button" onClick={() => filter()}>Filtrar</button>
     </div>
   );
 };
