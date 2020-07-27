@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types'
 import StarWarsContext from './StarWarsContext';
+
 
 const StarWarsProvider = ({ children }) => {
   // fn prover estados para qq comp.
@@ -22,11 +24,11 @@ const StarWarsProvider = ({ children }) => {
         await setData(results); // passo para o estado data o valor results
         await setLoading(false);
       } catch (error) {
-        console.log('Requisição rejeitada', error)}
+        console.log('Requisição rejeitada', error)
+      };
     })();
   }, []);
 
-  
   // guardar os estados, métodos, fn, para serem consumidos
   const context = {
     data,
@@ -37,3 +39,8 @@ const StarWarsProvider = ({ children }) => {
 };
 
 export default StarWarsProvider;
+
+
+StarWarsProvider.propTypes = {
+  children: PropTypes.func.isRequired,
+};
