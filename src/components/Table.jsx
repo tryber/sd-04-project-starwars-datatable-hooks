@@ -7,15 +7,15 @@ const Content = ({ planets, filterByName, filterByNumericValues, sort }) => (
   <tbody>
     {sort(filterByNumericValues(filterByName(planets))).map((planet) => (
       <tr key={planet.orbital_period}>
-        {Object.entries(planet).map(([key, value]) =>
-          key === 'name' ? (
+        {Object.entries(planet).map(([key, value]) => {
+          return key === 'name' ? (
             <td key={value} data-testid="planet-name">
               {value}
             </td>
           ) : (
             <td key={value}>{value}</td>
-          ),
-        )}
+          );
+        })}
       </tr>
     ))}
   </tbody>
@@ -46,4 +46,7 @@ export default function Table() {
 
 Content.propTypes = {
   planets: PropTypes.arrayOf(PropTypes.object).isRequired,
+  filterByName: PropTypes.func.isRequired,
+  filterByNumericValues: PropTypes.func.isRequired,
+  sort: PropTypes.func.isRequired,
 };

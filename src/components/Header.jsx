@@ -145,7 +145,7 @@ export default function Header() {
     { filterName, filtersNumber, filterableColumns, allColumns, order },
     { setFilterName, addFilterNumber, removeFilterNumber, setOrder },
   ] = useFilters();
-  
+
   return (
     <div className="jumbotron">
       <div className="row">
@@ -165,9 +165,17 @@ FilterByName.propTypes = {
 
 FilterByNumeric.propTypes = {
   filter: PropTypes.func.isRequired,
+  columns: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 NumericFilters.propTypes = {
   filters: PropTypes.arrayOf(PropTypes.object).isRequired,
   remove: PropTypes.func.isRequired,
 };
+
+Order.propTypes = {
+  columns: PropTypes.arrayOf(PropTypes.string).isRequired,
+  setOrder: PropTypes.func.isRequired,
+  order: PropTypes.shape({ column: PropTypes.string, sort: PropTypes.string }).isRequired,
+};
+
