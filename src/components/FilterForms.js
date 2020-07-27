@@ -26,11 +26,7 @@ function FilterForms() {
     return (
       <select onChange={(e) => handleChange(e.target)} data-testid={testId} name={name}>
         <option defaultChecked>{name}</option>
-        {newOptions.map((option) => (
-          <option key={option} value={option}>
-            {option}
-          </option>
-        ))}
+        {newOptions.map((option) => (<option key={option} value={option}>{option}</option>))}
       </select>
     );
   }
@@ -46,9 +42,7 @@ function FilterForms() {
           type="number"
           name="number"
         />
-        <button type="submit" data-testid="button-filter">
-          acionar filtro
-        </button>
+        <button type="submit" data-testid="button-filter">acionar filtro</button>
       </form>
       <ShowFilters />
     </div>
