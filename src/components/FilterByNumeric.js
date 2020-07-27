@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
-import {getColumns, getComparation} from './Selects';
+import { getColumns, getComparation } from './Selects';
 
 function FilterByNumeric() {
   const [column, setColumn] = useState('');
