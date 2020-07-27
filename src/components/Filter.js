@@ -14,31 +14,8 @@ const Filter = () => {
     value: '',
   });
 
-  // const [filterList, ] = useState([]);
   const { filterList, setFilterList } = useContext(StarWarsContext);
-
-  const addFilter = () => {
-    const { column, comparison, value } = values;
-    setColonumItemsFiltered(
-      colonumItemsFiltered.filter((item) => item !== column),
-    );
-    setFilterList([
-      ...filterList,
-      {
-        column: column,
-        comparison: comparison,
-        value: value,
-      },
-    ]);
-  };
-
-  const deleteFilter = (index2, filterList) => {
-    console.log('inside deleteFilter');
-    setFilterList(filterList.filter((filter, index) => index !== index2));
-  };
-
   const comparisonItems = ['Comparação', 'maior que', 'igual a', 'menor que'];
-
   const [colonumItemsFiltered, setColonumItemsFiltered] = useState([
     'Coluna',
     'population',
@@ -48,11 +25,27 @@ const Filter = () => {
     'surface_water',
   ]);
 
-  const inputColumnRender = (
-    handleInputChange,
-    values,
-    colonumItemsFiltered,
-  ) => (
+  const addFilter = () => {
+    const { column, comparison, value } = values;
+    setColonumItemsFiltered(
+      colonumItemsFiltered.filter((item) => item !== column),
+    );
+    setFilterList([
+      ...filterList,
+      {
+        column,
+        comparison,
+        value,
+      },
+    ]);
+  };
+
+  const deleteFilter = (index2) => {
+    console.log('inside deleteFilter');
+    setFilterList(filterList.filter((filter, index) => index !== index2));
+  };
+
+  const inputColumnRender = () => (
     <select
       name="column"
       className="form-control col-md-5 mr-3 mb-2"
@@ -79,7 +72,7 @@ const Filter = () => {
     </button>
   );
 
-  const comparisonRender = (handleInputChange, values, comparisonItems) => (
+  const comparisonRender = (handleInputChange, values) => (
     <select
       name="comparison"
       className="form-control col-md-5 mb-2"
@@ -95,7 +88,7 @@ const Filter = () => {
     </select>
   );
 
-  const filterRender = (filterList) => (
+  const filterRender = () => (
     <div className="filterListContainer">
       {filterList.map((filter, index) => (
         <div data-testid="filter" className="filterList">

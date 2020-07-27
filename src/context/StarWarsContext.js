@@ -18,10 +18,11 @@ const StarWarsProvider = ({ children }) => {
     isLoading,
     setIsLoading,
     filterList,
-    setFilterList    
+    setFilterList,
   };
 
-  useEffect(() => {  // Must be refactored to call API
+  useEffect(() => {
+    // Must be refactored to call API
     async function fetchData() {
       setIsLoading(true);
       const APIURL = 'https://swapi-trybe.herokuapp.com/api/planets/';

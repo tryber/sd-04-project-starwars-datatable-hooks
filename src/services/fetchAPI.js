@@ -19,20 +19,15 @@ import { StarWarsContext } from '../context/StarWarsContext';
 //   error,
 // });
 const GetPlanets = () => {
-
-
-
   async function fetchData() {
     const APIURL = 'https://swapi-trybe.herokuapp.com/api/planets/';
-    
+
     const res = await fetch(`${APIURL}`);
     res
-    .json()
-    .then(res => console.log((res)))
-    .catch(err => console.log((err)));
+      .json()
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   }
-  return ;
-
+  return;
 };
 export default GetPlanets;
-
