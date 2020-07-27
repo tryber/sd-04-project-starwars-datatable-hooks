@@ -13,7 +13,7 @@ function FilterName() {
         value={name}
       />
     </div>
-  )
+  );
 }
 
 export default FilterName;
