@@ -1,7 +1,40 @@
 import React, { useContext, useState } from 'react';
 import { StarWarsContext } from '../context/StarWarsContext';
 
+const comparisonItems = ['Comparação', 'maior que', 'igual a', 'menor que'];
+  const comparisonRender = (handleInputChange, values) => (
+    <select
+      name="comparison"
+      className="form-control col-md-5 mb-2"
+      data-testid="comparison-filter"
+      onChange={handleInputChange}
+      value={values.name}
+    >
+      {comparisonItems.map((item) => (
+        <option key={item} value={item}>
+          {item}
+        </option>
+      ))}
+    </select>
+  );
+
+
+  const buttonAddFilterRender = (addFilter) => (
+    <button
+      type="button"
+      className="btn btn-primary"
+      data-testid="button-filter"
+      onClick={addFilter}
+    >
+      Filter
+    </button>
+  );
+
+
+  
 const Filter = () => {
+
+
   // update the form entry
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -15,7 +48,7 @@ const Filter = () => {
   });
 
   const { filterList, setFilterList } = useContext(StarWarsContext);
-  const comparisonItems = ['Comparação', 'maior que', 'igual a', 'menor que'];
+ 
   const [colonumItemsFiltered, setColonumItemsFiltered] = useState([
     'Coluna',
     'population',
@@ -61,32 +94,32 @@ const Filter = () => {
     </select>
   );
 
-  const buttonAddFilterRender = () => (
-    <button
-      type="button"
-      className="btn btn-primary"
-      data-testid="button-filter"
-      onClick={addFilter}
-    >
-      Filter
-    </button>
-  );
+  // const buttonAddFilterRender = () => (
+  //   <button
+  //     type="button"
+  //     className="btn btn-primary"
+  //     data-testid="button-filter"
+  //     onClick={addFilter}
+  //   >
+  //     Filter
+  //   </button>
+  // );
 
-  const comparisonRender = (handleInputChange, values) => (
-    <select
-      name="comparison"
-      className="form-control col-md-5 mb-2"
-      data-testid="comparison-filter"
-      onChange={handleInputChange}
-      value={values.name}
-    >
-      {comparisonItems.map((item) => (
-        <option key={item} value={item}>
-          {item}
-        </option>
-      ))}
-    </select>
-  );
+  // const comparisonRender = (handleInputChange, values) => (
+  //   <select
+  //     name="comparison"
+  //     className="form-control col-md-5 mb-2"
+  //     data-testid="comparison-filter"
+  //     onChange={handleInputChange}
+  //     value={values.name}
+  //   >
+  //     {comparisonItems.map((item) => (
+  //       <option key={item} value={item}>
+  //         {item}
+  //       </option>
+  //     ))}
+  //   </select>
+  // );
 
   const filterRender = () => (
     <div className="filterListContainer">
