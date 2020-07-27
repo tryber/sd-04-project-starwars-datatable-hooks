@@ -68,25 +68,31 @@ const filterRender = (filterList, deleteFilter) => (
 
 const inputRender = (handleInputChange, values) => (
   <input
-  name="value"
-  type="number"
-  className="form-control col-md-8 mr-1"
-  data-testid="value-filter"
-  onChange={handleInputChange}
-  value={values.name}
-/>
-)
+    name="value"
+    type="number"
+    className="form-control col-md-8 mr-1"
+    data-testid="value-filter"
+    onChange={handleInputChange}
+    value={values.name}
+  />
+);
 
 const Filter = () => {
-  const [values, setValues] = useState({ // set the new form value in the corresponding array
-    column: '', comparison: '', value: '' });
-  const handleInputChange = (e) => { // update the form entry
+  const [values, setValues] = useState({
+    // set the new form value in the corresponding array
+    column: '',
+    comparison: '',
+    value: '',
+  });
+  const handleInputChange = (e) => {
+    // update the form entry
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
   };
   const { filterList, setFilterList } = useContext(StarWarsContext);
   const [colonumItemsFiltered, setColonumItemsFiltered] = useState([
-    'Coluna', 'population',
+    'Coluna',
+    'population',
     'orbital_period',
     'diameter',
     'rotation_period',
