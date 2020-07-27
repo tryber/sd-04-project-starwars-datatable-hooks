@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 import StarWarsContext from './StarWarsContext';
 
 
@@ -24,8 +24,8 @@ const StarWarsProvider = ({ children }) => {
         await setData(results); // passo para o estado data o valor results
         await setLoading(false);
       } catch (error) {
-        console.log('Requisição rejeitada', error)
-      };
+        console.log('Requisição rejeitada', error);
+      }
     })();
   }, []);
 
