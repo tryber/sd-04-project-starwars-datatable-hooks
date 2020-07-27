@@ -25,6 +25,46 @@ const giveMeOptions = (arr, name, previousFilters = []) => {
   ));
 };
 
+const handleChange = (e, field, setComparison, setColumn) => {
+  if (field === 'comparison') {
+    return setComparison(e.target.value);
+  }
+  return setColumn(e.target.value);
+};
+
+const selectFields = (
+  field,
+  filterByValues,
+  state,
+  setComparison,
+  setColumn,
+) => {
+  const prevFilters =
+    field === 'column' ? filterByValues.map((elem) => elem[field]) : [];
+  return (
+    <select
+      data-testid={`${field}-filter`}
+      value={state[field]}
+      onChange={(e) => handleChange(e, field, setComparison, setColumn)}
+    >
+      {giveMeOptions(options[field], field, prevFilters)}
+    </select>
+  );
+};
+
+const renderFilters = (filterByNumericValues) =>
+  filterByNumericValues.map((elem) => {
+    console.log('element', elem);
+    const filterS = `${elem.column} ${elem.comparison} ${elem.value}`;
+    return (
+      <Filter
+        key={`${elem.column}-${elem.value}`}
+        filterString={filterS}
+        column={elem.column}
+      />
+    );
+  });
+
 const NumericFilter = () => {
   const [column, setColumn] = React.useState('');
   const [comparison, setComparison] = React.useState('');
@@ -36,57 +76,12 @@ const NumericFilter = () => {
   } = useContext(StarWarsContext);
   const state = { column, comparison, value };
 
-  const handleChange = (e, field) => {
-    switch (field) {
-      case 'value':
-        setValue(e.target.value);
-        break;
-      case 'comparison':
-        setComparison(e.target.value);
-        break;
-      case 'column':
-        setColumn(e.target.value);
-        break;
-      default:
-        console.log('default');
-    }
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setColumn('');
     setComparison('');
     setValue(0);
   };
-
-  const selectFields = (field) => {
-    const prevFilters =
-      field === 'column'
-        ? filterByNumericValues.map((elem) => elem[field])
-        : [];
-    return (
-      <select
-        data-testid={`${field}-filter`}
-        value={state[field]}
-        onChange={(e) => handleChange(e, field)}
-      >
-        {giveMeOptions(options[field], field, prevFilters)}
-      </select>
-    );
-  };
-
-  const renderFilters = () =>
-    filterByNumericValues.map((elem) => {
-      console.log('element', elem);
-      const filterS = `${elem.column} ${elem.comparison} ${elem.value}`;
-      return (
-        <Filter
-          key={`${elem.column}-${elem.value}`}
-          filterString={filterS}
-          column={elem.column}
-        />
-      );
-    });
 
   return (
     <div>
@@ -97,8 +92,8 @@ const NumericFilter = () => {
           handleSubmit(e);
         }}
       >
-        {selectFields('column')}
-        {selectFields('comparison')}
+        {selectFields('column', filterByNumericValues, state, setComparison)}
+        {selectFields('comparison', filterByNumericValues, state, setColumn)}
         <input
           name="value"
           type="number"
@@ -110,7 +105,7 @@ const NumericFilter = () => {
           Filtrar
         </button>
       </form>
-      {renderFilters()}
+      {renderFilters(filterByNumericValues)}
     </div>
   );
 };

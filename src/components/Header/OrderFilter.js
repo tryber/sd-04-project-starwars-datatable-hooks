@@ -14,6 +14,31 @@ const options = {
   comparison: ['', 'maior que', 'menor que', 'igual a'],
 };
 
+const renderRadio = (sort, handleOrderChange) => (
+  <div>
+    <label htmlFor="ASC">
+      <input
+        data-testid="column-sort-input-asc"
+        type="radio"
+        value="ASC"
+        checked={sort === 'ASC'}
+        onChange={(e) => handleOrderChange(e, 'sort')}
+      />
+      ASC
+    </label>
+    <label htmlFor="DESC">
+      <input
+        data-testid="column-sort-input-desc"
+        type="radio"
+        value="DESC"
+        checked={sort === 'DESC'}
+        onChange={(e) => handleOrderChange(e, 'sort')}
+      />
+      DESC
+    </label>
+  </div>
+);
+
 const OrderFilter = () => {
   const {
     filters: {
@@ -24,42 +49,11 @@ const OrderFilter = () => {
   const [sort, setSort] = useState('');
 
   const handleOrderChange = (event, field) => {
-    switch (field) {
-      case 'column':
-        setColumn(event.target.value);
-        break;
-      case 'sort':
-        setSort(event.target.value);
-        break;
-      default:
-        console.log('default');
+    if (field === 'column') {
+      return setColumn(event.target.value);
     }
+    return setSort(event.target.value);
   };
-
-  const renderRadio = () => (
-    <div>
-      <label htmlFor="ASC">
-        <input
-          data-testid="column-sort-input-asc"
-          type="radio"
-          value="ASC"
-          checked={sort === 'ASC'}
-          onChange={(e) => handleOrderChange(e, 'sort')}
-        />
-        ASC
-      </label>
-      <label htmlFor="DESC">
-        <input
-          data-testid="column-sort-input-desc"
-          type="radio"
-          value="DESC"
-          checked={sort === 'DESC'}
-          onChange={(e) => handleOrderChange(e, 'sort')}
-        />
-        DESC
-      </label>
-    </div>
-  );
   return (
     <div>
       <form id="orderFilter" onSubmit={(e) => submitOrder(e, sort, column)}>
@@ -74,7 +68,7 @@ const OrderFilter = () => {
             </option>
           ))}
         </select>
-        {renderRadio()}
+        {renderRadio(sort, handleOrderChange)}
         <button
           type="submit"
           form="orderFilter"
