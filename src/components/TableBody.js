@@ -1,19 +1,21 @@
 import React, { useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
+import filterFunc from './functions/filterFunc';
 
 function TableBody() {
   const {
     planets,
     filters: {
       filterByName: { name },
+      filterByNumericValues: numericValues,
     },
   } = useContext(StarWarsContext);
 
-  const filterByName = planets.filter((planet) => planet.name.includes(name));
+  const data = filterFunc(planets, name, numericValues);
 
   return (
     <tbody>
-      {filterByName.map((planet) => (
+      {data.map((planet) => (
         <tr key={planet.name}>
           <td>{planet.name}</td>
           <td>{planet.rotation_period}</td>

@@ -8,6 +8,7 @@ const StarWarsProvider = ({ children }) => {
   const [planets, setPlanets] = useState([]);
   const [filters, setFilters] = useState({
     filterByName: { name: '' },
+    filterByNumericValues: [],
   });
 
   const sucessPlanets = (data) => {
@@ -32,6 +33,17 @@ const StarWarsProvider = ({ children }) => {
     setFilters({ ...filters, filterByName: { name } })
   );
 
+  const filterByNumericValues = (column, comparison, value) => (
+    setFilters((filter) => ({
+      ...filter,
+      filterByNumericValues: [...filter.filterByNumericValues, {
+        column,
+        comparison,
+        value,
+      }],
+    }))
+  );
+
   const context = {
     isFetching,
     setIsFetching,
@@ -40,6 +52,7 @@ const StarWarsProvider = ({ children }) => {
     fetchPlanets,
     filters,
     filterByName,
+    filterByNumericValues,
   };
 
   return (
