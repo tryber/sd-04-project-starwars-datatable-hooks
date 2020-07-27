@@ -8,7 +8,7 @@ const Content = ({ planets, filterByName, filterByNumericValues, sort }) => (
     {sort(filterByNumericValues(filterByName(planets))).map((planet) => (
       <tr key={planet.orbital_period}>
         {Object.entries(planet).map(([key, value]) => {
-          console.log('cc cuzao')
+          console.log('cc cuzao');
           return key === 'name' ? (
             <td key={value} data-testid="planet-name">
               {value}
