@@ -88,7 +88,7 @@ const Filter = () => {
   const { filterList, setFilterList } = useContext(StarWarsContext);
   const [colonumItemsFiltered, setColonumItemsFiltered] = useState([
     'Coluna', 'population', 'orbital_period',
-    'diameter', 'rotation_period', 'surface_water' ]);
+    'diameter', 'rotation_period', 'surface_water']);
 
   const addFilter = () => {
     const { column, comparison, value } = values;
