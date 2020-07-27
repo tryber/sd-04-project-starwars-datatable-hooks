@@ -3,6 +3,7 @@ import Table from './Table';
 import StarWarsContext from '../context/StarWarsContext';
 import FilterByName from './FilterByName';
 import FilterByNumeric from './FilterByNumeric';
+import RemoveFilter from './RemoveFilter';
 
 function Home() {
   const { isFetching, fetchPlanets } = useContext(StarWarsContext);
@@ -16,6 +17,7 @@ function Home() {
       <h2>StarWars DataTable</h2>
       <FilterByName />
       <FilterByNumeric />
+      <RemoveFilter />
       <Table />
     </div>
   );

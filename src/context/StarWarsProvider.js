@@ -44,6 +44,15 @@ const StarWarsProvider = ({ children }) => {
     }))
   );
 
+  const removeFilter = (filterToRemove) => (
+    setFilters((filter) => ({
+      ...filter,
+      filterByNumericValues: [
+        ...filter.filterByNumericValues.filter((obj) => obj !== filterToRemove),
+      ],
+    }))
+  );
+
   const context = {
     isFetching,
     setIsFetching,
@@ -53,6 +62,7 @@ const StarWarsProvider = ({ children }) => {
     filters,
     filterByName,
     filterByNumericValues,
+    removeFilter,
   };
 
   return (
