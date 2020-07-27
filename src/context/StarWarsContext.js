@@ -1,4 +1,5 @@
 import React, { createContext, useState } from 'react';
+import PropTypes from 'prop-types';
 
 const StarWarsContext = createContext();
 
@@ -9,7 +10,7 @@ const StarWarsProvider = ({ children }) => {
   const [filterByName, setFilterByName] = useState({ name: '' });
   const [filterByNumericValues, setFilterByNumericValues] = useState([]);
   const [order, setOrder] = useState({ column: 'Name', sort: 'ASC' });
-  const [options, setOptions] = useState([
+  const [options] = useState([
     'population',
     'orbital_period',
     'diameter',
@@ -32,8 +33,6 @@ const StarWarsProvider = ({ children }) => {
 
   const removeFilter = (col) => {
     setFilterByNumericValues([...filterByNumericValues.filter(({ column }) => column !== col)]);
-    console.log('remove filter has been called');
-    // setOptions([...options, col]);
   };
 
   const submitFilterData = (column, comparison, value) => {
@@ -57,6 +56,10 @@ const StarWarsProvider = ({ children }) => {
   };
 
   return <StarWarsContext.Provider value={context}>{children}</StarWarsContext.Provider>;
+};
+
+StarWarsProvider.propTypes = {
+  children: PropTypes.object.isRequired,
 };
 
 export { StarWarsContext, StarWarsProvider };

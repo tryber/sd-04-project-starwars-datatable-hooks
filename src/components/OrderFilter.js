@@ -3,15 +3,6 @@ import PropTypes from 'prop-types';
 import { StarWarsContext } from '../context/StarWarsContext';
 
 function OrderFilter({ keys }) {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     column: 'name',
-  //     sort: 'ASC',
-  //   };
-  //   this.handleChange = this.handleChange.bind(this);
-  //   this.handleSubmit = this.handleSubmit.bind(this);
-  // }
   const { submitFilters } = useContext(StarWarsContext);
   const [localState, setLocalState] = useState({ column: 'name', sort: 'ASC' });
   function handleChange({ name, value }) {
@@ -65,13 +56,8 @@ function OrderFilter({ keys }) {
   );
 }
 
-// const mapDispatchToProps = (dispatch) => ({
-//   submitFilters: (column, sort) => dispatch(sortFilters(column, sort)),
-// });
-
 OrderFilter.propTypes = {
   keys: PropTypes.arrayOf(PropTypes.string).isRequired,
-  // submitFilters: PropTypes.func.isRequired,
 };
 
 export default OrderFilter;

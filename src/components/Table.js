@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-// import PropTypes from 'prop-types';
 import FilterForms from './FilterForms';
 import OrderFilter from './OrderFilter';
 import { StarWarsContext } from '../context/StarWarsContext';
@@ -89,27 +88,5 @@ const Table = () => {
     </div>
   );
 };
-
-// const mapStateToProps = (state) => ({
-//   inputText: state.filters.filterByName.name,
-//   filterByNumericValues: state.filters.filterByNumericValues,
-//   data: state.apiReducer.data,
-//   error: state.apiReducer.error,
-//   col: state.filters.order.column,
-//   sort: state.filters.order.sort,
-// });
-
-// const mapDispatchToProps = (dispatch) => ({
-//   handleInput: (text) => dispatch(handleChange(text)),
-// });
-
-// Table.propTypes = {
-// data: PropTypes.arrayOf(PropTypes.object).isRequired,
-// handleInput: PropTypes.func.isRequired,
-// inputText: PropTypes.string.isRequired,
-// filterByNumericValues: PropTypes.arrayOf(PropTypes.object).isRequired,
-// col: PropTypes.string.isRequired,
-// sort: PropTypes.string.isRequired,
-// };
 
 export default Table;
