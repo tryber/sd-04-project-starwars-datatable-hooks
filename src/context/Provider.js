@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import StarWarsContext from './StarWarsContext';
 import getPlanetsData from '../services/StarWarsAPI';
 
@@ -45,5 +46,9 @@ class Provider extends Component {
     );
   }
 }
+
+Provider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export default Provider;
