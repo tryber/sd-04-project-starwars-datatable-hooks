@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const BodyTable = ({ planet }) => {
-  <tr>
+  return (
+    <tr>
     <td>{planet.name}</td>
     <td>{planet.rotation_period}</td>
     <td>{planet.orbital_period}</td>
@@ -16,7 +17,8 @@ const BodyTable = ({ planet }) => {
     <td>{planet.created}</td>
     <td>{planet.edited}</td>
     <td>{planet.url}</td>
-  </tr>;
+  </tr>
+  )
 };
 
 export default BodyTable;
