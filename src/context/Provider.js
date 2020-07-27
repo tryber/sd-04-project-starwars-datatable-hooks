@@ -5,17 +5,19 @@ import StarWarsContext from './StarWarsContext';
 import getPlanets from '../services/planetsAPI';
 
 const Provider = (props) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true); // Estado para mensagem de carregamento
+  const [data, setData] = useState([]); // Estado para os dados
 
+  const [name, setName] = useState(''); // Estado para atualização do input
+
+  // Chamada da API
   const handleDataSuccess = (response) => {
     setData(response.results);
     setIsLoading(false);
   };
   const handleDataFailure = (error) => {
     setIsLoading(false);
-    return error
-    // console.log(error.message)
+    return error;
   };
 
   const fetchPlanets = () => {
@@ -26,10 +28,17 @@ const Provider = (props) => {
     getPlanets().then(handleDataSuccess, handleDataFailure);
   };
 
+  // Atualização do valor do input para filtar pelo nome futuramente
+  const handleInput = (inputValue) => {
+    setName(inputValue);
+  };
+
   const contextValue = {
     isLoading,
     data,
     getPlanets: fetchPlanets,
+    handleInput,
+    name,
   };
   const { children } = props;
 
