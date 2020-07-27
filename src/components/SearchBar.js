@@ -5,9 +5,8 @@ function SearchBar() {
   return (
     <div>
       <FilterName />
-  </div>
-  )
-  
+    </div>
+  );
 }
 
 export default SearchBar;
