@@ -6,6 +6,9 @@ import planetsAPI from '../services/planetsAPI';
 const StarWarsProvider = ({ children }) => {
   const [isFetching, setIsFetching] = useState(false);
   const [planets, setPlanets] = useState([]);
+  const [filters, setFilters] = useState({
+    filterByName: { name: '' },
+  });
 
   const sucessPlanets = (data) => {
     setPlanets(data);
@@ -25,12 +28,18 @@ const StarWarsProvider = ({ children }) => {
     );
   };
 
+  const filterByName = (name) => (
+    setFilters({...filters, filterByName: { name } })
+  );
+
   const context = {
     isFetching,
     setIsFetching,
     planets,
     setPlanets,
     fetchPlanets,
+    filters,
+    filterByName,
   };
 
   return (
