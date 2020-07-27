@@ -3,40 +3,28 @@ import PropTypes from 'prop-types';
 import usePlanets from '../hooks/usePlanets';
 import useFilters from '../hooks/useFilters';
 
-const filterByNumericValues = (data, filterNumber) =>
-  filterNumber.reduce((filteredPlanetsArray, filterNumericValue) => {
-    const { column, comparison, value } = filterNumericValue;
-    return filteredPlanetsArray.filter((planet) => {
-      switch (comparison) {
-        case 'maior que':
-          return Number(planet[column]) > Number(value);
-        case 'menor que':
-          return Number(planet[column]) < Number(value);
-        case 'igual a':
-          return Number(planet[column]) === Number(value);
-        default:
-          return false;
-      }
-    });
-  }, data);
-
-const Content = ({ data, filterName, filterNumber }) => (
+const Content = ({ planets, filterByName, filterByNumericValues, sort }) => (
   <tbody>
-    {filterByNumericValues(data, filterNumber)
-      .filter((planet) => planet.name.toLowerCase().includes(filterName.toLowerCase()))
-      .map((planet) => (
-        <tr key={planet.orbital_period}>
-          {Object.values(planet).map((value) => (
+    {sort(filterByNumericValues(filterByName(planets))).map((planet) => (
+      <tr key={planet.orbital_period}>
+        {Object.entries(planet).map(([key, value]) =>
+          key === 'name' ? (
+            <td key={value} data-testid="planet-name">
+              {value}
+            </td>
+          ) : (
             <td key={value}>{value}</td>
-          ))}
-        </tr>
-      ))}
+          ),
+        )}
+      </tr>
+    ))}
   </tbody>
 );
 
 export default function Table() {
   const [[planets], [headers]] = usePlanets();
-  const [{ filterName, filtersNumber }] = useFilters();
+  const [, , { sortPlanets, filterByNumericValues, filterByName }] = useFilters();
+
   return (
     <table className="table table-dark">
       <thead>
@@ -46,13 +34,16 @@ export default function Table() {
           ))}
         </tr>
       </thead>
-      <Content data={planets} filterName={filterName} filterNumber={filtersNumber} />
+      <Content
+        planets={planets}
+        filterByName={filterByName}
+        filterByNumericValues={filterByNumericValues}
+        sort={sortPlanets}
+      />
     </table>
   );
 }
 
 Content.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
-  filterName: PropTypes.string.isRequired,
-  filterNumber: PropTypes.arrayOf(PropTypes.object).isRequired,
+  planets: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

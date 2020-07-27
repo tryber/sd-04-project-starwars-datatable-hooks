@@ -1,14 +1,60 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import useFilters from '../hooks/useFilters';
+
+const Order = ({ columns, setOrder, order }) => {
+  const [localOrder, setLocalOrder] = useState(order);
+  return (
+    <div className="col">
+      <select
+        data-testid="column-sort"
+        onChange={(e) => {
+          const {
+            target: { value },
+          } = e;
+          setLocalOrder((oldOrder) => ({ ...oldOrder, column: value }));
+        }}
+      >
+        {columns.map((column) => (
+          <option key={column}>{column}</option>
+        ))}
+      </select>
+      <div>
+        <label htmlFor="ASC">
+          ASC
+          <input
+            id="ASC"
+            name="sort"
+            data-testid="column-sort-input-asc"
+            type="radio"
+            onClick={() => setLocalOrder((oldOrder) => ({ ...oldOrder, sort: 'ASC' }))}
+            defaultChecked
+          />
+        </label>
+        <label htmlFor="DESC">
+          DESC
+          <input
+            id="DESC"
+            name="sort"
+            data-testid="column-sort-input-desc"
+            type="radio"
+            onClick={() => setLocalOrder((oldOrder) => ({ ...oldOrder, sort: 'DESC' }))}
+          />
+        </label>
+      </div>
+      <button data-testid="column-sort-button" type="button" onClick={() => setOrder(localOrder)}>
+        Ordenar
+      </button>
+    </div>
+  );
+};
 
 const NumericFilters = ({ filters, remove }) => (
   <div className="col">
     <h2>Filtros</h2>
     <div>
       {filters.map((filter) => (
-        <div data-testid="filter" key={filter.value}>
-          {console.log(filter)}
+        <div data-testid="filter" key={filter.id}>
           <p>{filter.column}</p>
           <p>{filter.comparison}</p>
           <p>{filter.value}</p>
@@ -33,8 +79,13 @@ const FilterByName = ({ filterName, filter }) => (
   </div>
 );
 
-const FilterByNumeric = ({ filter }) => {
+const FilterByNumeric = ({ filter, columns }) => {
   const [numericFilter, setNumericFilter] = useState({});
+
+  useEffect(() => {
+    setNumericFilter((oldNumericFilter) => ({ ...oldNumericFilter, column: columns[0] }));
+  }, [columns]);
+
   return (
     <div className="col">
       <div className="d-flex">
@@ -47,11 +98,11 @@ const FilterByNumeric = ({ filter }) => {
           <option value="" disabled>
             Coluna
           </option>
-          <option value="population">population</option>
-          <option value="orbital_period">orbital_period</option>
-          <option value="diameter">diameter</option>
-          <option value="rotation_period">rotation_period</option>
-          <option value="surface_water">surface_water</option>
+          {columns.map((column) => (
+            <option value={column} key={column}>
+              {column}
+            </option>
+          ))}
         </select>
         <select
           onChange={(e) => setNumericFilter({ ...numericFilter, comparison: e.target.value })}
@@ -79,7 +130,9 @@ const FilterByNumeric = ({ filter }) => {
         disabled={!numericFilter.value || !numericFilter.comparison || !numericFilter.column}
         data-testid="button-filter"
         type="button"
-        onClick={() => filter(numericFilter)}
+        onClick={() => {
+          filter(numericFilter);
+        }}
       >
         Filtrar
       </button>
@@ -89,14 +142,16 @@ const FilterByNumeric = ({ filter }) => {
 
 export default function Header() {
   const [
-    { filterName, filtersNumber },
-    { setFilterName, addFilterNumber, removeFilterNumber },
+    { filterName, filtersNumber, filterableColumns, allColumns, order },
+    { setFilterName, addFilterNumber, removeFilterNumber, setOrder },
   ] = useFilters();
+  
   return (
     <div className="jumbotron">
       <div className="row">
         <FilterByName filterName={filterName} filter={setFilterName} />
-        <FilterByNumeric filter={addFilterNumber} />
+        <Order columns={allColumns} setOrder={setOrder} order={order} />
+        <FilterByNumeric filter={addFilterNumber} columns={filterableColumns} />
         <NumericFilters filters={filtersNumber} remove={removeFilterNumber} />
       </div>
     </div>
