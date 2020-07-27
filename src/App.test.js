@@ -40,7 +40,7 @@ describe('Fazer uma requisição para o endpoint `/planets` da API de Star Wars 
     expect(global.fetch).toHaveBeenCalled();
   });
 
-  it.skip('preenche a tabela com os dados retornados', async () => {
+  it('preenche a tabela com os dados retornados', async () => {
     await act(async () => {
       render(<App />);
     });
