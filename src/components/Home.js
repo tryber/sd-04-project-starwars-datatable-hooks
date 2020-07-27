@@ -7,6 +7,6 @@ function Home() {
       <Table />
     </div>
   );
-};
+}
 
 export default Home;

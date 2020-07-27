@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import StartWarsContext from './StarWarsContext';
 import PropTypes from 'prop-types';
+
+import StartWarsContext from './StarWarsContext';
 import getPlanet from '../services/api';
 
 const StarWarsProvider = ({ children }) => {
@@ -25,10 +26,10 @@ const StarWarsProvider = ({ children }) => {
       { children }
     </StartWarsContext.Provider>
   );
-}
+};
 
 StarWarsProvider.propTypes = {
-  children: PropTypes.object.isRequired,
+  children: PropTypes.element.isRequired,
 };
 
 export default StarWarsProvider;
