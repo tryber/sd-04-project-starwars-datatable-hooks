@@ -8,18 +8,18 @@ import SearchBar from './SearchBar';
 import Filter from './Filter';
 import './MainContainer.css';
 
+const compare = (planetValue, filterValue, operator) => {
+  let result = false;
+  if (operator === 'maior que') result = planetValue > filterValue;
+  if (operator === 'menor que') result = planetValue < filterValue;
+  if (operator === 'igual a') result = planetValue === filterValue;
+  return result;
+};
+
 const MainContainer = () => {
   const { searchInput, isLoading, fetchedPlanets, filterList } = useContext(
     StarWarsContext,
   );
-
-  const compare = (planetValue, filterValue, operator) => {
-    let result = false;
-    if (operator === 'maior que') result = planetValue > filterValue;
-    if (operator === 'menor que') result = planetValue < filterValue;
-    if (operator === 'igual a') result = planetValue === filterValue;
-    return result;
-  };
 
   // filter the complete planet list from API according to active filters
   const planetFilter = () => {
