@@ -59,7 +59,7 @@ const StarWarsProvider = ({ children }) => {
 };
 
 StarWarsProvider.propTypes = {
-  children: PropTypes.object.isRequired,
+  children: PropTypes.element.isRequired,
 };
 
 export { StarWarsContext, StarWarsProvider };

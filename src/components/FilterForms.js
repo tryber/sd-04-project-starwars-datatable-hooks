@@ -8,25 +8,20 @@ function FilterForms() {
   function handleChange({ name, value }) {
     setLocalState({ ...localState, [name]: value });
   }
-
   function handleSubmit(event) {
     event.preventDefault();
     const { column, comparison, number } = localState;
-
     submitFilterData(column, comparison, number);
   }
-
   function filterOptions() {
     let newOptions = [...options];
     if (filterByNumericValues.length >= 1) {
-      console.log('filterOptions called');
       filterByNumericValues.forEach(({ column }) => {
         newOptions = newOptions.filter((option) => option !== column);
       });
     }
     return newOptions;
   }
-
   function renderSelect(newOptions, testId, name) {
     return (
       <select onChange={(e) => handleChange(e.target)} data-testid={testId} name={name}>
@@ -39,7 +34,6 @@ function FilterForms() {
       </select>
     );
   }
-
   const newOptions = filterOptions();
   return (
     <div>
