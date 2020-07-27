@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { getPlanets, changeSearch, filtered } from '../actions';
+import { starWarsContext } from '../context/starWarsContext';
 
 const initialColumns = [
   'population',
@@ -17,89 +16,68 @@ const filterColumns = (columnsInState) => {
   return initialColumns.filter((columnOption) => !usedColumns.includes(columnOption));
 };
 
-class Search extends Component {
-  componentDidMount() {
-    const { planets } = this.props;
-    planets();
-  }
+const renderBtnForm = () => {
+  return (
+    <button
+      type="button"
+      data-testid="button-filter"
+      onClick={() => {
+        // filterNumbers({
+        //   column: document.getElementById('columns').value,
+        //   comparison: document.getElementById('comparison').value,
+        //   value: document.getElementById('value').value,
+        // });
+      }}
+    >
+      Adicionar Filtro
+    </button>
+  );
+};
 
-  renderBtnForm() {
-    const { filterNumbers } = this.props;
-    return (
-      <button
-        type="button"
-        data-testid="button-filter"
-        onClick={() => {
-          filterNumbers({
-            column: document.getElementById('columns').value,
-            comparison: document.getElementById('comparison').value,
-            value: document.getElementById('value').value,
-          });
-        }}
-      >
-        Adicionar Filtro
-      </button>
-    );
-  }
+const renderForm = () => {
+  return (
+    <form>
+      <select data-testid="column-filter" id="columns">
+        <option defaultValue>Selecione</option>
+        {/* <option value="population">population</option>
+        <option value="orbital_period">orbital_period</option>
+        <option value="diameter">diameter</option>
+        <option value="rotation_period">rotation_period</option>
+        <option value="surface_water">surface_water</option> */}
+        {/* {filterColumns(filterByNumbers).map((column) => (
+          <option key={column}>{column}</option>
+        ))} */}
+      </select>
+      <select data-testid="comparison-filter" id="comparison">
+        <option defaultValue>Selecione</option>
+        <option value="maior que">maior que</option>
+        <option value="menor que">menor que</option>
+        <option value="igual a">igual a</option>
+      </select>
+      <input type="number" data-testid="value-filter" id="value" />
+      {/* {this.renderBtnForm()} */}
+    </form>
+  );
+};
 
-  renderForm() {
-    const { filterByNumbers } = this.props;
-    return (
-      <form>
-        <select data-testid="column-filter" id="columns">
-          <option defaultValue>Selecione</option>
-          {/* <option value="population">population</option>
-          <option value="orbital_period">orbital_period</option>
-          <option value="diameter">diameter</option>
-          <option value="rotation_period">rotation_period</option>
-          <option value="surface_water">surface_water</option> */}
-          {filterColumns(filterByNumbers).map((column) => (
-            <option key={column}>{column}</option>
-          ))}
-        </select>
-        <select data-testid="comparison-filter" id="comparison">
-          <option defaultValue>Selecione</option>
-          <option value="maior que">maior que</option>
-          <option value="menor que">menor que</option>
-          <option value="igual a">igual a</option>
-        </select>
-        <input type="number" data-testid="value-filter" id="value" />
-        {this.renderBtnForm()}
-      </form>
-    );
-  }
-
-  render() {
-    const { search, name } = this.props;
-    return (
+const Search = () => {
+  return (
+    <div>
       <div>
-        <div>
-          <input
-            data-testid="name-filter"
-            type="text"
-            value={name}
-            onChange={(e) => search(e.target.value)}
-          />
-        </div>
-        <div>
-          <h5>Filtro:</h5>
-          {this.renderForm()}
-        </div>
+        <input
+          data-testid="name-filter"
+          type="text"
+          value='oi'
+          onChange={(e) => e.target.value}
+        />
       </div>
-    );
-  }
-}
-
-const mapStateToProps = (state) => ({
-  name: state.filters.filterByName.name,
-  filterByNumbers: state.filters.filterByNumericValues,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  planets: (endpoint) => dispatch(getPlanets(endpoint)),
-  search: (planetName) => dispatch(changeSearch(planetName)),
-  filterNumbers: (value) => dispatch(filtered(value)),
-});
+      <div>
+        <h5>Filtro:</h5>
+        {/* {this.renderForm()} */}
+      </div>
+    </div>
+  );
+};
 
 Search.propTypes = {
   planets: PropTypes.func.isRequired,
@@ -109,4 +87,4 @@ Search.propTypes = {
   filterByNumbers: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Search);
+export default Search;
