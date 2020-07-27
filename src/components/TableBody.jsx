@@ -1,17 +1,22 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import axios from 'axios';
+import { SWContext } from '../context/SWContext';
 
 const TableBody = () => {
+  const { name, getName } = useContext(SWContext);
+
   const [data, setData] = useState([]);
 
-  useEffect(async () => {
-    const response = await fetch(
-      'https://swapi-trybe.herokuapp.com/api/planets/'
-    );
-    const res = await response.json();
-    const planets = res.results;
-    // console.log(planets);
-    setData(planets);
+  useEffect(() => {
+    axios
+      .get('https://swapi-trybe.herokuapp.com/api/planets/')
+      .then((res) => {
+        // console.log(res.data.results)
+        setData(res.data.results);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }, []);
 
   return (
