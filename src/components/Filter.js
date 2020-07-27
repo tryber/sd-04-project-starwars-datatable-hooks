@@ -2,39 +2,71 @@ import React, { useContext, useState } from 'react';
 import { StarWarsContext } from '../context/StarWarsContext';
 
 const comparisonItems = ['Comparação', 'maior que', 'igual a', 'menor que'];
-  const comparisonRender = (handleInputChange, values) => (
-    <select
-      name="comparison"
-      className="form-control col-md-5 mb-2"
-      data-testid="comparison-filter"
-      onChange={handleInputChange}
-      value={values.name}
-    >
-      {comparisonItems.map((item) => (
-        <option key={item} value={item}>
-          {item}
-        </option>
-      ))}
-    </select>
-  );
+const comparisonRender = (handleInputChange, values) => (
+  <select
+    name="comparison"
+    className="form-control col-md-5 mb-2"
+    data-testid="comparison-filter"
+    onChange={handleInputChange}
+    value={values.name}
+  >
+    {comparisonItems.map((item) => (
+      <option key={item} value={item}>
+        {item}
+      </option>
+    ))}
+  </select>
+);
 
+const buttonAddFilterRender = (addFilter) => (
+  <button
+    type="button"
+    className="btn btn-primary"
+    data-testid="button-filter"
+    onClick={addFilter}
+  >
+    Filter
+  </button>
+);
 
-  const buttonAddFilterRender = (addFilter) => (
-    <button
-      type="button"
-      className="btn btn-primary"
-      data-testid="button-filter"
-      onClick={addFilter}
-    >
-      Filter
-    </button>
-  );
+const inputColumnRender = (handleInputChange, values, colonumItemsFiltered) => (
+  <select
+    name="column"
+    className="form-control col-md-5 mr-3 mb-2"
+    data-testid="column-filter"
+    onChange={handleInputChange}
+    value={values.name}
+  >
+    {colonumItemsFiltered.map((item) => (
+      <option key={item} value={item}>
+        {item}
+      </option>
+    ))}
+  </select>
+);
 
+const filterRender = (filterList, deleteFilter) => (
+  <div className="filterListContainer">
+    {filterList.map((filter, index) => (
+      <div data-testid="filter" className="filterList">
+        <div>
+          {filter.column} {filter.comparison} {filter.value}
+        </div>
+        <div>
+          <button
+            type="button"
+            className="btn btn-danger button-delete"
+            onClick={() => deleteFilter(index, filterList)}
+          >
+            X
+          </button>
+        </div>
+      </div>
+    ))}
+  </div>
+);
 
-  
 const Filter = () => {
-
-
   // update the form entry
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -48,7 +80,7 @@ const Filter = () => {
   });
 
   const { filterList, setFilterList } = useContext(StarWarsContext);
- 
+
   const [colonumItemsFiltered, setColonumItemsFiltered] = useState([
     'Coluna',
     'population',
@@ -78,70 +110,6 @@ const Filter = () => {
     setFilterList(filterList.filter((filter, index) => index !== index2));
   };
 
-  const inputColumnRender = () => (
-    <select
-      name="column"
-      className="form-control col-md-5 mr-3 mb-2"
-      data-testid="column-filter"
-      onChange={handleInputChange}
-      value={values.name}
-    >
-      {colonumItemsFiltered.map((item) => (
-        <option key={item} value={item}>
-          {item}
-        </option>
-      ))}
-    </select>
-  );
-
-  // const buttonAddFilterRender = () => (
-  //   <button
-  //     type="button"
-  //     className="btn btn-primary"
-  //     data-testid="button-filter"
-  //     onClick={addFilter}
-  //   >
-  //     Filter
-  //   </button>
-  // );
-
-  // const comparisonRender = (handleInputChange, values) => (
-  //   <select
-  //     name="comparison"
-  //     className="form-control col-md-5 mb-2"
-  //     data-testid="comparison-filter"
-  //     onChange={handleInputChange}
-  //     value={values.name}
-  //   >
-  //     {comparisonItems.map((item) => (
-  //       <option key={item} value={item}>
-  //         {item}
-  //       </option>
-  //     ))}
-  //   </select>
-  // );
-
-  const filterRender = () => (
-    <div className="filterListContainer">
-      {filterList.map((filter, index) => (
-        <div data-testid="filter" className="filterList">
-          <div>
-            {filter.column} {filter.comparison} {filter.value}
-          </div>
-          <div>
-            <button
-              type="button"
-              className="btn btn-danger button-delete"
-              onClick={() => deleteFilter(index, filterList)}
-            >
-              X
-            </button>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-
   return (
     <div className="filters">
       <div>
@@ -167,7 +135,7 @@ const Filter = () => {
           </div>
         </form>
       </div>
-      <div>{filterRender(filterList)}</div>
+      <div>{filterRender(filterList, deleteFilter)}</div>
     </div>
   );
 };
