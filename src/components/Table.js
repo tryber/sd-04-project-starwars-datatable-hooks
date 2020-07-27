@@ -3,7 +3,7 @@ import TableHead from './TableHead';
 import TableBody from './TableBody';
 import StartWarsContext from '../context/StarWarsContext';
 
-const Table = () => {
+function Table() {
   const { isFetching } = useContext(StartWarsContext);
   if (isFetching) {
     return <div>Loading...</div>;
@@ -15,7 +15,7 @@ const Table = () => {
         <TableBody />
       </table>
     </div>
-  )
-}
+  );
+};
 
 export default Table;
