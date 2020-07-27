@@ -9,21 +9,18 @@ import ComparisonFilter from './components/ComparisonFilter';
 import Table from './components/Table';
 // import OrderFilter from './components/OrderFilter';
 
-const App = () => {
-  return (
-    <Provider> 
-      <div className="App">
-        <header className="App-header">
-          <SearchPlanet />
-          {/* <OrderFilter /> */}
-          <ComparisonFilter />
-          {/* <Filters /> */}
-        </header>
-        <Table />
-      </div>
-    </Provider>
-  );
-};
+const App = () => (
+  <Provider>
+    <div className="App">
+      <header className="App-header">
+        <SearchPlanet />
+        {/* <OrderFilter /> */}
+        <ComparisonFilter />
+        {/* <Filters /> */}
+      </header>
+      <Table />
+    </div>
+  </Provider>
+);
 
 export default App;
-

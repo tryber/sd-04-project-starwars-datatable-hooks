@@ -17,7 +17,7 @@ const ComparisonFilter = () => {
     handleNumericValues,
   } = useContext(StarWarsContext);
 
-  const availableFilters = () => {
+  const showAvailableFilters = () => {
     const columnOptions = [
       'population',
       'orbital_period',
@@ -26,8 +26,8 @@ const ComparisonFilter = () => {
       'surface_water',
     ];
     let availableFilters = columnOptions;
-    numericValues.forEach(({ column }) => {
-      availableFilters = availableFilters.filter((element) => element !== column);
+    numericValues.forEach((el) => {
+      availableFilters = availableFilters.filter((element) => element !== el.column);
     });
     return availableFilters;
   };
@@ -36,7 +36,7 @@ const ComparisonFilter = () => {
     handleNumericValues(column, comparison, value);
   };
 
-  const columnOptions = availableFilters();
+  const columnOptions = showAvailableFilters();
   return (
     <div>
       <select

@@ -31,6 +31,7 @@ const Provider = (props) => {
     setIsLoading(true);
 
     getPlanets().then(handleDataSuccess, handleDataFailure);
+    return null;
   };
 
   // Definição do valores para filtar pelo nome, coluna, comparação e numero futuramente
@@ -38,8 +39,8 @@ const Provider = (props) => {
     setFunction(event.target.value);
   };
 
-  const handleNumericValues = (column, comparison, value) => {
-    setNumericValues([...numericValues, { column, comparison, value }]);
+  const handleNumericValues = (col, comp, val) => {
+    setNumericValues([...numericValues, { column: col, comparison: comp, value: val }]);
   };
 
   const contextValue = {
