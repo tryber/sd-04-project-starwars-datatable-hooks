@@ -70,11 +70,14 @@ const StarWarsContextStore = ({ children }) => {
 };
 
 StarWarsContextStore.defaultProps = {
-  children: [],
+  children: undefined,
 };
 
 StarWarsContextStore.propTypes = {
-  children: PropTypes.object,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]),
 };
 
 export default StarWarsContextStore;
