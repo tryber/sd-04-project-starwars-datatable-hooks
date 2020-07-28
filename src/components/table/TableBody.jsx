@@ -3,6 +3,7 @@ import { StarWarsContext } from '../../context/StarWarsContext';
 
 const TableBody = () => {
   const { filter, data } = useContext(StarWarsContext);
+
   const filteredPlanets = [...data];
   filteredPlanets.sort((a, b) => a.name.localeCompare(b.name));
 

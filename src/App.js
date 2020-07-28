@@ -1,14 +1,14 @@
 import React from 'react';
 import './App.css';
-import { Provider } from './context/StarWarsContext';
+import { ProviderSW } from './context/StarWarsContext';
 import Home from './components/Home';
 
 const App = () => (
-  <Provider>
+  <ProviderSW>
     <section className="App">
       <Home />
     </section>
-  </Provider>
+  </ProviderSW>
 );
 
 export default App;

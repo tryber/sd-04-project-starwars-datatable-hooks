@@ -20,18 +20,25 @@ const generalFilter = {
   },
 };
 
-const Provider = ({ children }) => {
+const ProviderSW = ({ children }) => {
   const [data, setPlanet] = useState([]);
   const [isFetching, setIsFetching] = useState(true);
-  const [filter, setGeneralFilter] = useState(generalFilter);
+  const [filter, setFilter] = useState(generalFilter);
 
   const setFetching = () => {
-    setIsFetching(!isFetching);
+    setIsFetching();
   };
 
   const changeFilterName = (name) => {
     name.toLowerCase();
-    setGeneralFilter({ ...filter, filterByName: { name } });
+    setFilter({ ...filter, filterByName: { name } });
+  };
+
+  const changeFilterColumn = (column, comparison, value) => {
+    setFilter({
+      ...filter,
+      filterByNumericValues: [...filter.filterByNumericValues, [{ column, comparison, value }]],
+    });
   };
 
   const contextValue = {
@@ -41,13 +48,14 @@ const Provider = ({ children }) => {
     setPlanet,
     setFetching,
     isFetching,
+    changeFilterColumn,
   };
 
   return <StarWarsContext.Provider value={contextValue}>{children}</StarWarsContext.Provider>;
 };
 
-Provider.propTypes = {
+ProviderSW.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export { Provider, StarWarsContext };
+export { ProviderSW, StarWarsContext };
