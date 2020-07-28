@@ -1,28 +1,18 @@
 import React, { useEffect, useContext } from 'react';
-import axios from 'axios';
-import { SWContext } from '../context/SWContext';
+import { StarWarsContext } from '../context/StarWarsContext';
 
 const TableBody = () => {
-  const { data, setData, filter } = useContext(SWContext);
+  const { swApi, data, fetching, nameFilter } = useContext(StarWarsContext);
 
   useEffect(() => {
-    axios
-      .get('https://swapi-trybe.herokuapp.com/api/planets/')
-      .then((res) => {
-        setData(res.data.results);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    swApi();
   }, []);
 
   const filteredPlanetsByName = [...data].filter((planet) =>
-    planet.name.toLowerCase().includes(filter.filterByName.name.toLowerCase()),
+    planet.name.toLowerCase().includes(nameFilter.toLowerCase()),
   );
 
-  // console.log(filteredPlanetsByName)
-
-
+  if (fetching) return <p>Loading...</p>;
   return (
     <tbody>
       {filteredPlanetsByName.map((planets) => (

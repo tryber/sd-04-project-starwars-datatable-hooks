@@ -1,5 +1,5 @@
 import React from 'react';
-import { SWProvider } from './context/SWContext';
+import { SWProvider } from './context/StarWarsContext';
 import Home from './components/Home';
 
 const App = () => (

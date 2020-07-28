@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { SWContext } from '../context/SWContext';
+import { StarWarsContext } from '../context/StarWarsContext';
 
 const SearchInput = () => {
-  const { filterByName } = useContext(SWContext);
+  const { filterByName } = useContext(StarWarsContext);
 
   return (
     <div>
