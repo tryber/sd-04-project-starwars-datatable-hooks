@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { StarWarsContext } from '../context/StarWarsContext';
-// import Filters from './Filters';
+import Filters from './Filters';
 
 const Header = () => {
-  const { filters, filters: { filterByName }, setFilters } = useContext(StarWarsContext);
+  const { filters, setFilters } = useContext(StarWarsContext);
   return (
     <div>
       <input
@@ -11,10 +11,9 @@ const Header = () => {
         data-testid="name-filter"
         onChange={({ target: { value } }) => {
           setFilters({ ...filters, filterByName: { ...filters.filterByName, name: value } } );
-          console.log(filters);
         }}
       />
-      {/* <Filters /> */}
+      <Filters />
     </div>
   );
 };

@@ -174,7 +174,7 @@ describe('Sua página deve ter um filtro para valores numéricos', () => {
   beforeAll(mockFetch);
   beforeEach(cleanup);
 
-  it.skip('renderiza o filtro de coluna', async () => {
+  it('renderiza o filtro de coluna', async () => {
     await act(async () => {
       render(<App />);
     });
@@ -195,7 +195,7 @@ describe('Sua página deve ter um filtro para valores numéricos', () => {
     expect(foundColumnFilter).toEqual(expect.arrayContaining(columns));
   });
 
-  it.skip('renderiza o filtro de comparação', async () => {
+  it('renderiza o filtro de comparação', async () => {
     await act(async () => {
       render(<App />);
     });
@@ -210,7 +210,7 @@ describe('Sua página deve ter um filtro para valores numéricos', () => {
     expect(foundComparisonFilter).toEqual(expect.arrayContaining(columns));
   });
 
-  it.skip('renderiza o campo para o valor do filtro', async () => {
+  it('renderiza o campo para o valor do filtro', async () => {
     await act(async () => {
       render(<App />);
     });
@@ -218,7 +218,7 @@ describe('Sua página deve ter um filtro para valores numéricos', () => {
     expect(await screen.findByTestId(VALUE_FILTER_SELECTOR)).toHaveProperty('nodeName', 'INPUT');
   });
 
-  it.skip('renderiza o botão para executar a filtragem', async () => {
+  it('renderiza o botão para executar a filtragem', async () => {
     await act(async () => {
       render(<App />);
     });
@@ -226,7 +226,7 @@ describe('Sua página deve ter um filtro para valores numéricos', () => {
     expect(await screen.findByTestId(BUTTON_FILTER_SELECTOR)).toHaveProperty('nodeName', 'BUTTON');
   });
 
-  it.skip('filtra utilizando a comparação "menor que"', async () => {
+  it('filtra utilizando a comparação "menor que"', async () => {
     await act(async () => {
       render(<App />);
     });
@@ -243,7 +243,7 @@ describe('Sua página deve ter um filtro para valores numéricos', () => {
     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(7);
   });
 
-  it.skip('filtra utilizando a comparação "maior que"', async () => {
+  it('filtra utilizando a comparação "maior que"', async () => {
     await act(async () => {
       render(<App />);
     });
@@ -262,7 +262,7 @@ describe('Sua página deve ter um filtro para valores numéricos', () => {
     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(8);
   });
 
-  it.skip('filtra utilizando a comparação "igual a"', async () => {
+  it('filtra utilizando a comparação "igual a"', async () => {
     await act(async () => {
       render(<App />);
     });

@@ -30,27 +30,28 @@ const renderTable = (headers, data) => (
   </table>
 );
 
-// const comparacao = (planets, columnFilter) => {
-//   let aux = [...planets];
-//   columnFilter.forEach(({ column, comparison, value }) => {
-//     aux = aux.filter((planet) => {
-//       if (comparison === 'maior que') return Number(planet[column]) > Number(value);
-//       if (comparison === 'igual a') return Number(planet[column]) === Number(value);
-//       if (comparison === 'menor que') return Number(planet[column]) < Number(value);
-//       return false;
-//     });
-//   });
-//   return aux;
-// };
+const comparacao = (planets, columnFilter) => {
+  let aux = [...planets];
+  columnFilter.forEach(({ column, comparison, value }) => {
+    aux = aux.filter((planet) => {
+      if (comparison === 'maior que') return Number(planet[column]) > Number(value);
+      if (comparison === 'igual a') return Number(planet[column]) === Number(value);
+      if (comparison === 'menor que') return Number(planet[column]) < Number(value);
+      return false;
+    });
+  });
+  return aux;
+};
 
 const Table = () => {
-  // componentDidMount() {
-  //   const { starWarsAPI } = this.props;
-  //   starWarsAPI();
-  // }
-  const { planets, filters: { filterByName: { name } } } = useContext(StarWarsContext);
-
-  // const { data, isFetching, searchTerm, columnFilter } = this.props;
+  const {
+    planets,
+    filters: {
+      filterByName: { name },
+      filterByNumericValues,
+    },
+  } = useContext(StarWarsContext);
+  // const { data, isFetching, searchTerm, columnFilter } = this.props; // excluir
   let headers = '';
   let filtereds = [...planets];
   if (!planets.length) {
@@ -61,10 +62,10 @@ const Table = () => {
     filtereds = planets.filter((planet) => planet.name.includes(name));
     return <div>{renderTable(headers, filtereds)}</div>;
   }
-  // if (columnFilter.length !== 0) {
-  //   filtereds = comparacao(data, columnFilter);
-  //   return <div>{renderTable(headers, filtereds)}</div>;
-  // }
+  if (filterByNumericValues.length !== 0) {
+    filtereds = comparacao(planets, filterByNumericValues);
+    return <div>{renderTable(headers, filtereds)}</div>;
+  }
   return <div>{renderTable(headers, planets)}</div>;
 };
 
