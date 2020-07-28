@@ -26,9 +26,9 @@ const FilterByComparison = () => {
     <form>
       <select data-testid="column-filter" onChange={(e) => setColumn(e.target.value)}>
         <option defaultValue>Selecione</option>
-        {filterColumns(filters.filterByNumericValues).map((column) => (
-            <option key={column}>{column}</option>
-          ))}
+        {filterColumns(filters.filterByNumericValues).map((columns) => (
+          <option key={columns}>{columns}</option>
+        ))}
       </select>
       <select data-testid="comparison-filter" onChange={(e) => setComparison(e.target.value)}>
         <option defaultValue>Selecione</option>

@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { StarWarsContext } from '../context/starWarsContext';
 
-const ShowFilter = (props) => {
-  const {filters} = useContext(StarWarsContext)
+const ShowFilter = () => {
+  const { filters } = useContext(StarWarsContext);
   const filter = filters.filterByNumericValues;
   if (filter.length === 0) return null;
   return (
