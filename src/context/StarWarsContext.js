@@ -28,5 +28,5 @@ export const Store = ({ children }) => {
 };
 
 Store.propTypes = {
-  children: PropTypes.object.isRequired,
+  children: PropTypes.node.isRequired,
 };
