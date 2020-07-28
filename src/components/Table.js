@@ -9,7 +9,7 @@ function Table() {
   const chaves =
     (dataApi.length !== 0) ? Object.keys(dataApi[0]).filter((keys) => keys !== 'residents') : [];
 
-  const planets = filteredDataFunc([...dataApi], filterByName, filterByNumericValues);
+  const planets = filteredDataFunc(dataApi, filterByName, filterByNumericValues);
 
   if (isLoading) return <h1>Loading...</h1>;
   return (

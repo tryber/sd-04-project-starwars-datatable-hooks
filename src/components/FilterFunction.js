@@ -1,4 +1,5 @@
-const filteredDataFunc = (planets, filterByName, filterByNumericValues) => {
+const filteredDataFunc = (data, filterByName, filterByNumericValues) => {
+  let planets = [...data];
   if (filterByName.name.length > 0) {
     planets = planets.filter((planet) => planet.name.includes(filterByName.name));
   }
