@@ -70,6 +70,7 @@ export const getColumnsToSort = (onColumnChange, column) => {
   const select = columnsToSort();
   return (
     <select
+      data-testid="column-sort"
       onChange={(event) => onColumnChange(event)}
       value={column}
     >
