@@ -30,7 +30,7 @@ const Provider = ({ children }) => {
   };
 
   const changeFilterName = (name) => {
-    setGeneralFilter({ ...filter, filterByName: { name: name } });
+    setGeneralFilter({ ...filter, filterByName: { name } });
   };
 
   const contextValue = {
