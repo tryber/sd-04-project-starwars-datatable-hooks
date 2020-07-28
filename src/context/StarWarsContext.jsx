@@ -21,9 +21,8 @@ const SWProvider = ({ children }) => {
   const requestPlanets = () => {
     if (!fetching) return null;
     setFetching(true);
-    swApi().then(requestSucess, requestFailure);
+    return swApi().then(requestSucess, requestFailure);
   };
-  /////////////////////////////////////////
 
   const filterByName = (name) => {
     setNameFilter(name);
