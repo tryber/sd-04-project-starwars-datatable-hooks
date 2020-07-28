@@ -51,7 +51,6 @@ const Table = () => {
       filterByNumericValues,
     },
   } = useContext(StarWarsContext);
-  // const { data, isFetching, searchTerm, columnFilter } = this.props; // excluir
   let headers = '';
   let filtereds = [...planets];
   if (!planets.length) {

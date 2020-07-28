@@ -10,7 +10,7 @@ const Header = () => {
         type="text"
         data-testid="name-filter"
         onChange={({ target: { value } }) => {
-          setFilters({ ...filters, filterByName: { ...filters.filterByName, name: value } } );
+          setFilters({ ...filters, filterByName: { ...filters.filterByName, name: value } });
         }}
       />
       <Filters />

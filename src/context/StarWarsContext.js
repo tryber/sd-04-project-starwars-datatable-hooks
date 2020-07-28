@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import starWarsAPI from '../services/starWarsAPI';
 
 const StarWarsContext = createContext();
@@ -23,9 +24,20 @@ const StartWarsProvider = ({ children }) => {
     starWarsAPI().then((resp) => setPLanets(resp.results)); // Requisição da API.
   }, []);
 
-  const contextValue = { planets, setPLanets, filters, setFilters, filterKeys, setFilterKeys }; // Valores do contexto.
+  const contextValue = {
+    planets,
+    setPLanets,
+    filters,
+    setFilters,
+    filterKeys,
+    setFilterKeys
+  }; // Valores do contexto.
 
   return <StarWarsContext.Provider value={contextValue}>{children}</StarWarsContext.Provider>;
+};
+
+StartWarsProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export { StarWarsContext, StartWarsProvider as Provider };
