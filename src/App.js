@@ -1,26 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
-  return (
+import './App.css';
+import Provider from './context/Provider';
+
+import SearchPlanet from './components/SearchPlanet';
+import ComparisonFilter from './components/ComparisonFilter';
+import Filters from './components/Filters';
+import Table from './components/Table';
+// import OrderFilter from './components/OrderFilter';
+
+const App = () => (
+  <Provider>
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <SearchPlanet />
+        {/* <OrderFilter /> */}
+        <ComparisonFilter />
+        <Filters />
       </header>
+      <Table />
     </div>
-  );
-}
+  </Provider>
+);
 
 export default App;
