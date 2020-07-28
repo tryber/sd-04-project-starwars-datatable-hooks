@@ -1,6 +1,6 @@
 import React, { createContext, useState } from 'react';
 
-export const StarWarsContext = createContext();
+export const StarWarsContext2 = createContext();
 
 const initialState = {
   apiRequest: {
@@ -20,8 +20,8 @@ export const Store = ({ children }) => {
   const [store, setStore] = useState(initialState);
 
   return (
-    <StarWarsContext.Provider value={[store, setStore]}>
+    <StarWarsContext2.Provider value={[store, setStore]}>
       {children}
-    </StarWarsContext.Provider>
+    </StarWarsContext2.Provider>
   );
 };
