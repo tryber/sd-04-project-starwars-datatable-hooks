@@ -4,6 +4,26 @@ import StarWarsContext from '../context/StarWarsContext';
 // Gambiarra pro CC
 const options = ['maior que', 'menor que', 'igual a'];
 
+const createSelectTag = (name, testid, handler, setFunc, arr) => (
+  <select value={name} data-testid={testid} onChange={(event) => handler(event, setFunc)}>
+    <option value="">selecionar</option>
+    {arr.map((option) => (
+      <option key={option} value={option}>
+        {option}
+      </option>
+    ))}
+  </select>
+);
+
+const createInputTag = (value, testid, handler, setFunc) => (
+  <input
+    value={value}
+    type="number"
+    data-testid={testid}
+    onChange={(event) => handler(event, setFunc)}
+  />
+);
+
 const ComparisonFilter = () => {
   const {
     column,
@@ -39,37 +59,12 @@ const ComparisonFilter = () => {
   const columnOptions = showAvailableFilters();
   return (
     <div>
-      <select
-        value={column}
-        data-testid="column-filter"
-        onChange={(event) => handleChange(event, setColumn)}
-      >
-        <option value="">selecionar</option>
-        {columnOptions.map((option) => (
-          <option key={option} value={option}>
-            {option}
-          </option>
-        ))}
-      </select>
-      <select
-        value={comparison}
-        data-testid="comparison-filter"
-        onChange={(event) => handleChange(event, setComparison)}
-      >
-        <option value="">selecionar</option>
-        {options.map((option) => (
-          <option key={option} value={option}>
-            {option}
-          </option>
-        ))}
-      </select>
-      <input
-        value={value}
-        type="number"
-        data-testid="value-filter"
-        onChange={(event) => handleChange(event, setValue)}
-      />
-      <button data-testid="button-filter" type="button" onClick={() => filter()}>Filtrar</button>
+      {createSelectTag(column, 'column-filter', handleChange, setColumn, columnOptions)}
+      {createSelectTag(comparison, 'comparison-filter', handleChange, setComparison, options)}
+      {createInputTag(value, 'value-filter', handleChange, setValue)}
+      <button data-testid="button-filter" type="button" onClick={() => filter()}>
+        Filtrar
+      </button>
     </div>
   );
 };
