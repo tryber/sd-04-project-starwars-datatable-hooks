@@ -23,9 +23,10 @@ function Table() {
         <tbody>
           {planets.map((planet) => (
             <tr key={`${planet.name} 1`}>
-              {chaves.map((chave) => (
-                <td key={`${planet.name} ${chave}`}>{planet[chave]}</td>
-              ))}
+              {chaves.map((chave) => {
+                if (chave !== 'name') return <td key={`${planet.name} ${chave}`}>{planet[chave]}</td>
+                return <td key={`${planet.name} ${chave}`} data-testid="planet-name">{planet[chave]}</td>
+              })}
             </tr>
           ))}
         </tbody>
