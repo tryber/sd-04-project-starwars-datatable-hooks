@@ -2,17 +2,17 @@ import React, { useContext } from 'react';
 import { SWContext } from '../context/SWContext';
 
 const SearchInput = () => {
-  const { name, getName } = useContext(SWContext);
+  const { filterByName } = useContext(SWContext);
 
   return (
     <div>
       <input
-        value={name}
-        onChange={getName}
+        type="text"
+        onChange={(e) => filterByName(e.target.value)}
         data-testid="name-filter"
         placeholder="Search a Planet"
       />
-      {console.log(name)}
+      {/* {console.log(data)} */}
     </div>
   );
 };

@@ -1,19 +1,35 @@
-import React, { createContext } from 'react';
-import { useState } from 'react';
+import React, { createContext, useState } from 'react';
 
 const SWContext = createContext();
 
-const SWProvider = ({ children }) => {
-  const [name, setName] = useState('');
+const filters = {
+  filterByName: {
+    name: '',
+  },
+};
 
-  const getName = (e) => {
-    setName(e.target.value);
+const SWProvider = ({ children }) => {
+  const [data, setData] = useState([]);
+  const [fetching, setFetching] = useState(false);
+  const [filter, setFilter] = useState(filters);
+
+  const filterByName = (name) => {
+    setFilter({ filterByName: { name } });
   };
 
+//   const filteredByName = [...data].filter((planet) =>
+//   planet.name.includes(filter.filteredByName.name)
+// );
+
   const context = {
-    name,
-    setName,
-    getName,
+    data,
+    setData,
+    fetching,
+    setFetching,
+    filter,
+    setFilter,
+    filterByName,
+    // filteredByName
   };
 
   return <SWContext.Provider value={context}>{children}</SWContext.Provider>;

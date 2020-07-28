@@ -1,17 +1,14 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import axios from 'axios';
-import { SWContext } from '../context/SWContext';
+import { SWContext, SWProvider } from '../context/SWContext';
 
 const TableBody = () => {
-  const { name, getName } = useContext(SWContext);
-
-  const [data, setData] = useState([]);
+  const { data, setData, filter } = useContext(SWContext);
 
   useEffect(() => {
     axios
       .get('https://swapi-trybe.herokuapp.com/api/planets/')
       .then((res) => {
-        // console.log(res.data.results)
         setData(res.data.results);
       })
       .catch((err) => {
@@ -19,9 +16,16 @@ const TableBody = () => {
       });
   }, []);
 
+  const filteredPlanetsByName = [...data].filter((planet) =>
+    planet.name.includes(filter.filterByName.name)
+  );
+
+  // console.log(filteredPlanetsByName)
+
+
   return (
     <tbody>
-      {data.map((planets) => (
+      {filteredPlanetsByName.map((planets) => (
         <tr key={planets.name}>
           <td>{planets.name}</td>
           <td>{planets.rotation_period}</td>
