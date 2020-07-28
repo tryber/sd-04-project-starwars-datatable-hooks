@@ -286,7 +286,7 @@ describe('Sua página não deve utilizar filtros repetidos', () => {
   beforeAll(mockFetch);
   beforeEach(cleanup);
 
-  it.skip('filtra por população e o remove das opções', async () => {
+  it('filtra por população e o remove das opções', async () => {
     await act(async () => {
       render(<App />);
     });
