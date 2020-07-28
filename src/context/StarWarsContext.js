@@ -7,13 +7,7 @@ const generalFilter = {
   filterByName: {
     name: '',
   },
-  filterByNumericValues: [
-    {
-      column: '',
-      comparison: '',
-      value: '',
-    },
-  ],
+  filterByNumericValues: [],
   order: {
     column: 'Name',
     sort: 'ASC',
@@ -30,7 +24,6 @@ const ProviderSW = ({ children }) => {
   };
 
   const changeFilterName = (name) => {
-    name.toLowerCase();
     setFilter({ ...filter, filterByName: { name } });
   };
 

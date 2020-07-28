@@ -1,12 +1,9 @@
-const axios = require('axios');
+const url = 'https://swapi-trybe.herokuapp.com/api/planets/';
 
-const getPlanets = () => {
-  axios
-    .get('https://swapi-trybe.herokuapp.com/api/planets/')
-    .then((res) => res.data.results)
-    .catch((err) => {
-      console.log(err.message);
-    });
-};
-
-export default getPlanets;
+export default function getPlanets() {
+  return fetch(url).then((response) =>
+    response
+      .json()
+      .then((planets) => (response.ok ? Promise.resolve(planets) : Promise.reject(planets))),
+  );
+}

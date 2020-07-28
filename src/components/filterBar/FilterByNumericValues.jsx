@@ -11,13 +11,7 @@ const FilterByNumericValues = () => {
   const [value, setValue] = useState('');
   const { changeFilterColumn } = useContext(StarWarsContext);
 
-  async function handleSubmit() {
-    await changeFilterColumn(column, comparison, value);
-
-    setColumn('');
-    setComparison('');
-    setValue('');
-  }
+  const handleSubmit = () => changeFilterColumn(column, comparison, value);
 
   return (
     <form>

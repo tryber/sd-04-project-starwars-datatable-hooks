@@ -17,11 +17,11 @@ const CreateInputComparison = ({ changeComparison, comparison }) => (
 
 CreateInputComparison.propTypes = {
   changeComparison: PropTypes.func.isRequired,
-  comparison: PropTypes.string,
+  comparison: PropTypes.string.isRequired,
 };
 
-CreateInputComparison.defaultProps = {
-  comparison: '',
-};
+// CreateInputComparison.defaultProps = {
+//   comparison: '',
+// };
 
 export default CreateInputComparison;
