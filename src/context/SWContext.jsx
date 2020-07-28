@@ -1,4 +1,5 @@
 import React, { createContext, useState } from 'react';
+import PropTypes from 'prop-types';
 
 const SWContext = createContext();
 
@@ -17,10 +18,6 @@ const SWProvider = ({ children }) => {
     setFilter({ filterByName: { name } });
   };
 
-//   const filteredByName = [...data].filter((planet) =>
-//   planet.name.includes(filter.filteredByName.name)
-// );
-
   const context = {
     data,
     setData,
@@ -33,6 +30,10 @@ const SWProvider = ({ children }) => {
   };
 
   return <SWContext.Provider value={context}>{children}</SWContext.Provider>;
+};
+
+SWProvider.prototypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export { SWContext, SWProvider };

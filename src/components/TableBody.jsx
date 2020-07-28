@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from 'react';
 import axios from 'axios';
-import { SWContext, SWProvider } from '../context/SWContext';
+import { SWContext } from '../context/SWContext';
 
 const TableBody = () => {
   const { data, setData, filter } = useContext(SWContext);
@@ -17,7 +17,7 @@ const TableBody = () => {
   }, []);
 
   const filteredPlanetsByName = [...data].filter((planet) =>
-    planet.name.includes(filter.filterByName.name)
+    planet.name.includes(filter.filterByName.name),
   );
 
   // console.log(filteredPlanetsByName)
