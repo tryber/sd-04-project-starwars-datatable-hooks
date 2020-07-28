@@ -12,6 +12,14 @@ const generalFilter = {
     column: 'Name',
     sort: 'ASC',
   },
+  options: [
+    'Column',
+    'population',
+    'orbital_period',
+    'diameter',
+    'rotation_period',
+    'surface_water'
+  ],
 };
 
 const ProviderSW = ({ children }) => {

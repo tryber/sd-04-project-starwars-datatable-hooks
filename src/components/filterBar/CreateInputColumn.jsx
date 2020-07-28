@@ -1,20 +1,32 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import { StarWarsContext } from '../../context/StarWarsContext';
 
-const CreateInputColumn = ({ changeColumn, column }) => (
-  <select name="column" id="column" value={column} onChange={(e) => changeColumn(e.target.value)}>
-    <option value="" />
-    <option value="1">1</option>
-  </select>
-);
+const CreateInputColumn = ({ changeColumn, column }) => {
+  const { filter } = useContext(StarWarsContext);
+
+  let optionsFiltered = filter.options;
+
+  filter.filterByNumericValues.forEach(({ column }) => {
+    optionsFiltered = filter.options.filter((option) => option !== column);
+  });
+
+  return (
+    <select name="column" id="column" value={column} onChange={(e) => changeColumn(e.target.value)}>
+      {optionsFiltered.map((option) => (
+        <option key={option}>{option}</option>
+      ))}
+    </select>
+  );
+};
 
 CreateInputColumn.propTypes = {
   changeColumn: PropTypes.func.isRequired,
-  column: PropTypes.string,
+  column: PropTypes.string.isRequired,
 };
 
-CreateInputColumn.defaultProps = {
-  column: '',
-};
+// CreateInputColumn.defaultProps = {
+//   column: '',
+// };
 
 export default CreateInputColumn;

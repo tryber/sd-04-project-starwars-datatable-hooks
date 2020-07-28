@@ -1,15 +1,35 @@
 import React, { useContext } from 'react';
 import { StarWarsContext } from '../../context/StarWarsContext';
 
+const compareFilters = (planets, { column, comparison, value }) => {
+  switch (comparison) {
+    case 'maior que':
+      return Number(planets[column]) > Number(value);
+    case 'menor que':
+      return Number(planets[column]) < Number(value);
+    case 'igual a':
+      return Number(planets[column]) === Number(value);
+    default:
+      return false;
+  }
+};
+
 const TableBody = () => {
   const { filter, data } = useContext(StarWarsContext);
 
   const filteredPlanets = [...data];
   filteredPlanets.sort((a, b) => a.name.localeCompare(b.name));
 
-  const filteredByName = [...filteredPlanets].filter((planet) =>
+  let filteredByName = filteredPlanets.filter((planet) =>
     planet.name.toLowerCase().includes(filter.filterByName.name.toLowerCase()),
   );
+
+  if (filter.filterByNumericValues.length > 0) {
+    filter.filterByNumericValues.forEach(
+      (filter) =>
+        (filteredByName = filteredByName.filter((planet) => compareFilters(planet, filter))),
+    );
+  }
 
   const objKeys =
     filteredPlanets.length > 0
