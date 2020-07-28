@@ -1,13 +1,8 @@
 table {
+  border: 1px solid black;
   border-collapse: collapse;
   font-size: 17px;
   width: max-content;
-}
-
-table,
-th,
-td {
-  border: 1px solid black;
 }
 
 thead {
@@ -15,11 +10,13 @@ thead {
 }
 
 th {
+  border: 1px solid black;
   padding: 5px;
   text-align: center;
 }
 
 td {
+  border: 1px solid black;
   max-width: 100px;
   overflow: hidden;
   text-align: center;

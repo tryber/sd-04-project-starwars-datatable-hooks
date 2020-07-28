@@ -18,33 +18,34 @@ const usedColumns = [
   'url',
 ];
 
+const filterPlanetsName = (array, filter) => {
+  if (filter === '') return array;
+  return array.filter((planet) => planet.name.toLowerCase().includes(filter.toLowerCase()));
+};
+
+const filterPlanetsComparison = (array, filter) => {
+  if (filter.length === 0) return array;
+  return filter.reduce((acc, crr) => {
+    const { column, comparison, value } = crr;
+    return acc.filter((planet) => {
+      switch (comparison) {
+        case 'maior que':
+          return Number(planet[column]) > Number(value);
+        case 'menor que':
+          return Number(planet[column]) < Number(value);
+        case 'igual a':
+          return Number(planet[column]) === Number(value);
+        default:
+          return false;
+      }
+    });
+  }, array);
+};
+
 const Table = () => {
   const { planets, filters } = useContext(StarWarsContext);
-  const filterPlanetsName = (array) => {
-    if (filters.filterByName.name === '') return array;
-    return array.filter((planet) =>
-      planet.name.toLowerCase().includes(filters.filterByName.name.toLowerCase()),
-    );
-  };
-  const arrayPlanets = filterPlanetsName(planets.data);
-  const filterPlanetsComparison = (array) => {
-    if (filters.filterByNumericValues.length === 0) return array;
-    return filters.filterByNumericValues.reduce((acc, crr) => {
-      const { column, comparison, value } = crr;
-      return acc.filter((planet) => {
-        switch (comparison) {
-          case 'maior que':
-            return Number(planet[column]) > Number(value);
-          case 'menor que':
-            return Number(planet[column]) < Number(value);
-          case 'igual a':
-            return Number(planet[column]) === Number(value);
-          default:
-            return false;
-        }
-      });
-    }, array);
-  };
+  const input = filters.filterByName.name;
+  const arrayPlanets = filterPlanetsName(planets.data, input);  
   if (planets.loading) return <h1>Loading...</h1>;
   return (
     <div className="daniteste">
@@ -57,7 +58,7 @@ const Table = () => {
           </tr>
         </thead>
         <tbody>
-          {filterPlanetsComparison(arrayPlanets).map((planet) => (
+          {filterPlanetsComparison(arrayPlanets, filters.filterByNumericValues).map((planet) => (
             <tr key={planet.diameter}>
               {usedColumns.map((key) => (
                 <td key={key}>{planet[key]}</td>

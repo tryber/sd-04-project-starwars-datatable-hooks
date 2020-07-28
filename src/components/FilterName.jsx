@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { StarWarsContext } from '../context/starWarsContext';
 
 const FilterName = () => {
-  const { filterByName, filters} = useContext(StarWarsContext);
+  const { filterByName, filters } = useContext(StarWarsContext);
   return (
     <input
       data-testid="name-filter"
