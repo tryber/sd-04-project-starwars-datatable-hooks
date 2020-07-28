@@ -24,7 +24,7 @@ function NumericFilterCard() {
         ))}
       </div>
     </div>
-  )
+  );
 }
 
 export default NumericFilterCard;

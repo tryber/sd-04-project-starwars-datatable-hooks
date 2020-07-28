@@ -44,7 +44,7 @@ const StarWarsProvider = ({ children }) => {
   const deleteFilter = (columnEvent) => {
     setfilterByNumericValues(filterByNumericValues
       .filter(({ column }) => column !== columnEvent));
-  }
+  };
 
   const states = {
     dataApi,
