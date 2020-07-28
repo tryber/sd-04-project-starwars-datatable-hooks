@@ -1,16 +1,14 @@
 import React, { useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 
-
 function Table() {
-  const { dataApi, isLoading, filters} = useContext(StarWarsContext);
+  const { dataApi, isLoading, filters } = useContext(StarWarsContext);
 
-  const filteredData = () => {
+  const filteredDataFunc = () => {
     let planets = [...dataApi];
-    const { name } = filters.filterByName;
-    const { filterByNumericValues } = filters;
-    if (name.length > 0) {
-      planets = planets.filter((planet) => planet.name.includes(name));
+    const { filterByName, filterByNumericValues } = filters;
+    if (filterByName.name.length > 0) {
+      planets = planets.filter((planet) => planet.name.includes(filterByName.name));
     }
     if (filterByNumericValues.length > 0) {
       filterByNumericValues.forEach(({ column, comparison, value }) => {
@@ -28,13 +26,12 @@ function Table() {
   const chaves =
     (dataApi.length !== 0) ? Object.keys(dataApi[0]).filter((keys) => keys !== 'residents') : [];
 
-  const planets = filteredData();
+  const planets = filteredDataFunc();
 
   if (isLoading) return <h1>Loading...</h1>;
   return (
     <div>
       <table className="table">
-        {console.log(filters)}
         <thead>
           <tr>
             {chaves.map((chave) => (<th key={chave}>{chave}</th>))}

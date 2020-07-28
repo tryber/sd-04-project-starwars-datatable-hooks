@@ -12,7 +12,7 @@ function NumericFilter() {
       newFilter = newFilter.filter((elem) => elem !== column);
     });
     return newFilter;
-  }
+  };
 
   const optionFilter = availableFilters();
   return (
@@ -37,7 +37,7 @@ function NumericFilter() {
         <option value="igual a">igual a</option>
       </select><br />
       <input
-        data-testid="value-filter" type="number" className="input" name='value'
+        data-testid="value-filter" type="number" className="input" name="value"
         onChange={(e) => handleChange(e)}
       />
       <button type="submit" data-testid="button-filter">Filter</button>
