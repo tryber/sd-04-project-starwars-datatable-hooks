@@ -16,7 +16,7 @@ const ShowFilter = () => {
             type="button"
             name={column}
             onClick={(e) => {
-              const remove = filter.filter(filtro => filtro.column !== e.target.name);
+              const remove = filter.filter((filtro) => filtro.column !== e.target.name);
               return removeFilter(remove);
             }}
           >
