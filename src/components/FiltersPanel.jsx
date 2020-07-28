@@ -5,18 +5,16 @@ import FilterSearch from './FilterSearch';
 // import FilterNumbers from './FilterNumbers';
 import './FiltersPanel.css';
 
-const FiltersPanel = () => {
-  return (
-    <div className="filters-panel-container">
-      <h2 className="filter-panel-title">Filters</h2>
-      <form>
-        <FilterSearch />
-        {/* <FilterNumbers />
+const FiltersPanel = () => (
+  <div className="filters-panel-container">
+    <h2 className="filter-panel-title">Filters</h2>
+    <form>
+      <FilterSearch />
+      {/* <FilterNumbers />
           <FilterOrder /> */}
-      </form>
-      {/* <FilterList /> */}
-    </div>
-  );
-};
+    </form>
+    {/* <FilterList /> */}
+  </div>
+);
 
 export default FiltersPanel;
