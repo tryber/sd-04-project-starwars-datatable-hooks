@@ -27,7 +27,7 @@ const dynamicSort = (property, order) => {
 const useFilter = (arr) => {
   const [store] = useContext(StarWarsContext);
 
-  const filter = () => {
+  const filterPlanets = () => {
     let filtered = [];
     const filterName = store.filters.filterByName.name;
     const filterNumber = store.filters.filterByNumericValues;
@@ -62,7 +62,7 @@ const useFilter = (arr) => {
     return filtered;
   };
 
-  return store.apiRequest.data ? filter() : null;
+  return store.apiRequest.data ? filterPlanets() : null;
 };
 
 export default useFilter;

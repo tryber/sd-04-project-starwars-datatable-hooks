@@ -5,8 +5,7 @@ table {
   width: 900px;
 }
 
-th,
-td {
+th, td {
   border: 1px solid rgb(29, 31, 32);
   text-align: center;
 }
