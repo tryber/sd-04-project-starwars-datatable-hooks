@@ -10,7 +10,6 @@ const FilterName = () => {
         data-testid="name-filter"
         id="name"
         type="text"
-        // value=""
         onChange={(e) => changeFilterName(e.target.value)}
       />
     </div>

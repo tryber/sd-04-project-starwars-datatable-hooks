@@ -8,20 +8,25 @@ import { StarWarsContext } from '../../context/StarWarsContext';
 const FilterByNumericValues = () => {
   const [column, setColumn] = useState('');
   const [comparison, setComparison] = useState('');
-  const [value, setvalue] = useState(null);
+  const [value, setValue] = useState('');
   const { changeFilterColumn } = useContext(StarWarsContext);
 
-  const handleSubmit = () => changeFilterColumn(column, comparison, value);
+  async function handleSubmit() {
+    await changeFilterColumn(column, comparison, value);
+    setColumn('');
+    setComparison('');
+    setValue('');
+  }
 
   return (
     <form>
       <h3>Filter by numeric values</h3>
-      <CreateInputColumn changeColumn={setColumn} />
-      <CreateInputComparison changeComparison={setComparison} />
-      <CreateInputValue changeValue={setvalue} />
+      <CreateInputColumn changeColumn={setColumn} value={column} />
+      <CreateInputComparison changeComparison={setComparison} value={comparison} />
+      <CreateInputValue changeValue={setValue} value={value} />
       <button
         className="btn-small btn-dark"
-        onClick={() => handleSubmit()}
+        onClick={handleSubmit}
         data-testid="button-filter"
         type="button"
       >

@@ -1,10 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const createInputColumn = () => (
-  <select name="column" id="column">
-    <option value=""></option>
+const CreateInputColumn = ({ changeColumn, column }) => (
+  <select name="column" id="column" value={column} onChange={(e) => changeColumn(e.target.value)}>
+    <option value="" />
     <option value="1">1</option>
   </select>
 );
 
-export default createInputColumn;
+CreateInputColumn.propTypes = {
+  changeColumn: PropTypes.func.isRequired,
+  column: PropTypes.string,
+};
+
+CreateInputColumn.defaultProps = {
+  column: '',
+};
+
+export default CreateInputColumn;

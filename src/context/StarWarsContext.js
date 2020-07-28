@@ -9,9 +9,9 @@ const generalFilter = {
   },
   filterByNumericValues: [
     {
-      column: 'population',
-      comparison: 'maior que',
-      value: '100000',
+      column: '',
+      comparison: '',
+      value: '',
     },
   ],
   order: {
