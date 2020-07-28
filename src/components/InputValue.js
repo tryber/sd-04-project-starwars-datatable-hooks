@@ -9,7 +9,13 @@ const InputValue = () => {
     <div>
       <label htmlFor="number">
         Choose a value for comparison:
-        <input name="value" onChange={selectedFilters} type="number" id="number" data-testid="value-filter" />
+        <input
+          name="value"
+          onChange={selectedFilters}
+          type="number"
+          id="number"
+          data-testid="value-filter"
+        />
       </label>
       <div>
         <button onClick={handleFilter} type="button" data-testid="button-filter">

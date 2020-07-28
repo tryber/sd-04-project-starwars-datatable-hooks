@@ -26,7 +26,7 @@ const Table = () => {
     }, data);
   };
 
-  const planets = filterByName.name === '' ? toggleFilter() : filteredData;
+  const planetsData = filterByName.name === '' ? toggleFilter() : filteredData;
   const titles = planets[0] ? Object.keys(planets[0]) : [];
 
   return (
@@ -39,7 +39,7 @@ const Table = () => {
         </tr>
       </thead>
       <tbody>
-        {planets.map((planets) => (
+        {planetsData.map((planets) => (
           <tr key={planets.name}>
             {Object.values(planets)
               .filter((_, index) => index !== 9)

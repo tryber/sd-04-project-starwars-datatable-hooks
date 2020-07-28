@@ -13,7 +13,12 @@ const Column = () => {
 
   return (
     <div>
-      <select onChange={selectedFilters} name="column" data-testid="column-filter" defaultValue="default">
+      <select
+        onChange={selectedFilters}
+        name="column"
+        data-testid="column-filter"
+        defaultValue="default"
+      >
         <option value="default" disabled>Choose a Column</option>
         {arrayColumn().map((op) => <option key={op} value={op}>{op}</option>)}
       </select>

@@ -8,7 +8,12 @@ const Comparative = () => {
 
   return (
     <div>
-      <select onChange={selectedFilters} name="comparison" data-testid="comparison-filter" defaultValue="default">
+      <select
+        onChange={selectedFilters}
+        name="comparison"
+        data-testid="comparison-filter"
+        defaultValue="default"
+      >
         <option value="default" disabled>Choose a Comparative</option>
         {comparison.map((op) => <option key={op} value={op}>{op}</option>)}
       </select>
