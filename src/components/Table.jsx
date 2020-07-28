@@ -20,16 +20,13 @@ const usedColumns = [
 
 const Table = () => {
   const { planets, filters } = useContext(StarWarsContext);
-  const data = planets.data;
-  const input = filters.filterByName.name;
-
   const filterPlanetsName = (array) => {
-    if (input === '') return array;
-    return array.filter((planet) => planet.name.toLowerCase().includes(input.toLowerCase()));
+    if (filters.filterByName.name === '') return array;
+    return array.filter((planet) =>
+      planet.name.toLowerCase().includes(filters.filterByName.name.toLowerCase()),
+    );
   };
-
-  const arrayPlanets = filterPlanetsName(data);
-
+  const arrayPlanets = filterPlanetsName(planets.data);
   const filterPlanetsComparison = (array) => {
     if (filters.filterByNumericValues.length === 0) return array;
     return filters.filterByNumericValues.reduce((acc, crr) => {
