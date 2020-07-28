@@ -3,6 +3,7 @@ import StarWarsContext from '../context/StarWarsContext';
 import RenderTable from './RenderTable';
 import SelectFilters from './SelectFilters';
 import FiltersList from './FiltersList';
+import FilterSort from './FilterSort';
 
 function Table() {
   const { isFetching, data, getPlanetsData, filterName } = useContext(
@@ -24,6 +25,7 @@ function Table() {
       />
       <SelectFilters />
       <FiltersList />
+      <FilterSort />
       {isFetching && 'Loading...'}
       {!isFetching && isDataPresent && <RenderTable />}
     </div>

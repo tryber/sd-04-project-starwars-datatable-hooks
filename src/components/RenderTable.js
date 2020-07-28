@@ -29,10 +29,42 @@ const filterData = (datatable, name, numericFilters) => {
   return filteredData;
 };
 
+const numericKeys = [
+  'rotation_period',
+  'orbital_period',
+  'diameter',
+  'surface_water',
+  'population',
+];
+
+function compareValues(key, order = 'ASC') {
+  return function compare(a, b) {
+    let val1 = a[key];
+    let val2 = b[key];
+
+    if (numericKeys.includes(key)) {
+      val1 = Number(a[key]);
+      val2 = Number(b[key]);
+    }
+
+    let comparison = 0;
+    if (val1 > val2) {
+      comparison = 1;
+    }
+    if (val1 < val2) {
+      comparison = -1;
+    }
+    return order === 'DESC' ? comparison * -1 : comparison;
+  };
+}
+
 function RenderTable() {
-  const { data, filters } = useContext(StarWarsContext);
+  const { data, filters, order } = useContext(StarWarsContext);
   const name = filters.filterByName.name;
   const arrayFilters = filters.filterByNumericValues;
+  const column = order.column.toLowerCase();
+  const sort = order.sort;
+
   return (
     <table>
       <thead>
@@ -45,15 +77,18 @@ function RenderTable() {
         </tr>
       </thead>
       <tbody>
-        {filterData(data, name, arrayFilters).map(
-          ({ residents, ...planet }) => (
+        {filterData(data, name, arrayFilters)
+          .sort(compareValues(column, sort))
+          .map(({ residents, ...planet }) => (
             <tr key={planet.name}>
-              {Object.values(planet).map((value) => (
-                <td key={value}>{value}</td>
-              ))}
+              <td data-testid="planet-name">{planet.name}</td>
+              {Object.values(planet)
+                .filter((value) => value !== planet.name)
+                .map((value) => (
+                  <td key={value}>{value}</td>
+                ))}
             </tr>
-          ),
-        )}
+          ))}
       </tbody>
     </table>
   );

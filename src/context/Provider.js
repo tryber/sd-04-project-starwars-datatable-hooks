@@ -15,12 +15,14 @@ class Provider extends Component {
         },
         filterByNumericValues: [],
       },
+      order: { column: 'Name', sort: 'ASC' },
     };
     this.fetchPlanets = this.fetchPlanets.bind(this);
     this.handlePlanetsDataSuccess = this.handlePlanetsDataSuccess.bind(this);
     this.handleFilterName = this.handleFilterName.bind(this);
     this.handleFilterNumeric = this.handleFilterNumeric.bind(this);
     this.handleRemoveFilter = this.handleRemoveFilter.bind(this);
+    this.handleSort = this.handleSort.bind(this);
   }
 
   fetchPlanets() {
@@ -76,6 +78,15 @@ class Provider extends Component {
     });
   }
 
+  handleSort(column, sort) {
+    this.setState({
+      order: {
+        column: column,
+        sort: sort,
+      },
+    });
+  }
+
   render() {
     const contextValue = {
       ...this.state,
@@ -83,6 +94,7 @@ class Provider extends Component {
       filterName: this.handleFilterName,
       filterNumeric: this.handleFilterNumeric,
       removeFilter: this.handleRemoveFilter,
+      changeSort: this.handleSort,
     };
 
     const { children } = this.props;
