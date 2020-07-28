@@ -1,9 +1,9 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { StarWarsContext } from '../../context/StarWarsContext';
 
-export const TableBody = () => {
+const TableBody = () => {
   const { planet } = useContext(StarWarsContext);
-  let filteredPlanets = [...planet];
+  const filteredPlanets = [...planet];
   filteredPlanets.sort((a, b) => a.name.localeCompare(b.name));
 
   const objKeys =
@@ -13,13 +13,15 @@ export const TableBody = () => {
 
   return (
     <tbody>
-      {filteredPlanets.map((planet) => (
-        <tr key={planet.name}>
+      {filteredPlanets.map((planets) => (
+        <tr key={planets.name}>
           {objKeys.map((key) => (
-            <td key={key}>{planet[key]}</td>
+            <td key={key}>{planets[key]}</td>
           ))}
         </tr>
       ))}
     </tbody>
   );
 };
+
+export default TableBody;

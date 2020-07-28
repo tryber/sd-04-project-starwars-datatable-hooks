@@ -5,7 +5,7 @@ import { FilterBar } from './filterBar/FilterBar';
 
 const axios = require('axios');
 
-export const Home = () => {
+const Home = () => {
   const { setPlanet, setFetching, isFetching } = useContext(StarWarsContext);
 
   useEffect(() => {
@@ -28,3 +28,5 @@ export const Home = () => {
     </div>
   );
 };
+
+export default Home;
