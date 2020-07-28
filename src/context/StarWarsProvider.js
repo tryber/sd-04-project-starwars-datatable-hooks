@@ -76,12 +76,16 @@ const StarWarsProvider = ({ children }) => {
   return (
     <StarWarsContext.Provider value={stateValue}>
       {children}
+      {console.log(children)}
     </StarWarsContext.Provider>
   );
 };
 
 StarWarsProvider.propTypes = {
-  children: PropTypes.object.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.element),
+    PropTypes.element,
+  ]).isRequired,
 };
 
 export default StarWarsProvider;
