@@ -30,6 +30,9 @@ const TableBody = () => {
         (filteredByName = filteredByName.filter((planet) => compareFilters(planet, filtro))),
     );
   }
+console.log(filter.options);
+
+  console.log(filteredByName);
 
   const objKeys =
     filteredPlanets.length > 0

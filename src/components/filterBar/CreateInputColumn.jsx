@@ -7,12 +7,22 @@ const CreateInputColumn = ({ changeColumn, column }) => {
 
   let optionsFiltered = filter.options;
 
+  console.log('options filtered', optionsFiltered);
+
   filter.filterByNumericValues.forEach((filtro) => {
-    optionsFiltered = filter.options.filter((option) => option !== filtro.column);
+    optionsFiltered = optionsFiltered.filter((option) => option !== filtro.column);
   });
 
+  console.log('filtros: ', filter.filterByNumericValues);
+
   return (
-    <select name="column" id="column" value={column} onChange={(e) => changeColumn(e.target.value)}>
+    <select
+      data-testid="column-filter"
+      name="column"
+      id="column"
+      value={column}
+      onChange={(e) => changeColumn(e.target.value)}
+    >
       {optionsFiltered.map((option) => (
         <option key={option}>{option}</option>
       ))}
