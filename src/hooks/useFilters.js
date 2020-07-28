@@ -27,7 +27,7 @@ const useFilters = () => {
   const sortPlanets = useCallback(
     (data) => {
       if (!data.length) return [];
-      const planetKey = filters.order.column.toLowerCase();
+      const planetKey = filters.order.column.toLowerCase().replace(' ', '_');
       if (isNaN(data[0][planetKey])) {
         data.sort((a, b) => (a[planetKey] > b[planetKey] ? 1 : -1));
       } else {

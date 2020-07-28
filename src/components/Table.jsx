@@ -22,12 +22,13 @@ const Content = ({ planets, filterByName, filterByNumericValues, sort }) => (
                 return (
                   <td className="text-center" key={value}>
                     {value.map((film) => (
-                      <p className="mb-0">{film}</p>
+                      <p key={film + Math.round(Math.random() * 100)} className="mb-0">
+                        {film}
+                      </p>
                     ))}
                   </td>
                 );
               default:
-                console.log(value);
                 return (
                   <td className="text-center" key={value}>
                     {value}
