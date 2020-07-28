@@ -4,7 +4,7 @@ const getPlanets = () => {
   axios
     .get('https://swapi-trybe.herokuapp.com/api/planets/')
     .then((res) => {
-      console.log(res.data.results);
+      return res.data.results;
     })
     .catch((err) => {
       console.log(err.message);

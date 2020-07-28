@@ -1,22 +1,23 @@
 import React, { createContext, useState } from 'react';
 
-export const StarWarsContext = createContext();
+const StarWarsContext = createContext();
 
 const Provider = ({ children }) => {
   const [planet, setPlanet] = useState([]);
-  const [e, setE] = useState(true);
+  const [isFetching, setIsFetching] = useState(false);
 
-  const mudaVouF = () => {
-    setE(!e);
+  const setFetching = () => {
+    setIsFetching(!isFetching);
   };
 
   const contextValue = {
     planet,
-    e,
-    mudaVouF,
+    setPlanet,
+    setFetching,
+    isFetching,
   };
 
   return <StarWarsContext.Provider value={contextValue}>{children}</StarWarsContext.Provider>;
 };
 
-export default Provider;
+export { Provider, StarWarsContext };
