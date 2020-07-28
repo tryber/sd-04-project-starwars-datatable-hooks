@@ -9,7 +9,7 @@ const FiltersApplied = () => {
     <div>
       {filter.length > 0 ? <h3>Filters Applied: </h3> : null}
       {filters ? filters.map((filtro) => (
-        <div key={filtro.column}>
+        <div data-testid="filter" key={filtro.column}>
           <p>{filtro.column}</p>
           <p>{filtro.comparison}</p>
           <p>{filtro.value}</p>
