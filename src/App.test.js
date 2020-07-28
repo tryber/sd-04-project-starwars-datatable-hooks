@@ -68,7 +68,7 @@ describe('Fazer uma requisição para o endpoint `/planets` da API de Star Wars 
     }
   });
 
-  it.skip('renderiza uma tabela com 13 colunas', async () => {
+  it('renderiza uma tabela com 13 colunas', async () => {
     await act(async () => {
       render(<App />);
     });
@@ -76,7 +76,7 @@ describe('Fazer uma requisição para o endpoint `/planets` da API de Star Wars 
     expect(await screen.findAllByRole(COLUMN_ROLE_SELECTOR)).toHaveLength(13);
   });
 
-  it.skip('renderiza uma tabela com 11 linhas', async () => {
+  it('renderiza uma tabela com 11 linhas', async () => {
     await act(async () => {
       render(<App />);
     });
@@ -89,14 +89,14 @@ describe('Sua página deve ter um campo de texto que filtra a tabela para soment
   beforeAll(mockFetch);
   beforeEach(cleanup);
 
-  it.skip('renderiza campo de texto para filtro de nomes', async () => {
+  it('renderiza campo de texto para filtro de nomes', async () => {
     await act(async () => {
       render(<App />);
     });
     expect(await screen.findByTestId(INPUT_FILTER_NAME_SELECTOR)).toBeInTheDocument();
   });
 
-  it.skip('filtra planetas que possuem a letra "o" no nome', async () => {
+  it('filtra planetas que possuem a letra "o" no nome', async () => {
     await act(async () => {
       render(<App />);
       const input = await screen.findByTestId(INPUT_FILTER_NAME_SELECTOR);
@@ -110,7 +110,7 @@ describe('Sua página deve ter um campo de texto que filtra a tabela para soment
     }
   });
 
-  it.skip('filtra planetas que possuem a letra "oo" no nome', async () => {
+  it('filtra planetas que possuem a letra "oo" no nome', async () => {
     await act(async () => {
       render(<App />);
       const input = await screen.findByTestId(INPUT_FILTER_NAME_SELECTOR);
@@ -124,7 +124,7 @@ describe('Sua página deve ter um campo de texto que filtra a tabela para soment
     }
   });
 
-  it.skip('realiza vários filtros em sequência', async () => {
+  it('realiza vários filtros em sequência', async () => {
     await act(async () => {
       render(<App />);
       const input = await screen.findByTestId(INPUT_FILTER_NAME_SELECTOR);

@@ -48,19 +48,19 @@ const Table = () => {
   //   const { starWarsAPI } = this.props;
   //   starWarsAPI();
   // }
-  const { planets } = useContext(StarWarsContext);
+  const { planets, filters: { filterByName: { name } } } = useContext(StarWarsContext);
 
   // const { data, isFetching, searchTerm, columnFilter } = this.props;
   let headers = '';
-  // let filtereds = [...planets];
+  let filtereds = [...planets];
   if (!planets.length) {
     return <div>Loading...</div>;
   }
   headers = Object.keys(planets[0]).filter((key) => key !== 'residents');
-  // if (searchTerm) {
-  //   filtereds = data.filter((planet) => planet.name.includes(searchTerm));
-  //   return <div>{renderTable(headers, filtereds)}</div>;
-  // }
+  if (name) {
+    filtereds = planets.filter((planet) => planet.name.includes(name));
+    return <div>{renderTable(headers, filtereds)}</div>;
+  }
   // if (columnFilter.length !== 0) {
   //   filtereds = comparacao(data, columnFilter);
   //   return <div>{renderTable(headers, filtereds)}</div>;
