@@ -81,8 +81,8 @@ class Provider extends Component {
   handleSort(column, sort) {
     this.setState({
       order: {
-        column: column,
-        sort: sort,
+        column,
+        sort,
       },
     });
   }

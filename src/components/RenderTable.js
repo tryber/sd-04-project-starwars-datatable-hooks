@@ -37,26 +37,22 @@ const numericKeys = [
   'population',
 ];
 
-function compareValues(key, order = 'ASC') {
-  return function compare(a, b) {
-    let val1 = a[key];
-    let val2 = b[key];
+const ascSortNumber = (filtered, column) =>
+  filtered.sort((a, b) => Number(a[column]) - Number(b[column]));
 
-    if (numericKeys.includes(key)) {
-      val1 = Number(a[key]);
-      val2 = Number(b[key]);
-    }
+const ascSortString = (filtered, column) =>
+  filtered.sort((a, b) => {
+    if (a[column] > b[column]) return 1;
+    if (a[column] < b[column]) return -1;
+    return 0;
+  });
 
-    let comparison = 0;
-    if (val1 > val2) {
-      comparison = 1;
-    }
-    if (val1 < val2) {
-      comparison = -1;
-    }
-    return order === 'DESC' ? comparison * -1 : comparison;
-  };
-}
+const orderAscDesc = (filtered, column, sort) => {
+  const sorted = numericKeys.includes(column)
+    ? ascSortNumber(filtered, column)
+    : ascSortString(filtered, column);
+  return sort === 'DESC' ? sorted.reverse() : sorted;
+};
 
 function RenderTable() {
   const { data, filters, order } = useContext(StarWarsContext);
@@ -64,6 +60,9 @@ function RenderTable() {
   const arrayFilters = filters.filterByNumericValues;
   const column = order.column.toLowerCase();
   const sort = order.sort;
+
+  const filtered = filterData(data, name, arrayFilters);
+  const sorted = orderAscDesc(filtered, column, sort);
 
   return (
     <table>
@@ -77,18 +76,16 @@ function RenderTable() {
         </tr>
       </thead>
       <tbody>
-        {filterData(data, name, arrayFilters)
-          .sort(compareValues(column, sort))
-          .map(({ residents, ...planet }) => (
-            <tr key={planet.name}>
-              <td data-testid="planet-name">{planet.name}</td>
-              {Object.values(planet)
-                .filter((value) => value !== planet.name)
-                .map((value) => (
-                  <td key={value}>{value}</td>
-                ))}
-            </tr>
-          ))}
+        {sorted.map(({ residents, ...planet }) => (
+          <tr key={planet.name}>
+            <td data-testid="planet-name">{planet.name}</td>
+            {Object.values(planet)
+              .filter((value) => value !== planet.name)
+              .map((value) => (
+                <td key={value}>{value}</td>
+              ))}
+          </tr>
+        ))}
       </tbody>
     </table>
   );
