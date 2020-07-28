@@ -8,12 +8,24 @@ const StarWarsProvider = ({ children }) => {
   const [isFetching, setIsFetching] = useState(true);
   const [planets, setPlanets] = useState([]);
   const [name, setName] = useState('');
+  const [numericValues, setNumericValues] = useState([]);
+  const [column, setColumn] = useState('')
+  const [comparison, setComparison] = useState('')
+  const [value, setValue] = useState('')
 
   const context = {
     isFetching,
     planets,
     name,
     setName,
+    numericValues,
+    setNumericValues,
+    column,
+    setColumn,
+    comparison,
+    setComparison,
+    value,
+    setValue,
   };
 
   useEffect(() => {
