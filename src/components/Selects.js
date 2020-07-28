@@ -48,7 +48,7 @@ export const getComparation = (onComparationChange, comparation) => {
 };
 
 const columnsToSort = () => {
-  return [
+  const allColuns = [
     'Name',
     'Climate',
     'Created',
@@ -63,6 +63,7 @@ const columnsToSort = () => {
     'Terrain',
     'URL',
   ];
+  return allColuns;
 };
 
 export const getColumnsToSort = (onColumnChange, column) => {

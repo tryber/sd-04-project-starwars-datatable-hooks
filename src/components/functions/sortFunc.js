@@ -15,7 +15,7 @@ const orderAscStringValues = (planets, column) => (
     if (a[column] < b[column]) return -1;
     if (a[column] > b[column]) return 1;
     return 0;
-  }
+  },
 ));
 
 const sortFunc = (planets, column, order) => {

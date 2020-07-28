@@ -6,7 +6,7 @@ function OrderColumns() {
   const [column, setColumn] = useState('Name');
   const [order, setOrder] = useState('ASC');
 
-  const {sortColumns} = useContext(StarWarsContext);
+  const { sortColumns } = useContext(StarWarsContext);
 
   const onColumnChange = (event) => {
     setColumn(event.target.value);
