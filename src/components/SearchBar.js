@@ -5,7 +5,7 @@ import NumericFilter from './searchBarComponents/NumericFilter';
 import StarWarsContext from '../context/StarWarsContext';
 
 function SearchBar() {
-  const { filters } = useContext(StarWarsContext)
+  const { filters } = useContext(StarWarsContext);
   const NumericFilters = filters.filterByNumericValues;
 
   return (
@@ -28,7 +28,7 @@ function SearchBar() {
               </button> */}
             </div>
           ))}
-          </div>
+        </div>
       </div>
     </div>
   );
