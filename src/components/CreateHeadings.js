@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const CreateHeadings = ({ dados }) => (
   <thead>
-    <tr>{dados.map((key) => key !== 'url' && <th key={key}>{key}</th>)}</tr>
+    <tr>{dados.map((key) => key !== 'residents' && <th key={key}>{key}</th>)}</tr>
   </thead>
 );
 
