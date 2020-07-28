@@ -22,14 +22,14 @@ function SortFilter() {
       </select>
       <br />
       <label htmlFor="sort">
-        <input 
+        <input
           data-testid="column-sort-input" name="sort" type="radio"
           value="ASC" onChange={(e) => setSort(e.target.value)}
         />
         ASC
       </label>
       <label htmlFor="sort">
-        <input 
+        <input
           data-testid="column-sort-input" name="sort" type="radio"
           value="DESC" onChange={(e) => setSort(e.target.value)}
         />
@@ -37,8 +37,11 @@ function SortFilter() {
       </label>
       <br />
       <button
-        data-testid="column-sort-button" type="button" 
-        onClick={() => setOrder({ column, sort })}>Order</button>
+        data-testid="column-sort-button" type="button"
+        onClick={() => setOrder({ column, sort })}
+      >
+        Order
+      </button>
     </div>
   );
 }
