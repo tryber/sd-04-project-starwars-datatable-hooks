@@ -5,6 +5,7 @@ import StarWarsContext from  './StarWarsContext';
 const StarWarsProvider = ({children}) => {
   const [dataApi, setDataApi] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [filterByName, setfilterByName] = useState({name: ''})
 
   useEffect(() => {
     (async () => {
@@ -21,6 +22,8 @@ const StarWarsProvider = ({children}) => {
   const states = {
     dataApi,
     isLoading,
+    filterByName,
+    setfilterByName,
   }
 
   return (
