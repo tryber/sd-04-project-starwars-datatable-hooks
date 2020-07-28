@@ -25,12 +25,7 @@ const giveMeOptions = (arr, name, previousFilters = []) => {
   ));
 };
 
-const selectFields = (
-  field,
-  filterByValues,
-  state,
-  setState
-) => {
+const selectFields = (field, filterByValues, state, setState) => {
   const prevFilters =
     field === 'column' ? filterByValues.map((elem) => elem[field]) : [];
   return (
@@ -85,7 +80,12 @@ const NumericFilter = () => {
         }}
       >
         {selectFields('column', filterByNumericValues, state, setColumn)}
-        {selectFields('comparison', filterByNumericValues, state, setComparison)}
+        {selectFields(
+          'comparison',
+          filterByNumericValues,
+          state,
+          setComparison,
+        )}
         <input
           name="value"
           type="number"
