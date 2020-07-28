@@ -1,7 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React, { useContext } from 'react';
 import './Table.css';
+import { StarWarsContext } from '../context/starWarsContext';
 
 const usedColumns = [
   'name',
@@ -19,15 +18,21 @@ const usedColumns = [
   'url',
 ];
 
-const Table = ({ data, loading, filterName, filterComparison }) => {
+const Table = () => {
+  const { planets, filters } = useContext(StarWarsContext);
+  const data = planets.data;
+  const input = filters.filterByName.name;
+
   const filterPlanetsName = (array) => {
-    if (filterName === '') return array;
-    return array.filter((planet) => planet.name.toLowerCase().includes(filterName.toLowerCase()));
+    if (input === '') return array;
+    return array.filter((planet) => planet.name.toLowerCase().includes(input.toLowerCase()));
   };
+
   const arrayPlanets = filterPlanetsName(data);
+
   const filterPlanetsComparison = (array) => {
-    if (filterComparison.length === 0) return array;
-    return filterComparison.reduce((acc, crr) => {
+    if (filters.filterByNumericValues.length === 0) return array;
+    return filters.filterByNumericValues.reduce((acc, crr) => {
       const { column, comparison, value } = crr;
       return acc.filter((planet) => {
         switch (comparison) {
@@ -43,7 +48,7 @@ const Table = ({ data, loading, filterName, filterComparison }) => {
       });
     }, array);
   };
-  if (loading) return <h1>Loading...</h1>;
+  if (planets.loading) return <h1>Loading...</h1>;
   return (
     <div className="daniteste">
       <table>
@@ -68,18 +73,4 @@ const Table = ({ data, loading, filterName, filterComparison }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  loading: state.loading,
-  data: state.data,
-  filterName: state.filters.filterByName.name,
-  filterComparison: state.filters.filterByNumericValues,
-});
-
-Table.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
-  loading: PropTypes.bool.isRequired,
-  filterName: PropTypes.string.isRequired,
-  filterComparison: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
-
-export default connect(mapStateToProps)(Table);
+export default Table;

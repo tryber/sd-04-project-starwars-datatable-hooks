@@ -5,14 +5,18 @@ import Table from './components/Table';
 import Search from './components/Search';
 import ShowFilter from './components/ShowFilter';
 
+import { StarWarsProvider } from './context/starWarsContext';
+
 function App() {
   return (
-    <div>
-      <Search />
-      <ShowFilter />
-      <hr />
-      <Table />
-    </div>
+    <StarWarsProvider>
+      <div>
+        <Search />
+        <ShowFilter />
+        <hr />
+        <Table />
+      </div>
+    </StarWarsProvider>
   );
 }
 
