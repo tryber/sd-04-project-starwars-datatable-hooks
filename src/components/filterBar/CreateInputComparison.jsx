@@ -20,8 +20,8 @@ CreateInputComparison.propTypes = {
   comparison: PropTypes.string,
 };
 
-CreateInputComparison.defaultProps = {
-  comparison: '',
-};
+// CreateInputComparison.defaultProps = {
+//   comparison: '',
+// };
 
 export default CreateInputComparison;

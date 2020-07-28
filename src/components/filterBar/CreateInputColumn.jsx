@@ -13,8 +13,8 @@ CreateInputColumn.propTypes = {
   column: PropTypes.string,
 };
 
-CreateInputColumn.defaultProps = {
-  column: '',
-};
+// CreateInputColumn.defaultProps = {
+//   column: '',
+// };
 
 export default CreateInputColumn;
