@@ -30,9 +30,16 @@ const StarWarsProvider = ({ children }) => {
     })();
   }, []);
 
+  // atualizar nome que o user digita
   const getAndSetName = (nameUser) => {
     setName(nameUser);
   };
+
+  const toFilterPlanets = () => {
+    const filterName = data.filter((planet) => planet.name.toLowerCase().includes(name));
+    return filterName;
+  };
+
 
   // guardar os estados, métodos, fn, para serem consumidos
   const context = {
@@ -44,6 +51,7 @@ const StarWarsProvider = ({ children }) => {
       },
     },
     getAndSetName,
+    toFilterPlanets,
   };
 
   return <StarWarsContext.Provider value={context}>{children}</StarWarsContext.Provider>;

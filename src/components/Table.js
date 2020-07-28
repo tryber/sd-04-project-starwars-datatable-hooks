@@ -4,17 +4,7 @@ import HeadTable from './HeadTable';
 import BodyTable from './BodyTable';
 
 const Table = () => {
-  const {
-    data,
-    filters: {
-      filterByName: { name },
-    },
-  } = useContext(StarWarContext);
-
-  const toFilterPlanets = () => {
-    const filterName = data.filter((planet) => planet.name.toLowerCase().includes(name));
-    return filterName;
-  };
+  const { toFilterPlanets } = useContext(StarWarContext);
 
   return (
     <table>
