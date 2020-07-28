@@ -2,6 +2,9 @@ import React, { useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 import Table from './Table';
 import Search from './Search';
+import Column from './Column';
+import Comparative from './Comparative';
+import InputValue from './InputValue';
 
 const Home = () => {
   const states = useContext(StarWarsContext);
@@ -11,6 +14,11 @@ const Home = () => {
   return (
     <div>
       <Search />
+      <div>
+        <Column />
+        <Comparative />
+        <InputValue />
+      </div>
       <Table />
     </div>
   );

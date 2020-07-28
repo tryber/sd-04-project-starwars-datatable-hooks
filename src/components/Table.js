@@ -3,9 +3,31 @@ import StarWarsContext from '../context/StarWarsContext';
 
 const Table = () => {
   const states = useContext(StarWarsContext);
-  const { data, filterByName, filteredData } = states;
-  const array = filterByName.name === '' ? data : filteredData;
-  const titles = data[0] ? Object.keys(data[0]) : [];
+  const {
+    data, filterByName, filteredData, filterByNumericValues,
+  } = states;
+
+  const toggleFilter = () => {
+    if (filterByNumericValues.length < 1) return data;
+    return filterByNumericValues.reduce((newArray, filters) => {
+      const { column, comparison, value } = filters;
+      return newArray.filter((planet) => {
+        switch (comparison) {
+          case 'maior que':
+            return Number(planet[column]) > Number(value);
+          case 'menor que':
+            return Number(planet[column]) < Number(value);
+          case 'igual a':
+            return Number(planet[column]) === Number(value);
+          default:
+            return false;
+        }
+      });
+    }, data);
+  };
+
+  const planets = filterByName.name === '' ? toggleFilter() : filteredData;
+  const titles = planets[0] ? Object.keys(planets[0]) : [];
 
   return (
     <table>
@@ -17,7 +39,7 @@ const Table = () => {
         </tr>
       </thead>
       <tbody>
-        {array.map((planets) => (
+        {planets.map((planets) => (
           <tr key={planets.name}>
             {Object.values(planets)
               .filter((_, index) => index !== 9)

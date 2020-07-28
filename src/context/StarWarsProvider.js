@@ -8,6 +8,25 @@ const StarWarsProvider = ({ children }) => {
   const [filteredData, setDataFiltered] = useState([]);
   const [filters, setFilters] = useState({});
   const [filterByName, setSearch] = useState({ name: '' });
+  const [filterByNumericValues, setByNumericValues] = useState([]);
+  const [objFilters, setObjFilters] = useState({});
+
+  const handleFilter = (event) => {
+    event.preventDefault();
+    setByNumericValues((prevState) => [
+      ...prevState,
+      objFilters,
+    ]);
+  };
+
+  const selectedFilters = (event) => {
+    event.preventDefault();
+    const { name, value } = event.target;
+    setObjFilters((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
   useEffect(() => {
     (async () => {
@@ -24,6 +43,7 @@ const StarWarsProvider = ({ children }) => {
     setFilters((prevState) => ({
       ...prevState,
       filterByName,
+      filterByNumericValues,
     }));
 
     setDataFiltered(
@@ -31,7 +51,7 @@ const StarWarsProvider = ({ children }) => {
         planets.name.toLowerCase().indexOf(filterByName.name.toLowerCase()) !== -1))
         .map((planet) => planet),
     );
-  }, [filterByName, data]);
+  }, [filterByName, data, filterByNumericValues]);
 
   const handleCurrentData = (event) => {
     event.preventDefault();
@@ -48,6 +68,9 @@ const StarWarsProvider = ({ children }) => {
     filters,
     filterByName,
     filteredData,
+    selectedFilters,
+    handleFilter,
+    filterByNumericValues,
   };
 
   return (
@@ -58,7 +81,7 @@ const StarWarsProvider = ({ children }) => {
 };
 
 StarWarsProvider.propTypes = {
-  children: PropTypes.func.isRequired,
+  children: PropTypes.object.isRequired,
 };
 
 export default StarWarsProvider;
