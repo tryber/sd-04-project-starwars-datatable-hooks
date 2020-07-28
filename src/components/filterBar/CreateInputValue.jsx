@@ -17,8 +17,8 @@ CreateInputValue.propTypes = {
   value: PropTypes.string,
 };
 
-// CreateInputValue.defaultProps = {
-//   value: '',
-// };
+CreateInputValue.defaultProps = {
+  value: '',
+};
 
 export default CreateInputValue;

@@ -13,6 +13,7 @@ const FilterByNumericValues = () => {
 
   async function handleSubmit() {
     await changeFilterColumn(column, comparison, value);
+
     setColumn('');
     setComparison('');
     setValue('');
