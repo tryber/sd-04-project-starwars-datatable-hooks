@@ -1,5 +1,4 @@
 import React from 'react';
-import FilterBar from './FilterBar';
 
 const FilterName = () => (
   <div>
