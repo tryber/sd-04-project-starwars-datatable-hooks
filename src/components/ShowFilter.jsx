@@ -8,7 +8,7 @@ const ShowFilter = () => {
   return (
     <div className="numeric-filters">
       {filter.map(({ column, comparison, value }) => (
-        <div key={column}>
+        <div key={column} data-testid='filter'>
           <span>{column}</span>
           <span> - {comparison}</span>
           <span> - {value}</span>
