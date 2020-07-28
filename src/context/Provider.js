@@ -20,6 +20,7 @@ class Provider extends Component {
     this.handlePlanetsDataSuccess = this.handlePlanetsDataSuccess.bind(this);
     this.handleFilterName = this.handleFilterName.bind(this);
     this.handleFilterNumeric = this.handleFilterNumeric.bind(this);
+    this.handleRemoveFilter = this.handleRemoveFilter.bind(this);
   }
 
   fetchPlanets() {
@@ -62,12 +63,26 @@ class Provider extends Component {
     });
   }
 
+  handleRemoveFilter(filter) {
+    this.setState({
+      filters: {
+        ...this.state.filters,
+        filterByNumericValues: [
+          ...this.state.filters.filterByNumericValues.filter(
+            (item) => item !== filter,
+          ),
+        ],
+      },
+    });
+  }
+
   render() {
     const contextValue = {
       ...this.state,
       getPlanetsData: this.fetchPlanets,
       filterName: this.handleFilterName,
       filterNumeric: this.handleFilterNumeric,
+      removeFilter: this.handleRemoveFilter,
     };
 
     const { children } = this.props;

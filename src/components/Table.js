@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 import RenderTable from './RenderTable';
 import SelectFilters from './SelectFilters';
+import FiltersList from './FiltersList';
 
 function Table() {
   const { isFetching, data, getPlanetsData, filterName } = useContext(
@@ -22,6 +23,7 @@ function Table() {
         onChange={(event) => filterName(event.target.value)}
       />
       <SelectFilters />
+      <FiltersList />
       {isFetching && 'Loading...'}
       {!isFetching && isDataPresent && <RenderTable />}
     </div>
