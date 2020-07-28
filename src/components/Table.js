@@ -4,12 +4,12 @@ import filteredDataFunc from './FilterFunction';
 
 function Table() {
   const { dataApi, isLoading, filters } = useContext(StarWarsContext);
-  const { filterByName, filterByNumericValues } = filters;
+  const { filterByName, filterByNumericValues, order } = filters;
 
   const chaves =
     (dataApi.length !== 0) ? Object.keys(dataApi[0]).filter((keys) => keys !== 'residents') : [];
 
-  const planets = filteredDataFunc(dataApi, filterByName, filterByNumericValues);
+  const planets = filteredDataFunc(dataApi, filterByName, filterByNumericValues, order);
 
   if (isLoading) return <h1>Loading...</h1>;
   return (

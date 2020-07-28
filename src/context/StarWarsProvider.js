@@ -9,6 +9,7 @@ const StarWarsProvider = ({ children }) => {
   const [filterByName, setfilterByName] = useState({ name: '' });
   const [valueSelect, setvalueSelect] = useState({});
   const [filterByNumericValues, setfilterByNumericValues] = useState([]);
+  const [order, setOrder] = useState({ column: 'Name', sort: 'ASC' });
 
   useEffect(() => {
     (async () => {
@@ -46,10 +47,12 @@ const StarWarsProvider = ({ children }) => {
     filters: {
       filterByName,
       filterByNumericValues,
+      order,
     },
     setfilterByName,
     handleChange,
     NumericOnClick,
+    setOrder,
   };
 
   return (

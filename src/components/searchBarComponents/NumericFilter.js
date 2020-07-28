@@ -8,7 +8,7 @@ function NumericFilter() {
     const filtersTitles = ['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
     const { filterByNumericValues } = filters;
     let newFilter = filtersTitles;
-    Object.keys(filterByNumericValues).forEach(({ column }) => {
+    filterByNumericValues.forEach(({ column }) => {
       newFilter = newFilter.filter((elem) => elem !== column);
     });
     return newFilter;
