@@ -30,7 +30,7 @@ const StartWarsProvider = ({ children }) => {
     filters,
     setFilters,
     filterKeys,
-    setFilterKeys
+    setFilterKeys,
   }; // Valores do contexto.
 
   return <StarWarsContext.Provider value={contextValue}>{children}</StarWarsContext.Provider>;
