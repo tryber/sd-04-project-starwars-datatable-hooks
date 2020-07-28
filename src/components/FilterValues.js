@@ -3,25 +3,19 @@ import StartWarsContext from '../context/StarWarsContext';
 
 function FilterValues() {
   const {
-    setNumericValues,
-    column, setColumn,
-    comparison, setComparison,
-    value, setValue,
+    setNumericValues, column, setColumn,
+    comparison, setComparison, value, setValue,
   } = useContext(StartWarsContext);
 
-  function buildColumns() {
-    const arrayColumns = [
-      '',
-      'population',
-      'orbital_period',
-      'diameter',
-      'rotation_period',
-      'surface_water',
-    ];
-    return (
+  const arrayComparison = ['', 'maior que', 'menor que', 'igual a'];
+  const arrayColumns = [
+    '', 'population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water',
+  ];
+
+  return (
+    <div>
       <select
-        data-testid="column-filter"
-        value={column}
+        data-testid="column-filter" value={column}
         onChange={(e) => setColumn(e.target.value)}
       >
         {arrayColumns.map((item) => (
@@ -30,15 +24,8 @@ function FilterValues() {
           </option>
         ))}
       </select>
-    );
-  }
-
-  function buildComparison() {
-    const arrayComparison = ['', 'maior que', 'menor que', 'igual a'];
-    return (
       <select
-        data-testid="comparison-filter"
-        value={comparison}
+        data-testid="comparison-filter" value={comparison}
         onChange={(e) => setComparison(e.target.value)}
       >
         {arrayComparison.map((item) => (
@@ -47,18 +34,9 @@ function FilterValues() {
           </option>
         ))}
       </select>
-    );
-  }
-
-  return (
-    <div>
-      {buildColumns()}
-      {buildComparison()}
       <input
-        data-testid="value-filter"
-        type="number"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
+        data-testid="value-filter" type="number"
+        value={value} onChange={(e) => setValue(e.target.value)}
       />
       <button data-testid="button-filter" onClick={setNumericValues}>Filtrar</button>
     </div>
