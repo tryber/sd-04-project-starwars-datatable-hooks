@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { StarWarsContext } from '../context/starWarsContext';
 
 const ShowFilter = () => {
-  const { filters } = useContext(StarWarsContext);
+  const { filters, removeFilter } = useContext(StarWarsContext);
   const filter = filters.filterByNumericValues;
   if (filter.length === 0) return null;
   return (
@@ -12,6 +12,16 @@ const ShowFilter = () => {
           <span>{column}</span>
           <span> - {comparison}</span>
           <span> - {value}</span>
+          <button
+            type="button"
+            name={column}
+            onClick={(e) => {
+              const remove = filter.filter(filtro => filtro.column !== e.target.name);
+              return removeFilter(remove);
+            }}
+          >
+            X
+          </button>
         </div>
       ))}
     </div>

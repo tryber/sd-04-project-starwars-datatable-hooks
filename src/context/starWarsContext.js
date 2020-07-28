@@ -20,12 +20,17 @@ const StarWarsProvider = ({ children }) => {
     });
   };
 
+  const removeFilter = (value) => {
+    setFilters({ ...filters, filterByNumericValues: value });
+  };
+
   const context = {
     planets,
     setPlanets,
     filters,
     filterByName,
     filterByNumericValues,
+    removeFilter,
   };
 
   return <StarWarsContext.Provider value={context}>{children}</StarWarsContext.Provider>;
