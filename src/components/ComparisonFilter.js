@@ -34,8 +34,13 @@ const ComparisonFilter = () => {
     setValue,
     handleChange,
     numericValues,
-    handleNumericValues,
+    setNumericValues,
   } = useContext(StarWarsContext);
+
+  // Definição de todos os filtros que estão sendo usados
+  const handleNumericValues = (col, comp, val) => {
+    setNumericValues([...numericValues, { column: col, comparison: comp, value: val }]);
+  };
 
   const showAvailableFilters = () => {
     const columnOptions = [

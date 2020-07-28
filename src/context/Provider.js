@@ -39,11 +39,6 @@ const Provider = (props) => {
     setFunction(event.target.value);
   };
 
-  // Definição de todos os filtros que estão sendo usados
-  const handleNumericValues = (col, comp, val) => {
-    setNumericValues([...numericValues, { column: col, comparison: comp, value: val }]);
-  };
-
   const contextValue = {
     isLoading,
     data,
@@ -57,7 +52,6 @@ const Provider = (props) => {
     setComparison,
     value,
     setValue,
-    handleNumericValues,
     numericValues,
     setNumericValues,
   };
