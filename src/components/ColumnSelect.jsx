@@ -9,7 +9,7 @@ function ColumnSelect() {
   return (
     <div>
       <select
-        name="column"
+        id="column"
         data-testid="column-filter"
         onChange={handleChange}
       >

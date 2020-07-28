@@ -11,7 +11,7 @@ function SearchBar() {
       <FilterName />
       <ColumnSelect />
       <Comparison />
-      <input type="number" name="value" data-testid="value-filter" onChange={handleChange} />
+      <input type="number" id="value" data-testid="value-filter" onChange={handleChange} />
       <button data-testid="button-filter" onClick={onClick}>
         Filter
       </button>

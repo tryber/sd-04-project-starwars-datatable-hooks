@@ -6,7 +6,7 @@ function Comparison() {
   const comparison = ['', 'maior que', 'igual a', 'menor que'];
   return (
     <div>
-      <select name="comparison" data-testid="comparison-filter" onChange={handleChange}>
+      <select id="comparison" data-testid="comparison-filter" onChange={handleChange}>
         {comparison.map((option) => (
           <option key={option} value={option}>
             {option}
