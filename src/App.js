@@ -1,14 +1,13 @@
 import React from 'react';
-
 import './App.css';
-
 import { Provider } from './context/StarWarsContext';
-
-import { Home } from './components/Home';
+import Home from './components/Home';
 
 const App = () => (
   <Provider>
-    <Home />
+    <section className="App">
+      <Home />
+    </section>
   </Provider>
 );
 

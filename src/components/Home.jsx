@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
-import { Table } from './table/Table';
+import Table from './table/Table';
 import { StarWarsContext } from '../context/StarWarsContext';
-import { FilterBar } from './filterBar/FilterBar';
+import FilterBar from './filterBar/FilterBar';
 
 const axios = require('axios');
 

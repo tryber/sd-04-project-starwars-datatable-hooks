@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import { StarWarsContext } from '../../context/StarWarsContext';
 
 const TableBody = () => {
-  const { planet } = useContext(StarWarsContext);
-  const filteredPlanets = [...planet];
+  const { data } = useContext(StarWarsContext);
+  const filteredPlanets = [...data];
   filteredPlanets.sort((a, b) => a.name.localeCompare(b.name));
 
   const objKeys =

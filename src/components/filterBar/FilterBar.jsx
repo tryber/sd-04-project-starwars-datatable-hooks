@@ -1,5 +1,5 @@
 import React from 'react';
-import { FilterName } from './FilterName';
+import FilterName from './FilterName';
 
 const FilterBar = () => (
   <div>
