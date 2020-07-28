@@ -1,7 +1,7 @@
 import React from 'react';
 import TextFilter from './searchBarComponents/TextFilter';
-import SortFilter from './searchBarComponents/SortFilter';
-import NumericFilter from './searchBarComponents/NumericFilter';
+// import SortFilter from './searchBarComponents/SortFilter';
+// import NumericFilter from './searchBarComponents/NumericFilter';
 
 function SearchBar() {
   return (
@@ -9,7 +9,7 @@ function SearchBar() {
       <TextFilter />
       <div>
         <div><h1>Filtros:</h1></div>
-        {/*<div>
+        {/* <div>
           {filters.map((filter) => (
             <div data-testid="filter" className="filters">
               <p key={filter.value}>
@@ -23,10 +23,10 @@ function SearchBar() {
               </button>
             </div>
           ))}
-          </div>*/}
+          </div> */}
       </div>
     </div>
-  )
+  );
 }
 
-export default SearchBar
+export default SearchBar;

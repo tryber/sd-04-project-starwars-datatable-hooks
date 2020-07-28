@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 
 
@@ -11,14 +11,14 @@ function Table() {
       planets = planets.filter((planet) => planet.name.includes(filterByName.name));
     }
     return planets;
-  }
+  };
 
   const chaves =
     (dataApi.length !== 0) ? Object.keys(dataApi[0]).filter((keys) => keys !== 'residents') : [];
 
   const planets = filteredData();
 
-  if (isLoading) return <h1>Loading...</h1>
+  if (isLoading) return <h1>Loading...</h1>;
   return (
     <div>
       <table className="table">
@@ -39,7 +39,7 @@ function Table() {
         </tbody>
       </table>
     </div>
-  )
+  );
 }
 
-export default Table
+export default Table;

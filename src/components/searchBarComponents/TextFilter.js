@@ -15,7 +15,7 @@ function TextFilter() {
         />
       </label>
     </div>
-  )
+  );
 }
 
 export default TextFilter;

@@ -6,7 +6,7 @@ function Header() {
     <div>
       <img src={logo} className="logo" alt="starwars name" />
     </div>
-  )
+  );
 }
 
-export default Header
+export default Header;
