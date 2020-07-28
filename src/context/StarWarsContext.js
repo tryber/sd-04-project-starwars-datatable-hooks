@@ -34,9 +34,8 @@ export const StarWarsProvider = ({ children }) => {
     }
   };
 
-  const filterByName = (planets, text) => {
-    return planets.filter((planet) => text === '' || planet.name.includes(text));
-  };
+  const filterByName = (planets, text) =>
+    planets.filter((planet) => text === '' || planet.name.includes(text));
 
   // const resultsFilters = () => {
   //   if(dataFiltered.length) {
@@ -52,7 +51,7 @@ export const StarWarsProvider = ({ children }) => {
 
   useEffect(() => {
     if (dataFiltered) {
-      let planetsFiltered = filterByName(data, filters.filterByName.name);
+      const planetsFiltered = filterByName(data, filters.filterByName.name);
       setDataFiltered(planetsFiltered);
     }
   }, [filters]);

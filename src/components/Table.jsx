@@ -28,7 +28,7 @@ const Table = () => {
       </table>
     </div>
   ) : (
-    <h3 style={{textAlign: "center"}}>Planets not found. Try again!</h3>
+    <h3 style={{ textAlign: 'center' }}>Planets not found. Try again!</h3>
   );
 };
 
