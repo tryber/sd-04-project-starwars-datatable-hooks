@@ -5,9 +5,7 @@ import { StarWarsProvider } from './context/StarWarsContext';
 
 const App = () => (
   <StarWarsProvider>
-    <div>
       <Table />
-    </div>
   </StarWarsProvider>
 );
 

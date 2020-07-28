@@ -9,10 +9,10 @@ const initialStateFilters = {
     neme: '',
   },
   filterByNumericValues: [],
-  // order: {
-  //   column: 'Name',
-  //   sort: 'ASC',
-  // },
+  order: {
+    column: 'Name',
+    sort: 'ASC',
+  },
 };
 
 export const StarWarsProvider = ({ children }) => {
@@ -20,11 +20,13 @@ export const StarWarsProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
   const [filters, setFilters] = useState(initialStateFilters);
+  const [dataFiltered, setDataFiltered] = useState(data);
 
   const getData = async () => {
     try {
       const response = await getPlanets();
       setData(response.results);
+      setDataFiltered(response.results);
     } catch (e) {
       setError(e);
     } finally {
@@ -32,9 +34,35 @@ export const StarWarsProvider = ({ children }) => {
     }
   };
 
+  const filterByName = (planets, text) => {
+    return planets.filter((planet) => text === '' || planet.name.includes(text));
+  };
+
+  // const resultsFilters = () => {
+  //   if(dataFiltered.length) {
+  //     let planetsFiltered = filterByName(data, filters.filterByName.name);
+  //     setDataFiltered(planetsFiltered);
+  //   }
+  // }
+
   useEffect(() => {
     getData();
+    // resultsFilters()
   }, []);
+
+  useEffect(() => {
+    if (dataFiltered) {
+      let planetsFiltered = filterByName(data, filters.filterByName.name);
+      setDataFiltered(planetsFiltered);
+    }
+  }, [filters]);
+
+  const setFilterByName = (text) => {
+    setFilters((stateFilter) => ({
+      ...stateFilter,
+      filterByName: { name: text },
+    }));
+  };
 
   const context = {
     data,
@@ -45,7 +73,9 @@ export const StarWarsProvider = ({ children }) => {
     setError,
     filters,
     setFilters,
-    //fetchData,
+    setFilterByName,
+    dataFiltered,
+    setDataFiltered,
   };
 
   return <StarWarsContext.Provider value={context}>{children}</StarWarsContext.Provider>;
