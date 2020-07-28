@@ -29,8 +29,13 @@ const Provider = ({ children }) => {
     setIsFetching(!isFetching);
   };
 
+  const changeFilterName = (name) => {
+    setGeneralFilter({ ...filter, filterByName: { name: name } });
+  };
+
   const contextValue = {
     filter,
+    changeFilterName,
     data,
     setPlanet,
     setFetching,
