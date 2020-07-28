@@ -43,8 +43,14 @@
   padding: 20px;
 }
 
-.filter-numbers-inputs input , .filter-numbers-inputs select ,
- .filter-order-inputs select {
+.filter-numbers-inputs input , .filter-numbers-inputs select {
+  border: 3px solid rgb(255, 82, 82);
+  border-radius: 20px;
+  margin: 20px;
+  padding: 10px;
+}
+
+.filter-order-inputs select {
   border: 3px solid rgb(255, 82, 82);
   border-radius: 20px;
   margin: 20px;
