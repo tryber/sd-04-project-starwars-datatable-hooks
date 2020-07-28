@@ -23,14 +23,14 @@ function SortFilter() {
       <br />
       <label htmlFor="sort">
         <input
-          data-testid="column-sort-input" name="sort" type="radio"
+          data-testid="column-sort-input-asc" name="sort" type="radio"
           value="ASC" onChange={(e) => setSort(e.target.value)}
         />
         ASC
       </label>
       <label htmlFor="sort">
         <input
-          data-testid="column-sort-input" name="sort" type="radio"
+          data-testid="column-sort-input-desc" name="sort" type="radio"
           value="DESC" onChange={(e) => setSort(e.target.value)}
         />
         DESC
