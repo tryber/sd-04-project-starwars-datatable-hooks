@@ -39,12 +39,13 @@ const StarWarsProvider = ({ children }) => {
 
   // fn para salvar os valores que o user selected e input
   const handleChange = (event) => {
+    const { value, name } = event.target;
     event.preventDefault(); // impede que a  carregue de forma recorrente
     setValueSelect((prevState) => ( // recebe o estado anterior como param
       // e retorna o estado q é um obj
       {
         ...prevState,
-        [event.target.name]: event.target.value,
+        [name]: value,
       }
     ));
   };
