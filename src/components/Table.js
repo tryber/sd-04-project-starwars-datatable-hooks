@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 
-import CreateHeadings from '../components/CreateHeadings';
-import CreateBody from '../components/CreateBody';
+import CreateHeadings from './CreateHeadings';
+import CreateBody from './CreateBody';
 
 const filter = (data, name, numericValues) => {
   let filteredData = [...data];

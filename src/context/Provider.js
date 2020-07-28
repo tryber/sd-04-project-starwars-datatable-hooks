@@ -39,6 +39,7 @@ const Provider = (props) => {
     setFunction(event.target.value);
   };
 
+  // Definição de todos os filtros que estão sendo usados
   const handleNumericValues = (col, comp, val) => {
     setNumericValues([...numericValues, { column: col, comparison: comp, value: val }]);
   };
@@ -58,7 +59,9 @@ const Provider = (props) => {
     setValue,
     handleNumericValues,
     numericValues,
+    setNumericValues,
   };
+
   const { children } = props;
 
   return <StarWarsContext.Provider value={contextValue}>{children}</StarWarsContext.Provider>;
