@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import StarWarsContext from '../../context/StarWarsContext';
 
@@ -15,6 +16,16 @@ const Filter = (props) => {
       </button>
     </div>
   );
+};
+
+Filter.defaultProps = {
+  column: '',
+  filterString: '',
+};
+
+Filter.propTypes = {
+  column: PropTypes.string,
+  filterString: PropTypes.string,
 };
 
 export default Filter;

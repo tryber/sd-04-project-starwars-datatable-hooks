@@ -72,6 +72,50 @@ const sortData = (data, column, sortWay) => {
   return sortedData;
 };
 
+const getBody = (
+  filterByNumericValues,
+  results,
+  filterByName,
+  column,
+  sort,
+) => (
+  <tbody>
+    {sortData(
+      filterDataByName(
+        filterByNumber(filterByNumericValues, results),
+        filterByName,
+      ),
+      column,
+      sort,
+    ).map((element) => (
+      <tr key={element.name}>
+        {Object.values(element).map((d, i) => (
+          <td
+            data-testid={i === 0 ? 'planet-name' : 'info'}
+            key={`${element.name}-${d}`}
+          >
+            {d}
+          </td>
+        ))}
+      </tr>
+    ))}
+  </tbody>
+);
+
+const getHeaders = (results) => {
+  const headerKeys = Object.keys(results[0]);
+  return (
+    <tr>
+      {headerKeys.map((k) => {
+        if (k !== 'residents') {
+          return <th key={k}>{k}</th>;
+        }
+        return null;
+      })}
+    </tr>
+  );
+};
+
 const Table = () => {
   const {
     data: {
@@ -100,49 +144,11 @@ const Table = () => {
     });
   }, []);
 
-  const getHeaders = () => {
-    const headerKeys = Object.keys(results[0]);
-    return (
-      <tr>
-        {headerKeys.map((k) => {
-          if (k !== 'residents') {
-            return <th key={k}>{k}</th>;
-          }
-          return null;
-        })}
-      </tr>
-    );
-  };
-
-  const getBody = () => (
-    <tbody>
-      {sortData(
-        filterDataByName(
-          filterByNumber(filterByNumericValues, results),
-          filterByName,
-        ),
-        column,
-        sort,
-      ).map((element) => (
-        <tr key={element.name}>
-          {Object.values(element).map((d, i) => (
-            <td
-              data-testid={i === 0 ? 'planet-name' : 'info'}
-              key={`${element.name}-${d}`}
-            >
-              {d}
-            </td>
-          ))}
-        </tr>
-      ))}
-    </tbody>
-  );
-
   if (results) {
     return (
       <table>
-        <thead>{getHeaders()}</thead>
-        {getBody()}
+        <thead>{getHeaders(results)}</thead>
+        {getBody(filterByNumericValues, results, filterByName, column, sort)}
       </table>
     );
   }

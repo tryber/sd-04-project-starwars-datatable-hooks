@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import StarWarsContext from '../../context/StarWarsContext';
 

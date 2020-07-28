@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import StarWarsContext from './StarWarsContext';
 import bzunBzun from '../service/api';
@@ -29,9 +30,9 @@ const StarWarsContextStore = ({ children }) => {
     ]);
   };
 
-  const submitOrder = (event, srt, column) => {
+  const submitOrder = (event, srt, col) => {
     event.preventDefault();
-    setColumn(column);
+    setColumn(col);
     setSort(srt);
   };
 
@@ -66,6 +67,14 @@ const StarWarsContextStore = ({ children }) => {
       {children}
     </StarWarsContext.Provider>
   );
+};
+
+StarWarsContextStore.defaultProps = {
+  children: [],
+};
+
+StarWarsContextStore.propTypes = {
+  children: PropTypes.object,
 };
 
 export default StarWarsContextStore;
