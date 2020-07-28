@@ -27,7 +27,7 @@ const Table = () => {
   };
 
   const planetsData = filterByName.name === '' ? toggleFilter() : filteredData;
-  const titles = planets[0] ? Object.keys(planets[0]) : [];
+  const titles = planetsData[0] ? Object.keys(planetsData[0]) : [];
 
   return (
     <table>
