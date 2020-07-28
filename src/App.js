@@ -8,11 +8,7 @@ import { Home } from './components/Home';
 
 const App = () => (
   <Provider>
-    <div className="App">
-      <section>
-        <Home />
-      </section>
-    </div>
+    <Home />
   </Provider>
 );
 
