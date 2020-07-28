@@ -26,8 +26,8 @@ const TableBody = () => {
 
   if (filter.filterByNumericValues.length > 0) {
     filter.filterByNumericValues.forEach(
-      (filter) =>
-        (filteredByName = filteredByName.filter((planet) => compareFilters(planet, filter))),
+      (filtro) =>
+        (filteredByName = filteredByName.filter((planet) => compareFilters(planet, filtro))),
     );
   }
 

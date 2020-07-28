@@ -9,7 +9,7 @@ const FilterByNumericValues = () => {
   const [column, setColumn] = useState('');
   const [comparison, setComparison] = useState('');
   const [value, setValue] = useState('');
-  
+
   const { changeFilterColumn } = useContext(StarWarsContext);
 
   const handleSubmit = () => changeFilterColumn(column, comparison, value);

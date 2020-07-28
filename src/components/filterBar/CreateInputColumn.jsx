@@ -7,8 +7,8 @@ const CreateInputColumn = ({ changeColumn, column }) => {
 
   let optionsFiltered = filter.options;
 
-  filter.filterByNumericValues.forEach(({ column }) => {
-    optionsFiltered = filter.options.filter((option) => option !== column);
+  filter.filterByNumericValues.forEach((filtro) => {
+    optionsFiltered = filter.options.filter((option) => option !== filtro.column);
   });
 
   return (

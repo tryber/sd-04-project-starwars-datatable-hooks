@@ -18,7 +18,7 @@ const generalFilter = {
     'orbital_period',
     'diameter',
     'rotation_period',
-    'surface_water'
+    'surface_water',
   ],
 };
 
