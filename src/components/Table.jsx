@@ -45,7 +45,7 @@ const filterPlanetsComparison = (array, filter) => {
 const Table = () => {
   const { planets, filters } = useContext(StarWarsContext);
   const input = filters.filterByName.name;
-  const arrayPlanets = filterPlanetsName(planets.data, input);  
+  const arrayPlanets = filterPlanetsName(planets.data, input);
   if (planets.loading) return <h1>Loading...</h1>;
   return (
     <div className="daniteste">
