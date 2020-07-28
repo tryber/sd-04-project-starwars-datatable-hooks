@@ -6,13 +6,34 @@ export const StarWarsContext = createContext();
 
 const initialStateFilters = {
   filterByName: {
-    neme: '',
+    name: '',
   },
   filterByNumericValues: [],
-  order: {
-    column: 'Name',
-    sort: 'ASC',
-  },
+  // order: {
+  //   column: 'Name',
+  //   sort: 'ASC',
+  // },
+};
+
+const filterForComparison = (planet, column, comparison, value) => {
+  switch (comparison) {
+    case 'maior que':
+      return Number(planet[column]) > Number(value);
+    case 'menor que':
+      return Number(planet[column]) < Number(value);
+    case 'igual a':
+      return Number(planet[column]) === Number(value);
+    default:
+      return [];
+  }
+};
+
+const filterNumeric = (filteredData, filters) => {
+  return filters.reduce(
+    (acc, { column, comparison, value }) =>
+      acc.filter((planet) => filterForComparison(planet, column, comparison, value)),
+    filteredData,
+  );
 };
 
 export const StarWarsProvider = ({ children }) => {
@@ -44,24 +65,45 @@ export const StarWarsProvider = ({ children }) => {
   //   }
   // }
 
-  useEffect(() => {
-    getData();
-    // resultsFilters()
-  }, []);
-
-  useEffect(() => {
-    if (dataFiltered) {
-      const planetsFiltered = filterByName(data, filters.filterByName.name);
-      setDataFiltered(planetsFiltered);
-    }
-  }, [filters]);
-
   const setFilterByName = (text) => {
     setFilters((stateFilter) => ({
       ...stateFilter,
       filterByName: { name: text },
     }));
   };
+
+  const deleteFilter = (column) => {
+    const newFilterNumeric = filters.filterByNumericValues.filter(
+      (element) => element.column !== column,
+    );
+    setFilters((stateFilter) => ({
+      ...stateFilter,
+      filterByNumericValues: newFilterNumeric,
+    }));
+  };
+
+  const setNumericFilter = ({ column, comparison, value }) => {
+    setFilters((stateFilter) => ({
+      ...stateFilter,
+      filterByNumericValues: [...stateFilter.filterByNumericValues, { column, comparison, value }],
+    }));
+  };
+
+  useEffect(() => {
+    getData();
+    // resultsFilters()
+  }, []);
+
+  useEffect(() => {
+    if (dataFiltered.length) {
+      let planetsFiltered = filterByName(data, filters.filterByName.name);
+      planetsFiltered = filterNumeric(planetsFiltered, filters.filterByNumericValues);
+      setDataFiltered(planetsFiltered);
+      // console.log('planetsFiltered', planetsFiltered)
+      // console.log('data', data)
+      // console.log('filterByNumeric', filterNumeric(planetsFiltered, filters.filterByNumericValues))
+    }
+  }, [filters]);
 
   const context = {
     data,
@@ -75,6 +117,9 @@ export const StarWarsProvider = ({ children }) => {
     setFilterByName,
     dataFiltered,
     setDataFiltered,
+    selectFilter: filters.filterByNumericValues,
+    deleteFilter,
+    setNumericFilter,
   };
 
   return <StarWarsContext.Provider value={context}>{children}</StarWarsContext.Provider>;
