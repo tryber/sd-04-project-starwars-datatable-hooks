@@ -46,3 +46,60 @@ export const getComparation = (onComparationChange, comparation) => {
     </select>
   );
 };
+
+const columnsToSort = () => {
+  return [
+    'Name',
+    'Climate',
+    'Created',
+    'Diameter',
+    'Edited',
+    'Films',
+    'Gravity',
+    'Orbital_period',
+    'Population',
+    'Rotation_period',
+    'Surface_water',
+    'Terrain',
+    'URL',
+  ];
+};
+
+export const getColumnsToSort = (onColumnChange, column) => {
+  const select = columnsToSort();
+  return (
+    <select
+      onChange={(event) => onColumnChange(event)}
+      value={column}
+    >
+      {select.map((item) => (
+        <option key={item} value={item.toLowerCase()}>
+          {item}
+        </option>
+      ))}
+    </select>
+  );
+};
+
+export const getRadiosAscDesc = (onRadioChange) => (
+  <div>
+    <label htmlFor="ASC">ASC</label>
+    <input
+      type="radio"
+      data-testid="column-sort-input-asc"
+      id="ASC"
+      name="order"
+      value="ASC"
+      onChange={(event) => onRadioChange(event)}
+    />
+    <label htmlFor="DESC">DESC</label>
+    <input
+      type="radio"
+      data-testid="column-sort-input-desc"
+      id="DESC"
+      name="order"
+      value="DESC"
+      onChange={(event) => onRadioChange(event)}
+    />
+  </div>
+);

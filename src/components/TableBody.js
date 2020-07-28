@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 import filterFunc from './functions/filterFunc';
+import sortFunc from './functions/sortFunc';
 
 function TableBody() {
   const {
@@ -8,14 +9,16 @@ function TableBody() {
     filters: {
       filterByName: { name },
       filterByNumericValues: numericValues,
+      order: { sort, column: columnToSort },
     },
   } = useContext(StarWarsContext);
 
   const data = filterFunc(planets, name, numericValues);
+  const orderedPlanets = sortFunc(data, columnToSort, sort);
 
   return (
     <tbody>
-      {data.map((planet) => (
+      {orderedPlanets.map((planet) => (
         <tr key={planet.name}>
           <td>{planet.name}</td>
           <td>{planet.rotation_period}</td>
