@@ -10,6 +10,8 @@ const StarWarsProvider = ({ children }) => {
   const [data, setData] = useState([]); // inicialm. array result está vazio.
   const [isLoading, setLoading] = useState(true);
   const [name, setName] = useState('');
+  const [ valueSelect, setValueSelect ] = useState({});
+  const [ filterByNumericValues, setFilterNumeric ] = useState([]);
 
   // 1- fazendo requisição:
   const planets = 'https://swapi-trybe.herokuapp.com/api/planets/';
@@ -35,10 +37,26 @@ const StarWarsProvider = ({ children }) => {
     setName(nameUser);
   };
 
-  const toFilterPlanets = () => {
-    const filterName = data.filter((planet) => planet.name.toLowerCase().includes(name));
-    return filterName;
-  };
+  // fn para salvar os valores que o user selected e input
+  const handleChange = (event) => {
+    event.preventDefault(); // impede que a  carregue de forma recorrente
+    const { name, value } = event.target;
+    setValueSelect((prevState) => ( // recebe o estado anterior como param
+      // e retorna o estado q é um obj 
+      {
+        ...prevState,
+        [name]: value,
+      }
+    ));
+  }
+
+  const onClick = (event) => {
+    event.preventDefault();
+    setFilterNumeric((prevState) => ([
+      ...prevState,
+      valueSelect,
+    ]));
+  }
 
 
   // guardar os estados, métodos, fn, para serem consumidos
@@ -49,9 +67,11 @@ const StarWarsProvider = ({ children }) => {
       filterByName: {
         name,
       },
+      filterByNumericValues,
     },
     getAndSetName,
-    toFilterPlanets,
+    handleChange,
+    onClick,
   };
 
   return <StarWarsContext.Provider value={context}>{children}</StarWarsContext.Provider>;
