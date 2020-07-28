@@ -9,7 +9,7 @@ const sortLines = (planets, order) => {
   if (sort === 'ASC') sortPlanets = sortPlanets.sort((a, b) => a[column] - b[column]);
   if (sort === 'DESC') sortPlanets = sortPlanets.sort((a, b) => b[column] - a[column]);
   return sortPlanets;
-}
+};
 
 const filteredDataFunc = (data, filterByName, filterByNumericValues, order) => {
   let planets = [...data];
