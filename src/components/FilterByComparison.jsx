@@ -1,22 +1,22 @@
 import React, { useContext, useState } from 'react';
 import { StarWarsContext } from '../context/starWarsContext';
 
-// const initialColumns = [
-//   'population',
-//   'orbital_period',
-//   'diameter',
-//   'rotation_period',
-//   'surface_water',
-// ];
+const initialColumns = [
+  'population',
+  'orbital_period',
+  'diameter',
+  'rotation_period',
+  'surface_water',
+];
 
-// const filterColumns = (columnsInState) => {
-//   if (columnsInState.length === 0) return initialColumns;
-//   const usedColumns = columnsInState.map((numericFilter) => numericFilter.column);
-//   return initialColumns.filter((columnOption) => !usedColumns.includes(columnOption));
-// };
+const filterColumns = (columnsInState) => {
+  if (columnsInState.length === 0) return initialColumns;
+  const usedColumns = columnsInState.map((numericFilter) => numericFilter.column);
+  return initialColumns.filter((columnOption) => !usedColumns.includes(columnOption));
+};
 
 const FilterByComparison = () => {
-  const { filterByNumericValues } = useContext(StarWarsContext);
+  const { filterByNumericValues, filters } = useContext(StarWarsContext);
 
   const [column, setColumn] = useState('');
   const [comparison, setComparison] = useState('');
@@ -26,11 +26,9 @@ const FilterByComparison = () => {
     <form>
       <select data-testid="column-filter" onChange={(e) => setColumn(e.target.value)}>
         <option defaultValue>Selecione</option>
-        <option value="population">population</option>
-        <option value="orbital_period">orbital_period</option>
-        <option value="diameter">diameter</option>
-        <option value="rotation_period">rotation_period</option>
-        <option value="surface_water">surface_water</option>
+        {filterColumns(filters.filterByNumericValues).map((column) => (
+            <option key={column}>{column}</option>
+          ))}
       </select>
       <select data-testid="comparison-filter" onChange={(e) => setComparison(e.target.value)}>
         <option defaultValue>Selecione</option>

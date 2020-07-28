@@ -1,9 +1,9 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
+import { StarWarsContext } from '../context/starWarsContext';
 
 const ShowFilter = (props) => {
-  const { filter } = props;
+  const {filters} = useContext(StarWarsContext)
+  const filter = filters.filterByNumericValues;
   if (filter.length === 0) return null;
   return (
     <div className="numeric-filters">
@@ -18,10 +18,4 @@ const ShowFilter = (props) => {
   );
 };
 
-ShowFilter.propTypes = {
-  filter: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
-
-const mapStateToProps = (state) => ({ filter: state.filters.filterByNumericValues });
-
-export default connect(mapStateToProps)(ShowFilter);
+export default ShowFilter;
