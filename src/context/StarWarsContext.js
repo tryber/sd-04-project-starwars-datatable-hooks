@@ -30,6 +30,7 @@ const Provider = ({ children }) => {
   };
 
   const changeFilterName = (name) => {
+    name.toLowerCase();
     setGeneralFilter({ ...filter, filterByName: { name } });
   };
 

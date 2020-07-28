@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { StarWarsContext } from '../../context/StarWarsContext';
 
 const FilterName = () => {
-  const { filterName, changeFilterName } = useContext(StarWarsContext);
+  const { changeFilterName } = useContext(StarWarsContext);
   return (
     <div>
       <label htmlFor="name">Filter by name</label>
@@ -10,7 +10,7 @@ const FilterName = () => {
         data-testid="name-filter"
         id="name"
         type="text"
-        value={filterName}
+        // value=""
         onChange={(e) => changeFilterName(e.target.value)}
       />
     </div>

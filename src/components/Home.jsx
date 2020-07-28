@@ -13,11 +13,11 @@ const Home = () => {
       .get('https://swapi-trybe.herokuapp.com/api/planets/')
       .then((res) => {
         setPlanet(res.data.results);
-        setFetching();
+        setFetching(false);
       })
       .catch((err) => {
         console.log(err.message);
-        setFetching();
+        setFetching(false);
       });
   }, []);
 
