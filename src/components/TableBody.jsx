@@ -17,7 +17,7 @@ const TableBody = () => {
   }, []);
 
   const filteredPlanetsByName = [...data].filter((planet) =>
-    planet.name.includes(filter.filterByName.name),
+    planet.name.toLowerCase().includes(filter.filterByName.name.toLowerCase()),
   );
 
   // console.log(filteredPlanetsByName)

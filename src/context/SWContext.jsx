@@ -32,7 +32,7 @@ const SWProvider = ({ children }) => {
   return <SWContext.Provider value={context}>{children}</SWContext.Provider>;
 };
 
-SWProvider.prototypes = {
+SWProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
