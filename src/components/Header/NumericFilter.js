@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import StarWarsContext from '../../context/StarWarsContext';
 import Filter from './Filter';
 
@@ -25,19 +25,11 @@ const giveMeOptions = (arr, name, previousFilters = []) => {
   ));
 };
 
-const handleChange = (e, field, setComparison, setColumn) => {
-  if (field === 'comparison') {
-    return setComparison(e.target.value);
-  }
-  return setColumn(e.target.value);
-};
-
 const selectFields = (
   field,
   filterByValues,
   state,
-  setComparison,
-  setColumn,
+  setState
 ) => {
   const prevFilters =
     field === 'column' ? filterByValues.map((elem) => elem[field]) : [];
@@ -45,7 +37,7 @@ const selectFields = (
     <select
       data-testid={`${field}-filter`}
       value={state[field]}
-      onChange={(e) => handleChange(e, field, setComparison, setColumn)}
+      onChange={(e) => setState(e.target.value)}
     >
       {giveMeOptions(options[field], field, prevFilters)}
     </select>
@@ -66,9 +58,9 @@ const renderFilters = (filterByNumericValues) =>
   });
 
 const NumericFilter = () => {
-  const [column, setColumn] = React.useState('');
-  const [comparison, setComparison] = React.useState('');
-  const [value, setValue] = React.useState(0);
+  const [column, setColumn] = useState('');
+  const [comparison, setComparison] = useState('');
+  const [value, setValue] = useState(0);
   const {
     filters: {
       filterByNumericValues: { filterByNumericValues, submitFilter },
@@ -92,8 +84,8 @@ const NumericFilter = () => {
           handleSubmit(e);
         }}
       >
-        {selectFields('column', filterByNumericValues, state, setComparison)}
-        {selectFields('comparison', filterByNumericValues, state, setColumn)}
+        {selectFields('column', filterByNumericValues, state, setColumn)}
+        {selectFields('comparison', filterByNumericValues, state, setComparison)}
         <input
           name="value"
           type="number"

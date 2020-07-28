@@ -54,7 +54,7 @@ const checkData = (a, column) => {
   const data = numberColumns.some((elem) => elem === column)
     ? Number(a[column])
     : a[column.toLowerCase()].toUpperCase();
-  return data;
+  return data
 };
 
 const sortData = (data, column, sortWay) => {
