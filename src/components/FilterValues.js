@@ -3,18 +3,14 @@ import StartWarsContext from '../context/StarWarsContext';
 
 function FilterValues() {
   const {
-    numericValues,
     setNumericValues,
-    column,
-    setColumn,
-    comparison,
-    setComparison,
-    value,
-    setValue,
+    column, setColumn,
+    comparison, setComparison,
+    value, setValue,
   } = useContext(StartWarsContext);
 
-  function updateColumns() {
-    const columns =[
+  function buildColumns() {
+    const arrayColumns = [
       '',
       'population',
       'orbital_period',
@@ -22,11 +18,6 @@ function FilterValues() {
       'rotation_period',
       'surface_water',
     ];
-    return columns;
-  }
-
-  function buildColumns() {
-    const arrayColumns = updateColumns();
     return (
       <select
         data-testid="column-filter"

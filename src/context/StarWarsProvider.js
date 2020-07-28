@@ -9,9 +9,9 @@ const StarWarsProvider = ({ children }) => {
   const [planets, setPlanets] = useState([]);
   const [name, setName] = useState('');
   const [numericValues, setNumericValues] = useState([]);
-  const [column, setColumn] = useState('')
-  const [comparison, setComparison] = useState('')
-  const [value, setValue] = useState('')
+  const [column, setColumn] = useState('');
+  const [comparison, setComparison] = useState('');
+  const [value, setValue] = useState('');
 
   const context = {
     isFetching,
