@@ -3,12 +3,24 @@ import StarWarsContext from '../context/StarWarsContext';
 
 
 function Table() {
-  const { dataApi, isLoading, filterByName } = useContext(StarWarsContext);
+  const { dataApi, isLoading, filters} = useContext(StarWarsContext);
 
   const filteredData = () => {
     let planets = [...dataApi];
-    if (filterByName.name.length > 0) {
-      planets = planets.filter((planet) => planet.name.includes(filterByName.name));
+    const { name } = filters.filterByName;
+    const { filterByNumericValues } = filters;
+    if (name.length > 0) {
+      planets = planets.filter((planet) => planet.name.includes(name));
+    }
+    if (filterByNumericValues.length > 0) {
+      filterByNumericValues.forEach(({ column, comparison, value }) => {
+        planets = planets.filter((planet) => {
+          if (comparison === 'menor que') return Number(planet[column]) < Number(value);
+          if (comparison === 'igual a') return Number(planet[column]) === Number(value);
+          if (comparison === 'maior que') return Number(planet[column]) > Number(value);
+          return null;
+        });
+      });
     }
     return planets;
   };
@@ -22,7 +34,7 @@ function Table() {
   return (
     <div>
       <table className="table">
-        {console.log(filterByName)}
+        {console.log(filters)}
         <thead>
           <tr>
             {chaves.map((chave) => (<th key={chave}>{chave}</th>))}

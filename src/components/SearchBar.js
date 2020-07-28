@@ -1,12 +1,13 @@
 import React from 'react';
 import TextFilter from './searchBarComponents/TextFilter';
 // import SortFilter from './searchBarComponents/SortFilter';
-// import NumericFilter from './searchBarComponents/NumericFilter';
+import NumericFilter from './searchBarComponents/NumericFilter';
 
 function SearchBar() {
   return (
     <div className="searchBar">
       <TextFilter />
+      <NumericFilter />
       <div>
         <div><h1>Filtros:</h1></div>
         {/* <div>

@@ -7,9 +7,8 @@ const StarWarsProvider = ({ children }) => {
   const [dataApi, setDataApi] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [filterByName, setfilterByName] = useState({ name: '' });
-  const [column, setColumn] = useState('');
-  const [comparison, setComparison] = useState('');
-  const [value, setValue] = useState('');
+  const [valueSelect, setvalueSelect] = useState({});
+  const [filterByNumericValues, setfilterByNumericValues] = useState([])
 
   useEffect(() => {
     (async () => {
@@ -22,21 +21,35 @@ const StarWarsProvider = ({ children }) => {
     })();
   }, []);
 
+  const handleChange = (event) => {
+    event.preventDefault();
+    const { name, value } = event.target;
+    setvalueSelect((prevState) => (
+      {
+        ...prevState,
+        [name]: value,
+      }
+    ));
+  }
+
+  const NumericOnClick = (event) => {
+    event.preventDefault();
+    setfilterByNumericValues((prevState) => ([
+    ...prevState,
+    valueSelect,
+    ]));
+  }
+
   const states = {
     dataApi,
     isLoading,
     filters: {
       filterByName,
-      filterByNumericValues: {
-        column,
-        comparison,
-        value,
-      },
+      filterByNumericValues,
     },
     setfilterByName,
-    setColumn,
-    setComparison,
-    setValue,
+    handleChange,
+    NumericOnClick,
   };
 
   return (
