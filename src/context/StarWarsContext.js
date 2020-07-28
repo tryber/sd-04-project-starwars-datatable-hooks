@@ -28,13 +28,12 @@ const filterForComparison = (planet, column, comparison, value) => {
   }
 };
 
-const filterNumeric = (filteredData, filters) => {
-  return filters.reduce(
+const filterNumeric = (filteredData, filters) =>
+  filters.reduce(
     (acc, { column, comparison, value }) =>
       acc.filter((planet) => filterForComparison(planet, column, comparison, value)),
     filteredData,
   );
-};
 
 export const StarWarsProvider = ({ children }) => {
   const [data, setData] = useState([]);
@@ -101,7 +100,6 @@ export const StarWarsProvider = ({ children }) => {
       setDataFiltered(planetsFiltered);
       // console.log('planetsFiltered', planetsFiltered)
       // console.log('data', data)
-      // console.log('filterByNumeric', filterNumeric(planetsFiltered, filters.filterByNumericValues))
     }
   }, [filters]);
 

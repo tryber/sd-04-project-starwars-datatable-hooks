@@ -46,7 +46,6 @@ const OptionSelectFilter = () => {
         <option value="igual a">igual a</option>
       </select>
       <input
-        defaultValue=""
         onChange={(event) => handleFilterChange(event.target.value, 'value')}
         data-testid="value-filter"
         type="number"
