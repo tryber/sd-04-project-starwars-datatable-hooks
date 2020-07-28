@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { StarWarsContext } from '../context/StarWarsContext';
+import { StarWarsContext } from '../../context/StarWarsContext';
 
 export const TableBody = () => {
   const { planet } = useContext(StarWarsContext);

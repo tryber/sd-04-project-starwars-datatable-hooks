@@ -4,7 +4,7 @@ const StarWarsContext = createContext();
 
 const Provider = ({ children }) => {
   const [planet, setPlanet] = useState([]);
-  const [isFetching, setIsFetching] = useState(false);
+  const [isFetching, setIsFetching] = useState(true);
 
   const setFetching = () => {
     setIsFetching(!isFetching);
