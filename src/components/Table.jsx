@@ -2,21 +2,39 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import usePlanets from '../hooks/usePlanets';
 import useFilters from '../hooks/useFilters';
+import { capitalize, removeUnderline } from '../utils/format';
 
 const Content = ({ planets, filterByName, filterByNumericValues, sort }) => (
   <tbody>
     {sort(filterByNumericValues(filterByName(planets))).map((planet) => (
-      <tr key={planet.orbital_period}>
-        {Object.entries(planet).map(([key, value]) => {
-          console.log('cc cuzao');
-          return key === 'name' ? (
-            <td key={value} data-testid="planet-name">
-              {value}
-            </td>
-          ) : (
-            <td key={value}>{value}</td>
-          );
-        })}
+      <tr key={planet.id}>
+        {Object.entries(planet)
+          .filter(([key]) => key !== 'id' && key !== 'url')
+          .map(([key, value]) => {
+            switch (key) {
+              case 'name':
+                return (
+                  <td key={value} data-testid="planet-name" className="text-center">
+                    {value}
+                  </td>
+                );
+              case 'films':
+                return (
+                  <td className="text-center" key={value}>
+                    {value.map((film) => (
+                      <p className="mb-0">{film}</p>
+                    ))}
+                  </td>
+                );
+              default:
+                console.log(value);
+                return (
+                  <td className="text-center" key={value}>
+                    {value}
+                  </td>
+                );
+            }
+          })}
       </tr>
     ))}
   </tbody>
@@ -27,21 +45,28 @@ export default function Table() {
   const [, , { sortPlanets, filterByNumericValues, filterByName }] = useFilters();
 
   return (
-    <table className="table table-dark">
-      <thead>
-        <tr>
-          {headers.map((title) => (
-            <th key={title}>{title}</th>
-          ))}
-        </tr>
-      </thead>
-      <Content
-        planets={planets}
-        filterByName={filterByName}
-        filterByNumericValues={filterByNumericValues}
-        sort={sortPlanets}
-      />
-    </table>
+    <div className="row">
+      <div className="table-responsive">
+        <table className="table table-hover table-dark">
+          <thead className="bg-warning">
+            <tr className="text-center text-dark">
+              {headers
+                .filter((title) => title !== 'url')
+                .map((title) => {
+                  const formattedTitle = capitalize(removeUnderline(title));
+                  return <th key={title}>{formattedTitle}</th>;
+                })}
+            </tr>
+          </thead>
+          <Content
+            planets={planets}
+            filterByName={filterByName}
+            filterByNumericValues={filterByNumericValues}
+            sort={sortPlanets}
+          />
+        </table>
+      </div>
+    </div>
   );
 }
 
