@@ -4,7 +4,7 @@ import getPlanets from '../service/api';
 import { compare } from '../util/index';
 
 const TableBody = () => {
-  const { data, setData, fetching, setFetching, filterByName, filterByNumericValues } = useContext(
+  const { data, setData, setFetching, filterByName, filterByNumericValues } = useContext(
     SWContext,
   );
   useEffect(() => {
