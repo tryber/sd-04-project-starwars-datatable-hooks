@@ -3,38 +3,6 @@ import FilterForms from './FilterForms';
 import { StarWarsContext } from '../context/StarWarsContext';
 import useData from '../context/useData';
 
-// class Table extends Component {
-//   componentDidMount() {
-//     const { fetchPlanets: fetch } = this.props;
-//     fetch();
-//   }
-
-//   test() {
-//     const { filteredPlanets } = this.props;
-//     return filteredPlanets;
-//   }
-
-//   render() {
-//     const { planetsData, filteredPlanets, isFetching } = this.props;
-//     if (isFetching) return <p>Loading...</p>;
-//     const headerTitles = planetsData ? Object.keys(planetsData[0]) : [];
-//     return <RenderTable tableHeaderTitles={headerTitles} filteredPlanets={filteredPlanets} />;
-//   }
-// }
-
-// const mapDispatchToProps = (dispatch) => ({
-//   fetchPlanets: () => dispatch(fetchPlanets()),
-// });
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Table);
-
-// Table.propTypes = {
-//   planetsData: PropTypes.arrayOf(PropTypes.object).isRequired,
-//   fetchPlanets: PropTypes.func.isRequired,
-//   isFetching: PropTypes.bool.isRequired,
-//   filteredPlanets: PropTypes.arrayOf(PropTypes.object).isRequired,
-// };
-
 const comparisson = (planet, { column, comparison, value }) => {
   switch (comparison) {
     case 'maior que':
@@ -46,31 +14,6 @@ const comparisson = (planet, { column, comparison, value }) => {
     default:
       return false;
   }
-};
-
-const orderPlanets = (column, sort, planets) => {
-  const newPlanets = [...planets];
-  if (!Number(newPlanets[0][column])) {
-    newPlanets.sort(function (a, b) {
-      const x = a[column].toLowerCase();
-      const y = b[column].toLowerCase();
-      if (x < y) {
-        return -1;
-      }
-      if (x > y) {
-        return 1;
-      }
-      return 0;
-    });
-  } else {
-    newPlanets.sort(function (a, b) {
-      return a[column] - b[column];
-    });
-  }
-
-  if (sort === 'ASC') return newPlanets;
-  if (sort === 'DESC') return newPlanets.reverse();
-  return newPlanets;
 };
 
 const Table = () => {
@@ -95,6 +38,7 @@ const Table = () => {
     <div>
       <input data-testid="name-filter" type="text" onChange={(e) => handleInput(e.target.value)} />
       <FilterForms />
+      <OrderFilter keys={tableHeader} />
       <table>
         <thead>
           <tr>
