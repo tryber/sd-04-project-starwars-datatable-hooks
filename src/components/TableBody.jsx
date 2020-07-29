@@ -3,7 +3,7 @@ import SWContext from '../context/StarWarsContext';
 import getPlanets from '../service/api';
 
 const TableBody = () => {
-  const { data, setData, fetching, setFetching } = useContext(SWContext);
+  const { data, setData, fetching, setFetching, filterByName } = useContext(SWContext);
   useEffect(() => {
     setFetching(true);
     getPlanets().then(
@@ -19,7 +19,9 @@ const TableBody = () => {
   }, []);
   if (fetching === true) return <tbody>Loading..</tbody>;
   if (data.length > 1) {
-    const planets = data;
+    let planets = data;
+    if (filterByName.name !== '')
+      planets = planets.filter((planet) => planet.name.includes(filterByName.name));
     return (
       <tbody>
         {planets.map((planet) => (

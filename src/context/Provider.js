@@ -14,7 +14,11 @@ const SWProvider = ({ children }) => {
     'rotation_period',
     'surface_water',
   ]);
-  const context = { data, setData, fetching, setFetching, columns };
+  const [filterByName, setFilterByName] = useState({ name: '' });
+  const handleSearchText = (text) => {
+    setFilterByName({ name: text });
+  };
+  const context = { data, setData, fetching, setFetching, columns, handleSearchText, filterByName };
   return <SWContext.Provider value={context}>{children}</SWContext.Provider>;
 };
 
