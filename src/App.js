@@ -1,31 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './App.css';
-import StartWarsContext from './context/StarWarsContext';
+import StarWarsProvider from './context/StarWarsProvider';
 import Table from './components/Table';
+import SearchText from './components/SearchText';
 
-function App() {
-  const initialState = [];
-  const [planets, setPlanets] = useState(initialState);
-  const PLANETS_API = 'https://swapi-trybe.herokuapp.com/api';
-
-  useEffect(() => {
-    fetch(`${PLANETS_API}/planets`).then((response) =>
-      response.json().then((json) => {
-        setPlanets(json.results);
-      }),
-    );
-  }, []);
-
-  return (
-    <StartWarsContext.Provider value={planets}>
-      <div className="App">
-        <header className="App-header">
-          <h2>Star Wars Database</h2>
-        </header>
-        {planets === initialState ? <h2>Loading...</h2> : <Table />}
-      </div>
-    </StartWarsContext.Provider>
-  );
-}
+const App = () => (
+  <StarWarsProvider>
+    <div className="App">
+      <header className="App-header">
+        <h2>StarWars Datatable with Filters</h2>
+        <SearchText />
+      </header>
+      <Table />
+    </div>
+  </StarWarsProvider>
+);
 
 export default App;

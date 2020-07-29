@@ -1,4 +1,6 @@
-const PLANETS_API = 'https://swapi-trybe.herokuapp.com/api';
+//const PLANETS_API = 'https://swapi-trybe.herokuapp.com/api';
+
+const PLANETS_API = 'https://swapi.dev/api';
 
 const getStarsWarsPlanets = () => (
   fetch(`${PLANETS_API}/planets`)

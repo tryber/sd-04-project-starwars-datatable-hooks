@@ -1,10 +1,24 @@
-import React, { useContext } from 'react';
-import StartWarsContext from '../context/StarWarsContext';
+import React, { useContext, useEffect } from 'react';
+import StarWarsContext from '../context/StarWarsContext';
 import '../styles/Table.css';
 
-function Table() {
-  const data = useContext(StartWarsContext);
-  const title = Object.keys(data[0]).filter((key) => key !== 'residents');
+const Table = () => {
+  const { fetchPlanets, isLoading, planets, textInput } = useContext(StarWarsContext);
+
+  useEffect(() => {
+    fetchPlanets();
+  }, []);
+
+  const filter = () => {
+    let infoPlanets = planets;
+    if (textInput !== '')
+      infoPlanets = planets.filter((planet) => planet.name.toLowerCase().includes(textInput));
+    return infoPlanets;
+  };
+
+  if (isLoading) return <h2>Loading...</h2>;
+
+  const title = Object.keys(planets[0]).filter((key) => key !== 'residents');
   return (
     <div>
       <div className="container">
@@ -17,7 +31,7 @@ function Table() {
             </tr>
           </thead>
           <tbody>
-            {data.map((planet) => (
+            {filter().map((planet) => (
               <tr key={planet.name}>
                 {title.map((element) => (
                   <td key={element}>{planet[element]}</td>
@@ -29,6 +43,6 @@ function Table() {
       </div>
     </div>
   );
-}
+};
 
 export default Table;
