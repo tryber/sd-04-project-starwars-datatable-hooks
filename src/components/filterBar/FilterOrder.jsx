@@ -12,9 +12,9 @@ const createButon = () => {
 const createRadio = () => (
   <div>
     <label htmlFor="ASC">ASC</label>
-    <input data-testid="column-sort-input" name="sort" id="ASC" type="radio" />
+    <input data-testid="column-sort-input-asc" name="sort" id="ASC" type="radio" />
     <label htmlFor="DESC">DESC</label>
-    <input data-testid="column-sort-input" name="sort" id="DESC" type="radio" />
+    <input data-testid="column-sort-input-desc" name="sort" id="DESC" type="radio" />
   </div>
 );
 
