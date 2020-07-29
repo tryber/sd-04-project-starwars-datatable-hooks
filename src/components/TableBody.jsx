@@ -20,7 +20,6 @@ const TableBody = () => {
       },
     );
   }, []);
-  if (fetching === true) return <tbody>Loading..</tbody>;
   if (data.length > 1) {
     let planets = data;
     if (filterByName.name !== '') {

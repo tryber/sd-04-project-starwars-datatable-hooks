@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import SWContext from '../context/StarWarsContext';
 
 const Filters = () => {
-  const { columns, setfilterByNumericValues, handleNumericFilter } = useContext(SWContext);
+  const { columns, handleNumericFilter } = useContext(SWContext);
   return (
     <div>
       <form
@@ -11,7 +11,7 @@ const Filters = () => {
           handleNumericFilter(e.target);
         }}
       >
-        <label>
+        <label htmlFor="column">
           Selecione a coluna:
           <select name="column">
             {columns.map((option) => (
@@ -19,7 +19,7 @@ const Filters = () => {
             ))}
           </select>
         </label>
-        <label>
+        <label htmlFor="comparison">
           <select name="comparison">
             <option defaultValue>Comparison</option>
             <option value="maior que">Maior que</option>
