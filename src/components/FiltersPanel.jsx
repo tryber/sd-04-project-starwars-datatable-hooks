@@ -1,8 +1,8 @@
 import React from 'react';
 import FilterSearch from './FilterSearch';
-// import FilterList from './FilterList';
+import FilterNumbers from './FilterNumbers';
+import FilterList from './FilterList';
 // import FilterOrder from './FilterOrder';
-// import FilterNumbers from './FilterNumbers';
 import './FiltersPanel.css';
 
 const FiltersPanel = () => (
@@ -10,10 +10,10 @@ const FiltersPanel = () => (
     <h2 className="filter-panel-title">Filters</h2>
     <form>
       <FilterSearch />
-      {/* <FilterNumbers />
-          <FilterOrder /> */}
+      <FilterNumbers />
+      {/* <FilterOrder /> */}
     </form>
-    {/* <FilterList /> */}
+    <FilterList />
   </div>
 );
 
