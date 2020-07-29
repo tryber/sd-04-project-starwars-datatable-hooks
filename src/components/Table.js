@@ -17,7 +17,7 @@ const comparisson = (planet, { column, comparison, value }) => {
 };
 
 const Table = () => {
-  const { filterByNumericValues, filterByName, order, handleInput } = useContext(StarWarsContext);
+  const { filterByNumericValues, filterByName, handleInput } = useContext(StarWarsContext);
   const { data } = useData();
   let planets = [...data];
   const keys = data.length >= 1 ? Object.keys(data[0]) : [];
