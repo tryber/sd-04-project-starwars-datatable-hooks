@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
-// import { StarWarsProvider } from './context/StarWarsContext'; > sei que vou precisar
-// import Table from './components/Table'; > sei que vou precisar
+import { StarWarsProvider } from './context/StarWarsContext'; // sei que vou precisar
+import Table from './components/Table'; // sei que vou precisar
 
 const App = () => (
   <StarWarsProvider>
