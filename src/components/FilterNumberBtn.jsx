@@ -5,12 +5,15 @@ import { StarWarsContext } from '../context/StarWarsContext';
 const FilterNumberBtn = ({ state, clearColumnState }) => {
   const [store, setStore] = useContext(StarWarsContext);
 
-  const filterByNumber = (state) => {
+  const filterByNumber = (filtersState) => {
     setStore({
       ...store,
       filters: {
         ...store.filters,
-        filterByNumericValues: [...store.filters.filterByNumericValues, state],
+        filterByNumericValues: [
+          ...store.filters.filterByNumericValues,
+          filtersState,
+        ],
       },
     });
   };
