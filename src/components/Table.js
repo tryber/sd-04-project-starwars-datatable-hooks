@@ -1,20 +1,14 @@
 import React, { useContext, useEffect } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 import '../styles/Table.css';
+import TableBody from './TableBody';
 
 const Table = () => {
-  const { fetchPlanets, isLoading, planets, textInput } = useContext(StarWarsContext);
+  const { fetchPlanets, isLoading, planets } = useContext(StarWarsContext);
 
   useEffect(() => {
     fetchPlanets();
   }, []);
-
-  const filter = () => {
-    let infoPlanets = planets;
-    if (textInput !== '')
-      infoPlanets = planets.filter((planet) => planet.name.toLowerCase().includes(textInput));
-    return infoPlanets;
-  };
 
   if (isLoading) return <h2>Loading...</h2>;
 
@@ -30,15 +24,7 @@ const Table = () => {
               ))}
             </tr>
           </thead>
-          <tbody>
-            {filter().map((planet) => (
-              <tr key={planet.name}>
-                {title.map((element) => (
-                  <td key={element}>{planet[element]}</td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
+          <TableBody />
         </table>
       </div>
     </div>

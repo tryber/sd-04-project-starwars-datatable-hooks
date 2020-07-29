@@ -7,6 +7,10 @@ const StarWarsProvider = ({ children }) => {
   const [planets, setPlanets] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [textInput, setTextInput] = useState('');
+  const [column, setColumn] = useState('');
+  const [comparison, setComparison] = useState('');
+  const [value, setValue] = useState('');
+  const [comparisonFilter, setComparisonFilter] = useState(false);
 
   const fetchPlanets = () => {
     getStarsWarsPlanets().then(({ results }) => {
@@ -21,6 +25,14 @@ const StarWarsProvider = ({ children }) => {
     fetchPlanets,
     textInput,
     setTextInput,
+    column,
+    setColumn,
+    comparison,
+    setComparison,
+    value,
+    setValue,
+    setComparisonFilter,
+    comparisonFilter,
   };
 
   return <StarWarsContext.Provider value={contextAPI}>{children}</StarWarsContext.Provider>;

@@ -1,4 +1,4 @@
-//const PLANETS_API = 'https://swapi-trybe.herokuapp.com/api';
+// const PLANETS_API = 'https://swapi-trybe.herokuapp.com/api';
 
 const PLANETS_API = 'https://swapi.dev/api';
 
