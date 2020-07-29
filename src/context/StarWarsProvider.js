@@ -29,7 +29,7 @@ const StarWarsProvider = ({ children }) => {
   };
 
   const clearFilter = (columnRemove) => {
-    setByNumericValues(filterByNumericValues.filter(({column}) => column !== columnRemove));
+    setByNumericValues(filterByNumericValues.filter(({ column }) => column !== columnRemove));
   };
 
   useEffect(() => {
