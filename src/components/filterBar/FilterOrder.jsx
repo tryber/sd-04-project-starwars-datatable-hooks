@@ -42,7 +42,9 @@ const FilterOrder = () => {
 
   const handleChangeColumn = (e) => setColumn(e.target.value);
   const handleChangeSort = (e) => setSort(e.target.value);
-  const handleSubmit = () => changeOrder(column, sort);
+  const handleSubmit = () => {
+    changeOrder(column, sort);
+  };
   console.log('coluna', column);
 
   return (
@@ -63,7 +65,7 @@ const FilterOrder = () => {
       </select>
       {createRadio(handleChangeSort)}
       <button
-        onClick={(column, sort) => handleSubmit(column, sort)}
+        onClick={() => handleSubmit()}
         className="btn btn-dark"
         data-testid="column-sort-button"
         type="button"
