@@ -1,81 +1,42 @@
-import React, { useContext } from 'react';
-// import Columns from './Columns';
+import React, { useContext, useState } from 'react';
 // import Comparison from './Comparison';
 // import Value from './Value';
 import StartWarsContext from '../context/StarWarsContext';
+import { buildColumns, buildComparison } from './builders';
 
 function FilterValues() {
+  const [column, setColumn] = useState('');
+  const [comparison, setComparison] = useState('');
+  const [value, setValue] = useState('');
+
   const {
-    column,
-    setColumn,
-    comparison,
-    setComparison,
-    value,
-    setValue,
-    setNumericValues,
+    filterByNumericValues,
+    filters: { filterByNumericValues: numericValues }
   } = useContext(StartWarsContext);
 
   function onClick() {
-    setNumericValues(column, comparison, value);
+    filterByNumericValues(column, comparison, value);
   }
 
-  function updateColumns() {
-    const columns = [
-      '',
-      'population',
-      'orbital_period',
-      'diameter',
-      'rotation_period',
-      'surface_water',
-    ];
-    return columns;
+  function changeColumn(e) {
+    setColumn(e.target.value);
   }
 
-  function getColumns() {
-    const select = updateColumns();
-    return (
-      <select
-        data-testid="column-filter"
-        value={column}
-        onChange={(e) => setColumn(e.target.value)}
-      >
-        {select.map((item) => (
-          <option key={item} value={item}>
-            {item}
-          </option>
-        ))}
-      </select>
-    );
-  }
-
-  function getComparation() {
-    const comparation = ['', 'maior que', 'menor que', 'igual a'];
-    return (
-      <select
-        data-testid="comparison-filter"
-        value={comparison}
-        onChange={(e) => setComparison(e.target.value)}
-      >
-        {comparation.map((item) => (
-          <option key={item} value={item}>
-            {item}
-          </option>
-        ))}
-      </select>
-    );
+  function changeComparison(e) {
+    setComparison(e.target.value);
   }
 
   return (
     <div>
-      {getColumns()}
-      {getComparation()}
+      {buildColumns(column, numericValues, changeColumn)}
+      {buildComparison(comparison, changeComparison)}
       <input
         data-testid="value-filter"
         type="number"
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />
-      <button data-testid="button-filter" onClick={onClick()}>
+      <button data-testid="button-filter" onClick={onClick}>
         Filtrar
       </button>
     </div>
