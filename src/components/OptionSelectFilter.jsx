@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { StarWarsContext } from '../context/StarWarsContext';
 
-export const columnFilterElement = [
+const columnFilterElement = [
   'population',
   'orbital_period',
   'diameter',
@@ -15,17 +15,20 @@ const OptionSelectFilter = () => {
     comparison: '',
     value: '',
   });
-  const handleFilterChange = (element, field) => {
+
+  const handleFilterNumericChange = (element, field) => {
     setState((stateFilter) => ({
       ...stateFilter,
       [field]: element,
     }));
   };
+
   const { filters, setNumericFilter } = useContext(StarWarsContext);
+
   return (
     <div>
       <select
-        onChange={(event) => handleFilterChange(event.target.value, 'column')}
+        onChange={(event) => handleFilterNumericChange(event.target.value, 'column')}
         data-testid="column-filter"
       >
         <option />
@@ -37,7 +40,7 @@ const OptionSelectFilter = () => {
         )}
       </select>
       <select
-        onChange={(event) => handleFilterChange(event.target.value, 'comparison')}
+        onChange={(event) => handleFilterNumericChange(event.target.value, 'comparison')}
         data-testid="comparison-filter"
       >
         <option />
@@ -46,7 +49,7 @@ const OptionSelectFilter = () => {
         <option value="igual a">igual a</option>
       </select>
       <input
-        onChange={(event) => handleFilterChange(event.target.value, 'value')}
+        onChange={(event) => handleFilterNumericChange(event.target.value, 'value')}
         data-testid="value-filter"
         type="number"
       />

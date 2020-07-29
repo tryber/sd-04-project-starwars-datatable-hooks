@@ -3,6 +3,7 @@ import { StarWarsContext } from '../context/StarWarsContext';
 import TableHeader from '../components/TableHeader';
 import InputFilterByName from '../components/InputFilterByName';
 import SelectFilter from '../components/SelectFilter';
+import Sort from '../components/Sort';
 
 const Table = () => {
   const { dataFiltered, isLoading } = useContext(StarWarsContext);
@@ -14,16 +15,23 @@ const Table = () => {
     <div>
       <InputFilterByName />
       <SelectFilter />
+      <Sort />
       <table className="table table-bordered table-dark">
         <tbody>
           <TableHeader />
           {dataFiltered.map((planet) => (
             <tr key={planet.name}>
-              {Object.values(planet).map((value) => (
-                <td data-testid="planet-name" key={value}>
-                  {value}
-                </td>
-              ))}
+              {Object.values(planet).map((value) =>
+                //  Comparação para que, caso o valor do elemento da tabela possua o nome de um planeta
+                //  adicione o atributo data-testid="planet-name".
+                value !== planet.name ? (
+                  <td key={value}>{value}</td>
+                ) : (
+                  <td data-testid="planet-name" key={value}>
+                    {value}
+                  </td>
+                ),
+              )}
             </tr>
           ))}
         </tbody>
