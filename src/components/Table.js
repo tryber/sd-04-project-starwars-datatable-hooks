@@ -22,7 +22,6 @@ const Table = () => {
   let planets = [...data];
   if (planets.length >= 1) {
     const newColumn = order.column.toLowerCase();
-    planets = orderPlanets(newColumn, order.sort, planets);
   }
   const keys = data.length >= 1 ? Object.keys(data[0]) : [];
   const tableHeader = keys.filter((key) => key !== 'residents');
@@ -38,7 +37,6 @@ const Table = () => {
     <div>
       <input data-testid="name-filter" type="text" onChange={(e) => handleInput(e.target.value)} />
       <FilterForms />
-      <OrderFilter keys={tableHeader} />
       <table>
         <thead>
           <tr>
