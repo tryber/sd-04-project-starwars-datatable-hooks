@@ -4,18 +4,18 @@ import StartWarsContext from "../context/StarWarsContext";
 function Columns() {
   const { column, setColumn } = useContext(StartWarsContext);
   const arrayColumns = [
-    "",
-    "population",
-    "orbital_period",
-    "diameter",
-    "rotation_period",
-    "surface_water",
+    '',
+    'population',
+    'orbital_period',
+    'diameter',
+    'rotation_period',
+    'surface_water',
   ];
   return (
     <select
       data-testid="column-filter"
       value={column}
-      onChange={(e) => setColumn(e.target.value, "column")}
+      onChange={(e) => setColumn(e.target.value)}
     >
       {arrayColumns.map((item) => (
         <option key={item} value={item}>

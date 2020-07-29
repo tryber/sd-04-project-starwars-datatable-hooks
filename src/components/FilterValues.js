@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext } from 'react';
 // import Columns from './Columns';
 // import Comparison from './Comparison';
 // import Value from './Value';
-import StartWarsContext from "../context/StarWarsContext";
+import StartWarsContext from '../context/StarWarsContext';
 
 function FilterValues() {
   const {
