@@ -34,7 +34,7 @@ const createRadio = (handleChange) => (
 );
 
 const FilterOrder = () => {
-  const { changeOrder, filter } = useContext(StarWarsContext);
+  const { changeOrder } = useContext(StarWarsContext);
 
   const [sort, setSort] = useState('');
   const [column, setColumn] = useState('');
