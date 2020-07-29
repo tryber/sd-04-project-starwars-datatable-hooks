@@ -25,13 +25,13 @@ const Table = () => {
             //  o atributo data-testid="planet-name".
             <tr key={planet.name}>
               {Object.values(planet).map((value) => (
-                value !== planet.name) ? (
+                value !== planet.name ? (
                   <td key={value}>{value}</td>
                 ) : (
                   <td data-testid="planet-name" key={value}>
                     {value}
                   </td>
-                ),
+                )),
               )}
             </tr>
           ))}
