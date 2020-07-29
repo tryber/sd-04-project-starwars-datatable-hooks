@@ -20,8 +20,9 @@ const TableBody = () => {
   if (fetching === true) return <tbody>Loading..</tbody>;
   if (data.length > 1) {
     let planets = data;
-    if (filterByName.name !== '')
+    if (filterByName.name !== '') {
       planets = planets.filter((planet) => planet.name.includes(filterByName.name));
+    }
     return (
       <tbody>
         {planets.map((planet) => (

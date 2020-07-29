@@ -5,12 +5,13 @@ const SearchBar = () => {
   const { handleSearchText } = useContext(SWContext);
   return (
     <div>
-      <label>
+      <label htmlFor="SearchBar">
         Pesquise o nome do planeta:
         <input
           data-testid="name-filter"
           type="text"
           onChange={(e) => handleSearchText(e.target.value)}
+          name="SearchBar"
         />
       </label>
     </div>
