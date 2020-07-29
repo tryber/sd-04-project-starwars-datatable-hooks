@@ -20,9 +20,6 @@ const Table = () => {
   const { filterByNumericValues, filterByName, order, handleInput } = useContext(StarWarsContext);
   const { data } = useData();
   let planets = [...data];
-  if (planets.length >= 1) {
-    const newColumn = order.column.toLowerCase();
-  }
   const keys = data.length >= 1 ? Object.keys(data[0]) : [];
   const tableHeader = keys.filter((key) => key !== 'residents');
   if (filterByNumericValues.length >= 1) {
