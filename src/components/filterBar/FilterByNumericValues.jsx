@@ -22,7 +22,7 @@ const FilterByNumericValues = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h3>Filter by numeric values</h3>
+      <h4>Filter by numeric values</h4>
       <CreateInputColumn changeColumn={setColumn} value={column} />
       <CreateInputComparison changeComparison={setComparison} value={comparison} />
       <CreateInputValue changeValue={setValue} value={value} />

@@ -6,15 +6,15 @@ const FiltersApplied = () => {
   const { filter, removeFilter } = useContext(StarWarsContext);
   const filters = filter.filterByNumericValues;
   return (
-    <div>
-      {filters.length > 0 ? <h3>Filters Applied: </h3> : null}
+    <div className="d-flex align-items-center">
+      {filters.length > 0 ? <h5>Filters Applied: </h5> : null}
       {filters.map(({ column, comparison, value }) => (
-        <div data-testid="filter" key={column}>
+        <div className="filters-div" data-testid="filter" key={column}>
           <p>Column: {column}</p>
           <p>Comparison: {comparison}</p>
           <p>Value: {value}</p>
-          <button onClick={() => removeFilter(column)} type="button">
-            remove filter
+          <button className="btn btn-dark" onClick={() => removeFilter(column)} type="button">
+            remove
           </button>
         </div>
       ))}

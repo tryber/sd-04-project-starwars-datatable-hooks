@@ -42,13 +42,6 @@ const ProviderSW = ({ children }) => {
     });
   };
 
-  const selectedOptions = (filtro) => {
-    setFilter({
-      ...filter,
-      options: filter.options.filter((option) => option !== filtro),
-    });
-  };
-
   const removeFilter = (key) => {
     setFilter({
       ...filter,
@@ -64,7 +57,6 @@ const ProviderSW = ({ children }) => {
     setFetching,
     changeFilterName,
     changeFilterColumn,
-    selectedOptions,
     removeFilter,
   };
 

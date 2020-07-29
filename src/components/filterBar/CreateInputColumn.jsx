@@ -11,8 +11,6 @@ const CreateInputColumn = ({ changeColumn, value }) => {
     optionsFiltered = optionsFiltered.filter((option) => option !== filtro.column);
   });
 
-  // console.log('options filtered', optionsFiltered);
-  // console.log('filtros: ', filter.filterByNumericValues);
   return (
     <select
       data-testid="column-filter"
