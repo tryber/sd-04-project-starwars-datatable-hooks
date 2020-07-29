@@ -8,7 +8,7 @@ function FilterName() {
   const onChange = (e) => {
     setName(e.target.value);
     filterName(e.target.value);
-  }
+  };
 
   return (
     <div>

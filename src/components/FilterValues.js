@@ -11,7 +11,7 @@ function FilterValues() {
 
   const {
     filterByNumericValues,
-    filters: { filterByNumericValues: numericValues }
+    filters: { filterByNumericValues: numericValues },
   } = useContext(StartWarsContext);
 
   function onClick() {

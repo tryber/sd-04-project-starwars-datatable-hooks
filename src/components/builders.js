@@ -45,4 +45,4 @@ export function buildComparison(comparison, setComparison) {
       ))}
     </select>
   );
-};
+}

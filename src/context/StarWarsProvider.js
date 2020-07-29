@@ -21,7 +21,7 @@ const StarWarsProvider = ({ children }) => {
   }, []);
 
   const filterName = (name) => {
-    setFilter({...filters, filterByName: { name } })
+    setFilter({ ...filters, filterByName: { name } });
   };
 
   const filterByNumericValues = (column, comparison, value) => (
