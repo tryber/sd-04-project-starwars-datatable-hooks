@@ -14,6 +14,17 @@ const compareFilters = (planets, { column, comparison, value }) => {
   }
 };
 
+const sortPlanets = ({ column, sort }, planets) => {
+  switch (sort) {
+    case 'ASC':
+      return planets.sort((a, b) => a[column] - b[column]);
+    case 'DESC':
+      return planets.sort((a, b) => b[column] - a[column]);
+    default:
+      return null;
+  }
+};
+
 const TableBody = () => {
   const { filter, data } = useContext(StarWarsContext);
 
@@ -27,6 +38,10 @@ const TableBody = () => {
         (filteredPlanets = filteredPlanets.filter((planet) => compareFilters(planet, filtro))),
     );
   }
+  const filterOrder = filter.order;
+  console.log('filterORder', filterOrder);
+
+  filteredPlanets = sortPlanets(filterOrder, filteredPlanets);
 
   const objKeys =
     filteredPlanets.length > 0

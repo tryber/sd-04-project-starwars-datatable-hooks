@@ -42,6 +42,13 @@ const ProviderSW = ({ children }) => {
     });
   };
 
+  const changeOrder = (column, sort) => {
+    setFilter({
+      ...filter,
+      order: { column, sort },
+    });
+  };
+
   const removeFilter = (key) => {
     setFilter({
       ...filter,
@@ -58,6 +65,7 @@ const ProviderSW = ({ children }) => {
     changeFilterName,
     changeFilterColumn,
     removeFilter,
+    changeOrder,
   };
 
   return <StarWarsContext.Provider value={contextValue}>{children}</StarWarsContext.Provider>;
