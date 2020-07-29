@@ -39,7 +39,6 @@ const TableBody = () => {
     );
   }
   const filterOrder = filter.order;
-  console.log('filterORder', filterOrder);
 
   filteredPlanets = sortPlanets(filterOrder, filteredPlanets);
 
