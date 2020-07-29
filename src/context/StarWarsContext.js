@@ -41,7 +41,6 @@ const StarWarsProvider = ({ children }) => {
     handleInput,
     filterByNumericValues,
     submitFilterData,
-    submitFilters,
     options,
     removeFilter,
   };

@@ -95,7 +95,6 @@ const Table = () => {
     <div>
       <input data-testid="name-filter" type="text" onChange={(e) => handleInput(e.target.value)} />
       <FilterForms />
-      <OrderFilter keys={tableHeader} />
       <table>
         <thead>
           <tr>

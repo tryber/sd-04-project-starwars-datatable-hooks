@@ -1,21 +1,23 @@
-const useData = () => {
-  const { setData, setIsLoading, setError, isLoading, data } = useContext(StarWarsContext);
+// Refatorar
 
-  useEffect(() => {
-    setIsLoading(true);
-    getPlanets().then(
-      (json) => {
-        setData(json.results);
-        setIsLoading(false);
-      },
-      (error) => {
-        setError(error);
-        setIsLoading(false);
-      },
-    );
-  }, [setData, setIsLoading, setError]);
+// const useData = () => {
+//   const { setData, setIsLoading, setError, isLoading, data } = useContext(StarWarsContext);
 
-  return { data, isLoading };
-};
+//   useEffect(() => {
+//     setIsLoading(true);
+//     getPlanets().then(
+//       (json) => {
+//         setData(json.results);
+//         setIsLoading(false);
+//       },
+//       (error) => {
+//         setError(error);
+//         setIsLoading(false);
+//       },
+//     );
+//   }, [setData, setIsLoading, setError]);
 
-export default useData;
+//   return { data, isLoading };
+// };
+
+// export default useData;
