@@ -24,8 +24,8 @@ const Table = () => {
             //  tabela possua o nome de um planeta adicione
             //  o atributo data-testid="planet-name".
             <tr key={planet.name}>
-              {Object.values(planet).map((value) =>
-                value !== planet.name ? (
+              {Object.values(planet).map((value) => (
+                value !== planet.name) ? (
                   <td key={value}>{value}</td>
                 ) : (
                   <td data-testid="planet-name" key={value}>
