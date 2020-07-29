@@ -38,13 +38,12 @@ const Table = () => {
                       {planet[planetKey]}
                     </td>
                   );
-                } else {
-                  return (
-                    <td key={`${planet.name}${planet[planetKey]}`}>
-                      {planet[planetKey]}
-                    </td>
-                  );
                 }
+                return (
+                  <td key={`${planet.name}${planet[planetKey]}`}>
+                    {planet[planetKey]}
+                  </td>
+                );
               })}
             </tr>
           ))}

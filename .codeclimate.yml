@@ -1,4 +1,4 @@
-version: "2"         # required to adjust maintainability checks
+version: '2' # required to adjust maintainability checks
 checks:
   argument-count:
     config:
@@ -17,7 +17,7 @@ checks:
       threshold: 20
   method-lines:
     config:
-      threshold: 45
+      threshold: 70
   nested-control-flow:
     config:
       threshold: 4
@@ -30,13 +30,13 @@ checks:
     config:
       threshold: # language-specific defaults. an override will affect all languages.
 exclude_patterns:
-  - "**/*.test.js"
-  - "src/serviceWorker.js"
-  - "src/index.css"
-  - "src/App.css"
-  - "**/libs/*.css"
-  - "**/libs/*.js"
-  - "node_modules/"
+  - '**/*.test.js'
+  - 'src/serviceWorker.js'
+  - 'src/index.css'
+  - 'src/App.css'
+  - '**/libs/*.css'
+  - '**/libs/*.js'
+  - 'node_modules/'
 plugins:
   csslint:
     enabled: true
@@ -46,7 +46,7 @@ plugins:
       fallback-colors:
         enabled: false
       box-model:
-          enabled: false
+        enabled: false
   eslint:
     enabled: true
     config:

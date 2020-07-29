@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const FilterOrderSelect = ({ column, setColumn, tableHeaders }) => {
   return (
@@ -16,6 +17,12 @@ const FilterOrderSelect = ({ column, setColumn, tableHeaders }) => {
       ))}
     </select>
   );
+};
+
+FilterOrderSelect.propTypes = {
+  column: PropTypes.string.isRequired,
+  setColumn: PropTypes.func.isRequired,
+  tableHeaders: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default FilterOrderSelect;
