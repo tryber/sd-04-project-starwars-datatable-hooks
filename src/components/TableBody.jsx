@@ -1,9 +1,12 @@
 import React, { useContext, useEffect } from 'react';
 import SWContext from '../context/StarWarsContext';
 import getPlanets from '../service/api';
+import { compare } from '../util/index';
 
 const TableBody = () => {
-  const { data, setData, fetching, setFetching, filterByName } = useContext(SWContext);
+  const { data, setData, fetching, setFetching, filterByName, filterByNumericValues } = useContext(
+    SWContext,
+  );
   useEffect(() => {
     setFetching(true);
     getPlanets().then(
@@ -22,6 +25,12 @@ const TableBody = () => {
     let planets = data;
     if (filterByName.name !== '') {
       planets = planets.filter((planet) => planet.name.includes(filterByName.name));
+    }
+    if (filterByNumericValues.length > 0) {
+      filterByNumericValues.forEach((filter) => {
+        const { column, comparison, value } = filter;
+        planets = planets.filter((planeta) => compare(planeta, column, comparison, value));
+      });
     }
     return (
       <tbody>
