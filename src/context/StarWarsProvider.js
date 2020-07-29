@@ -28,6 +28,10 @@ const StarWarsProvider = ({ children }) => {
     }));
   };
 
+  const clearFilter = (columnRemove) => {
+    setByNumericValues(filterByNumericValues.filter(({column}) => column !== columnRemove));
+  };
+
   useEffect(() => {
     (async () => {
       try {
@@ -71,12 +75,12 @@ const StarWarsProvider = ({ children }) => {
     selectedFilters,
     handleFilter,
     filterByNumericValues,
+    clearFilter,
   };
 
   return (
     <StarWarsContext.Provider value={stateValue}>
       {children}
-      {console.log(children)}
     </StarWarsContext.Provider>
   );
 };

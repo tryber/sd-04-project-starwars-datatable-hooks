@@ -5,6 +5,7 @@ import Search from './Search';
 import Column from './Column';
 import Comparative from './Comparative';
 import InputValue from './InputValue';
+import Filters from './Filters';
 
 const Home = () => {
   const states = useContext(StarWarsContext);
@@ -18,6 +19,9 @@ const Home = () => {
         <Column />
         <Comparative />
         <InputValue />
+      </div>
+      <div>
+        <Filters />
       </div>
       <Table />
     </div>

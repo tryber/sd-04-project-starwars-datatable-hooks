@@ -5,6 +5,7 @@ const Column = () => {
   const states = useContext(StarWarsContext);
   const { selectedFilters, filterByNumericValues } = states;
   const columns = ['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
+
   const arrayColumn = () => {
     if (filterByNumericValues.length === 0) return columns;
     const valuesUsed = filterByNumericValues.map(({ column }) => column);
