@@ -20,10 +20,11 @@ const Table = () => {
         <tbody>
           <TableHeader />
           {dataFiltered.map((planet) => (
+            //  Comparação para que, caso o valor do elemento da
+            //  tabela possua o nome de um planeta adicione
+            //  o atributo data-testid="planet-name".
             <tr key={planet.name}>
               {Object.values(planet).map((value) =>
-                //  Comparação para que, caso o valor do elemento da tabela possua o nome de um planeta
-                //  adicione o atributo data-testid="planet-name".
                 value !== planet.name ? (
                   <td key={value}>{value}</td>
                 ) : (
