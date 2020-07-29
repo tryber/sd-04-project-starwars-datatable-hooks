@@ -27,7 +27,6 @@ const TableBody = () => {
         (filteredPlanets = filteredPlanets.filter((planet) => compareFilters(planet, filtro))),
     );
   }
-  console.log('filtros',filter.filterByNumericValues);
 
   const objKeys =
     filteredPlanets.length > 0

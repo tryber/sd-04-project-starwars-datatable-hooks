@@ -30,7 +30,7 @@ const CreateInputColumn = ({ changeColumn, value }) => {
 
 CreateInputColumn.propTypes = {
   changeColumn: PropTypes.func.isRequired,
-  column: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
 };
 
 // CreateInputColumn.defaultProps = {

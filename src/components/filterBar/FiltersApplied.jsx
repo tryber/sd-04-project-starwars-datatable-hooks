@@ -9,12 +9,12 @@ const FiltersApplied = () => {
     <div>
       {filters.length > 0 ? <h3>Filters Applied: </h3> : null}
       {filters.length > 0
-        ? filters.map((filtro, index) => (
-            <div data-testid="filter" key={index}>
-              <p>Column: {filtro.column}</p>
-              <p>Comparison: {filtro.comparison}</p>
-              <p>Value: {filtro.value}</p>
-              <button onClick={() => removeFilter(filtro.column)} type="button">
+        ? filters.map(({ column, comparison, value }) => (
+            <div data-testid="filter" key={column}>
+              <p>Column: {column}</p>
+              <p>Comparison: {comparison}</p>
+              <p>Value: {value}</p>
+              <button onClick={() => removeFilter(column)} type="button">
                 remove filter
               </button>
             </div>

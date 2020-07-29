@@ -1,4 +1,4 @@
-const url = 'https://swapi-trybe.herokuapp.com/api/planets/';
+// const url = 'https://swapi-trybe.herokuapp.com/api/planets/';
 
 const urlAlternate = 'https://swapi.dev/api/planets/';
 
