@@ -179,7 +179,7 @@ const FilterByNumeric = ({ filter, columns }) => {
 
 export default function Header() {
   const [
-    { filterName, filtersNumber, filterableColumns, allColumns, order },
+    { filterName, filtersNumber, filterableColumns, order, allColumns },
     { setFilterName, addFilterNumber, removeFilterNumber, setOrder },
   ] = useFilters();
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import usePlanets from '../hooks/usePlanets';
 import useFilters from '../hooks/useFilters';
 import { capitalize, removeUnderline } from '../utils/format';
@@ -42,9 +43,8 @@ const Content = ({ planets, filterByName, filterByNumericValues, sort }) => (
 );
 
 export default function Table() {
-  const [[planets], [headers]] = usePlanets();
+  const [planets, headers] = usePlanets();
   const [, , { sortPlanets, filterByNumericValues, filterByName }] = useFilters();
-
   return (
     <div className="row">
       <div className="table-responsive">
@@ -52,6 +52,7 @@ export default function Table() {
           <thead className="bg-warning">
             <tr className="text-center text-dark">
               {headers
+                .get()
                 .filter((title) => title !== 'url')
                 .map((title) => {
                   const formattedTitle = capitalize(removeUnderline(title));
@@ -60,7 +61,7 @@ export default function Table() {
             </tr>
           </thead>
           <Content
-            planets={planets}
+            planets={planets.get()}
             filterByName={filterByName}
             filterByNumericValues={filterByNumericValues}
             sort={sortPlanets}

@@ -1,14 +1,15 @@
-import { useEffect, useContext, useState, useMemo, useCallback } from 'react';
+import { useEffect, useMemo, useCallback } from 'react';
 import { compile, format } from 'date-and-time';
 import { v4 } from 'uuid';
-import { StarWarsContext } from '../contexts/StarWarsContext';
+import { useState } from '@hookstate/core';
 import getData from '../services/api';
+import { usePlanets as usePlanetsState } from '../global/planets';
 
 const datePattern = compile('DD/MM/YYYY');
 
 const usePlanets = () => {
-  const { planets, setPlanets } = useContext(StarWarsContext);
-  const [headers, setHeaders] = useState([]);
+  const planets = usePlanetsState();
+  const headers = useState([]);
 
   const films = useMemo(
     () => ({
@@ -36,7 +37,7 @@ const usePlanets = () => {
         // eslint-disable-next-line no-param-reassign
         delete planet.residents;
       });
-      setPlanets(
+      planets.set(
         data.results.map((planet) => ({
           ...planet,
           id: v4(),
@@ -45,15 +46,12 @@ const usePlanets = () => {
           edited: format(new Date(planet.edited), datePattern),
         })),
       );
-      setHeaders(Object.keys(data.results[0]));
+      headers.set(() => Object.keys(data.results[0]));
     });
-  }, [setPlanets, getFilm]);
+    // eslint-disable-next-line
+  }, []);
 
-  return [
-    [planets, setPlanets],
-    [headers, setHeaders],
-    [films, getFilm],
-  ];
+  return [planets, headers];
 };
 
 export default usePlanets;

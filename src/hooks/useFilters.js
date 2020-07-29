@@ -1,47 +1,41 @@
-import { useContext, useEffect, useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { v4 } from 'uuid';
-import { StarWarsContext } from '../contexts/StarWarsContext';
+import { useFilters as useFiltersState } from '../global/filters';
 
 const useFilters = () => {
-  const { filters, setFilters, filterableColumns, allColumns } = useContext(StarWarsContext);
+  const {
+    filterByName: filterByNameState,
+    filterByNumericValues: filterByNumericValuesState,
+    order: orderState,
+    filterableColumns,
+  } = useFiltersState();
 
-  const setFilterName = (value) =>
-    setFilters((oldFilters) => ({ ...oldFilters, filterByName: { name: value } }));
+  const setFilterName = (value) => filterByNameState.set(value);
 
-  const addFilterNumber = (filter) =>
-    setFilters((oldFilters) => ({
-      ...oldFilters,
-      filterByNumericValues: [...oldFilters.filterByNumericValues, { ...filter, id: v4() }],
-    }));
+  const addFilterNumber = (filter) => filterByNumericValuesState.add({ ...filter, id: v4() });
 
-  const removeFilterNumber = (filter) =>
-    setFilters((oldFilters) => ({
-      ...oldFilters,
-      filterByNumericValues: oldFilters.filterByNumericValues.filter(
-        (oldNumericFilter) => oldNumericFilter.id !== filter.id,
-      ),
-    }));
+  const removeFilterNumber = (filter) => filterByNumericValuesState.remove(filter);
 
-  const setOrder = (order) => setFilters((oldFilters) => ({ ...oldFilters, order }));
+  const setOrder = (order) => orderState.set(order);
 
   const sortPlanets = useCallback(
     (data) => {
       if (!data.length) return [];
-      const planetKey = filters.order.column.toLowerCase().replace(' ', '_');
+      const planetKey = orderState.get().column.toLowerCase().replace(' ', '_');
       if (isNaN(data[0][planetKey])) {
         data.sort((a, b) => (a[planetKey] > b[planetKey] ? 1 : -1));
       } else {
         data.sort((a, b) => a[planetKey] - b[planetKey]);
       }
-      if (filters.order.sort === 'DESC') data.reverse();
+      if (orderState.get().sort === 'DESC') data.reverse();
       return data;
     },
-    [filters.order],
+    [orderState],
   );
 
   const filterByNumericValues = useCallback(
     (data) =>
-      filters.filterByNumericValues.reduce(
+      filterByNumericValuesState.get().reduce(
         (array, filter) =>
           array.filter((planet) => {
             switch (filter.comparison) {
@@ -57,32 +51,42 @@ const useFilters = () => {
           }),
         data,
       ),
-    [filters.filterByNumericValues],
+    [filterByNumericValuesState],
   );
 
   const filterByName = useCallback(
     (data) =>
       data.filter((planet) =>
-        planet.name.toLowerCase().includes(filters.filterByName.name.toLowerCase()),
+        planet.name.toLowerCase().includes(filterByNameState.get().toLowerCase()),
       ),
-    [filters.filterByName.name],
+    [filterByNameState],
   );
 
-  useEffect(() => {
-    setFilters((oldFilters) => ({
-      ...oldFilters,
-      filterableColumns: filterableColumns.filter(
-        (column) => !filters.filterByNumericValues.some((filter) => filter.column === column),
-      ),
-    }));
-  }, [filters.filterByNumericValues, setFilters, filterableColumns]);
+  const allColumns = useMemo(
+    () => [
+      'name',
+      'climate',
+      'created',
+      'diameter',
+      'edited',
+      'films',
+      'gravity',
+      'orbital_period',
+      'population',
+      'rotation_period',
+      'surface_water',
+      'terrain',
+      'url',
+    ],
+    [],
+  );
 
   return [
     {
-      filterName: filters.filterByName.name,
-      filtersNumber: filters.filterByNumericValues,
-      filterableColumns: filters.filterableColumns,
-      order: filters.order,
+      filterName: filterByNameState.get(),
+      filtersNumber: filterByNumericValuesState.get(),
+      order: orderState.get(),
+      filterableColumns: filterableColumns.get(),
       allColumns,
     },
     {
