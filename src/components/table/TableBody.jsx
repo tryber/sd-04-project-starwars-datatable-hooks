@@ -52,7 +52,7 @@ const TableBody = () => {
       {filteredPlanets.map((planets) => (
         <tr key={planets.name}>
           {objKeys.map((key) => (
-            <td key={key}>{planets[key]}</td>
+            <td data-testid="planet-name" key={key}>{planets[key]}</td>
           ))}
         </tr>
       ))}
