@@ -1,20 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
-import apiPlanets from '../services/index'
 
-function Home () {
-
-  useEffect(() => {
-    loadData().then((data) => console.log(data));
-  }, [] )
-  
-  const loadData = async () => {
-    const data = await apiPlanets();
-    return data;
-  }
-
+function Home () {  
+  const { data } = useContext(StarWarsContext);
+  console.log('Data', data)
   return (
     <div>
+      {data.map(plat => <p>{plat.name}</p>)}
     </div>
   )
 }

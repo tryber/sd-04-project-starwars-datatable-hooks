@@ -1,12 +1,43 @@
-import React from 'react';
-
+import React, { useState, useEffect } from 'react';
+import apiPlanets from '../services/index';
 import StarWarsContext from './StarWarsContext';
 
-function Provider() {
+const INITIAL_STATE_FILTERS = {
+  filterByName: { name: '' },
+  filterByNumericValues: [],
+  order: {
+    column: 'Name',
+    sort: 'ASC',
+  },
+};
+
+const Provider = ({ children }) => { 
+  const [data, setData] = useState([]);
+  const [isFetching, setIsFetching] = useState(false);
+  const [filter, setFilter] = useState(INITIAL_STATE_FILTERS);
+
+  useEffect(() => {
+    loadData().then((data) => setData(data.results));
+  }, [] )
+  
+  const loadData = async () => {
+    const data  = await apiPlanets();
+    return data;
+  }
+
+  const contextValue ={
+    data,
+    setData,
+    isFetching,
+    setIsFetching,
+    filter,
+    setFilter
+  }
+
   return (
-    <div>
-      <p>Aloo</p>
-    </div>
+    <StarWarsContext.Provider value={contextValue}>
+      {children}
+    </StarWarsContext.Provider>
   );
 }
 

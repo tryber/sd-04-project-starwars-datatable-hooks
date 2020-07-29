@@ -1,12 +1,12 @@
 import React from 'react';
 import Home from './components/Home';
-import './App.css';
+import Provider from './context/Provider';
 
 function App() {
   return (
-    <div className="App">
+    <Provider>
       <Home />
-    </div>
+    </Provider>      
   );
 }
 
