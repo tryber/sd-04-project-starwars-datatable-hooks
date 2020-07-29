@@ -2,10 +2,10 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 export default function PlanetItem({ data }) {
-  const entries = Object.entries(data).filter((entry) => entry[0] !== 'residents');
+  const allEntries = Object.entries(data).filter((entry) => entry[0] !== 'residents');
   return (
     <tr>
-      {entries.map((info) => (
+      {allEntries.map((info) => (
         <td
           data-testid={info[0] === 'name' && 'planet-name'}
           key={`${data.name} ${info[0]}`}
