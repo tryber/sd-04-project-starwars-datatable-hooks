@@ -1,6 +1,6 @@
 import { useContext, useEffect } from 'react';
 import { StarWarsContext } from './StarWarsContext';
-import getPlanets from '../services/api';
+import getPlanets from '../services/planetsAPI';
 
 // const useData = () => {
 //   const tal = useContext(StarWarsContext);
