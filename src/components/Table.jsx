@@ -29,24 +29,18 @@ const Table = () => {
           {filtered.map((planet) => (
             <tr key={`${planet.name}${planet.rotation_period}`}>
               {store.apiRequest.headers.map((planetKey) => {
-                {
-                  if (planetKey === 'name') {
-                    return (
-                      <td
-                        key={`${planet.name}${planet[planetKey]}`}
-                        data-testid="planet-name"
-                      >
-                        {planet[planetKey]}
-                      </td>
-                    );
-                  }
-
-                  return (
-                    <td key={`${planet.name}${planet[planetKey]}`}>
-                      {planet[planetKey]}
-                    </td>
-                  );
-                }
+                return planetKey === 'name' ? (
+                  <td
+                    key={`${planet.name}${planet[planetKey]}`}
+                    data-testid="planet-name"
+                  >
+                    {planet[planetKey]}
+                  </td>
+                ) : (
+                  <td key={`${planet.name}${planet[planetKey]}`}>
+                    {planet[planetKey]}
+                  </td>
+                );
               })}
             </tr>
           ))}
