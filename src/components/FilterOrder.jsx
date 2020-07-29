@@ -1,20 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { StarWarsContext } from '../context/StarWarsContext';
-
-const createRadioBtn = (setSort, name) => (
-  <label htmlFor={name} className="filter-order-radio-container">
-    <input
-      type="radio"
-      id={name}
-      value={name}
-      name="order-type"
-      defaultChecked
-      onChange={(event) => setSort(event.target.value)}
-      data-testid={`column-sort-input-${name.toLowerCase()}`}
-    />
-    ASC
-  </label>
-);
+import FilterOrderSelect from './FilterOrderSelect';
 
 const FilterOrder = () => {
   const [store, setStore] = useContext(StarWarsContext);
@@ -41,24 +27,34 @@ const FilterOrder = () => {
     <div className="filter-order-container">
       <h3 className="caption">Order</h3>
       <div className="filter-order-inputs">
-        <select
-          name="column"
-          id="column"
-          value={column}
-          onChange={(event) => setColumn(event.target.value)}
-          data-testid="column-sort"
-        >
-          {tableHeaders.map((item) => (
-            <option
-              key={item}
-              value={item.charAt(0).toUpperCase() + item.slice(1)}
-            >
-              {item.charAt(0).toUpperCase() + item.slice(1)}
-            </option>
-          ))}
-        </select>
-        {createRadioBtn(setSort, 'ASC')}
-        {createRadioBtn(setSort, 'DESC')}
+        <FilterOrderSelect
+          column={column}
+          setColumn={setColumn}
+          tableHeaders={tableHeaders}
+        />
+        <label htmlFor="ASC" className="filter-order-radio-container">
+          <input
+            type="radio"
+            id="ASC"
+            value="ASC"
+            name="order-type"
+            defaultChecked
+            onChange={(event) => setSort(event.target.value)}
+            data-testid="column-sort-input-asc"
+          />
+          ASC
+        </label>
+        <label htmlFor="DESC" className="filter-order-radio-container">
+          <input
+            type="radio"
+            id="DESC"
+            value="DESC"
+            name="order-type"
+            onChange={(event) => setSort(event.target.value)}
+            data-testid="column-sort-input-desc"
+          />
+          DESC
+        </label>
       </div>
       <button
         type="button"
