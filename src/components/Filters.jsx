@@ -13,22 +13,24 @@ const Filters = () => {
       >
         <label htmlFor="column">
           Selecione a coluna:
-          <select name="column">
+          <select name="column" data-testid="column-filter">
             {columns.map((option) => (
               <option key={option}>{option}</option>
             ))}
           </select>
         </label>
         <label htmlFor="comparison">
-          <select name="comparison">
+          <select name="comparison" data-testid="comparison-filter">
             <option defaultValue>Comparison</option>
             <option value="maior que">Maior que</option>
             <option value="menor que">Menor que</option>
             <option value="igual a">Igual a</option>
           </select>
         </label>
-        <input name="number" type="number" />
-        <button type="submit">Filtrar</button>
+        <input name="number" type="number" data-testid="value-filter" />
+        <button type="submit" data-testid="button-filter">
+          Filtrar
+        </button>
       </form>
     </div>
   );
