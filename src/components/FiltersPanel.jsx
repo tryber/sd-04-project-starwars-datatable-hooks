@@ -2,7 +2,7 @@ import React from 'react';
 import FilterSearch from './FilterSearch';
 import FilterNumbers from './FilterNumbers';
 import FilterList from './FilterList';
-// import FilterOrder from './FilterOrder';
+import FilterOrder from './FilterOrder';
 import './FiltersPanel.css';
 
 const FiltersPanel = () => (
@@ -11,7 +11,7 @@ const FiltersPanel = () => (
     <form>
       <FilterSearch />
       <FilterNumbers />
-      {/* <FilterOrder /> */}
+      <FilterOrder />
     </form>
     <FilterList />
   </div>

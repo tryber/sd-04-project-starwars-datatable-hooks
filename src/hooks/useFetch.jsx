@@ -6,7 +6,10 @@ const useFetch = () => {
 
   const request = async (url) => {
     try {
-      setStore({ ...store, apiRequest: { loading: true } });
+      setStore({
+        ...store,
+        apiRequest: { ...store.apiRequest, loading: true },
+      });
       const response = await fetch(url);
       const json = await response.json();
       setStore({
