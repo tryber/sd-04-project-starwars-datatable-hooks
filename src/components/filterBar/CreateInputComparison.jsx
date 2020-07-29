@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const CreateInputComparison = ({ changeComparison, comparison }) => (
+const CreateInputComparison = ({ changeComparison, value }) => (
   <select
-    value={comparison}
+    value={value}
     onChange={(e) => changeComparison(e.target.value)}
     data-testid="comparison-filter"
     id="comparison"

@@ -17,22 +17,17 @@ const compareFilters = (planets, { column, comparison, value }) => {
 const TableBody = () => {
   const { filter, data } = useContext(StarWarsContext);
 
-  const filteredPlanets = [...data];
-  filteredPlanets.sort((a, b) => a.name.localeCompare(b.name));
-
-  let filteredByName = filteredPlanets.filter((planet) =>
-    planet.name.toLowerCase().includes(filter.filterByName.name.toLowerCase()),
-  );
+  let filteredPlanets = data
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .filter((planet) => planet.name.toLowerCase().includes(filter.filterByName.name.toLowerCase()));
 
   if (filter.filterByNumericValues.length > 0) {
     filter.filterByNumericValues.forEach(
       (filtro) =>
-        (filteredByName = filteredByName.filter((planet) => compareFilters(planet, filtro))),
+        (filteredPlanets = filteredPlanets.filter((planet) => compareFilters(planet, filtro))),
     );
   }
-  console.log(filter.options);
-
-  console.log(filteredByName);
+  console.log('filtros',filter.filterByNumericValues);
 
   const objKeys =
     filteredPlanets.length > 0
@@ -41,7 +36,7 @@ const TableBody = () => {
 
   return (
     <tbody>
-      {filteredByName.map((planets) => (
+      {filteredPlanets.map((planets) => (
         <tr key={planets.name}>
           {objKeys.map((key) => (
             <td key={key}>{planets[key]}</td>

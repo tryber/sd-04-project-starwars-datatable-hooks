@@ -12,20 +12,21 @@ const FilterByNumericValues = () => {
 
   const { changeFilterColumn } = useContext(StarWarsContext);
 
-  const handleSubmit = () => changeFilterColumn(column, comparison, value);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    changeFilterColumn(column, comparison, value);
+    setColumn('');
+    setComparison('');
+    setValue('');
+  };
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <h3>Filter by numeric values</h3>
       <CreateInputColumn changeColumn={setColumn} value={column} />
       <CreateInputComparison changeComparison={setComparison} value={comparison} />
       <CreateInputValue changeValue={setValue} value={value} />
-      <button
-        className="btn-small btn-dark"
-        onClick={handleSubmit}
-        data-testid="button-filter"
-        type="button"
-      >
+      <button className="btn-small btn-dark" data-testid="button-filter" type="submit">
         Apply filter
       </button>
     </form>

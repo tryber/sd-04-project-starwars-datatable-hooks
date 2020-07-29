@@ -3,18 +3,23 @@ import React, { useContext } from 'react';
 import { StarWarsContext } from '../../context/StarWarsContext';
 
 const FiltersApplied = () => {
-  const { filter } = useContext(StarWarsContext);
-  const filters = filter.filterByNumericValue;
+  const { filter, removeFilter } = useContext(StarWarsContext);
+  const filters = filter.filterByNumericValues;
   return (
     <div>
-      {filter.length > 0 ? <h3>Filters Applied: </h3> : null}
-      {filters ? filters.map((filtro) => (
-        <div data-testid="filter" key={filtro.column}>
-          <p>{filtro.column}</p>
-          <p>{filtro.comparison}</p>
-          <p>{filtro.value}</p>
-        </div>
-      )) : null}
+      {filters.length > 0 ? <h3>Filters Applied: </h3> : null}
+      {filters.length > 0
+        ? filters.map((filtro, index) => (
+            <div data-testid="filter" key={index}>
+              <p>Column: {filtro.column}</p>
+              <p>Comparison: {filtro.comparison}</p>
+              <p>Value: {filtro.value}</p>
+              <button onClick={() => removeFilter(filtro.column)} type="button">
+                remove filter
+              </button>
+            </div>
+          ))
+        : null}
     </div>
   );
 };

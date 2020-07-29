@@ -38,18 +38,34 @@ const ProviderSW = ({ children }) => {
   const changeFilterColumn = (column, comparison, value) => {
     setFilter({
       ...filter,
-      filterByNumericValues: [...filter.filterByNumericValues, [{ column, comparison, value }]],
+      filterByNumericValues: [...filter.filterByNumericValues, { column, comparison, value }],
+    });
+  };
+
+  const selectedOptions = (filtro) => {
+    setFilter({
+      ...filter,
+      options: filter.options.filter((option) => option !== filtro),
+    });
+  };
+
+  const removeFilter = (key) => {
+    setFilter({
+      ...filter,
+      filterByNumericValues: filter.filterByNumericValues.filter((filtro) => filtro.column !== key),
     });
   };
 
   const contextValue = {
-    filter,
-    changeFilterName,
     data,
+    isFetching,
+    filter,
     setPlanet,
     setFetching,
-    isFetching,
+    changeFilterName,
     changeFilterColumn,
+    selectedOptions,
+    removeFilter,
   };
 
   return <StarWarsContext.Provider value={contextValue}>{children}</StarWarsContext.Provider>;
