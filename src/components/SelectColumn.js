@@ -14,20 +14,27 @@ const listOfComparisons = ['maior que', 'menor que', 'igual a'];
 const listOfActiveColumns = [];
 
 const SelectColumn = () => {
-  const { setColumn, column, setComparison, setComparisonFilter } = useContext(StarWarsContext);
+  const {
+    setColumn,
+    column,
+    setComparison,
+    setComparisonFilter,
+    comparison,
+    value,
+    setButton,
+  } = useContext(StarWarsContext);
 
   const setActiveColumns = () => {
     listOfActiveColumns.push(column);
-    setComparisonFilter(true);
+    setComparisonFilter([column, comparison, value]);
+    setButton(true);
   };
 
   return (
     <div className="container">
       <div className="container-box">
         <select
-          data-testid="column-filter"
-          name="column"
-          onChange={(e) => setColumn(e.target.value)}
+          data-testid="column-filter" name="column" onChange={(e) => setColumn(e.target.value)}
         >
           <option defaultValue>Column</option>
           {listOfColumns
@@ -39,8 +46,7 @@ const SelectColumn = () => {
             ))}
         </select>
         <select
-          data-testid="comparison-filter"
-          name="comparison"
+          data-testid="comparison-filter" name="comparison"
           onChange={(e) => setComparison(e.target.value)}
         >
           <option defaultValue>Comparison</option>
@@ -51,8 +57,7 @@ const SelectColumn = () => {
       </div>
       <NumberFilter />
       <button type="button" onClick={() => setActiveColumns()} data-testid="button-filter">
-        Filtrar
-      </button>
+        Filtrar</button>
     </div>
   );
 };

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 
 const TableBody = () => {
-  const { planets, textInput, comparisonFilter, comparison, column, value } = useContext(
+  const { planets, textInput, comparisonFilter, comparison, button } = useContext(
     StarWarsContext,
   );
 
@@ -11,11 +11,17 @@ const TableBody = () => {
     if (textInput !== '') {
       infoPlanets = planets.filter((planet) => planet.name.toLowerCase().includes(textInput));
     }
-    if (comparisonFilter) {
+    if (comparison.length > 0 && button) {
       infoPlanets = planets.filter((planet) => {
-        if (comparison === 'maior que') return Number(planet[column]) > Number(value);
-        if (comparison === 'menor que') return Number(planet[column]) < Number(value);
-        if (comparison === 'igual a') return Number(planet[column]) === Number(value);
+        if (comparisonFilter[1] === 'maior que') {
+          return Number(planet[comparisonFilter[0]]) > Number([comparisonFilter[2]]);
+        }
+        if (comparisonFilter[1] === 'menor que') {
+          return Number(planet[comparisonFilter[0]]) < Number([comparisonFilter[2]]);
+        }
+        if (comparisonFilter[1] === 'igual a') {
+          return Number(planet[comparisonFilter[0]]) === Number([comparisonFilter[2]]);
+        }
         return null;
       });
     }
