@@ -38,14 +38,12 @@ const FilterOrder = () => {
 
   const [sort, setSort] = useState('');
   const [column, setColumn] = useState('');
-  console.log(filter.order);
 
   const handleChangeColumn = (e) => setColumn(e.target.value);
   const handleChangeSort = (e) => setSort(e.target.value);
   const handleSubmit = () => {
     changeOrder(column, sort);
   };
-  console.log('coluna', column);
 
   return (
     <div>
