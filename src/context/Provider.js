@@ -11,34 +11,34 @@ const INITIAL_STATE_FILTERS = {
   },
 };
 
-const Provider = ({ children }) => { 
+const Provider = ({ children }) => {
   const [data, setData] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
   const [filter, setFilter] = useState(INITIAL_STATE_FILTERS);
 
   useEffect(() => {
     loadData().then((data) => setData(data.results));
-  }, [] )
-  
-  const loadData = async () => {
-    const data  = await apiPlanets();
-    return data;
-  }
+  }, []);
 
-  const contextValue ={
+  const loadData = async () => {
+    const data = await apiPlanets();
+    return data;
+  };
+
+  const contextValue = {
     data,
     setData,
     isFetching,
     setIsFetching,
     filter,
-    setFilter
-  }
+    setFilter,
+  };
 
   return (
     <StarWarsContext.Provider value={contextValue}>
       {children}
     </StarWarsContext.Provider>
   );
-}
+};
 
 export default Provider;

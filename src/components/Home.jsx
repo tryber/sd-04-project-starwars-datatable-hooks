@@ -1,14 +1,16 @@
-import React, { useContext } from 'react';
-import StarWarsContext from '../context/StarWarsContext';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-function Home () {  
-  const { data } = useContext(StarWarsContext);
-  console.log('Data', data)
+// import Filtro from './filtros/';
+import Table from './table/Table';
+
+function Home() {
   return (
     <div>
-      {data.map(plat => <p>{plat.name}</p>)}
+      {/* <Filtro /> */}
+      <Table />
     </div>
-  )
+  );
 }
 
 export default Home;
