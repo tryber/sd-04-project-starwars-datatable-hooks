@@ -1,0 +1,40 @@
+import React, { createContext, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import requestAPI from './APIrequest';
+
+const StoreProvider = createContext();
+
+export function Store({ children }) {
+  const [planets, setPlanets] = useState([]);
+  const [name, setFilterByName] = useState('');
+  const [filterByNumericValues, setFilterByNumeric] = useState([]);
+  const context = {
+    planets,
+    filters: {
+      filterByName: name,
+      filterByNumericValues,
+      setFilterByNumeric,
+      setFilterByName,
+    },
+  };
+  // Hooks que funciona como componenteDidMount chamando
+  // a request da API quando o componente é montado
+  useEffect(() => {
+    async function request() {
+      const response = await requestAPI('https://swapi.dev/api/planets/');
+      setPlanets(response.results);
+    }
+    request();
+  }, []);
+  return (
+    <StoreProvider.Provider value={context}>
+      {children}
+    </StoreProvider.Provider>
+  );
+}
+
+export default StoreProvider;
+
+StoreProvider.propTypes = {
+  children: PropTypes.func.isRequired,
+};
