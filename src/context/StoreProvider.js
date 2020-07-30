@@ -1,8 +1,6 @@
 import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
 
-// Criação do contexto
-
 export const StarWarsContext = createContext();
 
 const StoreProvider = ({ children }) => {
