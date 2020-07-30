@@ -5,7 +5,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 // import store from './store';
-import StoreProvider from './context/StarWarsContext';
+import StoreProvider from './context/StoreProvider';
 
 ReactDOM.render(
   <StoreProvider>

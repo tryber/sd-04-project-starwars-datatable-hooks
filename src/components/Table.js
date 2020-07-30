@@ -1,36 +1,35 @@
 import React, { useContext } from 'react';
 // import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import './Table.css';
 import { checkNamePlanet, checkFilters } from '../helpers';
-import { StarWarsContext } from '../context/StarWarsContext';
+import { StarWarsContext } from '../context/StoreProvider';
 
-const THeadBody = ({ data, filterName, storeFilters }) => {
-  console.log(data, filterName, storeFilters)
-return (
-  <table>
-    <thead>
-      <tr>
-        <th>name</th>
-        <th>rotation_period</th>
-        <th>orbital_period</th>
-        <th>diameter</th>
-        <th>climate</th>
-        <th>gravity</th>
-        <th>terrain</th>
-        <th>surface_water</th>
-        <th>population</th>
-        <th>films</th>
-        <th>created</th>
-        <th>edited</th>
-        <th>url</th>
-      </tr>
-    </thead>
-    <tbody>
-      <TBody data={data} filterName={filterName} storeFilters={storeFilters} />
-    </tbody>
-  </table>
-)}
+const THeadBody = ({ data, filterName, storeFilters }) =>
+  (
+    <table>
+      <thead>
+        <tr>
+          <th>name</th>
+          <th>rotation_period</th>
+          <th>orbital_period</th>
+          <th>diameter</th>
+          <th>climate</th>
+          <th>gravity</th>
+          <th>terrain</th>
+          <th>surface_water</th>
+          <th>population</th>
+          <th>films</th>
+          <th>created</th>
+          <th>edited</th>
+          <th>url</th>
+        </tr>
+      </thead>
+      <tbody>
+        <TBody data={data} filterName={filterName} storeFilters={storeFilters} />
+      </tbody>
+    </table>
+  );
 
 const TBody = ({ data, filterName, storeFilters }) => data.filter((planet) =>
   checkNamePlanet(planet.name, filterName)).filter((planet) =>
@@ -53,19 +52,19 @@ const TBody = ({ data, filterName, storeFilters }) => data.filter((planet) =>
         </tr>
       ));
 
-export default ( /* data */ /* loading */ /* filterName */ /* storeFilters */) => {
+const Table = () => {
   const { getData: [data], getFilters: [filters] } = useContext(StarWarsContext);
   const loading = data.loading;
   const filtersNV = filters.filterByNumericValues;
   const filtersNN = filters.filterByName.name;
 
   return (loading ? <p>Loading...</p> :
-    <div>
-      <p>StarWars Datatable with Filters</p>
-      <THeadBody data={data.data} filterName={filtersNN} storeFilters={filtersNV} />
-    </div>
+  <div>
+    <p>StarWars Datatable with Filters</p>
+    <THeadBody data={data.data} filterName={filtersNN} storeFilters={filtersNV} />
+  </div>
   );
-}
+};
 
 // const mapStateToProps = (state) => ({
 //   data: state.data.data,
@@ -74,14 +73,14 @@ export default ( /* data */ /* loading */ /* filterName */ /* storeFilters */) =
 //   storeFilters: state.filters.filterByNumericValues,
 // });
 
-// export default connect(mapStateToProps)(Table);
+export default Table;
 
-// Table.propTypes = {
-//   data: PropTypes.arrayOf(PropTypes.object).isRequired,
-//   loading: PropTypes.bool.isRequired,
-//   filterName: PropTypes.string.isRequired,
-//   storeFilters: PropTypes.arrayOf(PropTypes.object).isRequired,
-// };
+Table.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  //   loading: PropTypes.bool.isRequired,
+  filterName: PropTypes.string.isRequired,
+  storeFilters: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 // THeadBody.propTypes = {
 //   data: PropTypes.arrayOf(PropTypes.object).isRequired,

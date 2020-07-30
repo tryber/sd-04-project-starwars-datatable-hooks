@@ -1,10 +1,11 @@
 import React, { createContext, useState } from 'react';
+import PropTypes from 'prop-types';
 
 // Criação do contexto
 
 export const StarWarsContext = createContext();
 
-export default ({ children }) => {
+const StoreProvider = ({ children }) => {
 
   // initial states = initial reducers
 
@@ -26,4 +27,10 @@ export default ({ children }) => {
   // Provedor + store global
 
   return <StarWarsContext.Provider value={store}>{children}</StarWarsContext.Provider>;
+};
+
+export default StoreProvider;
+
+StarWarsContext.propTypes = {
+  children: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

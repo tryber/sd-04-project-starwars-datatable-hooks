@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 //   asyncActionDataFetch, actionNameFilter,
 //   actionNumericFilter, actionDelNumericFilter,
 // } from '../actions';
-import { StarWarsContext } from '../context/StarWarsContext';
+import { StarWarsContext } from '../context/StoreProvider';
 
 const SelectColumn = ({ columnValues }) =>
   <select
@@ -21,7 +21,7 @@ const SelectComparisom = ({ comparisonValues }) =>
     {comparisonValues.map((comparison) => (<option key={comparison}>{comparison}</option>))}
   </select>;
 
-export default ( /* dataFetch */ /* nameFilter */ /* numericFilter */ /* filters */ /* delNumericFilter */) => {
+export default () => {
   // (() => dataFetch('https://swapi-trybe.herokuapp.com/api/planets/'))();
 
   const { getData: [, setData], getFilters: [filters, setFilters] } = useContext(StarWarsContext);
@@ -53,15 +53,15 @@ export default ( /* dataFetch */ /* nameFilter */ /* numericFilter */ /* filters
     return nF({
       ...filters,
       filterByNumericValues: [
-        ...filters.filterByNumericValues, { column, comparison, value }
-      ]
+        ...filters.filterByNumericValues, { column, comparison, value },
+      ],
     });
   };
 
   const delStoreFilter = (column, dNF) => dNF({
     ...filters,
     filterByNumericValues: filters.filterByNumericValues.filter((filter) =>
-      filter.column !== column)
+      filter.column !== column),
   });
 
   const comparisonValues = ['comparação', 'maior que', 'menor que', 'igual a'];
