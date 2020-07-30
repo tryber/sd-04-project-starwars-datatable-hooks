@@ -10,14 +10,29 @@ const StarWarsProvider = ({ children }) => {
   const [column, setColumn] = useState('');
   const [comparison, setComparison] = useState('');
   const [value, setValue] = useState('');
-  const [comparisonFilter, setComparisonFilter] = useState([]);
   const [button, setButton] = useState(false);
+  const [filters, setFilters] = useState({
+    filterByNumericValues: [],
+  });
 
   const fetchPlanets = () => {
     getStarsWarsPlanets().then(({ results }) => {
       setPlanets(results);
       setIsLoading(false);
     });
+  };
+
+  const addFilters = (columnTwo, comparisonTwo, valueTwo) => {
+    setFilters((filter) => ({
+      filterByNumericValues: [
+        ...filter.filterByNumericValues,
+        {
+          columnTwo,
+          comparisonTwo,
+          valueTwo,
+        },
+      ],
+    }));
   };
 
   const contextAPI = {
@@ -32,10 +47,10 @@ const StarWarsProvider = ({ children }) => {
     setComparison,
     value,
     setValue,
-    setComparisonFilter,
-    comparisonFilter,
     button,
     setButton,
+    addFilters,
+    filters,
   };
 
   return <StarWarsContext.Provider value={contextAPI}>{children}</StarWarsContext.Provider>;

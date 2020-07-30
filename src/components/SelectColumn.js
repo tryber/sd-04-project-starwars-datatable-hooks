@@ -18,15 +18,15 @@ const SelectColumn = () => {
     setColumn,
     column,
     setComparison,
-    setComparisonFilter,
+    setButton,
+    addFilters,
     comparison,
     value,
-    setButton,
   } = useContext(StarWarsContext);
 
-  const setActiveColumns = () => {
+  const clickFilter = () => {
     listOfActiveColumns.push(column);
-    setComparisonFilter([column, comparison, value]);
+    addFilters(column, comparison, value);
     setButton(true);
   };
 
@@ -56,7 +56,7 @@ const SelectColumn = () => {
         </select>
       </div>
       <NumberFilter />
-      <button type="button" onClick={() => setActiveColumns()} data-testid="button-filter">
+      <button type="button" onClick={() => clickFilter()} data-testid="button-filter">
         Filtrar</button>
     </div>
   );

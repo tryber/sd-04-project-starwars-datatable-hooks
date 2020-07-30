@@ -2,27 +2,21 @@ import React, { useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 
 const TableBody = () => {
-  const { planets, textInput, comparisonFilter, comparison, button } = useContext(
-    StarWarsContext,
-  );
+  const { planets, textInput, filters } = useContext(StarWarsContext);
 
   const filter = () => {
     let infoPlanets = planets;
     if (textInput !== '') {
       infoPlanets = planets.filter((planet) => planet.name.toLowerCase().includes(textInput));
     }
-    if (comparison.length > 0 && button) {
-      infoPlanets = planets.filter((planet) => {
-        if (comparisonFilter[1] === 'maior que') {
-          return Number(planet[comparisonFilter[0]]) > Number([comparisonFilter[2]]);
-        }
-        if (comparisonFilter[1] === 'menor que') {
-          return Number(planet[comparisonFilter[0]]) < Number([comparisonFilter[2]]);
-        }
-        if (comparisonFilter[1] === 'igual a') {
-          return Number(planet[comparisonFilter[0]]) === Number([comparisonFilter[2]]);
-        }
-        return null;
+    if (filters.filterByNumericValues.length > 0) {
+      filters.filterByNumericValues.forEach(({ column, comparison, value }) => {
+        infoPlanets = planets.filter((planet) => {
+          if (comparison === 'maior que') return Number(planet[column]) > Number(value);
+          if (comparison === 'menor que') return Number(planet[column]) < Number(value);
+          if (comparison === 'igual a') return Number(planet[column]) === Number(value);
+          return null;
+        });
       });
     }
     return infoPlanets;
