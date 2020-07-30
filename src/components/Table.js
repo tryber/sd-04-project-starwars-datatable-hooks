@@ -82,8 +82,8 @@ Table.propTypes = {
   storeFilters: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-// THeadBody.propTypes = {
-//   data: PropTypes.arrayOf(PropTypes.object).isRequired,
-//   filterName: PropTypes.string.isRequired,
-//   storeFilters: PropTypes.arrayOf(PropTypes.object).isRequired,
-// };
+THeadBody.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  filterName: PropTypes.string.isRequired,
+  storeFilters: PropTypes.arrayOf(PropTypes.object).isRequired,
+};

@@ -6,9 +6,6 @@ import PropTypes from 'prop-types';
 export const StarWarsContext = createContext();
 
 const StoreProvider = ({ children }) => {
-
-  // initial states = initial reducers
-
   const oFilters = { filterByName: { name: '' }, filterByNumericValues: [] };
   const oData = { loading: false, data: [], error: {} };
 
@@ -31,6 +28,6 @@ const StoreProvider = ({ children }) => {
 
 export default StoreProvider;
 
-StarWarsContext.propTypes = {
+StoreProvider.propTypes = {
   children: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
