@@ -25,4 +25,4 @@ yarn-error.log*
 # VSCode repo settings
 .vscode
 
-testData.js
+/src/testData.js
