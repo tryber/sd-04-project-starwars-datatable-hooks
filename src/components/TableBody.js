@@ -10,11 +10,11 @@ const TableBody = () => {
       infoPlanets = planets.filter((planet) => planet.name.toLowerCase().includes(textInput));
     }
     if (filters.filterByNumericValues.length > 0) {
-      filters.filterByNumericValues.forEach(({ column, comparison, value }) => {
+      filters.filterByNumericValues.forEach(({ columnTwo, comparisonTwo, valueTwo }) => {
         infoPlanets = planets.filter((planet) => {
-          if (comparison === 'maior que') return Number(planet[column]) > Number(value);
-          if (comparison === 'menor que') return Number(planet[column]) < Number(value);
-          if (comparison === 'igual a') return Number(planet[column]) === Number(value);
+          if (comparisonTwo === 'maior que') return Number(planet[columnTwo]) > Number(valueTwo);
+          if (comparisonTwo === 'menor que') return Number(planet[columnTwo]) < Number(valueTwo);
+          if (comparisonTwo === 'igual a') return Number(planet[columnTwo]) === Number(valueTwo);
           return null;
         });
       });
