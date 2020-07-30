@@ -9,7 +9,10 @@ const DeleteFunction = () => {
       {filters.filterByNumericValues.map(({ columnTwo, comparisonTwo, valueTwo }) => (
         <div data-testid="filter" key={columnTwo}>
           <p>{`${columnTwo} ${comparisonTwo} ${valueTwo}`}</p>
-          <button type="button" onClick={() => deleteFilters({ columnTwo, comparisonTwo, valueTwo })}>
+          <button
+            type="button"
+            onClick={() => deleteFilters({ columnTwo, comparisonTwo, valueTwo })}
+          >
             X
           </button>
         </div>

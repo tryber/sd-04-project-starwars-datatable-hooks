@@ -23,7 +23,7 @@ const SelectColumn = () => {
     filters,
   } = useContext(StarWarsContext);
 
-  const listOfActiveColumns = filters.filterByNumericValues.map(element => element.columnTwo)
+  const listOfActiveColumns = filters.filterByNumericValues.map((element) => element.columnTwo);
 
   const clickFilter = () => {
     addFilters(column, comparison, value);
