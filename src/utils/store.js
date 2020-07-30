@@ -35,6 +35,9 @@ export function Store({ children }) {
 
 export default StoreProvider;
 
-StoreProvider.propTypes = {
-  children: PropTypes.func.isRequired,
+Store.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
 };
