@@ -35,6 +35,14 @@ const StarWarsProvider = ({ children }) => {
     }));
   };
 
+  const deleteFilters = (filterToDelete) => {
+    setFilters((filter) => ({
+      filterByNumericValues: [
+        ...filter.filterByNumericValues.filter((filterObj) => filterObj === filterToDelete),
+      ],
+    }));
+  };
+
   const contextAPI = {
     isLoading,
     planets,
@@ -51,6 +59,7 @@ const StarWarsProvider = ({ children }) => {
     setButton,
     addFilters,
     filters,
+    deleteFilters,
   };
 
   return <StarWarsContext.Provider value={contextAPI}>{children}</StarWarsContext.Provider>;

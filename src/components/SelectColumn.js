@@ -11,8 +11,6 @@ const listOfColumns = [
 ];
 const listOfComparisons = ['maior que', 'menor que', 'igual a'];
 
-const listOfActiveColumns = [];
-
 const SelectColumn = () => {
   const {
     setColumn,
@@ -22,10 +20,12 @@ const SelectColumn = () => {
     addFilters,
     comparison,
     value,
+    filters,
   } = useContext(StarWarsContext);
 
+  const listOfActiveColumns = filters.filterByNumericValues.map(element => element.columnTwo)
+
   const clickFilter = () => {
-    listOfActiveColumns.push(column);
     addFilters(column, comparison, value);
     setButton(true);
   };

@@ -4,6 +4,7 @@ import StarWarsProvider from './context/StarWarsProvider';
 import Table from './components/Table';
 import SearchText from './components/SearchText';
 import SelectColumn from './components/SelectColumn';
+import DeleteFunction from './components/DeleteFilter';
 
 const App = () => (
   <StarWarsProvider>
@@ -13,6 +14,7 @@ const App = () => (
         <SearchText />
         <SelectColumn />
       </header>
+      <DeleteFunction />
       <Table />
     </div>
   </StarWarsProvider>
