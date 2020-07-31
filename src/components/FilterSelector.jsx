@@ -24,17 +24,24 @@ const FilterSelector = () => {
   const { filters, submitNumericFilter } = useContext(StarWarsContext);
   return (
     <div>
-      <select required onChange={(event) => handleFilterChange(event.target.value, 'column')} data-testid="column-filter">
+      <select
+        required
+        onChange={(event) => handleFilterChange(event.target.value, "column")}
+        data-testid="column-filter"
+      >
         <option />
         {columnFilter.map(
-          (option) => !filters.filterByNumericValues.find(({ colun }) => column === option) && (
-            <option key={option}>{option}</option>
-          ),
+          (option) =>
+            !filters.filterByNumericValues.find(
+              ({ colun }) => column === option
+            ) && <option key={option}>{option}</option>
         )}
       </select>
       <select
         required
-        onChange={(event) => hangleFilterChange(event.target.value, 'comparison')}
+        onChange={(event) =>
+          hangleFilterChange(event.target.value, "comparison")
+        }
         data-testid="comparison-filter"
       >
         <option />
@@ -44,15 +51,19 @@ const FilterSelector = () => {
       </select>
       <input
         defaultValue="0"
-        onChange={(event) => handleFilterChange(event.target.value, 'value')}
+        onChange={(event) => handleFilterChange(event.target.value, "value")}
         data-testid="value-filter"
         type="number"
       />
-      <button onClick={() => submitNumericFilter(state)} type="button" data-testid="button-filter">
+      <button
+        onClick={() => submitNumericFilter(state)}
+        type="button"
+        data-testid="button-filter"
+      >
         Add Filter
       </button>
     </div>
   );
 };
 
-export default FilterSekector;
+export default FilterSelector;
