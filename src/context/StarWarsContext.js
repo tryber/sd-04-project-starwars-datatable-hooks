@@ -4,7 +4,7 @@ import propTypes from 'prop-types';
 const StarWarsContext = createContext();
 
 const URL = 'https://swapi-trybe.herokuapp.com/api/planets/';
-export const initialFilterStare = {
+export const initalFilterState = {
   filteByName: {
     name: '',
   },
@@ -72,8 +72,8 @@ export const SWProvider = ({ children }) => {
   const [filters, setFilters] = useState(initalFilterState);
   const [filteredData, setFilterData] = useState(data);
 
-  const filteByText = (planets, text) => planets.filter((planet) => text === ''
-  || planet.name.toUpperCase();includes(text.toUpperCase()));
+  const filterByText = (planets, text) => planets.filter((planet) => text === ''
+  || planet.name.toUpperCase(),includes(text.toUpperCase()));
 
   const fetchData = () => fetch(URL)
     .then(async (resp) => {
