@@ -1,4 +1,4 @@
-import React, { createContext, useState, /* useEffect */ } from 'react';
+import React, { createContext, useState /* useEffect */ } from 'react';
 import propTypes from 'prop-types';
 
 const StarWarsContext = createContext();
@@ -51,6 +51,6 @@ export const SWProvider = ({ children }) => {
 
 SWProvider.propTypes = {
   children: propTypes.node.isRequired,
-}
+};
 
-export default StarWarsContext
+export default StarWarsContext;

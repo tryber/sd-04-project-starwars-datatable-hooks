@@ -4,7 +4,7 @@ import Table from './Table';
 
 const Home = () => {
   const { filteredData, isFetching, fetchData } = useContext(StarWarsContext);
-  useEffect(()=> {
+  useEffect(() => {
     fetchData();
   }, []);
 
