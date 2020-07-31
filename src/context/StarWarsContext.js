@@ -47,8 +47,8 @@ function sortBy(planetA, planetB, column) {
         return 0;
     }
   }
-  return planet1.toLowerCase().localeCompare(planet2.toLowerCase())
-};
+  return planet1.toLowerCase().localeCompare(planet2.toLowerCase());
+}
 
 const sortByCondition = (dataToSort, sort, column) => {
   switch (sort) {
@@ -73,7 +73,7 @@ export const SWProvider = ({ children }) => {
   const [filteredData, setFilterData] = useState(data);
 
   const filterByText = (planets, text) => planets.filter((planet) => text === ''
-  || planet.name.toUpperCase(),includes(text.toUpperCase()));
+  || planet.name.toUpperCase().includes(text.toUpperCase()));
 
   const fetchData = () => fetch(URL)
     .then(async (resp) => {
@@ -89,40 +89,40 @@ export const SWProvider = ({ children }) => {
       }
     });
 
-    const removeFilter = (column) => {
-      const newFilters = filters.filterByNumericValues.filter(
-        (e) => e.column !== column,
-      );
-      setFilters((prevFilters) => ({ ...prevFilters, filterByNumericValues: newFilters }));
-    };
+  const removeFilter = (column) => {
+    const newFilters = filters.filterByNumericValues.filter(
+      (e) => e.column !== column,
+    );
+    setFilters((prevFilters) => ({ ...prevFilters, filterByNumericValues: newFilters }));
+  };
 
-    const submitSort = (column, sort) => setFilters((prevFilters) => ({
-      ...prevFilters,
-      order: {
-        column, sort,
-      },
+  const submitSort = (column, sort) => setFilters((prevFilters) => ({
+    ...prevFilters,
+    order: {
+      column, sort,
+    },
+  }));
+
+  const setNameFilter = (filter) => {
+    setFilters((prevFilters) => ({ ...prevFilters, filterByName: { name: filter } }));
+  };
+
+  const submitNumericFilter = ({ column, comparison, value }) => {
+    setFilters((prevState) => ({
+      ...prevState,
+      filterByNumericValues: [...prevState.filterByNumericValues, { column, comparison, value }],
     }));
+  }
 
-    const setNameFilter = (filter) => {
-      setFilters((prevFilters) => ({ ...prevFilters, filterByName: { name: filter } }));
-    };
-
-    const submitNumericFilter = ({ column, comparison, value }) => {
-      setFilters((prevState) => ({
-        ...prevState,
-        filterByNumericValues: [...prevState.filterByNumericValues, { column, comparison, value}],
-      }));
+  useEffect(() => {
+    if (filteredData.length) {
+      let arrayFiltered = filterByText(data, filters.filterByName.name);
+      arrayFiltered = filteredByNumeric(arrayFiltered, filters.filterByNumericValues);
+      const { sort, column } = filters.order;
+      arrayFiltered = sortByCondition(arrayFiltered, sort, column);
+      setFilterData(arrayFiltered);
     }
-
-    useEffect(() => {
-      if (filteredData.length) {
-        let arrayFiltered = filterByText(data, filters.filterByName.name);
-        arrayFiltered = filteredByNumeric(arrayFiltered, filters.filterByNumericValues);
-        const { sort, column } = filters.order;
-        arrayFiltered = sortByCondition(arrayFiltered, sort, column);
-        setFilterData(arrayFiltered);
-      }
-    }, [filters, isFetching]);
+  }, [filters, isFetching]);
 
   const context = {
     submitSort,
