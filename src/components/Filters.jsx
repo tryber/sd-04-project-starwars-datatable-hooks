@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import StoreProvider from '../utils/store';
+import OrderFilter from './OrderFilter';
 
 const NameFilter = () => {
   const { filters } = useContext(StoreProvider);
@@ -80,6 +81,7 @@ const Filters = () =>
   <div>
     {NameFilter()}
     {NumericFilters()}
+    {OrderFilter()}
   </div>;
 
 export default Filters;

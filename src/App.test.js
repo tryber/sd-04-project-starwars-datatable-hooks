@@ -44,6 +44,7 @@ describe('Fazer uma requisição para o endpoint `/planets` da API de Star Wars 
       render(<App />);
     });
     const planets = testData.results;
+    console.log(testData);
     for(let planetIndex in planets) {
       const name = await screen.findByText(planets[planetIndex].name);
       const rotationPeriod = await screen.findAllByText(planets[planetIndex].rotation_period);

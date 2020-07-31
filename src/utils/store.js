@@ -8,13 +8,16 @@ export function Store({ children }) {
   const [planets, setPlanets] = useState([]);
   const [name, setFilterByName] = useState('');
   const [filterByNumericValues, setFilterByNumeric] = useState([]);
+  const [order, setOrder] = useState({ column: 'name', sort: 'ASC', })
   const context = {
     planets,
     filters: {
       filterByName: name,
       filterByNumericValues,
+      order,
       setFilterByNumeric,
       setFilterByName,
+      setOrder,
     },
   };
   // Hooks que funciona como componenteDidMount chamando
