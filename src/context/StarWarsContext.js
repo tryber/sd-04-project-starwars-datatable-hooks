@@ -93,7 +93,7 @@ export const SWProvider = ({ children }) => {
       const newFilters = filters.filterByNumericValues.filter(
         (e) => e.column !== column,
       );
-      setFilters((precFilters) => ({ ...prevFilters, filterByNumericValues: newFilters }));
+      setFilters((prevFilters) => ({ ...prevFilters, filterByNumericValues: newFilters }));
     };
 
     const submitSort = (column, sort) => setFilters((prevFilters) => ({
@@ -104,11 +104,11 @@ export const SWProvider = ({ children }) => {
     }));
 
     const setNameFilter = (filter) => {
-      setFilters((prevFilters) => ({ ...precFilters, filterByName: { name: filter } }));
+      setFilters((prevFilters) => ({ ...prevFilters, filterByName: { name: filter } }));
     };
 
     const submitNumericFilter = ({ column, comparison, value }) => {
-      setFilters((prevFilters) => ({
+      setFilters((prevState) => ({
         ...prevState,
         filterByNumericValues: [...prevState.filterByNumericValues, { column, comparison, value}],
       }));
