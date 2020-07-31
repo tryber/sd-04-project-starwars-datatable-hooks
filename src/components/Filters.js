@@ -1,11 +1,6 @@
 import React, { useContext, useEffect } from 'react';
-// import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-// import {
-//   asyncActionDataFetch, actionNameFilter,
-//   actionNumericFilter, actionDelNumericFilter,
-// } from '../actions';
-import { StarWarsContext } from '../context/StoreProvider';
+import StarWarsContext from '../context/StarWarsContext';
 
 const SelectColumn = ({ columnValues }) =>
   <select
@@ -22,8 +17,6 @@ const SelectComparisom = ({ comparisonValues }) =>
   </select>;
 
 export default () => {
-  // (() => dataFetch('https://swapi-trybe.herokuapp.com/api/planets/'))();
-
   const { getData: [, setData], getFilters: [filters, setFilters] } = useContext(StarWarsContext);
   const filtersNV = filters.filterByNumericValues;
 
@@ -71,45 +64,23 @@ export default () => {
       <label htmlFor="planet-filter">Procurar </label>
       <input
         type="text" id="planet-filter" data-testid="name-filter"
-        // onChange={(e) => nameFilter(e.target.value)}
         onChange={(e) => setFilters({ ...filters, filterByName: { name: e.target.value } })}
       />
-      {/* <form onSubmit={(e) => storeFilters(numericFilter, e)}> */}
+
       <form onSubmit={(e) => storeFilters(setFilters, e)}>
         <SelectColumn columnValues={returnStoreColumns(filtersNV)} />
         <SelectComparisom comparisonValues={comparisonValues} />
         <input id="value-filter" type="number" data-testid="value-filter" />
         <button type="submit" data-testid="button-filter">Filtrar</button>
       </form>
+
       {filtersNV.map(({ column, comparison, value }) => <div key={column} data-testid="filter">
         {`${column} ${comparison} ${value}`}
-        <button onClick={() => delStoreFilter(column, setFilters /* delNumericFilter */)}>X</button>
+        <button onClick={() => delStoreFilter(column, setFilters)}>X</button>
       </div>)}
     </div>
   );
 };
-
-// const mapStateToProps = (state) => ({
-//   filters: state.filters.filterByNumericValues,
-// });
-
-// const mapDispatchToProps = (dispatch) => ({
-//   dataFetch: (url) => dispatch(asyncActionDataFetch(url)),
-//   nameFilter: (text) => dispatch(actionNameFilter(text)),
-//   numericFilter: (oNumericFilter) => dispatch(actionNumericFilter(oNumericFilter)),
-//   delNumericFilter: (column) =>
-//     dispatch(actionDelNumericFilter(column)),
-// });
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Filters);
-
-// Filters.propTypes = {
-//   dataFetch: PropTypes.func.isRequired,
-//   nameFilter: PropTypes.func.isRequired,
-//   numericFilter: PropTypes.func.isRequired,
-//   filters: PropTypes.arrayOf(PropTypes.object).isRequired,
-//   delNumericFilter: PropTypes.func.isRequired,
-// };
 
 SelectColumn.propTypes = {
   columnValues: PropTypes.arrayOf(PropTypes.string).isRequired,

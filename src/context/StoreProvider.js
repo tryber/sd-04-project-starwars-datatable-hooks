@@ -1,7 +1,6 @@
 import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
-
-export const StarWarsContext = createContext();
+import StarWarsContext from './StarWarsContext';
 
 const StoreProvider = ({ children }) => {
   const oFilters = { filterByName: { name: '' }, filterByNumericValues: [] };

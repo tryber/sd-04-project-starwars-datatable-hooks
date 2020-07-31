@@ -1,9 +1,8 @@
 import React, { useContext } from 'react';
-// import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import './Table.css';
 import { checkNamePlanet, checkFilters } from '../helpers';
-import { StarWarsContext } from '../context/StoreProvider';
+import StarWarsContext from '../context/StarWarsContext';
 
 const THeadBody = ({ data, filterName, storeFilters }) =>
   (
@@ -66,18 +65,10 @@ const Table = () => {
   );
 };
 
-// const mapStateToProps = (state) => ({
-//   data: state.data.data,
-//   loading: state.data.loading,
-//   filterName: state.filters.filterByName.name,
-//   storeFilters: state.filters.filterByNumericValues,
-// });
-
 export default Table;
 
 Table.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
-  //   loading: PropTypes.bool.isRequired,
   filterName: PropTypes.string.isRequired,
   storeFilters: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
