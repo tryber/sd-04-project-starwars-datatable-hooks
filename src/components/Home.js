@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 import Table from './Table';
+import Filter from './Filter';
 
 const Home = () => {
   const { filteredData, isFetching, fetchData } = useContext(StarWarsContext);
@@ -11,6 +12,7 @@ const Home = () => {
   return (filteredData.length > 0 && !isFetching
     ? (
       <div className="App">
+        <Filter />
         <Table />
       </div>
     )

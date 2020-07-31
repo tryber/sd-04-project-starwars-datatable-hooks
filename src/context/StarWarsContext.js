@@ -112,7 +112,7 @@ export const SWProvider = ({ children }) => {
       ...prevState,
       filterByNumericValues: [...prevState.filterByNumericValues, { column, comparison, value }],
     }));
-  }
+  };
 
   useEffect(() => {
     if (filteredData.length) {
