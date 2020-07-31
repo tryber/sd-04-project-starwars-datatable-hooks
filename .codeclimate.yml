@@ -37,6 +37,7 @@ exclude_patterns:
   - "**/libs/*.css"
   - "**/libs/*.js"
   - "node_modules/"
+  - "src/testData.js"
 plugins:
   csslint:
     enabled: true
