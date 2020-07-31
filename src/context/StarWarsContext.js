@@ -1,5 +1,7 @@
-import React, { /*createContext,*/ useState, /*useEffect*/ } from 'react';
-import propTypes from 'prop-types'
+import React, { createContext, useState, /* useEffect */ } from 'react';
+import propTypes from 'prop-types';
+
+const StarWarsContext = createContext();
 
 const URL = 'https://swapi-trybe.herokuapp.com/api/planets/';
 export const initialFilterStare = {
@@ -10,7 +12,7 @@ export const initialFilterStare = {
   order: {
     column: 'Name',
     sort: 'ASC',
-  }
+  },
 };
 
 export const SWProvider = ({ children }) => {
