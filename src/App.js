@@ -5,7 +5,7 @@ import SearchBar from './components/SearchBar';
 import Filter from './components/Filter';
 import FiltersPanel from './components/FiltersPanel';
 
-class App extends React.Component {
+const App = () => {
 
   render() {
     return (
