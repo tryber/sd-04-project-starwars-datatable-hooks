@@ -9,10 +9,10 @@ import Filter from './components/Filter';
 import FiltersPanel from './components/FiltersPanel';
 
 class App extends React.Component {
-  componentDidMount() {
+  /* componentDidMount() {
     const { getPlanets } = this.props;
     getPlanets();
-  }
+  } */
 
   render() {
     return (
