@@ -5,24 +5,19 @@ import SearchBar from './components/SearchBar';
 import Filter from './components/Filter';
 import FiltersPanel from './components/FiltersPanel';
 
-const App = () => {
-
-  render() {
-    return (
-      <StarWarsProvider>
-        <div>
-          <header>
-            <SearchBar />
-            <Filter />
-            <FiltersPanel />
-          </header>
-          <section>
-            <Table />
-          </section>
-        </div>
-      </StarWarsProvider>
-    );
-  }
-}
+const App = () => (
+  <StarWarsProvider>
+    <div>
+      <header>
+        <SearchBar />
+        <Filter />
+        <FiltersPanel />
+      </header>
+      <section>
+        <Table />
+      </section>
+    </div>
+  </StarWarsProvider>
+);
 
 export default App;
