@@ -23,7 +23,7 @@ const StarWarsProvider = ({ children }) => {
     getPlanets();
   }, []);
 
-  const contextValue = {
+  const store = {
     data,
     setData,
     isFetching,
@@ -32,7 +32,7 @@ const StarWarsProvider = ({ children }) => {
     setError,
   };
 
-  return <StarWarsContext.Provider value={contextValue}>{children}</StarWarsContext.Provider>;
+  return <StarWarsContext.Provider value={store}>{children}</StarWarsContext.Provider>;
 };
 
 StarWarsProvider.propTypes = {
