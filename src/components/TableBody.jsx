@@ -1,39 +1,30 @@
-import React, { useEffect, useContext } from 'react';
-import { StarWarsContext } from '../context/StarWarsContext';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const TableBody = () => {
-  const { swApi, data, fetching, nameFilter } = useContext(StarWarsContext);
+const TableBody = ({ planets }) => (
+  <tbody>
+    {planets.map((planet) => (
+      <tr key={planet.name}>
+        <td>{planet.name}</td>
+        <td>{planet.rotation_period}</td>
+        <td>{planet.orbital_period}</td>
+        <td>{planet.diameter}</td>
+        <td>{planet.climate}</td>
+        <td>{planet.gravity}</td>
+        <td>{planet.terrain}</td>
+        <td>{planet.surface_water}</td>
+        <td>{planet.population}</td>
+        <td>{planet.films}</td>
+        <td>{planet.created}</td>
+        <td>{planet.edited}</td>
+        <td>{planet.url}</td>
+      </tr>
+    ))}
+  </tbody>
+);
 
-  useEffect(() => {
-    swApi();
-  }, []);
-
-  const filteredPlanetsByName = [...data].filter((planet) =>
-    planet.name.toLowerCase().includes(nameFilter.toLowerCase()),
-  );
-
-  if (fetching) return <p>Loading...</p>;
-  return (
-    <tbody>
-      {filteredPlanetsByName.map((planets) => (
-        <tr key={planets.name}>
-          <td>{planets.name}</td>
-          <td>{planets.rotation_period}</td>
-          <td>{planets.orbital_period}</td>
-          <td>{planets.diameter}</td>
-          <td>{planets.climate}</td>
-          <td>{planets.gravity}</td>
-          <td>{planets.terrain}</td>
-          <td>{planets.surface_water}</td>
-          <td>{planets.population}</td>
-          <td>{planets.films}</td>
-          <td>{planets.created}</td>
-          <td>{planets.edited}</td>
-          <td>{planets.url}</td>
-        </tr>
-      ))}
-    </tbody>
-  );
+TableBody.propTypes = {
+  planets: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default TableBody;

@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import swApi from '../services/swApi';
 
@@ -8,24 +8,30 @@ const SWProvider = ({ children }) => {
   const [data, setData] = useState([]);
   const [fetching, setFetching] = useState(true);
   const [nameFilter, setNameFilter] = useState('');
+  const [value, setValue] = useState('');
+  const [column, setColumn] = useState('');
+  const [comparison, setComparison] = useState('');
+  const [numericValues, setNumericValues] = useState([]);
 
-  //  Função caso a api retorne sucesso:
   const requestSucess = (res) => {
     setData(res.results);
     setFetching(false);
   };
-  const requestFailure = (error) => {
-    setFetching(false);
-    return error;
-  };
   const requestPlanets = () => {
     if (!fetching) return null;
     setFetching(true);
-    return swApi().then(requestSucess, requestFailure);
+    return swApi().then(requestSucess);
   };
 
-  const filterByName = (name) => {
-    setNameFilter(name);
+  // const setFilterByName = (name) => {
+  //   setNameFilter(name);
+  // };
+
+  const setFilterByNum = (a, b, c) => {
+    setNumericValues([
+      ...numericValues,
+      { column: a, comparison: b, value: c },
+    ]);
   };
 
   const context = {
@@ -34,8 +40,18 @@ const SWProvider = ({ children }) => {
     fetching,
     setFetching,
     swApi: requestPlanets,
-    filterByName,
     nameFilter,
+    setNameFilter,
+    // setFilterByName,
+    value,
+    setValue,
+    column,
+    setColumn,
+    comparison,
+    setComparison,
+    numericValues,
+    setNumericValues,
+    setFilterByNum,
   };
 
   return (
