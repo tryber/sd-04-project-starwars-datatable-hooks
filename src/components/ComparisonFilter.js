@@ -2,9 +2,7 @@ import React, { useContext } from 'react';
 import { StarWarsContext } from '../context/StarWarsContext';
 
 const ComparisonFilter = () => {
-  const { comparison, setComparison } = useContext(
-    StarWarsContext
-  );
+  const { comparison, setComparison } = useContext(StarWarsContext);
 
   const numericOptions = ['maior que', 'menor que', 'igual a'];
 
@@ -14,7 +12,7 @@ const ComparisonFilter = () => {
       value={comparison}
       onChange={(e) => setComparison(e.target.value)}
     >
-      <option value=""></option>
+      <option value="" />
       {numericOptions.map((option) => (
         <option key={option} value={option}>
           {option}

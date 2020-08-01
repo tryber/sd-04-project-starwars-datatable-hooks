@@ -4,7 +4,7 @@ import { StarWarsContext } from '../context/StarWarsContext';
 const ColumnFilter = () => {
   const { column, setColumn, numericValues } = useContext(StarWarsContext);
 
-  const planetFilters = () => {
+  const planetsFilters = () => {
     const planetOptions = [
       'population',
       'orbital_period',
@@ -15,13 +15,13 @@ const ColumnFilter = () => {
     let planetFilters = planetOptions;
     numericValues.forEach((element) => {
       planetFilters = planetFilters.filter(
-        (option) => option !== element.column
+        (option) => option !== element.column,
       );
     });
     return planetFilters;
   };
 
-  const planetOptions = planetFilters();
+  const planetOptions = planetsFilters();
 
   return (
     <select
@@ -29,7 +29,7 @@ const ColumnFilter = () => {
       value={column}
       onChange={(e) => setColumn(e.target.value)}
     >
-      <option value=""></option>
+      <option value="" />
       {planetOptions.map((option) => (
         <option key={option} value={option}>
           {option}

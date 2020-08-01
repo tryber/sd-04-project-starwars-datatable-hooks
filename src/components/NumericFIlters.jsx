@@ -6,7 +6,7 @@ import ComparisonFilter from './ComparisonFilter';
 
 const NumericFilters = () => {
   const { value, column, comparison, setFilterByNum } = useContext(
-    StarWarsContext
+    StarWarsContext,
   );
 
   const comparisonFilters = () => {

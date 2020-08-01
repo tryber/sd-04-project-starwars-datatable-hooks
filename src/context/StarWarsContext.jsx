@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import swApi from '../services/swApi';
 
@@ -23,10 +23,6 @@ const SWProvider = ({ children }) => {
     return swApi().then(requestSucess);
   };
 
-  // const setFilterByName = (name) => {
-  //   setNameFilter(name);
-  // };
-
   const setFilterByNum = (a, b, c) => {
     setNumericValues([
       ...numericValues,
@@ -42,7 +38,6 @@ const SWProvider = ({ children }) => {
     swApi: requestPlanets,
     nameFilter,
     setNameFilter,
-    // setFilterByName,
     value,
     setValue,
     column,
