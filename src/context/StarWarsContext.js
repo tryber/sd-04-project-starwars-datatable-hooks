@@ -20,15 +20,13 @@ const StarsWarsProvider = ({ children }) => {
   const [data, setData] = useState([]);
 
   // Obtêndo o dados da requisição
-  const getSucessApi = (obj) => {
-    let planets;
-    planets = obj.results.map((planet) => planet);
-    return setData(planets);
+  function getSucessApi(obj) {
+    return setData(obj.results.map((planet) => planet));
   };
 
   // Fazendo a requisição
   const fetchAPI = () => {
-    if (isFetching) return null; 
+    if (isFetching) return null;
     setIsFetching(true);
     return getAPI().then(getSucessApi);
   };
@@ -37,7 +35,7 @@ const StarsWarsProvider = ({ children }) => {
     fetchAPI();
   });
 
-  const search = (rows) => {
+  function search(rows) {
     return rows.filter((row) => row.name.toLowerCase().includes(Input));
   }
 
