@@ -22,7 +22,7 @@ const StarsWarsProvider = ({ children }) => {
   // Obtêndo o dados da requisição
   function getSucessApi(obj) {
     return setData(obj.results.map((planet) => planet));
-  };
+  }
 
   // Fazendo a requisição
   const fetchAPI = () => {
