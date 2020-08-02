@@ -1,8 +1,8 @@
 import React from 'react';
 
 const Hearder = () =>
-  <thead>
-    <tr>
+  <thead >
+    <tr className="header">
       <th>Name</th>
       <th>Population</th>
       <th>Rotation period</th>

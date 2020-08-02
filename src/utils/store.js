@@ -8,7 +8,7 @@ export function Store({ children }) {
   const [planets, setPlanets] = useState([]);
   const [name, setFilterByName] = useState('');
   const [filterByNumericValues, setFilterByNumeric] = useState([]);
-  const [order, setOrder] = useState({ column: 'name', sort: 'ASC', })
+  const [order, setOrder] = useState({ column: 'name', sort: 'ASC' });
   const context = {
     planets,
     filters: {
