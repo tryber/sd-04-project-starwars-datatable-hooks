@@ -39,7 +39,15 @@ const StarsWarsProvider = ({ children }) => {
     return rows.filter((row) => row.name.toLowerCase().includes(Input));
   }
 
+  function tableHead() {
+    // Obtên o cabeçalho das colunas
+    const columns = data[0] && Object.keys(data[0]);
+    console.log(columns);
+    return columns;
+  }
+
   const context = {
+    tableHead,
     fetchAPI,
     isFetching,
     data,
