@@ -4,13 +4,13 @@ import getAPI from '../service/StarWarsAPI';
 
 const StarsWarsContext = createContext();
 
-const INITIAL_STATE = {
-  filters: {
-    filterByName: {
-      name: '',
-    },
-  },
-};
+// const INITIAL_STATE = {
+//   filters: {
+//     filterByName: {
+//       name: '',
+//     },
+//   },
+// };
 
 const StarsWarsProvider = ({ children }) => {
   // Estado de controle requisição API
@@ -18,31 +18,33 @@ const StarsWarsProvider = ({ children }) => {
   // const [filters] = useState(INITIAL_STATE);
   const [Input, getInput] = useState('');
   const [data, setData] = useState([]);
-  
+
   // Obtêndo o dados da requisição
   const getSucessApi = (obj) => {
-    return setData(obj.results.map((planets) => planets));
+    let planets;
+    planets = obj.results.map((planet) => planet);
+    return setData(planets);
   };
-  
+
   // Fazendo a requisição
   const fetchAPI = () => {
     if (isFetching) return null; 
-    getAPI().then(getSucessApi);
     setIsFetching(true);
+    return getAPI().then(getSucessApi);
   };
 
   useEffect(() => {
     fetchAPI();
   });
 
-  function search(rows) {
+  const search = (rows) => {
     return rows.filter((row) => row.name.toLowerCase().includes(Input));
   }
 
   const context = {
     fetchAPI,
     isFetching,
-    data,   
+    data,
     Input,
     getInput,
     search,
