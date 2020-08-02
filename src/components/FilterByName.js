@@ -7,10 +7,11 @@ const FilterByName = () => {
   const { Input, getInput } = useContext(StarsWarsContext);
   return (
     <div>
-      <label>Filter By name: </label>
+      <label htmlFor="textName">Filter By name: </label>
       <input
         type="text"
         value={Input}
+        name="textName"
         data-testid="name-filter"
         onChange={(e) => getInput(e.target.value)}
       />
