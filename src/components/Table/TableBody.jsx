@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
-import OrdemAscedente from '../Filtros/OrdemAscedente';
-import OrdemDescendente from '../Filtros/OrdemDescendente';
+import orderASC from '../Filter/OrderASC';
+import orderDESC from '../Filter/OrderDESC';
 import StarWarsContext from '../../context/StarWarsContext';
 
-function TBody() {
+function TableBody() {
   const [planets, setPlanets] = useState([]);
   const {
     data,
@@ -16,8 +16,8 @@ function TBody() {
 
   useEffect(() => {
     const filtered = sort === 'ASC'
-      ? OrdemAscedente(data, name, numericValues, columnSort)
-      : OrdemDescendente(data, name, numericValues, columnSort);
+      ? orderASC(data, name, numericValues, columnSort)
+      : orderDESC(data, name, numericValues, columnSort);
     setPlanets(filtered);
   }, [name, numericValues, columnSort, sort]);
 
@@ -48,4 +48,4 @@ function TBody() {
   );
 }
 
-export default TBody;
+export default TableBody;

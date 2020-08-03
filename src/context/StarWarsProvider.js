@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import StarWarsContext from './StarWarsContext';
-import apiStarWars from '../services/apiStarWars';
+import apiStarWars from '../services';
 
 const StarWarsProvider = ({ children }) => {
   const [data, setData] = useState([]);
