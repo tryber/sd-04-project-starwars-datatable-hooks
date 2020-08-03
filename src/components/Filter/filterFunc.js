@@ -1,5 +1,5 @@
 
-const ComparaFiltro = (planets, text, numericValues) => {
+const filterFunc = (planets, text, numericValues) => {
   if (numericValues.length === 0) {
     return planets.filter((planet) => planet.name.includes(text));
   }
@@ -34,4 +34,4 @@ const ComparaFiltro = (planets, text, numericValues) => {
   );
 };
 
-export default ComparaFiltro;
+export default filterFunc;
