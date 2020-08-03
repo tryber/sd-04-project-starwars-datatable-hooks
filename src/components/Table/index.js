@@ -7,6 +7,19 @@ const handlePlanetSort = (planets, order) => {
 
   return planets.sort((planetA, planetB) => {
     if (sort === 'ASC') {
+      return Number(planetA[column]) > Number(planetB[column]) ? 1 : -1;
+    }
+    if (sort === 'DESC') {
+      return Number(planetA[column]) < Number(planetB[column]) ? 1 : -1;
+    }
+  });
+};
+
+const handlePlanetSortByName = (planets, order) => {
+  const { column, sort } = order;
+
+  return planets.sort((planetA, planetB) => {
+    if (sort === 'ASC') {
       return planetA[column.toLowerCase()] > planetB[column.toLowerCase()] ? 1 : -1;
     }
     if (sort === 'DESC') {
@@ -19,10 +32,28 @@ const handleNameFilter = (filterByName, planets) => {
   let filterResult = planets;
 
   if (filterByName.name) {
-    filterResult = planets.filter((planet) =>
-      planet.name.toLowerCase().includes(filterByName.name.toLowerCase())
-    );
+    filterResult = planets.filter((planet) => planet
+      .name.toLowerCase().includes(filterByName.name.toLowerCase()));
   }
+
+  return filterResult;
+};
+
+const handleNumericFilter = (filterByNumericValues, planets) => {
+  let filterResult = planets;
+
+  filterByNumericValues.forEach((filter) => {
+    const { column, comparison, value } = filter;
+    if (comparison === 'maior que') {
+      filterResult = filterResult.filter((planet) => Number(planet[column]) > Number(value));
+    }
+    if (comparison === 'igual a') {
+      filterResult = filterResult.filter((planet) => Number(planet[column]) === Number(value));
+    }
+    if (comparison === 'menor que') {
+      filterResult = filterResult.filter((planet) => Number(planet[column]) < Number(value));
+    }
+  });
 
   return filterResult;
 };
@@ -39,10 +70,14 @@ const renderHeader = (planets) => (
 
 const renderData = (planets, order) => {
   const planetsData = [];
-  const sortedPlanets = handlePlanetSort(planets, order);
+  const sortedPlanets = order.column === 'Name'
+    ? handlePlanetSortByName(planets, order)
+    : handlePlanetSort(planets, order);
 
   sortedPlanets.forEach((planet) => {
-    const columns = Object.keys(planet).map((column) => <td>{planet[column]}</td>);
+    const columns = Object.keys(planet).map((column) => (
+      <td data-testid={column === 'name' ? 'planet-name' : null}>{planet[column]}</td>
+    ));
 
     planetsData.push(<tr key={planet.name}>{columns}</tr>);
   });
@@ -62,6 +97,10 @@ const Table = () => {
 
   if (filterByName.name) {
     filteredPlanets = handleNameFilter(filterByName, filteredPlanets);
+  }
+
+  if (filters.filterByNumericValues.length > 0) {
+    filteredPlanets = handleNumericFilter(filterByNumericValues, filteredPlanets);
   }
 
   if (planets.planetsFetching) return <p>Loading...</p>;

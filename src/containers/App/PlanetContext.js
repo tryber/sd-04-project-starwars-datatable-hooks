@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 const initialState = {
   planetsFetching: true,
@@ -40,6 +41,10 @@ export const PlanetProvider = ({ children }) => {
   const context = { planets, fetchPlanets };
 
   return <PlanetsContext.Provider value={context}>{children}</PlanetsContext.Provider>;
+};
+
+PlanetsContext.propTypes = {
+  children: PropTypes.element.isRequired,
 };
 
 export default PlanetsContext;

@@ -22,14 +22,14 @@ export const FiltersProvider = ({ children }) => {
     }));
   };
 
-  const handleNumericFilter = (filter) => {
+  const handleFilterByNumber = (filter) => {
     setFilters((prevState) => ({
       ...prevState,
       filterByNumericValues: [...prevState.filterByNumericValues, filter],
     }));
   };
 
-  const handleOrderFilter = (filter) => {
+  const handleFilterByOrder = (filter) => {
     setFilters((prevState) => ({
       ...prevState,
       order: { ...prevState.order, ...filter },
@@ -41,7 +41,7 @@ export const FiltersProvider = ({ children }) => {
       ...prevState,
       filterByNumericValues: [
         ...prevState.filterByNumericValues.filter(
-          (numericFilter) => numericFilter.colunm !== filter.colunm
+          (numericFilter) => numericFilter.colunm !== filter.colunm,
         ),
       ],
     }));
@@ -50,8 +50,8 @@ export const FiltersProvider = ({ children }) => {
   const context = {
     filters,
     handleFilterByName,
-    handleNumericFilter,
-    handleOrderFilter,
+    handleFilterByNumber,
+    handleFilterByOrder,
     handleFilterRemoval,
   };
 

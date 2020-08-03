@@ -8,6 +8,7 @@
     "no-param-reassign":"off",
     "consistent-return":"off",
     "array-callback-return":"off",
+    "react/prop-types": ["off"],
     "react/jsx-filename-extension": [
       1,
       {
