@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import StarWarsContext from './StarWarsContext';
-import getPlanetsAPI from '../services/getPlanetsAPI';
+import planetsAPI from '../services/getPlanetsAPI';
 
 const StarWarsProvider = ({ children }) => {
   const [isFetching, setIsFetching] = useState(false);
@@ -26,7 +27,7 @@ const StarWarsProvider = ({ children }) => {
 
   const fetchPlanets = () => {
     setIsFetching(true);
-    getPlanetsAPI().then(
+    planetsAPI().then(
       (response) => sucessPlanets(response.results),
       (error) => failurePlanets(error),
     );
@@ -34,32 +35,29 @@ const StarWarsProvider = ({ children }) => {
 
   const filterByName = (name) => setFilters({ ...filters, filterByName: { name } });
 
-  const filterByNumericValues = (column, comparison, value) =>
-    setFilters((filter) => ({
-      ...filter,
-      filterByNumericValues: [
-        ...filter.filterByNumericValues,
-        {
-          column,
-          comparison,
-          value,
-        },
-      ],
-    }));
+  const filterByNumericValues = (column, comparison, value) => setFilters((filter) => ({
+    ...filter,
+    filterByNumericValues: [
+      ...filter.filterByNumericValues,
+      {
+        column,
+        comparison,
+        value,
+      },
+    ],
+  }));
 
-  const removeFilter = (filterToRemove) =>
-    setFilters((filter) => ({
-      ...filter,
-      filterByNumericValues: [
-        ...filter.filterByNumericValues.filter((obj) => obj !== filterToRemove),
-      ],
-    }));
+  const removeFilter = (filterToRemove) => setFilters((filter) => ({
+    ...filter,
+    filterByNumericValues: [
+      ...filter.filterByNumericValues.filter((obj) => obj !== filterToRemove),
+    ],
+  }));
 
-  const sortColumns = (column, sort) =>
-    setFilters((filter) => ({
-      ...filter,
-      order: { column, sort },
-    }));
+  const sortColumns = (column, sort) => setFilters((filter) => ({
+    ...filter,
+    order: { column, sort },
+  }));
 
   const context = {
     isFetching,
@@ -82,4 +80,3 @@ StarWarsProvider.propTypes = {
 };
 
 export default StarWarsProvider;
-

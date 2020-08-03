@@ -1,119 +1,49 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { filterByNumericValues } from '../actions';
+import React, { useState, useContext } from 'react';
+import StarWarsContext from '../context/StarWarsContext';
+import { getColumns, getComparation } from './Selects';
 
-class FilterValues extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      column: '',
-      comparation: '',
-      number: '',
-    };
+function FilterValues() {
+  const [column, setColumn] = useState('');
+  const [comparation, setComparation] = useState('');
+  const [number, setNumber] = useState('');
 
-    this.onClick = this.onClick.bind(this);
-  }
+  const {
+    filterByNumericValues,
+    filters: { filterByNumericValues: numericValues },
+  } = useContext(StarWarsContext);
 
-  onChange(event, field) {
-    this.setState({ [field]: event.target.value });
-  }
+  const onColumnChange = (event) => {
+    setColumn(event.target.value);
+  };
 
-  onClick() {
-    const { column, comparation, number } = this.state;
-    const { onFilterByNumericValues } = this.props;
-    onFilterByNumericValues(column, comparation, number);
-    this.setState({ column: '', comparation: '', number: '' });
-  }
+  const onComparationChange = (event) => {
+    setComparation(event.target.value);
+  };
 
-  getColumns() {
-    const select = this.updateColumns();
-    const { column } = this.state;
-    return (
-      <select
-        value={column}
-        data-testid="column-filter"
-        onChange={(event) => this.onChange(event, 'column')}
-      >
-        {select.map((item) => (
-          <option key={item} value={item}>
-            {item}
-          </option>
-        ))}
-      </select>
-    );
-  }
+  const onNumberChange = (event) => {
+    setNumber(event.target.value);
+  };
 
-  getComparation() {
-    const comparation = ['', 'maior que', 'menor que', 'igual a'];
-    const { comparation: comp } = this.state;
-    return (
-      <select
-        value={comp}
-        data-testid="comparison-filter"
-        onChange={(event) => this.onChange(event, 'comparation')}
-      >
-        {comparation.map((item) => (
-          <option key={item} value={item}>
-            {item}
-          </option>
-        ))}
-      </select>
-    );
-  }
+  const onClick = () => {
+    filterByNumericValues(column, comparation, number);
+    setColumn('');
+    setComparation('');
+    setNumber('');
+  };
 
-  updateColumns() {
-    const { numericValues } = this.props;
-    const columns = [
-      '',
-      'population',
-      'orbital_period',
-      'diameter',
-      'rotation_period',
-      'surface_water',
-    ];
-    const chosenColumns = numericValues.map(({ column }) => column);
-    return columns.filter((item) => !chosenColumns.includes(item));
-  }
-
-  render() {
-    const { number } = this.state;
-    return (
-      <div>
-        {this.getColumns()}
-        {this.getComparation()}
-        <input
-          type="number"
-          data-testid="value-filter"
-          value={number}
-          onChange={(event) => this.onChange(event, 'number')}
-        />
-        <button type="button" data-testid="button-filter" onClick={this.onClick}>
-          Filtrar
-        </button>
-      </div>
-    );
-  }
+  return (
+    <div>
+      {getColumns(onColumnChange, numericValues, column)}
+      {getComparation(onComparationChange, comparation)}
+      <input
+        type="number"
+        data-testid="value-filter"
+        value={number}
+        onChange={(event) => onNumberChange(event)}
+      />
+      <button type="button" data-testid="button-filter" onClick={onClick}>Filtrar</button>
+    </div>
+  );
 }
 
-FilterValues.propTypes = {
-  numericValues: PropTypes.arrayOf(
-    PropTypes.shape({
-      column: PropTypes.string,
-      comparison: PropTypes.string,
-      value: PropTypes.string,
-    }),
-  ).isRequired,
-  onFilterByNumericValues: PropTypes.func.isRequired,
-};
-
-const mapState = (state) => ({
-  numericValues: state.filters.filterByNumericValues,
-});
-
-const mapDispatch = (dispatch) => ({
-  onFilterByNumericValues:
-    (column, comparison, value) => dispatch(filterByNumericValues(column, comparison, value)),
-});
-
-export default connect(mapState, mapDispatch)(FilterValues);
+export default FilterValues;
