@@ -54,7 +54,7 @@ export const getRadios = (changeImput) => (
     />
     <label htmlFor="DESC">DESC</label>
   </div>
-)
+);
 
 export const getComparation = (changegComparation, comparation) => {
   const comparationValues = ['', 'maior que', 'menor que', 'igual a'];
