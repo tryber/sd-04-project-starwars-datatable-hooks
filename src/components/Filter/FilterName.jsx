@@ -10,7 +10,7 @@ function FilterName() {
     filterByName(event.target.value);
   };
 
-  return(
+  return (
     <div>
       <input
         data-testid="name-filter"
