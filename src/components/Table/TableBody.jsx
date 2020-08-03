@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
-import orderASC from '../Filter/orderASC';
-import orderDESC from '../Filter/orderDESC';
+import orderAsc from '../Filter/orderAsc';
+import orderDesc from '../Filter/orderDesc';
 import StarWarsContext from '../../context/StarWarsContext';
 
 function TableBody() {
@@ -16,8 +16,8 @@ function TableBody() {
 
   useEffect(() => {
     const filtered = sort === 'ASC'
-      ? orderASC(data, name, numericValues, columnSort)
-      : orderDESC(data, name, numericValues, columnSort);
+      ? orderAsc(data, name, numericValues, columnSort)
+      : orderDesc(data, name, numericValues, columnSort);
     setPlanets(filtered);
   }, [name, numericValues, columnSort, sort]);
 

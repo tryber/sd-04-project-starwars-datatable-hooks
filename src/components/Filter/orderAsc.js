@@ -8,7 +8,7 @@ const orderName = (array) => (
   })
 );
 
-const orderFuncAsc = (planets, name, numericValues, columnSort) => {
+const orderAsc = (planets, name, numericValues, columnSort) => {
   if (columnSort === 'Name') {
     const filter = filterFunc(planets, name, numericValues);
     return orderName(filter);
@@ -18,4 +18,4 @@ const orderFuncAsc = (planets, name, numericValues, columnSort) => {
   );
 };
 
-export default orderFuncAsc;
+export default orderAsc;
