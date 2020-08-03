@@ -5,6 +5,9 @@
     "no-alert": "off",
     "prefer-arrow-callback": "off",
     "func-names": "off",
+    "no-param-reassign":"off",
+    "consistent-return":"off",
+    "array-callback-return":"off",
     "react/jsx-filename-extension": [
       1,
       {

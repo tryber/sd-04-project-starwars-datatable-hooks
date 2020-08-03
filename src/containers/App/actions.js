@@ -20,11 +20,11 @@ const planetsFetchErrored = (status) => ({
 export const fetchPlanets = () => (dispatch) => {
   fetch('https://swapi.dev/api/planets/')
     .then((response) => {
-      if (!response.ok) throw Error(response.statusText);
+      // if (!response.status !== 200) throw Error(response.statusText);
 
       return response.json();
     })
-    .then((data) => dispatch(planetsFetchSuccess(data)))
-    .then(() => dispatch(planetsFetch(false)))
-    .catch((error) => dispatch(planetsFetchErrored({ status: true, error })));
+    .then((data) => dispatch(planetsFetchSuccess(data.results)))
+    .then(() => dispatch(planetsFetch(false)));
+  // .catch((error) => dispatch(planetsFetchErrored({ status: true, error })));
 };
