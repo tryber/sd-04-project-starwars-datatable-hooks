@@ -2,7 +2,7 @@ import React from 'react';
 import TableHeder from './TableHeder';
 import TableBody from './TableBody';
 
-const Table = () => {
+function Table() {
   return (
     <div>
       <table>
@@ -11,6 +11,6 @@ const Table = () => {
       </table>
     </div>
   );
-};
+}
 
 export default Table;
