@@ -13,14 +13,14 @@ function FilterName() {
   return(
     <div>
       <input
-          data-testid="name-filter"
-          type="text"
-          value={text}
-          placeholder="Faça uma pesquisa"
-          onChange={(event) => onTextChange(event)}
-        />
+        data-testid="name-filter"
+        type="text"
+        value={text}
+        placeholder="Faça uma pesquisa"
+        onChange={(event) => onTextChange(event)}
+      />
     </div>
-  )
+  );
 }
 
 export default FilterName;
