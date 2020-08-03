@@ -41,7 +41,7 @@ function FilterOrder() {
       {getColumns()}
       {getRadios(onInputChange)}
       <button
-        data-testid="column=sort-button"
+        data-testid="column-sort-button"
         type="button"
         onClick={onClick}
       >
