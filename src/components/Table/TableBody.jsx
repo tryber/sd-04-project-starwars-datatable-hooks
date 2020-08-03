@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
-import orderASC from '../Filter/OrderASC';
-import orderDESC from '../Filter/OrderDESC';
+import orderASC from '../Filter/orderASC';
+import orderDESC from '../Filter/orderDESC';
 import StarWarsContext from '../../context/StarWarsContext';
 
 function TableBody() {
