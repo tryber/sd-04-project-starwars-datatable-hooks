@@ -41,7 +41,7 @@ export const FiltersProvider = ({ children }) => {
       ...prevState,
       filterByNumericValues: [
         ...prevState.filterByNumericValues.filter(
-          (numericFilter) => numericFilter.colunm !== filter.colunm,
+          (numericFilter) => numericFilter.column !== filter.column,
         ),
       ],
     }));
