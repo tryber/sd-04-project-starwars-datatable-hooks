@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState,useContext } from 'react'
 import StarWarsContext from '../../context/StarWarsContext';
 import { updateColumns, getColumns, getComparation } from './Selectors';
 
