@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react';
 import CreateInputColumn from './CreateInputColumn';
-
 import CreateInputValue from './CreateInputValue';
 import CreateInputComparison from './CreateInputComparison';
 import { StarWarsContext } from '../../context/StarWarsContext';

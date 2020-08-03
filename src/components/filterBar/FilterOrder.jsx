@@ -2,14 +2,6 @@ import React, { useContext, useState } from 'react';
 import { StarWarsContext } from '../../context/StarWarsContext';
 import planetHeaders from '../../services/data';
 
-// const createButon = () => {
-//   return (
-//     <button className="btn btn-dark" data-testid="column-sort-button" type="button">
-//       Order
-//     </button>
-//   );
-// };
-
 const createRadio = (handleChange) => (
   <div>
     <label htmlFor="ASC">ASC</label>

@@ -38,6 +38,7 @@ const TableBody = () => {
         (filteredPlanets = filteredPlanets.filter((planet) => compareFilters(planet, filtro))),
     );
   }
+
   const filterOrder = filter.order;
 
   filteredPlanets = sortPlanets(filterOrder, filteredPlanets);
@@ -51,8 +52,10 @@ const TableBody = () => {
     <tbody>
       {filteredPlanets.map((planets) => (
         <tr key={planets.name}>
-          {objKeys.map((key) => (
-            <td data-testid="planet-name" key={key}>{planets[key]}</td>
+          {objKeys.map((key, index) => (
+            <td data-testid={index === 0 && 'planet-name'} key={key}>
+              {planets[key]}
+            </td>
           ))}
         </tr>
       ))}
