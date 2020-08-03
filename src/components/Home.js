@@ -1,22 +1,21 @@
 import React, { useContext, useEffect } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
-import Table from './Table';
-import Filter from './Filter';
+import Table from './Table/Table';
+import Filter from './Filter/Filter';
 
 const Home = () => {
-  const { filteredData, isFetching, fetchData } = useContext(StarWarsContext);
+  const { isFetching, requestFetch } = useContext(StarWarsContext);
   useEffect(() => {
-    fetchData();
+    requestFetch();
   }, []);
 
-  return (filteredData.length > 0 && !isFetching
-    ? (
-      <div className="App">
-        <Filter />
-        <Table />
-      </div>
-    )
-    : <h1>Sem planetas encontrados</h1>
+  if (isFetching) return <h1>Loading...</h1>;
+  return(
+    <div>
+      <h1>StarWars Datatable With Filters</h1>
+      <Filter />
+      <Table />
+    </div>
   );
 };
 
