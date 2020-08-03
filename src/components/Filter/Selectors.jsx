@@ -1,6 +1,6 @@
 import React from 'react';
 
-const updateColumns = (numericValues) => {
+export const updateColumns = (numericValues) => {
   const columnValues = [
     'population',
     'orbital_period',
