@@ -94,7 +94,7 @@ const Filters = () => {
   if (planets.planetsFetching) return null;
 
   return (
-    <>
+    <div>
       <form>
         <input
           type="text"
@@ -120,7 +120,7 @@ const Filters = () => {
         </button>
       </form>
       {renderSortFilters(planets, handleFilterByOrder)}
-    </>
+    </div>
   );
 };
 
