@@ -1,24 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
+import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
-
+import TableBody from './components/TableBody';
+import TableHead from './components/TableHead';
+import SWProvider from './context/Provider';
+import SearchBar from './components/SearchBar';
+import Filters from './components/Filters';
+import FiltersInUse from './components/FiltersInUse';
+// To commit
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <SWProvider>
+        <SearchBar />
+        <Filters />
+        <FiltersInUse />
+        <table className="table">
+          <TableHead />
+          <TableBody />
+        </table>
+      </SWProvider>
     </div>
   );
 }
