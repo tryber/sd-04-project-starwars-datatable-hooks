@@ -1,28 +1,24 @@
-import React, { Component } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+// import StarWarsContext from '../../context/StarWarsContext';
+import useFilters from '../../effect/useFilters';
 
-import { filterByName } from '../../../../sd-04-project-react-redux-starwars-database-filters/src/action';
-
-class FilterByName extends Component {
-  render() {
-    return (
-      <div>
-        <input
-          type="text"
-          data-testid="name-filter"
-          placeholder="Pesquise um planeta"
-          onChange={(event) => this.props.filterByName(event.target.value)}
-        />
-      </div>
-    );
-  }
+function FilterByName() {
+  // const { filterName } = useContext(StarWarsContext);
+  const { filterByName } = useFilters();
+  return (
+    <div>
+      <input
+        type="text"
+        data-testid="name-filter"
+        placeholder="Pesquise um planeta"
+        onChange={(event) => filterByName(event.target.value)}
+      />
+    </div>
+  );
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  filterByName: (name) => dispatch(filterByName(name)),
-});
-
-export default connect(null, mapDispatchToProps)(FilterByName);
+export default FilterByName;
 
 FilterByName.propTypes = {
   filterByName: PropTypes.func.isRequired,
