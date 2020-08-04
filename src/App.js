@@ -6,6 +6,7 @@ import TableHead from './components/TableHead';
 import SWProvider from './context/Provider';
 import SearchBar from './components/SearchBar';
 import Filters from './components/Filters';
+import FiltersInUse from './components/FiltersInUse';
 // To commit
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <SWProvider>
         <SearchBar />
         <Filters />
+        <FiltersInUse />
         <table className="table">
           <TableHead />
           <TableBody />

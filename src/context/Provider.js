@@ -30,6 +30,11 @@ const SWProvider = ({ children }) => {
     ]);
     setColumns([...columns].filter((coluna) => coluna !== column));
   };
+  const removeFilter = (filterColumn) => {
+    setfilterByNumericValues([
+      ...filterByNumericValues.filter(({ column }) => column !== filterColumn),
+    ]);
+  };
   const context = {
     data,
     setData,
@@ -41,6 +46,7 @@ const SWProvider = ({ children }) => {
     filterByNumericValues,
     setfilterByNumericValues,
     handleNumericFilter,
+    removeFilter,
   };
   return <SWContext.Provider value={context}>{children}</SWContext.Provider>;
 };
