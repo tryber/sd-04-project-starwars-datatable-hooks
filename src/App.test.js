@@ -1,5 +1,7 @@
 import React from 'react';
-import { cleanup, fireEvent, render, screen } from '@testing-library/react';
+import {
+  cleanup, fireEvent, render, screen,
+} from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 
 import App from './App';
@@ -24,9 +26,9 @@ const mockFetch = () => {
     .mockImplementation(() => Promise.resolve({
       status: 200,
       ok: true,
-      json: () => Promise.resolve(testData)
+      json: () => Promise.resolve(testData),
     }));
-}
+};
 
 describe('Fazer uma requisição para o endpoint `/planets` da API de Star Wars e preencher uma tabela com os dados retornados, com exceção dos da coluna `residents`', () => {
   beforeAll(mockFetch);
@@ -44,7 +46,7 @@ describe('Fazer uma requisição para o endpoint `/planets` da API de Star Wars 
       render(<App />);
     });
     const planets = testData.results;
-    for(let planetIndex in planets) {
+    for (const planetIndex in planets) {
       const name = await screen.findByText(planets[planetIndex].name);
       const rotationPeriod = await screen.findAllByText(planets[planetIndex].rotation_period);
       const orbitalPeriod = await screen.findAllByText(planets[planetIndex].orbital_period);
@@ -64,7 +66,7 @@ describe('Fazer uma requisição para o endpoint `/planets` da API de Star Wars 
       expect(terrain.length).toBeGreaterThanOrEqual(1);
       expect(surfaceWater.length).toBeGreaterThanOrEqual(1);
       expect(population.length).toBeGreaterThanOrEqual(1);
-    };
+    }
   });
 
   it('renderiza uma tabela com 13 colunas', async () => {
@@ -104,7 +106,7 @@ describe('Sua página deve ter um campo de texto que filtra a tabela para soment
 
     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(8);
     const planetNames = ['Coruscant', 'Dagobah', 'Endor', 'Hoth', 'Kamino', 'Naboo', 'Tatooine'];
-    for (let planetName of planetNames) {
+    for (const planetName of planetNames) {
       expect(await screen.findByText(planetName)).toBeInTheDocument();
     }
   });
@@ -118,7 +120,7 @@ describe('Sua página deve ter um campo de texto que filtra a tabela para soment
 
     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(3);
     const planetNames = ['Naboo', 'Tatooine'];
-    for (let planetName of planetNames) {
+    for (const planetName of planetNames) {
       expect(await screen.findByText(planetName)).toBeInTheDocument();
     }
   });
@@ -132,7 +134,7 @@ describe('Sua página deve ter um campo de texto que filtra a tabela para soment
     let planetNames = [];
     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(8);
     planetNames = ['Coruscant', 'Dagobah', 'Endor', 'Hoth', 'Kamino', 'Naboo', 'Tatooine'];
-    for (let planetName of planetNames) {
+    for (const planetName of planetNames) {
       expect(await screen.findByText(planetName)).toBeInTheDocument();
     }
 
@@ -142,7 +144,7 @@ describe('Sua página deve ter um campo de texto que filtra a tabela para soment
     });
     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(3);
     planetNames = ['Naboo', 'Tatooine'];
-    for (let planetName of planetNames) {
+    for (const planetName of planetNames) {
       expect(await screen.findByText(planetName)).toBeInTheDocument();
     }
 
@@ -152,7 +154,7 @@ describe('Sua página deve ter um campo de texto que filtra a tabela para soment
     });
     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(11);
     planetNames = ['Alderaan', 'Bespin', 'Coruscant', 'Dagobah', 'Endor', 'Hoth', 'Kamino', 'Naboo', 'Tatooine', 'Yavin IV'];
-    for (let planetName of planetNames) {
+    for (const planetName of planetNames) {
       expect(await screen.findByText(planetName)).toBeInTheDocument();
     }
   });
@@ -170,7 +172,7 @@ describe('Sua página deve ter um filtro para valores numéricos', () => {
     const column = await screen.findByTestId(COLUMN_FILTER_SELECTOR);
     expect(column).toHaveProperty('nodeName', 'SELECT');
     const columns = ['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
-    const foundColumnFilter = Array.from(column.children).map(child => {
+    const foundColumnFilter = Array.from(column.children).map((child) => {
       expect(child).toHaveProperty('nodeName', 'OPTION');
       return child.innerHTML;
     });
@@ -185,7 +187,7 @@ describe('Sua página deve ter um filtro para valores numéricos', () => {
     const column = await screen.findByTestId(COMPARISON_FILTER_SELECTOR);
     expect(column).toHaveProperty('nodeName', 'SELECT');
     const columns = ['maior que', 'igual a', 'menor que'];
-    const foundComparisonFilter = Array.from(column.children).map(child => {
+    const foundComparisonFilter = Array.from(column.children).map((child) => {
       expect(child).toHaveProperty('nodeName', 'OPTION');
       return child.innerHTML;
     });
@@ -213,9 +215,9 @@ describe('Sua página deve ter um filtro para valores numéricos', () => {
       render(<App />);
     });
 
-    fireEvent.change(await screen.findByTestId(COLUMN_FILTER_SELECTOR), { target: { value: 'surface_water' }});
-    fireEvent.change(await screen.findByTestId(COMPARISON_FILTER_SELECTOR), { target: { value: 'menor que' }});
-    fireEvent.change(await screen.findByTestId(VALUE_FILTER_SELECTOR), { target: { value: '40' }});
+    fireEvent.change(await screen.findByTestId(COLUMN_FILTER_SELECTOR), { target: { value: 'surface_water' } });
+    fireEvent.change(await screen.findByTestId(COMPARISON_FILTER_SELECTOR), { target: { value: 'menor que' } });
+    fireEvent.change(await screen.findByTestId(VALUE_FILTER_SELECTOR), { target: { value: '40' } });
     fireEvent.click(await screen.findByTestId(BUTTON_FILTER_SELECTOR));
 
     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(7);
@@ -226,9 +228,9 @@ describe('Sua página deve ter um filtro para valores numéricos', () => {
       render(<App />);
     });
 
-    fireEvent.change(await screen.findByTestId(COLUMN_FILTER_SELECTOR), { target: { value: 'diameter' }});
-    fireEvent.change(await screen.findByTestId(COMPARISON_FILTER_SELECTOR), { target: { value: 'maior que' }});
-    fireEvent.change(await screen.findByTestId(VALUE_FILTER_SELECTOR), { target: { value: '8900' }});
+    fireEvent.change(await screen.findByTestId(COLUMN_FILTER_SELECTOR), { target: { value: 'diameter' } });
+    fireEvent.change(await screen.findByTestId(COMPARISON_FILTER_SELECTOR), { target: { value: 'maior que' } });
+    fireEvent.change(await screen.findByTestId(VALUE_FILTER_SELECTOR), { target: { value: '8900' } });
     fireEvent.click(await screen.findByTestId(BUTTON_FILTER_SELECTOR));
 
     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(8);
@@ -239,9 +241,9 @@ describe('Sua página deve ter um filtro para valores numéricos', () => {
       render(<App />);
     });
 
-    fireEvent.change(await screen.findByTestId(COLUMN_FILTER_SELECTOR), { target: { value: 'population' }});
-    fireEvent.change(await screen.findByTestId(COMPARISON_FILTER_SELECTOR), { target: { value: 'igual a' }});
-    fireEvent.change(await screen.findByTestId(VALUE_FILTER_SELECTOR), { target: { value: '200000' }});
+    fireEvent.change(await screen.findByTestId(COLUMN_FILTER_SELECTOR), { target: { value: 'population' } });
+    fireEvent.change(await screen.findByTestId(COMPARISON_FILTER_SELECTOR), { target: { value: 'igual a' } });
+    fireEvent.change(await screen.findByTestId(VALUE_FILTER_SELECTOR), { target: { value: '200000' } });
     fireEvent.click(await screen.findByTestId(BUTTON_FILTER_SELECTOR));
 
     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(2);
@@ -262,21 +264,21 @@ describe('Sua página não deve utilizar filtros repetidos', () => {
 
     column = await screen.findByTestId(COLUMN_FILTER_SELECTOR);
     expect(column).toHaveProperty('nodeName', 'SELECT');
-    foundColumnFilter = Array.from(column.children).map(child => {
+    foundColumnFilter = Array.from(column.children).map((child) => {
       expect(child).toHaveProperty('nodeName', 'OPTION');
       return child.innerHTML;
     });
     expect(foundColumnFilter).toEqual(expect.arrayContaining(['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water']));
 
-    fireEvent.change(await screen.findByTestId(COLUMN_FILTER_SELECTOR), { target: { value: 'population' }});
-    fireEvent.change(await screen.findByTestId(COMPARISON_FILTER_SELECTOR), { target: { value: 'maior que' }});
-    fireEvent.change(await screen.findByTestId(VALUE_FILTER_SELECTOR), { target: { value: '8000' }});
+    fireEvent.change(await screen.findByTestId(COLUMN_FILTER_SELECTOR), { target: { value: 'population' } });
+    fireEvent.change(await screen.findByTestId(COMPARISON_FILTER_SELECTOR), { target: { value: 'maior que' } });
+    fireEvent.change(await screen.findByTestId(VALUE_FILTER_SELECTOR), { target: { value: '8000' } });
     fireEvent.click(await screen.findByTestId(BUTTON_FILTER_SELECTOR));
     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(8);
 
     column = await screen.findByTestId(COLUMN_FILTER_SELECTOR);
     expect(column).toHaveProperty('nodeName', 'SELECT');
-    foundColumnFilter = Array.from(column.children).map(child => {
+    foundColumnFilter = Array.from(column.children).map((child) => {
       expect(child).toHaveProperty('nodeName', 'OPTION');
       return child.innerHTML;
     });
