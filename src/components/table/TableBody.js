@@ -46,7 +46,7 @@ function TableBody() {
 }
 
 export default TableBody;
-
+// para adicionar
 // TableBody.defaultProps = {
 //   columnSort: 'Name',
 //   sort: 'ASC',
