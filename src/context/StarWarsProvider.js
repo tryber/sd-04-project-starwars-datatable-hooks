@@ -10,13 +10,11 @@ const StarWarsProvider = ({ children }) => {
   const [filterByName, setSearch] = useState({ name: '' });
   const [filterByNumericValues, setByNumericValues] = useState([]);
   const [objFilters, setObjFilters] = useState({});
+  const [order, setOrder] = useState({ column: 'Name', sort: 'ASC' });
 
   const handleFilter = (event) => {
     event.preventDefault();
-    setByNumericValues((prevState) => [
-      ...prevState,
-      objFilters,
-    ]);
+    setByNumericValues((prevState) => [...prevState, objFilters]);
   };
 
   const selectedFilters = (event) => {
@@ -29,7 +27,9 @@ const StarWarsProvider = ({ children }) => {
   };
 
   const clearFilter = (columnRemove) => {
-    setByNumericValues(filterByNumericValues.filter(({ column }) => column !== columnRemove));
+    setByNumericValues(
+      filterByNumericValues.filter(({ column }) => column !== columnRemove),
+    );
   };
 
   useEffect(() => {
@@ -39,7 +39,9 @@ const StarWarsProvider = ({ children }) => {
         const { results } = await request.json();
         await setData(results);
         await setLoading(false);
-      } catch (error) { console.log('Algo deu errado', error); }
+      } catch (error) {
+        console.log('Algo deu errado', error);
+      }
     })();
   }, []);
 
@@ -48,14 +50,18 @@ const StarWarsProvider = ({ children }) => {
       ...prevState,
       filterByName,
       filterByNumericValues,
+      order,
     }));
 
     setDataFiltered(
-      data.filter((planets) => (
-        planets.name.toLowerCase().indexOf(filterByName.name.toLowerCase()) !== -1))
+      data
+        .filter(
+          (planets) =>
+            planets.name.toLowerCase().indexOf(filterByName.name.toLowerCase()) !== -1,
+        )
         .map((planet) => planet),
     );
-  }, [filterByName, data, filterByNumericValues]);
+  }, [filterByName, data, filterByNumericValues, order]);
 
   const handleCurrentData = (event) => {
     event.preventDefault();
@@ -76,20 +82,18 @@ const StarWarsProvider = ({ children }) => {
     handleFilter,
     filterByNumericValues,
     clearFilter,
+    order,
+    setOrder,
   };
 
   return (
-    <StarWarsContext.Provider value={stateValue}>
-      {children}
-    </StarWarsContext.Provider>
+    <StarWarsContext.Provider value={stateValue}>{children}</StarWarsContext.Provider>
   );
 };
 
 StarWarsProvider.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.element),
-    PropTypes.element,
-  ]).isRequired,
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element])
+    .isRequired,
 };
 
 export default StarWarsProvider;
