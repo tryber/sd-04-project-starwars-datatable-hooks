@@ -19,7 +19,9 @@ const TableHead = () => {
   if (fetching === true) {
     return (
       <tbody>
-        <tr>Loading...</tr>
+        <tr>
+          <td>Loading...</td>
+        </tr>
       </tbody>
     );
   }
