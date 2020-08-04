@@ -1,26 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import StarWarsProvider from './context/StarWarsProvider';
+import Table from './components/Table';
+import SearchText from './components/SearchText';
+import SelectColumn from './components/SelectColumn';
+import DeleteFunction from './components/DeleteFilter';
 
-function App() {
-  return (
+const App = () => (
+  <StarWarsProvider>
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h2>StarWars Datatable with Filters</h2>
+        <SearchText />
+        <SelectColumn />
       </header>
+      <DeleteFunction />
+      <Table />
     </div>
-  );
-}
+  </StarWarsProvider>
+);
 
 export default App;
