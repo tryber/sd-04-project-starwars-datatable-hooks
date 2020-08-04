@@ -19,16 +19,16 @@ const SWProvider = ({ children }) => {
   const handleSearchText = (text) => {
     setFilterByName({ name: text });
   };
-  const handleNumericFilter = (value) => {
+  const handleNumericFilter = (column, comparison, number) => {
     setfilterByNumericValues([
       ...filterByNumericValues,
       {
-        column: value.column.value,
-        comparison: value.comparison.value,
-        value: value.number.value,
+        column,
+        comparison,
+        value: number,
       },
     ]);
-    setColumns([...columns].filter((coluna) => coluna !== value.column.value));
+    setColumns([...columns].filter((coluna) => coluna !== column));
   };
   const context = {
     data,
