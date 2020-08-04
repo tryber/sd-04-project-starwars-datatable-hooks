@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { filterByName } from '../../../../sd-04-project-react-redux-starwars-database-filters/src/action';
-
+import { filterByName } from '../../'
 class FilterByName extends Component {
   render() {
     return (
