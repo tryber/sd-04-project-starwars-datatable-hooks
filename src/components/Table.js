@@ -1,49 +1,45 @@
 import React, { useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 
+const sortingData = (sortBy) => {
+  const { order } = useContext(StarWarsContext);
+  const { column, sort } = order;
+  let sortData = sortBy;
+  const selectedCol = column.toLowerCase();
+  if (selectedCol === 'name' || selectedCol === 'climate' || selectedCol === 'terrain') {
+    sortData = sortData.sort((a, b) => a[selectedCol].localeCompare(b[selectedCol]));
+  }
+  if (sort === 'ASC') {
+    sortData = sortData.sort((a, b) => a[selectedCol] - b[selectedCol]);
+  }
+  if (sort === 'DESC') {
+    sortData = sortData.sort((a, b) => b[selectedCol] - a[selectedCol]);
+  }
+  return sortData;
+};
+
+const toggleFilter = () => {
+  const { data, filterByNumericValues } = useContext(StarWarsContext);
+  if (filterByNumericValues.length < 1) return sortingData(data);
+  return filterByNumericValues.reduce((newArray, filters) => {
+    const { column, comparison, value } = filters;
+    return newArray.filter((planet) => {
+      switch (comparison) {
+        case 'maior que':
+          return Number(planet[column]) > Number(value);
+        case 'menor que':
+          return Number(planet[column]) < Number(value);
+        case 'igual a':
+          return Number(planet[column]) === Number(value);
+        default:
+          return false;
+      }
+    });
+  }, sortingData(data));
+};
+
 const Table = () => {
-  const states = useContext(StarWarsContext);
-  const { data, filterByName, filteredData, filterByNumericValues, order } = states;
-
-  const sortingData = (sortBy) => {
-    const { column, sort } = order;
-    let sortData = sortBy;
-    const selectedCol = column.toLowerCase();
-    if (
-      selectedCol === 'name' ||
-      selectedCol === 'climate' ||
-      selectedCol === 'terrain'
-    ) {
-      sortData = sortData.sort((a, b) => a[selectedCol].localeCompare(b[selectedCol]));
-    }
-    if (sort === 'ASC') {
-      sortData = sortData.sort((a, b) => a[selectedCol] - b[selectedCol]);
-    }
-    if (sort === 'DESC') {
-      sortData = sortData.sort((a, b) => b[selectedCol] - a[selectedCol]);
-    }
-    return sortData;
-  };
-
-  const toggleFilter = () => {
-    if (filterByNumericValues.length < 1) return sortingData(data);
-    return filterByNumericValues.reduce((newArray, filters) => {
-      const { column, comparison, value } = filters;
-      return newArray.filter((planet) => {
-        switch (comparison) {
-          case 'maior que':
-            return Number(planet[column]) > Number(value);
-          case 'menor que':
-            return Number(planet[column]) < Number(value);
-          case 'igual a':
-            return Number(planet[column]) === Number(value);
-          default:
-            return false;
-        }
-      });
-    }, sortingData(data));
-  };
-
+  const { filterByName, filteredData } = useContext(StarWarsContext);
   const planetsData = filterByName.name === '' ? toggleFilter() : filteredData;
   const titles = planetsData[0] ? Object.keys(planetsData[0]) : [];
 

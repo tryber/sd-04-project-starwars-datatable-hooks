@@ -42,9 +42,9 @@ const SortByAscDesc = () => {
         <option value="DEFAULT" disable>
           Columns
         </option>
-        {listColumns.map((column) => (
-          <option key={column} value={column} name="column-sort">
-            {column}
+        {listColumns.map((op) => (
+          <option key={op} value={op} name="column-sort">
+            {op}
           </option>
         ))}
       </select>
