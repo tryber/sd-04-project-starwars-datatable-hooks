@@ -96,7 +96,7 @@ const FilterNav = () => {
                 checked
                 value="ASC"
                 onChange={(e) => onChangeOrder('sort', e.target.value)}
-                test="column-sort-input"
+                test="column-sort-input-asc"
               />
               <label htmlFor="orderDESC"> DESC:</label>
               <Input
@@ -105,7 +105,7 @@ const FilterNav = () => {
                 id="orderDESC"
                 value="DESC"
                 onChange={(e) => onChangeOrder('sort', e.target.value)}
-                test="column-sort-input"
+                test="column-sort-input-desc"
               />
               <Button
                 onClick={() => functions.setFilterByOrder(localOder)}
