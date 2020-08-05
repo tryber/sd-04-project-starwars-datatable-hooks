@@ -1,25 +1,14 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
-import { filterByNumericValues } from '../../action';
+import useFilters from '../../effect/useFilters';
 
-class FilterValue extends React.Component {
-  constructor(props) {
-    super(props);
+function FilterValue() {
+  const [number, setNumber] = useState('');
+  const [column, setColumn] = useState('');
+  const [comparation, setComparation] = useState('');
 
-    this.state = {
-      number: '',
-      column: '',
-      comparation: '',
-    };
+  const { filterByNumericValues } = useFilters();
 
-    this.updateColumn = this.updateColumn.bind(this);
-    this.onNumberChange = this.onNumberChange.bind(this);
-    this.onSelectChange = this.onSelectChange.bind(this);
-    this.getColumns = this.getColumns.bind(this);
-    this.getComparation = this.getComparation.bind(this);
-    this.onClick = this.onClick.bind(this);
-  }
 
   componentDidMount() {
     this.updateColumn();
@@ -36,7 +25,7 @@ class FilterValue extends React.Component {
 
   onClick() {
     const { number, column, comparation } = this.state;
-    this.props.filterByNumericValues(column, comparation, number);
+    filterByNumericValues(column, comparation, number);
     this.setState({ number: '', column: '', comparation: '' });
   }
 
@@ -90,43 +79,34 @@ class FilterValue extends React.Component {
     ];
   }
 
-  render() {
-    return (
-      <div>
-        {this.getColumns()}
-        {this.getComparation()}
-        <input
-          type="number"
-          data-testid="value-filter"
-          value={this.state.number}
-          onChange={(event) => this.onNumberChange(event)}
-        />
-        <button data-testid="button-filter" onClick={this.onClick}>
-          Filtrar
-        </button>
-      </div>
-    );
-  }
+
+  return (
+    <div>
+      {this.getColumns()}
+      {this.getComparation()}
+      <input
+        type="number"
+        data-testid="value-filter"
+        value={this.state.number}
+        onChange={(event) => this.onNumberChange(event)}
+      />
+      <button data-testid="button-filter" onClick={this.onClick}>
+        Filtrar
+      </button>
+    </div>
+  );
+  
 }
 
-const mapStateToProps = (state) => ({
-  numericValues: state.filters.filterByNumericValues,
-});
+export default FilterValue;
 
-const mapDispatchToProps = (dispatch) => ({
-  filterByNumericValues: (column, comparison, value) =>
-    dispatch(filterByNumericValues(column, comparison, value)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(FilterValue);
-
-FilterValue.propTypes = {
-  numericValues: PropTypes.arrayOf(
-    PropTypes.shape({
-      column: PropTypes.string,
-      comparison: PropTypes.string,
-      value: PropTypes.string,
-    }),
-  ).isRequired,
-  filterByNumericValues: PropTypes.func.isRequired,
-};
+// FilterValue.propTypes = {
+//   numericValues: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       column: PropTypes.string,
+//       comparison: PropTypes.string,
+//       value: PropTypes.string,
+//     }),
+//   ).isRequired,
+//   filterByNumericValues: PropTypes.func.isRequired,
+// };

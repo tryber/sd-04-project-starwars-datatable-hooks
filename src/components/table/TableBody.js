@@ -1,26 +1,21 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-
 import StarWarsContext from '../../context/StarWarsContext';
-import orderFuncAsc from '../filters/OrderFuncAsc';
-import orderFuncDesc from '../filters/OrderFuncDesc';
+import usePlanets from '../../effect/usePlanets';
+import useFilters from '../../effect/useFilters';
 
 function TableBody() {
-  const {
-    data,
-    filterByName: { name },
-    filterByNumericValues,
-    order: { column, sort },
-  } = useContext(StarWarsContext);
+  const { first } = useContext(StarWarsContext);
+  const data = usePlanets();
+  let { filteredPlanets } = useFilters();
 
-  data =
-    sort === 'ASC'
-      ? orderFuncAsc(data, name, filterByNumericValues, column, sort)
-      : orderFuncDesc(data, name, filterByNumericValues, column, sort);
+  if (first) {
+    filteredPlanets = data;
+  }
 
   return (
     <tbody>
-      {data.map((planet) => (
+      {filteredPlanets.map((planet) => (
         <tr key={planet.name}>
           <td>{planet.name}</td>
           <td>{planet.rotation_period}</td>
@@ -52,24 +47,26 @@ export default TableBody;
 //   sort: 'ASC',
 // };
 
-// TableBody.propTypes = {
-//   planets: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       name: PropTypes.string,
-//       rotation_period: PropTypes.string,
-//       orbital_period: PropTypes.string,
-//       diameter: PropTypes.string,
-//       climate: PropTypes.string,
-//       gravity: PropTypes.string,
-//       terrain: PropTypes.string,
-//       surface_water: PropTypes.string,
-//       population: PropTypes.string,
-//       film: PropTypes.string,
-//       created: PropTypes.string,
-//       edited: PropTypes.string,
-//       url: PropTypes.string,
-//     }),
-//   ).isRequired,
+TableBody.propTypes = {
+  planets: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      rotation_period: PropTypes.string,
+      orbital_period: PropTypes.string,
+      diameter: PropTypes.string,
+      climate: PropTypes.string,
+      gravity: PropTypes.string,
+      terrain: PropTypes.string,
+      surface_water: PropTypes.string,
+      population: PropTypes.string,
+      film: PropTypes.string,
+      created: PropTypes.string,
+      edited: PropTypes.string,
+      url: PropTypes.string,
+    })
+  ).isRequired,
+};
+
 //   name: PropTypes.string.isRequired,
 //   numericValues: PropTypes.arrayOf(
 //     PropTypes.shape({
@@ -82,4 +79,3 @@ export default TableBody;
 //   ).isRequired,
 //   columnSort: PropTypes.string.isRequired,
 //   sort: PropTypes.string.isRequired,
-// };

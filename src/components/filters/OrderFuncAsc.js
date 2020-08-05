@@ -7,6 +7,7 @@ const orderName = (array) => array.sort(function (a, b) {
 });
 
 const orderFuncAsc = (planets, name, numericValues, columnSort) => {
+  console.log("Planets", planets)
   if (columnSort === 'Name') {
     const filter = filterFunc(planets, name, numericValues);
     return orderName(filter);

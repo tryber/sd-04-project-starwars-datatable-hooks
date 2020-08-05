@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import apiPlanets from '../services/index';
+import React, { useState } from 'react';
 import StarWarsContext from './StarWarsContext';
 
 const INITIAL_STATE_FILTERS = {
@@ -13,25 +12,25 @@ const INITIAL_STATE_FILTERS = {
 
 const Provider = ({ children }) => {
   const [data, setData] = useState([]);
+  const [filteredPlanets, setFilteredPlanets] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
-  const [filter, setFilter] = useState(INITIAL_STATE_FILTERS);
-
-  useEffect(() => {
-    loadData().then((data) => setData(data.results));
-  }, []);
-
-  const loadData = async () => {
-    const data = await apiPlanets();
-    return data;
-  };
+  const [first, setFirst] = useState(true);
+  const [error, setError] = useState('');
+  const [filters, setFilters] = useState(INITIAL_STATE_FILTERS);
 
   const contextValue = {
     data,
     setData,
     isFetching,
     setIsFetching,
-    filter,
-    setFilter,
+    filters,
+    setFilters,
+    error,
+    setError,
+    filteredPlanets,
+    setFilteredPlanets,
+    first,
+    setFirst,
   };
 
   return (

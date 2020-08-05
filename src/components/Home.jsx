@@ -1,13 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-// import Filtro from './filtros/';
+import Filter from './filters/Filters';
 import Table from './table/Table';
 
 function Home() {
   return (
     <div>
-      {/* <Filtro /> */}
+      <Filter />
       <Table />
     </div>
   );
