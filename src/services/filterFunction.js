@@ -1,11 +1,17 @@
 const filterComparisons = (filteredData, column, comparison, value) => {
   switch (comparison) {
     case 'maior que':
-      return filteredData.filter((child) => Number(child[column]) > Number(value));
+      return filteredData.filter(
+        (child) => Number(child[column]) > Number(value),
+      );
     case 'igual a':
-      return filteredData.filter((child) => Number(child[column]) === Number(value));
+      return filteredData.filter(
+        (child) => Number(child[column]) === Number(value),
+      );
     case 'menor que':
-      return filteredData.filter((child) => Number(child[column]) < Number(value));
+      return filteredData.filter(
+        (child) => Number(child[column]) < Number(value),
+      );
     default:
       return false;
   }
@@ -39,7 +45,9 @@ const filterFunction = (data, filterName, filterNumber, order) => {
       filteredData = filterComparisons(filteredData, column, comparison, value);
     });
   }
-  if (filterName.name) filteredData = data.filter((obj) => obj.name.toLowerCase().includes(filterName.name));
+  if (filterName.name) {
+    filteredData = data.filter((obj) => obj.name.toLowerCase().includes(filterName.name));
+  }
   if (order) filteredData.sort(compare(order.column.toLowerCase(), order.sort));
   return filteredData;
 };

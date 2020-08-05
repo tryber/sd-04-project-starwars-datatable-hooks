@@ -1,13 +1,11 @@
 import React, { useEffect, useContext } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { StarWarsContext } from '../context/StarWarsContext';
 import fecthFunction from '../services/fetchFunction';
 import filterFunction from '../services/filterFunction';
 
-const Table = ({ filterNumber, order }) => {
+const Table = () => {
   const { setPlanetsData, planetsData, filters } = useContext(StarWarsContext);
-  const { filterByName } = filters;
+  const { filterByName, filterByNumericValues, order } = filters;
   useEffect(() => {
     fecthFunction().then((data) => setPlanetsData(data.results));
   }, [setPlanetsData]);
@@ -35,8 +33,8 @@ const Table = ({ filterNumber, order }) => {
         {filterFunction(
           planetsData,
           filterByName,
-          filterNumber,
-          order
+          filterByNumericValues,
+          order,
         ).map(
           ({
             name,
@@ -68,42 +66,15 @@ const Table = ({ filterNumber, order }) => {
               <td key={name + created}>{created}</td>
               <td key={name + edited}>{edited}</td>
             </tr>
-          )
+          ),
         )}
       </tbody>
     </table>
   );
 };
 
-const mapState = (state) => {
-  const { filterByNumericValues, order } = state.filters;
-  const { data, loading, error } = state.api;
-  return {
-    data,
-    loading,
-    error,
-    filterNumber: filterByNumericValues,
-    order,
-  };
-};
+export default Table;
 
-export default connect(mapState)(Table);
-
-Table.defaultProps = {
-  error: false,
-};
-
-Table.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.object])
-  ).isRequired,
-  loading: PropTypes.bool.isRequired,
-  error: PropTypes.bool,
-  filterValues: PropTypes.string.isRequired,
-  filterNumber: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.object]))
-    .isRequired,
-  order: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string])).isRequired,
-};
 // jeito de fazer a tabela automática:
 // {data.length !== 0 && filterFunction(data, filterValues, filterNumber, order).map(
 //   (title) => (
