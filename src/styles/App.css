@@ -1,8 +1,7 @@
 body {
   background-color: #282c34;
   color: white;
-  font-family: 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
-    'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family: monospace;
   margin: 0;
   padding: 0;
 }
@@ -23,7 +22,7 @@ nav {
 
 label {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
 }
 
 .row {
