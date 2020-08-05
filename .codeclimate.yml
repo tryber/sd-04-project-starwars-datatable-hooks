@@ -17,7 +17,7 @@ checks:
       threshold: 20
   method-lines:
     config:
-      threshold: 45
+      threshold: 110
   nested-control-flow:
     config:
       threshold: 4
@@ -34,6 +34,7 @@ exclude_patterns:
   - "src/serviceWorker.js"
   - "src/index.css"
   - "src/App.css"
+  - "src/testData.js"
   - "**/libs/*.css"
   - "**/libs/*.js"
   - "node_modules/"
