@@ -52,7 +52,7 @@ const Table = () => {
             edited,
           }) => (
             <tr key={name}>
-              <td key={name + name}>{name}</td>
+              <td data-testid="planet-name" key={name + name}>{name}</td>
               <td key={name + rotationPeriod}>{rotationPeriod}</td>
               <td key={name + orbitalPeriod}>{orbitalPeriod}</td>
               <td key={name + diameter}>{diameter}</td>
