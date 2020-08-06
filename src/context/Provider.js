@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import StarWarsContext from './StarWarsContext';
 import PropTypes from 'prop-types';
+import StarWarsContext from './StarWarsContext';
 
 const INITIAL_STATE_FILTERS = {
   filterByName: { name: '' },

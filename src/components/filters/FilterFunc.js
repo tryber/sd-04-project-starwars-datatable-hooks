@@ -1,6 +1,7 @@
 const filterFunc = (planets, name, numericValues) => {
-  if (numericValues.length === 0)
+  if (numericValues.length === 0) {
     return planets.filter((planet) => planet.name.includes(name));
+  }
   return numericValues.reduce(
     (acc, { column, comparison, value }) =>
       acc.filter((planet) => {
@@ -24,7 +25,7 @@ const filterFunc = (planets, name, numericValues) => {
             return planet.name.includes(name);
         }
       }),
-    planets
+    planets,
   );
 };
 

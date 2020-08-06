@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-import PropTypes from 'prop-types';
 import StarWarsContext from '../../context/StarWarsContext';
 import updateColumn from './updateColumn';
 import { getColumns, getComparation } from './getSelecters';
@@ -45,14 +44,3 @@ function FilterValue() {
 }
 
 export default FilterValue;
-
-// FilterValue.propTypes = {
-//   numericValues: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       column: PropTypes.string,
-//       comparison: PropTypes.string,
-//       value: PropTypes.string,
-//     }),
-//   ).isRequired,
-//   filterByNumericValues: PropTypes.func.isRequired,
-// };
