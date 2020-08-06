@@ -1,23 +1,22 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 import { filterPlanetByName } from '../actions/filterPlanetByName';
+import StarWarsContext from '../context/StarWarsContext';
 
-const SearchBar = ({ value, dispatchFilterPlanetByName }) => (
-  <form>
-    <div>
-      <input
-        data-testid="name-filter"
-        value={value}
-        onChange={(event) => dispatchFilterPlanetByName(event.target.value)}
-      />
-    </div>
-  </form>
-);
+const SearchBar = () => {
+  const { filterByName: { name }, handleSearch } = useContext(StarWarsContext);
 
-SearchBar.propTypes = {
-  value: PropTypes.string.isRequired,
-  dispatchFilterPlanetByName: PropTypes.func.isRequired,
+  return (
+    <form>
+      <div>
+        <input
+          data-testid="name-filter"
+          value={name}
+          onChange={(event) => handleSearch(event.target.value)}
+        />
+      </div>
+    </form>
+  );
 };
 
 const mapStateToProps = (state) => ({

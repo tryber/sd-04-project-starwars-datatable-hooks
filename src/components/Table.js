@@ -17,14 +17,16 @@ const comparation = (planet, { column, comparison, value }) => {
   }
 };
 
-const filterPlanetByName = (planets, teste = '') => planets.filter((planet) => planet.name.includes(teste));
+const filterPlanetByName = (planets, name = '') => planets.filter((planet) => planet.name.includes(name));
 
-const Table = ({ name, filterByNumericValues }) => {
-  const { data, isFetching } = useContext(StarWarsContext);
+const Table = ({ filterByNumericValues }) => {
+  const { data, isFetching, filterByName: { name } } = useContext(StarWarsContext);
 
   console.log('Data on component', data);
 
   let planets = [...data];
+
+  console.log('teste', name);
 
   if (filterByNumericValues.length > 0) {
     filterByNumericValues.forEach((filter) => {
@@ -54,13 +56,11 @@ const Table = ({ name, filterByNumericValues }) => {
 
 Table.propTypes = {
   filterByNumericValues: PropTypes.arrayOf(PropTypes.object).isRequired,
-  name: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   data: state.planetsReducer.data,
   isFetching: state.planetsReducer.isFetching,
-  name: state.filters.filterByName.name,
   filterByNumericValues: state.filters.filterByNumericValues,
 });
 

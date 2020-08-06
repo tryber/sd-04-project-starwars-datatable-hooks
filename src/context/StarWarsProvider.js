@@ -7,6 +7,8 @@ const StarWarsProvider = ({ children }) => {
   const [data, setData] = useState([]);
   const [isFetching, setIsFetching] = useState(true);
   const [error, setError] = useState('');
+  const [filterByName, setfilterByName] = useState({ name: '' });
+  const [filterByNumericValues, setFilterByNumericValues] = useState([]);
 
   const getPlanets = async () => {
     try {
@@ -23,6 +25,12 @@ const StarWarsProvider = ({ children }) => {
     getPlanets();
   }, []);
 
+  const handleSearch = (value) => {
+    setfilterByName({
+      name: value,
+    });
+  };
+
   const store = {
     data,
     setData,
@@ -30,6 +38,10 @@ const StarWarsProvider = ({ children }) => {
     setIsFetching,
     error,
     setError,
+    filterByName,
+    handleSearch,
+    filterByNumericValues,
+    setFilterByNumericValues,
   };
 
   return <StarWarsContext.Provider value={store}>{children}</StarWarsContext.Provider>;
