@@ -3,6 +3,7 @@ import StoreProvider from '../utils/store';
 import Header from './Hearder';
 import numericFilter from '../helpers/numericFilter';
 
+// Função que ordena os planetas
 // const order = (column, sort, planets) => {
 //   planets.sort((a, b) => {
 //     if (!isNaN(a[column]) && !isNaN(b[column])) {
