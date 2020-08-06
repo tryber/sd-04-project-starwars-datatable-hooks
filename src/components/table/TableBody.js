@@ -1,21 +1,36 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import StarWarsContext from '../../context/StarWarsContext';
+import orderFuncAsc from '../filters/OrderFuncAsc';
+import orderFuncDesc from '../filters/OrderFuncDesc';
 import usePlanets from '../../effect/usePlanets';
-import useFilters from '../../effect/useFilters';
 
 function TableBody() {
-  const { first } = useContext(StarWarsContext);
+  const [planets, setPlanets] = useState([]);
   const data = usePlanets();
-  let { filteredPlanets } = useFilters();
+  const {
+    filters: {
+      filterByName: { name },
+      filterByNumericValues: numericValues,
+      order: { sort, column: columnSort },
+    },
+  } = useContext(StarWarsContext);
 
-  if (first) {
-    filteredPlanets = data;
-  }
+  useEffect(() => {
+    const filtered =
+      sort === 'ASC'
+        ? orderFuncAsc(data, name, numericValues, columnSort)
+        : orderFuncDesc(data, name, numericValues, columnSort);
+    setPlanets(filtered);
+  }, [name, numericValues, columnSort, sort]);
+
+  useEffect(() => {
+    setPlanets(data);
+  }, [])
 
   return (
     <tbody>
-      {filteredPlanets.map((planet) => (
+      {planets.map((planet) => (
         <tr key={planet.name}>
           <td>{planet.name}</td>
           <td>{planet.rotation_period}</td>

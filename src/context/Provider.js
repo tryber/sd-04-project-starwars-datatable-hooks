@@ -12,11 +12,42 @@ const INITIAL_STATE_FILTERS = {
 
 const Provider = ({ children }) => {
   const [data, setData] = useState([]);
-  const [filteredPlanets, setFilteredPlanets] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
-  const [first, setFirst] = useState(true);
   const [error, setError] = useState('');
   const [filters, setFilters] = useState(INITIAL_STATE_FILTERS);
+
+  const filterByName = (name) =>
+    setFilters((state) => ({
+      ...state,
+      filterByName: { name },
+    }));
+
+  const filterByNumericValues = (column, comparison, value) =>
+    setFilters((state) => ({
+      ...state,
+      filterByNumericValues: [
+        ...state.filterByNumericValues,
+        {
+          column,
+          comparison,
+          value,
+        },
+      ],
+    }));
+
+  const removeFilterNumeric = (obj) =>
+    setFilters((state) => ({
+      ...state,
+      filterByNumericValues: [
+        ...state.filterByNumericValues.filter((filter) => filter !== obj),
+      ],
+    }));
+
+  const orderColumns = (column, sort) =>
+    setFilters((state) => ({
+      ...state,
+      order: { column, sort },
+    }));
 
   const contextValue = {
     data,
@@ -24,13 +55,12 @@ const Provider = ({ children }) => {
     isFetching,
     setIsFetching,
     filters,
-    setFilters,
     error,
     setError,
-    filteredPlanets,
-    setFilteredPlanets,
-    first,
-    setFirst,
+    filterByName,
+    filterByNumericValues,
+    removeFilterNumeric,
+    orderColumns,
   };
 
   return (
