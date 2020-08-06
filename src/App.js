@@ -6,7 +6,7 @@ function App() {
   return (
     <Provider>
       <Home />
-    </Provider>      
+    </Provider>
   );
 }
 

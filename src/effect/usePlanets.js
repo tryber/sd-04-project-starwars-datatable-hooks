@@ -3,22 +3,20 @@ import apiPlanets from '../services/index';
 import StarWarsContext from '../context/StarWarsContext';
 
 const usePlanets = () => {
-  const { data, setData, setIsFetching, setError } = useContext(
-    StarWarsContext
-  );
-
-  useEffect(() => {
-    loadData()
-      .then((data) => setData(data.results))
-      .then(() => setIsFetching(false))
-      .catch((err) => setError(err));
-  }, []);
+  const { data, setData, setIsFetching, setError } = useContext(StarWarsContext);
 
   const loadData = async () => {
     setIsFetching(true);
-    const data = await apiPlanets();
-    return data;
+    const dataPlanets = await apiPlanets();
+    return dataPlanets;
   };
+
+  useEffect(() => {
+    loadData()
+      .then((dataPlanets) => setData(dataPlanets.results))
+      .then(() => setIsFetching(false))
+      .catch((err) => setError(err));
+  }, []);
 
   return data;
 };

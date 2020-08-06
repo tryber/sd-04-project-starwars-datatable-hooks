@@ -78,7 +78,7 @@ TableBody.propTypes = {
       created: PropTypes.string,
       edited: PropTypes.string,
       url: PropTypes.string,
-    })
+    }),
   ).isRequired,
 };
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import StarWarsContext from './StarWarsContext';
+import PropTypes from 'prop-types';
 
 const INITIAL_STATE_FILTERS = {
   filterByName: { name: '' },
@@ -71,3 +72,7 @@ const Provider = ({ children }) => {
 };
 
 export default Provider;
+
+Provider.propTypes = {
+  children: PropTypes.element.isRequired,
+};
