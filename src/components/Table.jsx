@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { StoreContext } from '../utils/store';
 import Header from './Hearder';
-import numericFilter from '../helpers/numericFilter';
+// import numericFilter from '../helpers/numericFilter';
 
 // Função que ordena os planetas
 // const order = (column, sort, planets) => {
