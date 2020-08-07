@@ -29,7 +29,7 @@ function Table() {
       <table>
         <Header />
         <tbody>
-          {newPlanets.map((planet) =>
+          {filteredPlanets.map((planet) =>
             <tr key={planet.name}>
               <td>{planet.name}</td>
               <td>{planet.population}</td>

@@ -14,6 +14,8 @@ const Hearder = () =>
       <th>Surface water</th>
       <th>Created</th>
       <th>Edited</th>
+      <th >Residents</th>
+      <th >Films</th>
     </tr>
   </thead>;
 
