@@ -38,6 +38,7 @@
     ]
   },
   "devDependencies": {
-    "@sheerun/mutationobserver-shim": "^0.3.3"
+    "@sheerun/mutationobserver-shim": "^0.3.3",
+    "eslint-config-airbnb": "^18.2.0"
   }
 }
