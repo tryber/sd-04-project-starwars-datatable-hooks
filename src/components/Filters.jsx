@@ -1,15 +1,15 @@
 import React, { useContext } from 'react';
-import StoreProvider from '../utils/store';
+import { StoreContext } from '../utils/store';
 import OrderFilter from './OrderFilter';
 
 const NameFilter = () => {
-  const { filters } = useContext(StoreProvider);
+  const context = useContext(StoreContext);
   return (
     <div>
       <input
-        value={filters.filterByName}
+        value={context.filterByName}
         onChange={(e) => {
-          filters.setFilterByName(e.target.value);
+          context.setFilterByName(e.target.value);
         }}
         type="text"
         data-testid="name-filter"
@@ -43,10 +43,9 @@ const Select = (options, testId) =>
   </select>;
 
 const NumericFilters = () => {
-  const { filters } = useContext(StoreProvider);
+  const { filters } = useContext(StoreContext);
   const filteredColumns = filters.filterByNumericValues.reduce((acc, cur) => {
     const { column } = cur;
-    console.log(column);
     return (
       acc.filter((option) =>
         (option.value !== column),

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import StoreProvider from '../utils/store';
+import { StoreContext } from '../utils/store';
 
 const columnOption = [
   { value: '', text: 'Column' },
@@ -31,8 +31,7 @@ const inputRadio = (value, handle) => (
 );
 
 const OrderFilter = () => {
-  const { filters } = useContext(StoreProvider);
-  console.log(filters.order);
+  const { filters } = useContext(StoreContext);
   let column;
   let sort;
   const handleColumn = (e) => { column = e.target.value; };
@@ -46,7 +45,7 @@ const OrderFilter = () => {
     >
       <select onChange={(e) => handleColumn(e, column)} name="columnName" data-testid="column-sort">
         {columnOption.map(({ value, text }) =>
-          <option value={value}>{text}</option>,
+          <option key={value} value={value}>{text}</option>,
         )}
       </select>
       {inputRadio('ASC', handleSort)}

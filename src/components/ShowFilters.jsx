@@ -1,8 +1,7 @@
 import React, { useContext } from 'react';
-import StoreProvider from '../utils/store';
+import { StoreContext } from '../utils/store';
 
 const deletFilter = (numberFilters, updateFilter, column) => {
-  console.log(numberFilters, updateFilter, column);
   numberFilters.forEach((filter, index) => {
     if (filter.column === column) {
       numberFilters.splice(index, 1);
@@ -11,7 +10,7 @@ const deletFilter = (numberFilters, updateFilter, column) => {
   updateFilter([...numberFilters]);
 };
 const ShowFilters = () => {
-  const { filters } = useContext(StoreProvider);
+  const { filters } = useContext(StoreContext);
   return (
     <ul>
       {filters.filterByNumericValues.map((option) => (
