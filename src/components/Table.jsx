@@ -23,7 +23,7 @@ function Table() {
   const filteredPlanets = numericFilter(newPlanets, filters.filterByNumericValues);
   const column = filters.order.column;
   const sort = filters.order.sort;
-  order(column, sort, filteredPlanets);
+  order(filteredPlanets, column, sort );
   return (
     <div>
       <table>
