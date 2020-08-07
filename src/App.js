@@ -14,12 +14,12 @@ const App = () =>
       <div>
         <img src={headerImg} alt="Imagem de cabelhaço da tabela de dados" width="100%" />
         <div className="filters-container">
-        <Filters />
-        <ShowFilters />
-      </div>
+          <Filters />
+          <ShowFilters />
+        </div>
       </div>
       <Table />
     </div>;
-  </StoreContext>
+  </StoreContext>;
 
 export default App;

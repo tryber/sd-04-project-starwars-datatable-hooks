@@ -25,10 +25,10 @@ function Table() {
   const newPlanets = planets.filter(({ name }) =>
     (name.toLowerCase()).includes(filters.filterByName),
   );
-  const filteredPlanets = numericFilter(newPlanets, filters.filterByNumericValues);
-  const column = filters.order.column;
-  const sort = filters.order.sort;
-  console.log(column, sort);
+  // const filteredPlanets = numericFilter(newPlanets, filters.filterByNumericValues);
+  // const column = filters.order.column;
+  // const sort = filters.order.sort;
+  // console.log(filteredPlanets);
   // filters.setOrder(column, sort, filteredPlanets);
   return (
     <div>
