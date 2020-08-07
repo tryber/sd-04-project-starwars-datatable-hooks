@@ -3,13 +3,13 @@ import { StoreContext } from '../utils/store';
 import OrderFilter from './OrderFilter';
 
 const NameFilter = () => {
-  const context = useContext(StoreContext);
+  const { filters } = useContext(StoreContext);
   return (
     <div>
       <input
-        value={context.filterByName}
+        value={filters.filterByName}
         onChange={(e) => {
-          context.setFilterByName(e.target.value);
+          filters.setFilterByName(e.target.value);
         }}
         type="text"
         data-testid="name-filter"
@@ -71,7 +71,7 @@ const NumericFilters = () => {
       {Select(filteredColumns, 'column-filter')}
       {Select(comparisonOptions, 'comparison-filter')}
       <input type="number" data-testid="value-filter" />
-      <button type="submit">Filtrar</button>
+      <button type="submit" data-testid="button-filter">Filtrar</button>
     </form>
   );
 };

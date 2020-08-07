@@ -1,23 +1,18 @@
 import React, { useContext } from 'react';
 import { StoreContext } from '../utils/store';
 import Header from './Hearder';
-// import numericFilter from '../helpers/numericFilter';
+import numericFilter from '../helpers/numericFilter';
 
 // Função que ordena os planetas
-// const order = (column, sort, planets) => {
-//   planets.sort((a, b) => {
-//     if (!isNaN(a[column]) && !isNaN(b[column])) {
-//       if (sort === 'ASC') {
-//         return (a[column]).localeCompare(b[column]);
-//       }
-//       return (b[column]).localeCompare(a[column]);
-//     }
-//     if (sort === 'ASC') {
-//       return (a[column]) - (b[column]);
-//     }
-//     return (b[column]) - (a[column]);
-//   });
-// };
+const order = (dataPlanets, column, orderFilter) => {
+  if (column === 'name' || column === 'climate') {
+    dataPlanets.sort((a, b) => (a[column]).localeCompare(b[column]));
+  } else if (orderFilter.sort === 'ASC') {
+    dataPlanets.sort((a, b) => (Number(a[column]) - Number(b[column])));
+  } else {
+    dataPlanets.sort((a, b) => (Number(b[column]) - Number(a[column])));
+  }
+};
 
 function Table() {
   const { planets, filters } = useContext(StoreContext);
@@ -25,11 +20,10 @@ function Table() {
   const newPlanets = planets.filter(({ name }) =>
     (name.toLowerCase()).includes(filters.filterByName),
   );
-  // const filteredPlanets = numericFilter(newPlanets, filters.filterByNumericValues);
-  // const column = filters.order.column;
-  // const sort = filters.order.sort;
-  // console.log(filteredPlanets);
-  // filters.setOrder(column, sort, filteredPlanets);
+  const filteredPlanets = numericFilter(newPlanets, filters.filterByNumericValues);
+  const column = filters.order.column;
+  const sort = filters.order.sort;
+  order(column, sort, filteredPlanets);
   return (
     <div>
       <table>
@@ -48,6 +42,8 @@ function Table() {
               <td>{planet.surface_water}</td>
               <td>{planet.created}</td>
               <td>{planet.edited}</td>
+              <td >Residents</td>
+              <td >Films</td>
             </tr>,
           )}
         </tbody>
