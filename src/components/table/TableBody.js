@@ -2,12 +2,11 @@ import React, { useContext, useState, useEffect } from 'react';
 import StarWarsContext from '../../context/StarWarsContext';
 import orderFuncAsc from '../filters/OrderFuncAsc';
 import orderFuncDesc from '../filters/OrderFuncDesc';
-import usePlanets from '../../effect/usePlanets';
 
 function TableBody() {
   const [planets, setPlanets] = useState([]);
-  const data = usePlanets();
   const {
+    data,
     filters: {
       filterByName: { name },
       filterByNumericValues: numericValues,
@@ -25,7 +24,7 @@ function TableBody() {
 
   useEffect(() => {
     setPlanets(data);
-  }, []);
+  }, [data]);
 
   return (
     <tbody>
