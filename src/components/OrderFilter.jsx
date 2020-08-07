@@ -16,13 +16,13 @@ const columnOption = [
   { value: 'edited', text: 'edited' },
 ];
 
-const inputRadio = (value, handle) => (
+const inputRadio = (value, handle, testid) => (
   <label htmlFor={value}>
     <input
       name="orderRatio"
       id={value}
       type="radio"
-      data-testid="column-sort-input"
+      data-testid={testid}
       value={value}
       onClick={(e) => handle(e)}
     />
@@ -48,8 +48,8 @@ const OrderFilter = () => {
           <option key={value} value={value}>{text}</option>,
         )}
       </select>
-      {inputRadio('ASC', handleSort)}
-      {inputRadio('DESC', handleSort)}
+      {inputRadio('ASC', handleSort, 'column-sort-input-asc')}
+      {inputRadio('DESC', handleSort, 'column-sort-input-desc')}
       <button type="submit" data-testid="column-sort-button">Filtrar</button>
     </form>
   );
