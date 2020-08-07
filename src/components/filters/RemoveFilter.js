@@ -1,10 +1,12 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { removeFilterNumeric } from '../../action';
+import React, { useContext } from 'react';
+import StarWarsContext from '../../context/StarWarsContext';
 
-function RemoveFilter({ numericValues, removeNumeric }) {
-  const onClick = (type) => removeNumeric(type);
+function RemoveFilter() {
+  const { removeFilterNumeric,
+    filters: { filterByNumericValues: numericValues },
+  } = useContext(StarWarsContext);
+
+  const onClick = (type) => removeFilterNumeric(type);
 
   return numericValues.map((type) => (
     <div data-testid="filter" key={type.column}>
@@ -16,23 +18,4 @@ function RemoveFilter({ numericValues, removeNumeric }) {
   ));
 }
 
-const mapStateToProps = (state) => ({
-  numericValues: state.filters.filterByNumericValues,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  removeNumeric: (type) => dispatch(removeFilterNumeric(type)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(RemoveFilter);
-
-RemoveFilter.propTypes = {
-  numericValues: PropTypes.arrayOf(
-    PropTypes.shape({
-      column: PropTypes.string,
-      comparison: PropTypes.string,
-      value: PropTypes.string,
-    }),
-  ).isRequired,
-  removeNumeric: PropTypes.func.isRequired,
-};
+export default RemoveFilter;
