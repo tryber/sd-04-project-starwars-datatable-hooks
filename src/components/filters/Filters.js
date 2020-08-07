@@ -1,7 +1,7 @@
 import React from 'react';
 import FilterName from './FilterByName';
 import FilterValues from './FiltersValue';
-// import FilterOrder from './FilterOrder';
+import FilterOrder from './FilterOrder';
 // import RemoveFilter from './RemoveFilter';
 
 function Filters() {
@@ -9,8 +9,8 @@ function Filters() {
     <div>
       <FilterName />
       <FilterValues />
-      {/* <FilterOrder />
-      <RemoveFilter />} */}
+      <FilterOrder />
+      {/* <RemoveFilter />} */}
     </div>
   );
 }
