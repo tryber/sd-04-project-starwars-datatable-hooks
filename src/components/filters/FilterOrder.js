@@ -4,7 +4,7 @@ import { getRadios } from './getSelecters';
 
 function FilterOrder() {
   const [columnSort, setColumnSort] = useState('Name');
-  const [inputSort, setInputSort] = useState('Name');
+  const [inputSort, setInputSort] = useState('ASC');
   const { orderColumns } = useContext(StarWarsContext);
 
   const onInputChange = (event) => setInputSort(event.target.value);
