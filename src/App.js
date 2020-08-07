@@ -1,26 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import StoreContext from './utils/store';
+import './css/App.css';
+import './css/header.css';
+import Table from './components/Table';
+import Filters from './components/Filters';
+import ShowFilters from './components/ShowFilters';
+import headerImg from './images/star-wars.png';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+
+const App = () =>
+  <StoreContext>
+    <div >
+      <div>
+        <img src={headerImg} alt="Imagem de cabelhaço da tabela de dados" width="100%" />
+        <div className="filters-container">
+          <Filters />
+          <ShowFilters />
+        </div>
+      </div>
+      <Table />
+    </div>;
+  </StoreContext>;
 
 export default App;

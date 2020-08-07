@@ -1,0 +1,17 @@
+td {
+  border: 1px solid black;
+  text-align: center;
+}
+
+th {
+  border: 1px solid black;
+  text-align: center;
+}
+
+.filters-container {
+  align-self: center;
+  background-color: cadetblue;
+  display: flex;
+  justify-content: center;
+  width: 50%;
+}
