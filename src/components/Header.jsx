@@ -1,10 +1,9 @@
 import React from 'react';
 
-export default Header = () => {
-  return <div>
-<input type="text" placeholder="Find Planets"/>
+const Header = () => (
+  <div>
+    <input type="text" placeholder="Find Planets" />
+  </div>
+);
 
-
-
-  </div>;
-};
+export default Header;

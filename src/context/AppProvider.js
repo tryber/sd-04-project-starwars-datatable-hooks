@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { useState } from 'react';
 import AppContext from './AppContext';
 
@@ -14,5 +15,9 @@ const AppProvider = ({ children }) => {
 
   return <AppContext.Provider value={context}> {children} </AppContext.Provider>;
 };
+
+AppProvider.propTypes = {
+  children: PropTypes.func.isRequired,
+}
 
 export default AppProvider;

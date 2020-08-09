@@ -9,7 +9,7 @@ import Colunas from './Colunas';
 // import orderFuncAsc from '../components/orderFuncAsc';
 // import orderFuncDesc from '../components/OrderFuncDesc';
 
-const Table = (props) => {
+const Table = () => {
   //  const { isFetching, data, planets, name, numericValues, columnSort, sort } = useContext(
   //    AppContext,
   //  );
@@ -25,14 +25,14 @@ const Table = (props) => {
     getPlanetsData();
   }, []);
 
-  /* 
+  /*
   const ordemData =
     sort === 'ASC'
       ? orderFuncAsc(planets, name, numericValues, columnSort, sort)
       : orderFuncDesc(planets, name, numericValues, columnSort, sort); */
 
   if (isFetching) return <span>...Loading</span>;
-  //const planeta1 = data;
+  // const planeta1 = data;
 
   return (
     <div>
@@ -46,7 +46,7 @@ const Table = (props) => {
     </div>
   );
 };
-/* 
+/*
 Table.propTypes = {
   data: PropTypes.shape({
     map: PropTypes.func,

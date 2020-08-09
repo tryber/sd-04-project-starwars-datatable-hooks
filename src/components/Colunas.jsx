@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Colunas = (planeta) => (
+const Colunas = () => (
   <tr>
     <td>name</td>
     <td>rotation_period</td>
