@@ -5,43 +5,26 @@ import getSwapi from '../services/getSwapi';
 // import filterAll from './filterAll';
 import linhas from './Linhas';
 import Colunas from './Colunas';
+import Header from './Header';
 // import './Table.css';
 // import orderFuncAsc from '../components/orderFuncAsc';
 // import orderFuncDesc from '../components/OrderFuncDesc';
 
-const Table = () => {
-  //  const { isFetching, data, planets, name, numericValues, columnSort, sort } = useContext(
-  //    AppContext,
-  //  );
-  const { data, setdata, setIsFetching, isFetching } = useContext(AppContext);
+const Table = ({planets}) => {
 
-  async function getPlanetsData() {
-    const planets = await getSwapi();
-    setdata(planets.results);
-    setIsFetching(false);
-  }
-
-  useEffect(() => {
-    getPlanetsData();
-  }, []);
-
-  /*
-  const ordemData =
-    sort === 'ASC'
-      ? orderFuncAsc(planets, name, numericValues, columnSort, sort)
-      : orderFuncDesc(planets, name, numericValues, columnSort, sort); */
-
-  if (isFetching) return <span>...Loading</span>;
+  const { data, setData, setIsFetching, isFetching } = useContext(AppContext);
+  //if (isFetching) return <span>...Loading</span>;
   // const planeta1 = data;
+  const { filteredPlanets } = data;
+  console.log(filteredPlanets)
 
   return (
     <div>
-      {console.log(data)}
       <table className="tabela">
         <thead>
           <Colunas />
         </thead>
-        <tbody>{data.map((selectedPlanet) => linhas(selectedPlanet))}</tbody>
+        <tbody>{filteredPlanets.map((selectedPlanet) => linhas(selectedPlanet))}</tbody>
       </table>
     </div>
   );

@@ -3,14 +3,23 @@ import React, { useState } from 'react';
 import AppContext from './AppContext';
 
 const AppProvider = ({ children }) => {
-  const [isFetching, setIsFetching] = useState(true);
-  const [data, setdata] = useState('');
+  const INITIAL_STATE = {
+    isFetching: true,
+    filterByName: { name: '' },
+    filteredPlanets: [],
+    planetsData: [],
+    filterByNumericValues: [],
+    order: {
+      column: 'Name',
+      sort: 'ASC',
+    },
+  };
+
+  const [data, setData] = useState(INITIAL_STATE);
 
   const context = {
-    isFetching,
-    setIsFetching,
     data,
-    setdata,
+    setData,
   };
 
   return <AppContext.Provider value={context}> {children} </AppContext.Provider>;
