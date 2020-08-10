@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 import StarWarsContext from '../../context/StarWarsContext';
 
 function FilterByName() {
@@ -18,7 +17,3 @@ function FilterByName() {
 }
 
 export default FilterByName;
-
-FilterByName.propTypes = {
-  filterByName: PropTypes.func.isRequired,
-};
