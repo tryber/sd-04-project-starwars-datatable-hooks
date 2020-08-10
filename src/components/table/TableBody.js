@@ -20,11 +20,7 @@ function TableBody() {
         ? orderFuncAsc(data, name, numericValues, columnSort)
         : orderFuncDesc(data, name, numericValues, columnSort);
     setPlanets(filtered);
-  }, [name, numericValues, columnSort, sort]);
-
-  useEffect(() => {
-    setPlanets(data);
-  }, [data]);
+  }, [data, name, numericValues, columnSort, sort]);
 
   return (
     <tbody>
