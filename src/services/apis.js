@@ -4,4 +4,4 @@ const getPlanets = async () => {
   return results.json();
 };
 
-export default getPlanets ;
+export default getPlanets;
