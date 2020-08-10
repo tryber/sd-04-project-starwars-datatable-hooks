@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getPlanets } from '../services/apis';
+import getPlanets from '../services/apis';
 
 export default function TableBody() {
   const [planets, setPlanets] = useState([]);

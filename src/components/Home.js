@@ -2,9 +2,9 @@ import React from 'react';
 import Table from './Table';
 
 export default function Home() {
-  return(
+  return (
     <div>
       <Table />
     </div>
-  )
+  );
 }
