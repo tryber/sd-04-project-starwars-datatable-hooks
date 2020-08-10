@@ -11,7 +11,7 @@ function FilterOrder() {
 
   const getColumns = () => {
     const columns = [
-      'Name',
+      'name',
       'population',
       'orbital_period',
       'diameter',
