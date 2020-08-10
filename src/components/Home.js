@@ -1,19 +1,17 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import Table from './Table/Table';
 import StarWarsContext from '../context/StarwarsContext';
-import Filters from './filters/Filters';
 
 function Home() {
-  const { requestFetch, isFetching } = useContext(StarWarsContext);
+  const { fetchPlanets, isFetching } = useContext(StarWarsContext);
   useEffect(() => {
-    requestFetch();
+    fetchPlanets();
   }, []);
 
   if (isFetching) return <h1>Loading...</h1>;
   return (
     <div>
       <h1>StarWars Datatable with Filters</h1>
-      <Filters />
       <Table />
     </div>
   );

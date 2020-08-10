@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import StarWarsContext from './StarWarsContext';
-import apiPlanets from '../services/required';
+import apiPlanets from '../services/apiPlanets';
 
 const StarWarsProvider = ({ children }) => {
   const [data, setData] = useState([]);
@@ -26,7 +27,7 @@ const StarWarsProvider = ({ children }) => {
     setIsFetching(false);
   };
 
-  const requestFetch = () => {
+  const fetchPlanets = () => {
     resquestPlanets();
     return apiPlanets().then(
       (json) => successPlanets(json.results),
@@ -72,7 +73,7 @@ const StarWarsProvider = ({ children }) => {
     isFetching,
     error,
     filters,
-    requestFetch,
+    fetchPlanets,
     filterByName,
     filterByNumericValues,
     removeFilterNumeric,
@@ -84,6 +85,10 @@ const StarWarsProvider = ({ children }) => {
       {children}
     </StarWarsContext.Provider>
   );
+};
+
+StarWarsProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export default StarWarsProvider;
