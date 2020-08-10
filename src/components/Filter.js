@@ -31,7 +31,7 @@ const Filter = () => {
         value: '',
       }]);
     }
-    console.log('Context numeric filter', filterByNumericValues);
+    // console.log('Context numeric filter', filterByNumericValues);
   }
 
   function filterColumns(value) {

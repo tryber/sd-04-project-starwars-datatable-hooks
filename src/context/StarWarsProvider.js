@@ -35,7 +35,6 @@ const StarWarsProvider = ({ children }) => {
 
   const addFilter = ({ column, comparison, value }) => {
     setFilterByNumericValues([...filterByNumericValues, { column, comparison, value }]);
-    console.log(filterByNumericValues);
   };
 
   const rmFilter = (filter) => {
