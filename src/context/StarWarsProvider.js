@@ -9,6 +9,8 @@ const StarWarsProvider = ({ children }) => {
   const [error, setError] = useState('');
   const [filterByName, setfilterByName] = useState({ name: '' });
   const [filterByNumericValues, setFilterByNumericValues] = useState([]);
+  const [columns] = useState(['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water']);
+  const [comparisons] = useState(['maior que', 'igual a', 'menor que']);
 
   const getPlanets = async () => {
     try {
@@ -31,6 +33,18 @@ const StarWarsProvider = ({ children }) => {
     });
   };
 
+  const addFilter = ({ column, comparison, value }) => {
+    setFilterByNumericValues([...filterByNumericValues, { column, comparison, value }]);
+    console.log(filterByNumericValues);
+  };
+
+  const rmFilter = (filter) => {
+    console.log(filter);
+    setFilterByNumericValues([
+      ...filterByNumericValues.filter(({ column }) => column !== filter.column)
+    ]);
+  };
+
   const store = {
     data,
     setData,
@@ -41,7 +55,10 @@ const StarWarsProvider = ({ children }) => {
     filterByName,
     handleSearch,
     filterByNumericValues,
-    setFilterByNumericValues,
+    addFilter,
+    rmFilter,
+    columns,
+    comparisons,
   };
 
   return <StarWarsContext.Provider value={store}>{children}</StarWarsContext.Provider>;

@@ -1,6 +1,4 @@
 import React, { useContext } from 'react';
-import { connect } from 'react-redux';
-import { filterPlanetByName } from '../actions/filterPlanetByName';
 import StarWarsContext from '../context/StarWarsContext';
 
 const SearchBar = () => {
@@ -19,12 +17,4 @@ const SearchBar = () => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  value: state.filters.filterByName.name,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  dispatchFilterPlanetByName: (name) => dispatch(filterPlanetByName(name)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
+export default SearchBar;

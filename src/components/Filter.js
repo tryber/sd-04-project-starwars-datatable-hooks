@@ -1,35 +1,40 @@
-import React from 'react';
-import PropTypes, { string, object } from 'prop-types';
-import { connect } from 'react-redux';
-import { filterPlanetByNumber } from '../actions/filterPlanetByName';
+import React, { useContext, useState } from 'react';
+import StarWarsContext from '../context/StarWarsContext';
 
-class Filter extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      column: '',
-      comparison: '',
-      value: '',
-    };
+const Filter = () => {
+  const {
+    filterByNumericValues,
+    addFilter,
+    columns,
+    comparisons,
+  } = useContext(StarWarsContext);
 
-    this.getFilterInfo = this.getFilterInfo.bind(this);
-    /* this.handleChange = this.handleChange.bind(this); */
-    this.filterColumns = this.filterColumns.bind(this);
-  }
+  const [localState, setLocalState] = useState({
+    column: '',
+    comparison: '',
+    value: '',
+  });
 
-  getFilterInfo(e) {
-    e.preventDefault();
-    const { dispatchFilterPlanetByNumber } = this.props;
-    dispatchFilterPlanetByNumber(this.state);
-  }
-
-  handleChange(e) {
+  function handleChange(e) {
     const { name, value } = e.target;
-    this.setState({ [name]: value });
+    console.log(name, value);
+    setLocalState({ ...localState, [name]: value });
   }
 
-  filterColumns() {
-    const { value, columns } = this.props;
+  function getFilterInfo(e) {
+    e.preventDefault();
+    if (localState.value !== undefined) {
+      addFilter(localState);
+      setLocalState([{
+        column: '',
+        comparison: '',
+        value: '',
+      }]);
+    }
+    console.log('Context numeric filter', filterByNumericValues);
+  }
+
+  function filterColumns(value) {
     let filteredColumns = [...columns];
     if (value.length > 0) {
       value.forEach(({ column }) => {
@@ -39,15 +44,15 @@ class Filter extends React.Component {
     return filteredColumns;
   }
 
-  renderSelect(columns, testId, name) {
+  function renderSelect(filteredColumns, testId, name) {
     return (
       <select
-        onChange={(e) => this.handleChange(e)}
+        onChange={(e) => handleChange(e)}
         data-testid={testId}
         name={name}
       >
         <option defaultChecked>{name}</option>
-        {columns.map((column) => (
+        {filteredColumns.map((column) => (
           <option
             key={column}
             value={column}
@@ -59,42 +64,22 @@ class Filter extends React.Component {
     );
   }
 
-  render() {
-    const filteredColumns = this.filterColumns();
-    const { comparisons } = this.props;
-    return (
-      <div className="numeric-filter">
-        <form onSubmit={(e) => this.getFilterInfo(e)}>
-          {this.renderSelect(filteredColumns, 'column-filter', 'column')}
-          {this.renderSelect(comparisons, 'comparison-filter', 'comparison')}
-          <input
-            onChange={(e) => this.handleChange(e)}
-            data-testid="value-filter"
-            name="value"
-            type="number"
-          />
-          <button data-testid="button-filter" type="submit">Add Filter</button>
-        </form>
-      </div>
-    );
-  }
-}
-
-Filter.propTypes = {
-  value: PropTypes.arrayOf(object).isRequired,
-  dispatchFilterPlanetByNumber: PropTypes.func.isRequired,
-  columns: PropTypes.arrayOf(string).isRequired,
-  comparisons: PropTypes.arrayOf(string).isRequired,
+  const filteredColumns = filterColumns(filterByNumericValues);
+  return (
+    <div className="numeric-filter">
+      <form onSubmit={(e) => getFilterInfo(e)}>
+        {renderSelect(filteredColumns, 'column-filter', 'column')}
+        {renderSelect(comparisons, 'comparison-filter', 'comparison')}
+        <input
+          onChange={(e) => handleChange(e)}
+          data-testid="value-filter"
+          name="value"
+          type="number"
+        />
+        <button data-testid="button-filter" type="submit">Add Filter</button>
+      </form>
+    </div>
+  );
 };
 
-const mapStateToProps = (state) => ({
-  value: state.filters.filterByNumericValues,
-  columns: state.filters.columns,
-  comparisons: state.filters.comparisons,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  dispatchFilterPlanetByNumber: (filterData) => dispatch(filterPlanetByNumber(filterData)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Filter);
+export default Filter;

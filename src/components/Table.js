@@ -1,6 +1,4 @@
 import React, { useContext } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import TableHeader from './TableHeader';
 import StarWarsContext from '../context/StarWarsContext';
 
@@ -19,14 +17,15 @@ const comparation = (planet, { column, comparison, value }) => {
 
 const filterPlanetByName = (planets, name = '') => planets.filter((planet) => planet.name.includes(name));
 
-const Table = ({ filterByNumericValues }) => {
-  const { data, isFetching, filterByName: { name } } = useContext(StarWarsContext);
-
-  console.log('Data on component', data);
+const Table = () => {
+  const {
+    data,
+    isFetching,
+    filterByName: { name },
+    filterByNumericValues,
+  } = useContext(StarWarsContext);
 
   let planets = [...data];
-
-  console.log('teste', name);
 
   if (filterByNumericValues.length > 0) {
     filterByNumericValues.forEach((filter) => {
@@ -54,14 +53,4 @@ const Table = ({ filterByNumericValues }) => {
   );
 };
 
-Table.propTypes = {
-  filterByNumericValues: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  data: state.planetsReducer.data,
-  isFetching: state.planetsReducer.isFetching,
-  filterByNumericValues: state.filters.filterByNumericValues,
-});
-
-export default connect(mapStateToProps, null)(Table);
+export default Table;
