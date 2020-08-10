@@ -9,9 +9,7 @@ const filterTableByName = (search, set, data, planets) => {
 };
 
 const Header = () => {
-  useEffect((planetsData) => {
-    getPlanetsData();
-  }, []);
+  const { data, setData, isFetching } = useContext(AppContext);
 
   async function getPlanetsData() {
     const planets = await getSwapi();
@@ -22,8 +20,10 @@ const Header = () => {
       isFetching: false,
     });
   }
+  useEffect(() => {
+    getPlanetsData();
+  }, []);
 
-  const { data, setData, isFetching } = useContext(AppContext);
   if (isFetching) return <p>Loading...</p>;
 
   const { planetsData } = data;

@@ -9,8 +9,8 @@ import Colunas from './Colunas';
 // import orderFuncDesc from '../components/OrderFuncDesc';
 
 const Table = () => {
-  const { data, setData, setIsFetching, isFetching } = useContext(AppContext);
-  //if (isFetching) return <span>...Loading</span>;
+  const { data } = useContext(AppContext);
+  // if (isFetching) return <span>...Loading</span>;
   // const planeta1 = data;
   const { filteredPlanets } = data;
   console.log(filteredPlanets);
