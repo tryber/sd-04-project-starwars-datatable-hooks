@@ -1,5 +1,5 @@
-import AppContext from '../context/AppContext';
 import React, { useContext, useEffect } from 'react';
+import AppContext from '../context/AppContext';
 import getSwapi from '../services/getSwapi';
 
 const filterTableByName = (search, set, data, planets) => {
