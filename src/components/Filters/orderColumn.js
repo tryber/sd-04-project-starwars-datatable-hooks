@@ -1,6 +1,6 @@
 const orderColumn = (numericValues) => {
   const columnValues = [
-    'population,
+    'population',
     'orbital_period',
     'diameter',
     'rotation_period',
