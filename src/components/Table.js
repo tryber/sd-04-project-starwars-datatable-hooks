@@ -1,22 +1,19 @@
 // import PropTypes from 'prop-types';
 import React, { useContext, useEffect } from 'react';
 import AppContext from '../context/AppContext';
-import getSwapi from '../services/getSwapi';
 // import filterAll from './filterAll';
 import linhas from './Linhas';
 import Colunas from './Colunas';
-import Header from './Header';
 // import './Table.css';
 // import orderFuncAsc from '../components/orderFuncAsc';
 // import orderFuncDesc from '../components/OrderFuncDesc';
 
-const Table = ({planets}) => {
-
+const Table = () => {
   const { data, setData, setIsFetching, isFetching } = useContext(AppContext);
   //if (isFetching) return <span>...Loading</span>;
   // const planeta1 = data;
   const { filteredPlanets } = data;
-  console.log(filteredPlanets)
+  console.log(filteredPlanets);
 
   return (
     <div>

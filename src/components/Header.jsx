@@ -1,5 +1,4 @@
 import AppContext from '../context/AppContext';
-import Table from './Table';
 import React, { useContext, useEffect } from 'react';
 import getSwapi from '../services/getSwapi';
 
@@ -24,9 +23,7 @@ const Header = () => {
     });
   }
 
-  
-
-  const { data, setData, isFetching, filteredPlanets } = useContext(AppContext);
+  const { data, setData, isFetching } = useContext(AppContext);
   if (isFetching) return <p>Loading...</p>;
 
   const { planetsData } = data;
@@ -34,7 +31,7 @@ const Header = () => {
     <div>
       <input
         type="text"
-        data-testid='name-filter'
+        data-testid="name-filter"
         onChange={(e) => filterTableByName(e.target.value, setData, data, planetsData)}
       />
     </div>
