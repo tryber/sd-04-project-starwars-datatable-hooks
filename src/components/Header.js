@@ -7,7 +7,6 @@ import StarWarsContext from '../context/StarWarsContext';
 
 const Header = () => {
   const { data } = useContext(StarWarsContext);
-  console.log(data);
 
   return (
     <header>

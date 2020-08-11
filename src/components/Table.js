@@ -47,8 +47,6 @@ const Table = () => {
     order: { column, sort },
   } = useContext(StarWarsContext);
 
-  console.log(column, sort);
-
   let planets = [...data];
 
   if (planets.length > 1) {

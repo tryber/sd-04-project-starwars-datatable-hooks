@@ -53,8 +53,8 @@ const Filter = () => {
   return (
     <div className="numeric-filter">
       <form onSubmit={(e) => getFilterInfo(e)}>
-        <RenderSelect options={filteredColumns} testId="column-filter" name="column" />
-        <RenderSelect options={comparisons} testId="comparison-filter" name="comparison" />
+        <RenderSelect options={filteredColumns} testId="column-filter" name="column" handlerFunc={handleChange} />
+        <RenderSelect options={comparisons} testId="comparison-filter" name="comparison" handlerFunc={handleChange} />
         <input
           onChange={(e) => handleChange(e)}
           data-testid="value-filter"
