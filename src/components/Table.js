@@ -70,7 +70,7 @@ const Table = () => {
         {planets.map((planet) => (
           <tr key={planet.name}>
             {Object.values(planet).map((item) => (
-              <td key={item}>{item}</td>
+              <td data-testid={column === 'name' ? 'planet-name' : null} key={item}>{item}</td>
             ))}
           </tr>
         ))}
