@@ -10,7 +10,7 @@ function RemoveFilters() {
   const onClick = (type) => removeFilterNumeric(type);
 
   return numericValues.map((type) => (
-    <div data-testid="filter" key={type.column}>  
+    <div data-testid="filter" key={type.column}>
       <span>{`${type.column} - ${type.comparison} - ${type.value} `}</span>
       <button type="button" onClick={() => onClick(type)}>
         X

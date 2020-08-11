@@ -43,7 +43,7 @@ const StarWarsProvider = ({ children }) => {
       filterByName: { name },
     }))
   );
-  
+
   const filterByNumericValues = (column, comparison, value) => (
     setFilters((state) => ({
       ...state,
