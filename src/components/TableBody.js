@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import getPlanets from '../services/apis';
+import React, { useContext } from 'react';
+import { PlanetsContext } from '../context';
 
 export default function TableBody() {
-  const [planets, setPlanets] = useState([]);
-  useEffect(() => {
-    getPlanets().then((data) => setPlanets(data.results));
-  }, []);
+  console.log(PlanetsContext)
+  const { planets } = useContext(PlanetsContext);
 
   return (
     <tbody>
-      {planets.map((planet) => (
+      {planets.length && planets.map((planet) => (
         <tr key={planet.name}>
           <td>{planet.name}</td>
           <td>{planet.rotation_period}</td>
