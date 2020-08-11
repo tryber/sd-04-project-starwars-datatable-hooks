@@ -61,16 +61,19 @@ const Table = () => {
 
   if (name !== '') planets = filterPlanetByName(planets, name);
 
+  const objKeys = data.length > 0 ? Object.keys(data[0]) : [];
+  const headers = objKeys.filter((key) => key !== 'residents');
+
   if (isFetching) return <p>Loading...</p>;
 
   return (
     <table className="table table-bordered table-dark">
-      <TableHeader heads={Object.keys(data[0])} />
+      <TableHeader heads={headers} />
       <tbody>
         {planets.map((planet) => (
           <tr key={planet.name}>
-            {Object.values(planet).map((item) => (
-              <td data-testid={column === 'name' ? 'planet-name' : null} key={item}>{item}</td>
+            {headers.map((col) => (
+              <td data-testid={col === 'name' ? 'planet-name' : null} key={planet[col]}>{planet[col]}</td>
             ))}
           </tr>
         ))}
