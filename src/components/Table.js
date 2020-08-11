@@ -1,20 +1,28 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { StarsWarsContext } from '../context/StarWarsContext';
 import FilterByName from './FilterByName';
+import Filters from './Filters';
 import TableHead from './TableHead';
+import RemoveFilter from './RemoveFilter';
 
 import './Table.css';
 
 const Table = () => {
-  const { data, search } = useContext(StarsWarsContext);
+  const { data, filter, fetchAPI } = useContext(StarsWarsContext);
+
+  useEffect(() => {
+    fetchAPI();
+  }, []);
 
   return (
     <div>
       <FilterByName />
+      <Filters />
+      <RemoveFilter />
       <table>
         {data.length > 0 && <TableHead />}
         <tbody>
-          {search(data).map((row) => (
+          {filter(data).map((row) => (
             <tr key={row.name}>
               <td>{row.name}</td>
               <td>{row.rotation_period}</td>
@@ -33,6 +41,7 @@ const Table = () => {
           ))}
         </tbody>
       </table>
+      <div></div>
     </div>
   );
 };

@@ -1,59 +1,116 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import getAPI from '../service/StarWarsAPI';
 
 const StarsWarsContext = createContext();
 
-// const INITIAL_STATE = {
-//   filters: {
-//     filterByName: {
-//       name: '',
-//     },
-//   },
-// };
-
 const StarsWarsProvider = ({ children }) => {
   // Estado de controle requisição API
-  const [isFetching, setIsFetching] = useState(false);
-  // const [filters] = useState(INITIAL_STATE);
-  const [Input, getInput] = useState('');
+  // const [isFetching, setIsFetching] = useState(false);
+  const [value, setValue] = useState(0);
+  const [column, setColumn] = useState();
+  const [comparison, setComparison] = useState();
   const [data, setData] = useState([]);
 
-  // Obtêndo o dados da requisição
-  function getSucessApi(obj) {
-    return setData(obj.results.map((planet) => planet));
-  }
-
-  // Fazendo a requisição
-  const fetchAPI = () => {
-    if (isFetching) return null;
-    setIsFetching(true);
-    return getAPI().then(getSucessApi);
-  };
-
-  useEffect(() => {
-    fetchAPI();
+  const [filters, setFilters] = useState({
+    filterByName: { name: '' },
+    filterByNumericValues: [],
+    order: { column: 'Name', sort: 'ASC' },
   });
 
-  function search(rows) {
-    return rows.filter((row) => row.name.toLowerCase().includes(Input));
+  const inputName = (event) => {
+    setFilters((oldName) => ({
+      ...oldName,
+      filterByName: { name: event },
+    }));
+  };
+
+  const addValues = (_column, _comparison, _value) => {
+    setFilters((oldFilters) => ({
+      ...oldFilters,
+      filterByNumericValues: [
+        ...oldFilters.filterByNumericValues,
+        { column: _column, comparison: _comparison, value: _value },
+      ],
+    }));
+  };
+
+  const deleteFilter = (column) => {
+    setFilters((old) => ({
+      ...old,
+      filterByNumericValues: old.filterByNumericValues.filter(
+        (index) => index !== column
+      ),
+    }));
+  };
+
+  // Fazendo a requisição
+  const fetchAPI = async () => {
+    getAPI().then((data) => {
+      setData(data.results);
+    });
+  };
+
+  function filter(data) {
+    let filterData = [...data];
+
+    if (filters) {
+      filterData = data.filter((planeta) =>
+        planeta.name.toLowerCase().includes(filters.filterByName.name)
+      );
+    }
+
+    if (filters.filterByNumericValues.length !== 0) {
+      filters.filterByNumericValues.forEach((itens) => {
+        if (itens.comparison === 'maior que') {
+          filterData = filterData.filter(
+            (item) => Number(item[itens.column]) > Number([itens.value])
+          );
+        }
+        if (itens.comparison === 'igual a') {
+          filterData = filterData.filter(
+            (item) => Number(item[itens.column]) === Number([itens.value])
+          );
+        }
+        if (itens.comparison === 'menor que') {
+          filterData = filterData.filter(
+            (item) => Number(item[itens.column]) < Number([itens.value])
+          );
+        }
+      });
+    }
+
+    return filterData;
   }
 
-  function tableHead() {
-    // Obtên o cabeçalho das colunas
-    const columns = data[0] && Object.keys(data[0]);
-    console.log(columns);
-    return columns;
-  }
+  const columnSelect = (columnCat) => {
+    const columnCategorias = [
+      'population',
+      'orbital_period',
+      'diameter',
+      'rotation_period',
+      'surface_water',
+    ];
 
+    columnCategorias.map((categoria) => {
+      return [...columnCategorias.filter((e) => !e.includes(categoria))];
+    });
+  };
   const context = {
-    tableHead,
+    addValues,
+    column,
+    comparison,
+    value,
+    setColumn,
+    setComparison,
+    setValue,
+    filter,
+    filters,
     fetchAPI,
-    isFetching,
     data,
-    Input,
-    getInput,
-    search,
+    inputName,   
+    columnSelect,
+    deleteFilter,
   };
 
   return (

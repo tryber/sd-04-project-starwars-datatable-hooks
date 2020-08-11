@@ -4,16 +4,17 @@ import { StarsWarsContext } from '../context/StarWarsContext';
 import './Table.css';
 
 const FilterByName = () => {
-  const { Input, getInput } = useContext(StarsWarsContext);
+  const { inputName, filters } = useContext(StarsWarsContext);
+
   return (
     <div>
       <label htmlFor="textName">Filter By name: </label>
       <input
         type="text"
-        value={Input}
+        value={filters.filterByName.name}
         name="textName"
         data-testid="name-filter"
-        onChange={(e) => getInput(e.target.value)}
+        onChange={(e) => inputName(e.target.value)}
       />
     </div>
   );

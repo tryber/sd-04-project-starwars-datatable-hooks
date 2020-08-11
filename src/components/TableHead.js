@@ -1,12 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { StarsWarsContext } from '../context/StarWarsContext';
 
 const TableHead = () => {
   const { data } = useContext(StarsWarsContext);
 
-  const columns = Object.keys(data[0]).filter((col) => col !== 'residents');
+  useEffect(() => {
+    console.log(data);
+  });
 
-  console.log(columns);
+  const columns = Object.keys(data[0]).filter((col) => col !== 'residents');
 
   return (
     <thead>
