@@ -24,7 +24,7 @@ const SortFilters = ({ headers }) => {
       <form onChange={(e) => handleChange(e.target)} name="sort">
         <label htmlFor="ASC">ASC</label>
         <input
-          data-testid="column-sort-input"
+          data-testid="column-sort-input-asc"
           id="ASC"
           name="sort"
           type="radio"
@@ -33,7 +33,7 @@ const SortFilters = ({ headers }) => {
         />
         <label htmlFor="DESC">DESC</label>
         <input
-          data-testid="column-sort-input"
+          data-testid="column-sort-input-desc"
           id="DESC"
           name="sort"
           type="radio"
