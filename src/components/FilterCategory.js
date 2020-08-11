@@ -15,7 +15,7 @@ const FilterCategory = () => {
   if (filters.filterByNumericValues.length > 0) {
     filters.filterByNumericValues.forEach(({ column }) => {
       columnCategorias = columnCategorias.filter(
-        (categoria) => categoria !== column
+        (categoria) => categoria !== column,
       );
     });
   }

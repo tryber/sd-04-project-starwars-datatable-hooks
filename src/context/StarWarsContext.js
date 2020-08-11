@@ -35,24 +35,24 @@ const StarsWarsProvider = ({ children }) => {
     }));
   };
 
-  const deleteFilter = (column) => {
+  const deleteFilter = (col) => {
     setFilters((old) => ({
       ...old,
       filterByNumericValues: old.filterByNumericValues.filter(
-        (index) => index !== column
+        (index) => index !== col
       ),
     }));
   };
 
   // Fazendo a requisição
   const fetchAPI = async () => {
-    getAPI().then((data) => {
-      setData(data.results);
+    getAPI().then((json) => {
+      setData(json.results);
     });
   };
 
-  function filter(data) {
-    let filterData = [...data];
+  function filter(text) {
+    let filterData = [...text];
 
     if (filters) {
       filterData = data.filter((planeta) =>
@@ -83,19 +83,6 @@ const StarsWarsProvider = ({ children }) => {
     return filterData;
   }
 
-  const columnSelect = (columnCat) => {
-    const columnCategorias = [
-      'population',
-      'orbital_period',
-      'diameter',
-      'rotation_period',
-      'surface_water',
-    ];
-
-    columnCategorias.map((categoria) => {
-      return [...columnCategorias.filter((e) => !e.includes(categoria))];
-    });
-  };
   const context = {
     addValues,
     column,
@@ -108,8 +95,7 @@ const StarsWarsProvider = ({ children }) => {
     filters,
     fetchAPI,
     data,
-    inputName,   
-    columnSelect,
+    inputName,
     deleteFilter,
   };
 

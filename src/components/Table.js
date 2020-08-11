@@ -41,7 +41,6 @@ const Table = () => {
           ))}
         </tbody>
       </table>
-      <div></div>
     </div>
   );
 };
