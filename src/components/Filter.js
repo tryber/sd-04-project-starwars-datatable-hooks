@@ -25,20 +25,9 @@ const Filter = () => {
   }
   function renderSelect(filteredColumns, testId, name) {
     return (
-      <select
-        onChange={(e) => handleChange(e.target)}
-        data-testid={testId}
-        name={name}
-      >
+      <select onChange={(e) => handleChange(e.target)} data-testid={testId} name={name}>
         <option defaultChecked>{name}</option>
-        {filteredColumns.map((column) => (
-          <option
-            key={column}
-            value={column}
-          >
-            {column}
-          </option>
-        ))}
+        {filteredColumns.map((column) => (<option key={column} value={column}>{column}</option>))}
       </select>
     );
   }
