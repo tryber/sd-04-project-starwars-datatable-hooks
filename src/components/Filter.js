@@ -1,37 +1,42 @@
 import React, { useContext, useState } from 'react';
+import PropTypes, { string } from 'prop-types';
 import StarWarsContext from '../context/StarWarsContext';
+
+const RenderSelect = ({
+  options, testId, name, handlerFunc,
+}) => (
+  <select
+    onChange={(e) => handlerFunc(e)}
+    data-testid={testId}
+    name={name}
+  >
+    <option defaultChecked>{name}</option>
+    {options.map((column) => (
+      <option
+        key={column}
+        value={column}
+      >
+        {column}
+      </option>
+    ))}
+  </select>
+);
 
 const Filter = () => {
   const {
-    filterByNumericValues,
-    addFilter,
-    columns,
-    comparisons,
+    filterByNumericValues, addFilter, columns, comparisons,
   } = useContext(StarWarsContext);
 
-  const [localState, setLocalState] = useState({
-    column: '',
-    comparison: '',
-    value: '',
-  });
+  const [localState, setLocalState] = useState({ column: '', comparison: '', value: '' });
 
-  function handleChange(e) {
-    const { name, value } = e.target;
-    console.log(name, value);
-    setLocalState({ ...localState, [name]: value });
-  }
+  const handleChange = ({ name, value }) => setLocalState({ ...localState, [name]: value });
 
   function getFilterInfo(e) {
     e.preventDefault();
     if (localState.value !== undefined) {
       addFilter(localState);
-      setLocalState([{
-        column: '',
-        comparison: '',
-        value: '',
-      }]);
+      setLocalState([{ column: '', comparison: '', value: '' }]);
     }
-    // console.log('Context numeric filter', filterByNumericValues);
   }
 
   function filterColumns(value) {
@@ -44,32 +49,12 @@ const Filter = () => {
     return filteredColumns;
   }
 
-  function renderSelect(filteredColumns, testId, name) {
-    return (
-      <select
-        onChange={(e) => handleChange(e)}
-        data-testid={testId}
-        name={name}
-      >
-        <option defaultChecked>{name}</option>
-        {filteredColumns.map((column) => (
-          <option
-            key={column}
-            value={column}
-          >
-            {column}
-          </option>
-        ))}
-      </select>
-    );
-  }
-
   const filteredColumns = filterColumns(filterByNumericValues);
   return (
     <div className="numeric-filter">
       <form onSubmit={(e) => getFilterInfo(e)}>
-        {renderSelect(filteredColumns, 'column-filter', 'column')}
-        {renderSelect(comparisons, 'comparison-filter', 'comparison')}
+        <RenderSelect options={filteredColumns} testId="column-filter" name="column" />
+        <RenderSelect options={comparisons} testId="comparison-filter" name="comparison" />
         <input
           onChange={(e) => handleChange(e)}
           data-testid="value-filter"
@@ -80,6 +65,13 @@ const Filter = () => {
       </form>
     </div>
   );
+};
+
+RenderSelect.propTypes = {
+  options: PropTypes.arrayOf(string).isRequired,
+  testId: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  handlerFunc: PropTypes.func.isRequired,
 };
 
 export default Filter;
