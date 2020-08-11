@@ -15,6 +15,27 @@ const comparation = (planet, { column, comparison, value }) => {
   }
 };
 
+const ordernation = (column, sort, planetsData) => {
+  const planets = [...planetsData];
+  if (!Number(planets[0][column])) {
+    planets.sort((a, b) => {
+      const x = a[column].toLowerCase();
+      const y = b[column].toLowerCase();
+      if (x < y) {
+        return -1;
+      }
+      if (x > y) {
+        return 1;
+      }
+      return 0;
+    });
+  } else {
+    planets.sort((a, b) => a[column] - b[column]);
+  }
+
+  return sort === 'ASC' ? planets : planets.reverse();
+};
+
 const filterPlanetByName = (planets, name = '') => planets.filter((planet) => planet.name.includes(name));
 
 const Table = () => {
@@ -23,9 +44,16 @@ const Table = () => {
     isFetching,
     filterByName: { name },
     filterByNumericValues,
+    order: { column, sort },
   } = useContext(StarWarsContext);
 
+  console.log(column, sort);
+
   let planets = [...data];
+
+  if (planets.length > 1) {
+    planets = ordernation(column, sort, planets);
+  }
 
   if (filterByNumericValues.length > 0) {
     filterByNumericValues.forEach((filter) => {

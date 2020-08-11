@@ -1,18 +1,12 @@
 import React from 'react';
 import StarWarsProvider from './context/StarWarsProvider';
 import Table from './components/Table';
-import SearchBar from './components/SearchBar';
-import Filter from './components/Filter';
-import FiltersPanel from './components/FiltersPanel';
+import Header from './components/Header';
 
 const App = () => (
   <StarWarsProvider>
     <div>
-      <header>
-        <SearchBar />
-        <Filter />
-        <FiltersPanel />
-      </header>
+      <Header />
       <section>
         <Table />
       </section>

@@ -1,33 +1,27 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import StarWarsContext from '../context/StarWarsContext';
 
-class SortFilters extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      column: 'name',
-      sort: 'ASC',
-    };
+const SortFilters = ({ headers }) => {
+  const [localState, setLocalState] = useState({
+    column: 'name',
+    sort: 'ASC',
+  });
+  const { sortFilters } = useContext(StarWarsContext);
 
-    this.getFilterInfo = this.getFilterInfo.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+  function getFilterInfo() {
+    const { column, sort } = localState;
+    sortFilters(column, sort);
   }
 
-  getFilterInfo() {
-    const { column, sort } = this.state;
-    const { dispatchSortFilters } = this.props;
-    dispatchSortFilters(column, sort);
-  }
-
-  handleChange(e) {
+  function handleChange(e) {
     const { name, value } = e;
-    this.setState({ [name]: value });
+    setLocalState({ ...localState, [name]: value });
   }
 
-  renderOptions() {
+  function renderOptions() {
     return (
-      <form onChange={(e) => this.handleChange(e.target)} name="sort">
+      <form onChange={(e) => handleChange(e.target)} name="sort">
         <label htmlFor="ASC">ASC</label>
         <input
           data-testid="column-sort-input"
@@ -49,43 +43,35 @@ class SortFilters extends React.Component {
     );
   }
 
-  render() {
-    const { headers } = this.props;
-    return (
+  return (
+    <div>
+      <select
+        data-testid="column-sort"
+        name="column"
+        onChange={(e) => handleChange(e.target)}
+      >
+        {headers.map((header) => (
+          <option key={header} value={header}>
+            {header}
+          </option>
+        ))}
+      </select>
       <div>
-        <select
-          data-testid="column-sort"
-          name="column"
-          onChange={(e) => this.handleChange(e.target)}
+        {renderOptions()}
+        <button
+          data-testid="column-sort-button"
+          type="submit"
+          onClick={(e) => getFilterInfo(e)}
         >
-          {headers.map((header) => (
-            <option key={header} value={header}>
-              {header}
-            </option>
-          ))}
-        </select>
-        <div>
-          {this.renderOptions()}
-          <button
-            data-testid="column-sort-button"
-            type="submit"
-            onClick={(e) => this.getFilterInfo(e)}
-          >
-            Filtrar
-          </button>
-        </div>
+          Filtrar
+        </button>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 SortFilters.propTypes = {
   headers: PropTypes.arrayOf(PropTypes.string).isRequired,
-  dispatchSortFilters: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  dispatchSortFilters: (column, sort) => dispatch(sortFilters(column, sort)),
-});
-
-export default connect(null, mapDispatchToProps)(SortFilters);
+export default SortFilters;

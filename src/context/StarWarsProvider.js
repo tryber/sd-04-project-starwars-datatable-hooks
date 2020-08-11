@@ -9,6 +9,7 @@ const StarWarsProvider = ({ children }) => {
   const [error, setError] = useState('');
   const [filterByName, setfilterByName] = useState({ name: '' });
   const [filterByNumericValues, setFilterByNumericValues] = useState([]);
+  const [order, setOrder] = useState({ column: 'name', sort: 'ASC' });
   const [columns] = useState(['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water']);
   const [comparisons] = useState(['maior que', 'igual a', 'menor que']);
 
@@ -27,9 +28,9 @@ const StarWarsProvider = ({ children }) => {
     getPlanets();
   }, []);
 
-  const handleSearch = (value) => {
+  const handleSearch = (name) => {
     setfilterByName({
-      name: value,
+      name,
     });
   };
 
@@ -40,8 +41,15 @@ const StarWarsProvider = ({ children }) => {
   const rmFilter = (filter) => {
     console.log(filter);
     setFilterByNumericValues([
-      ...filterByNumericValues.filter(({ column }) => column !== filter.column)
+      ...filterByNumericValues.filter(({ column }) => column !== filter.column),
     ]);
+  };
+
+  const sortFilters = (column, sort) => {
+    setOrder({
+      column,
+      sort,
+    });
   };
 
   const store = {
@@ -56,6 +64,8 @@ const StarWarsProvider = ({ children }) => {
     filterByNumericValues,
     addFilter,
     rmFilter,
+    order,
+    sortFilters,
     columns,
     comparisons,
   };
