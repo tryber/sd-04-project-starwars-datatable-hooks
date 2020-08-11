@@ -12,7 +12,7 @@ function Home() {
   if (isFetching) return <h1>Loading...</h1>;
   return (
     <div>
-      <h1>StarWars Datatable with Filters</h1>
+      <h1>StarWars Datatable</h1>
       <Filters />
       <Table />
     </div>
