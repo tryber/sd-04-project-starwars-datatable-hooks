@@ -5,22 +5,22 @@ import StarWarsContext from '../context/StarWarsContext';
 const RenderSelect = ({
   options, testId, name, handlerFunc,
 }) => (
-  <select
-    onChange={(e) => handlerFunc(e)}
-    data-testid={testId}
-    name={name}
-  >
-    <option defaultChecked>{name}</option>
-    {options.map((column) => (
-      <option
-        key={column}
-        value={column}
-      >
-        {column}
-      </option>
-    ))}
-  </select>
-);
+    <select
+      onChange={(e) => handlerFunc(e)}
+      data-testid={testId}
+      name={name}
+    >
+      <option defaultChecked>{name}</option>
+      {options.map((column) => (
+        <option
+          key={column}
+          value={column}
+        >
+          {column}
+        </option>
+      ))}
+    </select>
+  );
 
 const Filter = () => {
   const {
@@ -53,8 +53,18 @@ const Filter = () => {
   return (
     <div className="numeric-filter">
       <form onSubmit={(e) => getFilterInfo(e)}>
-        <RenderSelect options={filteredColumns} testId="column-filter" name="column" handlerFunc={handleChange} />
-        <RenderSelect options={comparisons} testId="comparison-filter" name="comparison" handlerFunc={handleChange} />
+        <RenderSelect
+          options={filteredColumns}
+          testId="column-filter"
+          name="column"
+          handlerFunc={handleChange}
+        />
+        <RenderSelect
+          options={comparisons}
+          testId="comparison-filter"
+          name="comparison"
+          handlerFunc={handleChange}
+        />
         <input
           onChange={(e) => handleChange(e)}
           data-testid="value-filter"
