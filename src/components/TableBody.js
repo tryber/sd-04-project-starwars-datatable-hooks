@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { PlanetsContext } from '../context';
 
 export default function TableBody() {
-  console.log(PlanetsContext)
   const { planets } = useContext(PlanetsContext);
 
   return (

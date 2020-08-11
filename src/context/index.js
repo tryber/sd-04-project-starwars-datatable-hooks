@@ -20,7 +20,7 @@ const PlanetsProvider = ({ children }) => {
 };
 
 PlanetsContext.propTypes = {
-  chidren: PropTypes.element.isRequired,
-}
+  children: PropTypes.element.isRequired,
+};
 
-export { PlanetsContext, PlanetsProvider as Provider }
+export { PlanetsContext, PlanetsProvider as Provider };
