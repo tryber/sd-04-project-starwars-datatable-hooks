@@ -23,4 +23,8 @@ PlanetsContext.propTypes = {
   children: PropTypes.element.isRequired,
 };
 
+PlanetsProvider.propTypes = {
+  children: PropTypes.element.isRequired,
+};
+
 export { PlanetsContext, PlanetsProvider as Provider };

@@ -6,7 +6,7 @@ export default function TableBody() {
 
   return (
     <tbody>
-      {planets.length && planets.map((planet) => (
+      {planets.map((planet) => (
         <tr key={planet.name}>
           <td>{planet.name}</td>
           <td>{planet.rotation_period}</td>
