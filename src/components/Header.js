@@ -8,12 +8,18 @@ import StarWarsContext from '../context/StarWarsContext';
 const Header = () => {
   const { data } = useContext(StarWarsContext);
 
+  let filteredData = [];
+
+  if (data.length > 0) {
+    filteredData = Object.keys(data[0]).filter((column) => column !== 'residents');
+  }
+
   return (
     <header>
       <SearchBar />
       <Filter />
       <FiltersPanel />
-      <SortFilters headers={data.length > 0 ? Object.keys(data[0]) : []} />
+      <SortFilters headers={filteredData} />
     </header>
   );
 };
