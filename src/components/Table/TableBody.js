@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import orderFuncAsc from '../Filters/orderFuncAsc';
 import orderFuncDesc from '../Filters/orderFuncDesc';
-import StarWarsContext from '../../context/StarwarsContext';
+import StarWarsContext from '../../context/StarWarsContext';
 
 function TableBody() {
   const [planets, setPlanets] = useState([]);
@@ -20,7 +20,7 @@ function TableBody() {
         ? orderFuncAsc(data, name, numericValues, columnSort)
         : orderFuncDesc(data, name, numericValues, columnSort);
     setPlanets(filtered);
-  }, [name, numericValues, columnSort, sort]);
+  }, [data, name, numericValues, columnSort, sort]);
 
   return (
     <tbody>

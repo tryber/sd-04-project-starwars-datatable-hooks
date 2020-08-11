@@ -17,6 +17,7 @@ const StarWarsProvider = ({ children }) => {
   });
 
   const resquestPlanets = () => setIsFetching(true);
+
   const successPlanets = (results) => {
     setData(results);
     setIsFetching(false);
@@ -29,6 +30,7 @@ const StarWarsProvider = ({ children }) => {
 
   const fetchPlanets = () => {
     resquestPlanets();
+
     return apiPlanets().then(
       (json) => successPlanets(json.results),
       (erro) => failurePlanets(erro),
@@ -41,6 +43,7 @@ const StarWarsProvider = ({ children }) => {
       filterByName: { name },
     }))
   );
+  
   const filterByNumericValues = (column, comparison, value) => (
     setFilters((state) => ({
       ...state,
