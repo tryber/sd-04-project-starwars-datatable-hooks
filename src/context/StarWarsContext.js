@@ -9,12 +9,13 @@ const StarsWarsProvider = ({ children }) => {
   const [value, setValue] = useState(0);
   const [column, setColumn] = useState();
   const [comparison, setComparison] = useState();
+  const [sort, setSort] = useState();
   const [data, setData] = useState([]);
 
   const [filters, setFilters] = useState({
     filterByName: { name: '' },
     filterByNumericValues: [],
-    order: { column: 'Name', sort: 'ASC' },
+    order: { column: 'name', sort: 'ASC' },
   });
 
   const inputName = (event) => {
@@ -38,9 +39,16 @@ const StarsWarsProvider = ({ children }) => {
     setFilters((old) => ({
       ...old,
       filterByNumericValues: old.filterByNumericValues.filter(
-        (index) => index !== col,
+        (index) => index !== col
       ),
     }));
+  };
+
+  const columnSort = (_colum, _sort) => {
+    setFilters((old) => ({
+      ...old,
+      order: {column: _colum, sort: _sort },
+    }));    
   };
 
   // Fazendo a requisição
@@ -55,7 +63,7 @@ const StarsWarsProvider = ({ children }) => {
 
     if (filters) {
       filterData = data.filter((planeta) =>
-        planeta.name.toLowerCase().includes(filters.filterByName.name),
+        planeta.name.toLowerCase().includes(filters.filterByName.name)
       );
     }
 
@@ -63,17 +71,17 @@ const StarsWarsProvider = ({ children }) => {
       filters.filterByNumericValues.forEach((itens) => {
         if (itens.comparison === 'maior que') {
           filterData = filterData.filter(
-            (item) => Number(item[itens.column]) > Number([itens.value]),
+            (item) => Number(item[itens.column]) > Number([itens.value])
           );
         }
         if (itens.comparison === 'igual a') {
           filterData = filterData.filter(
-            (item) => Number(item[itens.column]) === Number([itens.value]),
+            (item) => Number(item[itens.column]) === Number([itens.value])
           );
         }
         if (itens.comparison === 'menor que') {
           filterData = filterData.filter(
-            (item) => Number(item[itens.column]) < Number([itens.value]),
+            (item) => Number(item[itens.column]) < Number([itens.value])
           );
         }
       });
@@ -82,11 +90,38 @@ const StarsWarsProvider = ({ children }) => {
     return filterData;
   }
 
+  const numericKeys = [
+    'rotation_period',
+    'orbital_period',
+    'diameter',
+    'surface_water',
+    'population',
+  ];
+
+  const ascSortNumber = (filtered, column) =>
+    filtered.sort((a, b) => Number(a[column]) - Number(b[column]));
+
+  const ascSortString = (filtered, column) =>
+    filtered.sort((a, b) => {
+      if (a[column] > b[column]) return 1;
+      if (a[column] < b[column]) return -1;
+      return 0;
+    });
+
+  const orderAscDesc = (filtered) => {
+    const sorted = numericKeys.includes(filters.order.column)
+      ? ascSortNumber(filtered, filters.order.column)
+      : ascSortString(filtered, filters.order.column);
+    return filters.order.sort === 'DESC' ? sorted.reverse() : sorted;
+  };
+
   const context = {
     addValues,
     column,
     comparison,
     value,
+    sort,
+    setSort,
     setColumn,
     setComparison,
     setValue,
@@ -96,6 +131,8 @@ const StarsWarsProvider = ({ children }) => {
     data,
     inputName,
     deleteFilter,
+    columnSort,
+    orderAscDesc,
   };
 
   return (

@@ -3,7 +3,7 @@ import { StarsWarsContext } from '../context/StarWarsContext';
 
 const RemoveFilter = () => {
   const { filters, deleteFilter } = useContext(StarsWarsContext);
-
+  console.log(filters.order);
   if (filters.filterByNumericValues.length > 0) {
     return filters.filterByNumericValues.map((filter) => (
       <div data-testid="filter" key={filter.column}>

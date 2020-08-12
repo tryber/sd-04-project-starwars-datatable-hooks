@@ -4,27 +4,31 @@ import FilterByName from './FilterByName';
 import Filters from './Filters';
 import TableHead from './TableHead';
 import RemoveFilter from './RemoveFilter';
+import RadioSort from './RadioSort';
 
 import './Table.css';
 
 const Table = () => {
-  const { data, filter, fetchAPI } = useContext(StarsWarsContext);
+  const { data, filter, fetchAPI, orderAscDesc } = useContext(StarsWarsContext);
 
   useEffect(() => {
     fetchAPI();
   }, []);
 
+  const filtered = filter(data);
+  console.log(filtered);
   return (
     <div>
       <FilterByName />
       <Filters />
       <RemoveFilter />
+      <RadioSort />
       <table>
         {data.length > 0 && <TableHead />}
         <tbody>
-          {filter(data).map((row) => (
+          {orderAscDesc(filtered).map((row) => (
             <tr key={row.name}>
-              <td>{row.name}</td>
+              <td data-testid="planet-name" >{row.name}</td>
               <td>{row.rotation_period}</td>
               <td>{row.orbital_period}</td>
               <td>{row.diameter}</td>
