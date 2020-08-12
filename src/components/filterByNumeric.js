@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { AppContext } from '../context';
+import React from 'react';
+// import { AppContext } from '../context';
 
 const filterByNumeric = () => {
   // const { data } = useContext(AppContext);
