@@ -1,7 +1,6 @@
-
 const getApi = () => fetch('https://swapi.dev/api/planets/')
-  .then((res) => res.json())
-  .then((data) => data);
-
+  .then((data) => data.json())
+  .then((json) => json)
+  .catch((err) => { throw err });
 
 export default getApi;
