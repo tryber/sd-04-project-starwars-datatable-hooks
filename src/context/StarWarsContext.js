@@ -5,7 +5,7 @@ import getAPI from '../service/StarWarsAPI';
 const StarsWarsContext = createContext();
 
 const StarsWarsProvider = ({ children }) => {
-  // Estado de controle requisição API  
+  // Estado de controle requisição API
   const [value, setValue] = useState(0);
   const [column, setColumn] = useState();
   const [comparison, setComparison] = useState();
@@ -38,7 +38,7 @@ const StarsWarsProvider = ({ children }) => {
     setFilters((old) => ({
       ...old,
       filterByNumericValues: old.filterByNumericValues.filter(
-        (index) => index !== col
+        (index) => index !== col,
       ),
     }));
   };
@@ -55,7 +55,7 @@ const StarsWarsProvider = ({ children }) => {
 
     if (filters) {
       filterData = data.filter((planeta) =>
-        planeta.name.toLowerCase().includes(filters.filterByName.name)
+        planeta.name.toLowerCase().includes(filters.filterByName.name),
       );
     }
 
@@ -63,17 +63,17 @@ const StarsWarsProvider = ({ children }) => {
       filters.filterByNumericValues.forEach((itens) => {
         if (itens.comparison === 'maior que') {
           filterData = filterData.filter(
-            (item) => Number(item[itens.column]) > Number([itens.value])
+            (item) => Number(item[itens.column]) > Number([itens.value]),
           );
         }
         if (itens.comparison === 'igual a') {
           filterData = filterData.filter(
-            (item) => Number(item[itens.column]) === Number([itens.value])
+            (item) => Number(item[itens.column]) === Number([itens.value]),
           );
         }
         if (itens.comparison === 'menor que') {
           filterData = filterData.filter(
-            (item) => Number(item[itens.column]) < Number([itens.value])
+            (item) => Number(item[itens.column]) < Number([itens.value]),
           );
         }
       });
