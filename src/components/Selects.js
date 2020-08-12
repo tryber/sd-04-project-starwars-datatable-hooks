@@ -9,6 +9,7 @@ const updateColumns = (numericValues) => {
     'rotation_period',
     'surface_water',
   ];
+  // comment
   const stateColumns = numericValues.map(({ column }) => column);
   return columns.filter((option) => !stateColumns.includes(option));
 };
@@ -103,6 +104,5 @@ export const getRadiosAscDesc = (onRadioChange) => (
       value="DESC"
       onChange={(event) => onRadioChange(event)}
     />
-    // comment
   </div>
 );
