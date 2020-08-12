@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../context';
 
-export const filterByNumericValues = () => {
-  const { data, setData } = useContext(AppContext);
-  const { filterByNumericValues } = data;
+const filterByNumeric = () => {
+  const { data } = useContext(AppContext);
+  // const { filterByNumericValues } = data;
 
   return (
     <div>
@@ -23,3 +23,5 @@ export const filterByNumericValues = () => {
     </div>
   );
 };
+
+export default filterByNumeric;
