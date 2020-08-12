@@ -1,9 +1,12 @@
 import React, { useContext } from 'react';
 import { PlanetsContext } from '../context';
 import Table from './Table';
+import FilterValues from './FilterValues';
 
 export default function Home() {
-  const { setFilterByName } = useContext(PlanetsContext);
+  const { setFilterByName } = useContext(
+    PlanetsContext
+  );
   return (
     <div>
       <label htmlFor="pName">
@@ -12,7 +15,7 @@ export default function Home() {
           id="pName"
           type="text"
           placeholder="Nome do planeta"
-          onChange={(event) => setFilterByName({ name: event.target.value })}
+          onChange={(event) => setFilterByName({name: event.target.value})}
         />
       </label>
       <Table />
