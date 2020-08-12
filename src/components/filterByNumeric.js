@@ -1,7 +1,7 @@
 import React from 'react';
 // import { AppContext } from '../context';
 
-const filterByNumeric = () => {
+const filterByNumeric = () => (
   // const { data } = useContext(AppContext);
   // const { filterByNumericValues } = data;
 
@@ -22,6 +22,6 @@ const filterByNumeric = () => {
       </select>
     </div>
   );
-};
+);
 
 export default filterByNumeric;
