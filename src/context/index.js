@@ -11,7 +11,7 @@ const PlanetsProvider = ({ children }) => {
   const [number, setNumber] = useState('');
   const [filterByNumericValues, setFilterByNumericValues] = useState('');
   const [isLoad, setIsLoad] = useState(false);
-  const [filterByName, setFilterByName] = useState({ name: '' })
+  const [filterByName, setFilterByName] = useState({ name: '' });
 
   const context = {
     planets,

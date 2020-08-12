@@ -5,7 +5,6 @@ import dataOrganization from './Function';
 export default function TableBody() {
   const { planets, filterByName } = useContext(PlanetsContext);
   const name = filterByName.name;
-  console.log(name)
 
   return (
     <tbody>
