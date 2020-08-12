@@ -12,7 +12,7 @@ export default function Home() {
           id="pName"
           type="text"
           placeholder="Nome do planeta"
-          onChange={ (event) => setFilterByName({ name: event.target.value }) }
+          onChange={(event) => setFilterByName({ name: event.target.value })}
         />
       </label>
       <Table />
