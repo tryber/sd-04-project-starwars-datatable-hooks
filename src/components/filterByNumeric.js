@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { AppContext } from '../context';
 
 const filterByNumeric = () => {
-  const { data } = useContext(AppContext);
+  // const { data } = useContext(AppContext);
   // const { filterByNumericValues } = data;
 
   return (
