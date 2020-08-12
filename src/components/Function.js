@@ -1,5 +1,5 @@
 function FiltersFunc(planets, name) {
-  return planets.filter((planet) => planet.name.includes(name))
+  return planets.filter((planet) => planet.name.includes(name));
 }
 
 const dataOrganization = (planets, name) => {
