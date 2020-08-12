@@ -6,10 +6,28 @@ const PlanetsContext = createContext();
 
 const PlanetsProvider = ({ children }) => {
   const [planets, setPlanets] = useState([]);
+  const [column, setColumn] = useState('');
+  const [comparison, setComparison] = useState('');
+  const [number, setNumber] = useState('');
+  const [filterByNumericValues, setFilterByNumericValues] = useState('');
+  const [isLoad, setIsLoad] = useState(false);
+  const [filterByName, setFilterByName] = useState({ name: '' })
 
   const context = {
     planets,
     setPlanets,
+    column,
+    setColumn,
+    comparison,
+    setComparison,
+    number,
+    setNumber,
+    filterByNumericValues,
+    setFilterByNumericValues,
+    isLoad,
+    setIsLoad,
+    filterByName,
+    setFilterByName,
   };
 
   useEffect(() => {

@@ -1,12 +1,15 @@
 import React, { useContext } from 'react';
 import { PlanetsContext } from '../context';
+import dataOrganization from './Function';
 
 export default function TableBody() {
-  const { planets } = useContext(PlanetsContext);
+  const { planets, filterByName } = useContext(PlanetsContext);
+  const name = filterByName.name;
+  console.log(name)
 
   return (
     <tbody>
-      {planets.map((planet) => (
+      {dataOrganization(planets, name).map((planet) => (
         <tr key={planet.name}>
           <td>{planet.name}</td>
           <td>{planet.rotation_period}</td>
