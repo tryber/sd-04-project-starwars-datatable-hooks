@@ -3,7 +3,7 @@ import { StarsWarsContext } from '../context/StarWarsContext';
 
 const FilterSort = () => {
   const { columnSort, column, sort } = useContext(StarsWarsContext);
-  
+
   return (
     <div>
       <button

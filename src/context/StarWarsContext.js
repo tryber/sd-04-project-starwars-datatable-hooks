@@ -39,7 +39,7 @@ const StarsWarsProvider = ({ children }) => {
     setFilters((old) => ({
       ...old,
       filterByNumericValues: old.filterByNumericValues.filter(
-        (index) => index !== col
+        (index) => index !== col,
       ),
     }));
   };
@@ -47,8 +47,8 @@ const StarsWarsProvider = ({ children }) => {
   const columnSort = (_colum, _sort) => {
     setFilters((old) => ({
       ...old,
-      order: {column: _colum, sort: _sort },
-    }));    
+      order: { column: _colum, sort: _sort },
+    }));
   };
 
   // Fazendo a requisição
@@ -63,7 +63,7 @@ const StarsWarsProvider = ({ children }) => {
 
     if (filters) {
       filterData = data.filter((planeta) =>
-        planeta.name.toLowerCase().includes(filters.filterByName.name)
+        planeta.name.toLowerCase().includes(filters.filterByName.name),
       );
     }
 
@@ -71,17 +71,17 @@ const StarsWarsProvider = ({ children }) => {
       filters.filterByNumericValues.forEach((itens) => {
         if (itens.comparison === 'maior que') {
           filterData = filterData.filter(
-            (item) => Number(item[itens.column]) > Number([itens.value])
+            (item) => Number(item[itens.column]) > Number([itens.value]),
           );
         }
         if (itens.comparison === 'igual a') {
           filterData = filterData.filter(
-            (item) => Number(item[itens.column]) === Number([itens.value])
+            (item) => Number(item[itens.column]) === Number([itens.value]),
           );
         }
         if (itens.comparison === 'menor que') {
           filterData = filterData.filter(
-            (item) => Number(item[itens.column]) < Number([itens.value])
+            (item) => Number(item[itens.column]) < Number([itens.value]),
           );
         }
       });
@@ -101,10 +101,10 @@ const StarsWarsProvider = ({ children }) => {
   const ascSortNumber = (filtered, column) =>
     filtered.sort((a, b) => Number(a[column]) - Number(b[column]));
 
-  const ascSortString = (filtered, column) =>
+  const ascSortString = (filtered, _column) =>
     filtered.sort((a, b) => {
-      if (a[column] > b[column]) return 1;
-      if (a[column] < b[column]) return -1;
+      if (a[_column] > b[_column]) return 1;
+      if (a[_column] < b[_column]) return -1;
       return 0;
     });
 
