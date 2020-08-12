@@ -1,4 +1,4 @@
-import ApiPlanet from '../services/ApiPlanets';
+import ApiPlanet from '../services/apiPlanets';
 
 export const REQUESTING_PLANETS = 'REQUESTING_PLANETS';
 export const REQUEST_PLANET_SUCCESS = 'REQUEST_PLANET_SUCCESS';
