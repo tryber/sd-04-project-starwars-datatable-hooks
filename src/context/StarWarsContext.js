@@ -5,8 +5,7 @@ import getAPI from '../service/StarWarsAPI';
 const StarsWarsContext = createContext();
 
 const StarsWarsProvider = ({ children }) => {
-  // Estado de controle requisição API
-  // const [isFetching, setIsFetching] = useState(false);
+  // Estado de controle requisição API  
   const [value, setValue] = useState(0);
   const [column, setColumn] = useState();
   const [comparison, setComparison] = useState();
