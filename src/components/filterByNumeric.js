@@ -7,7 +7,7 @@ export const filterByNumericValues = () => {
 
   return (
     <div>
-      <select data-testid="column-filter" onChange={() => }>
+      <select data-testid="column-filter">
         <option value="population">population</option>
         <option value="orbital_period">orbital_period</option>
         <option value="diam eter">diameter</option>

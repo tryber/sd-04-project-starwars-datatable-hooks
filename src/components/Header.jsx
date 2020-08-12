@@ -1,9 +1,11 @@
 import React, { useContext, useEffect } from 'react';
-import {AppContext} from '../context/index';
+import { AppContext } from '../context/index';
 import getSwapi from '../services/getSwapi';
 
 const filterTableByName = (search, set, data, planets) => {
-  const filteredPlanets = planets.filter(({ name }) => name.toUpperCase().includes(search.toUpperCase()));
+  const filteredPlanets = planets.filter(({ name }) =>
+    name.toUpperCase().includes(search.toUpperCase()),
+  );
 
   set({ ...data, filteredPlanets, filterByName: { name: search } });
 };
