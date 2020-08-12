@@ -4,6 +4,7 @@ import Table from './components/Table';
 import Header from './components/Header';
 
 function App() {
+  // xablau
   return (
     <div className="App">
       <StarWarsContextStore>
