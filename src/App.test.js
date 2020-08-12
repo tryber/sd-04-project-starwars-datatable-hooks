@@ -28,7 +28,7 @@ const mockFetch = () => {
     }));
 }
 
- describe('Fazer uma requisição para o endpoint `/planets` da API de Star Wars e preencher uma tabela com os dados retornados, com exceção dos da coluna `residents`', () => {
+/*  describe('Fazer uma requisição para o endpoint `/planets` da API de Star Wars e preencher uma tabela com os dados retornados, com exceção dos da coluna `residents`', () => {
   beforeAll(mockFetch);
   beforeEach(cleanup);
 
@@ -82,7 +82,7 @@ const mockFetch = () => {
     // a requisição (mock) retorna 10 planetas, somando com mais um linha do header totalizando 11 linhas
     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(11);
   });
-});
+}); */
 
 describe('Sua página deve ter um campo de texto que filtra a tabela para somente exibir planetas cujos nomes incluam o texto digitado', () => {
   beforeAll(mockFetch);
@@ -157,7 +157,7 @@ describe('Sua página deve ter um campo de texto que filtra a tabela para soment
     }
   });
 });
-/*
+
 
 describe('Sua página deve ter um filtro para valores numéricos', () => {
   beforeAll(mockFetch);
@@ -284,7 +284,7 @@ describe('Sua página não deve utilizar filtros repetidos', () => {
     expect(foundColumnFilter).toEqual(expect.arrayContaining(['orbital_period', 'diameter', 'rotation_period', 'surface_water']));
   });
 });
-
+/*
 describe('Cada filtro de valores numéricos deve ter um ícone de `X` que, ao ser clicado, o apaga e desfaz suas filtragens dos dados da tabela', () => {
   beforeAll(mockFetch);
   beforeEach(cleanup);

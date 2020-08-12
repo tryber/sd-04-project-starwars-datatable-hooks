@@ -1,14 +1,15 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
-import AppContext from './AppContext';
+import React, { useState, createContext } from 'react';
 
-const AppProvider = ({ children }) => {
+export const AppContext = createContext();
+
+export default function AppProvider({ children }) {
   const INITIAL_STATE = {
     isFetching: true,
     filterByName: { name: '' },
     filteredPlanets: [],
     planetsData: [],
-    filterByNumericValues: [],
+    filterByNumericValues: [{ column: '', comparison: '', value: '' }],
     order: {
       column: 'Name',
       sort: 'ASC',
@@ -23,10 +24,8 @@ const AppProvider = ({ children }) => {
   };
 
   return <AppContext.Provider value={context}> {children} </AppContext.Provider>;
-};
+}
 
 AppProvider.propTypes = {
   children: PropTypes.func.isRequired,
 };
-
-export default AppProvider;

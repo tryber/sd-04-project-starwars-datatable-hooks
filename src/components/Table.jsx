@@ -1,6 +1,6 @@
 // import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
-import AppContext from '../context/AppContext';
+import { AppContext } from '../context';
 // import filterAll from './filterAll';
 import linhas from './Linhas';
 import Colunas from './Colunas';
@@ -13,7 +13,6 @@ const Table = () => {
   // if (isFetching) return <span>...Loading</span>;
   // const planeta1 = data;
   const { filteredPlanets } = data;
-  console.log(filteredPlanets);
 
   return (
     <div>

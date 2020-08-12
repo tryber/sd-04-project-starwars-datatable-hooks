@@ -1,6 +1,6 @@
 import React from 'react';
 import Table from './components/Table';
-import AppProvider from './context/AppProvider';
+import AppProvider from './context';
 import Header from './components/Header';
 
 const App = () => (

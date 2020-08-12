@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from 'react';
-import AppContext from '../context/AppContext';
+import {AppContext} from '../context/index';
 import getSwapi from '../services/getSwapi';
 
 const filterTableByName = (search, set, data, planets) => {
-  const filteredPlanets = planets.filter(({ name }) => name.includes(search));
+  const filteredPlanets = planets.filter(({ name }) => name.toUpperCase().includes(search.toUpperCase()));
 
   set({ ...data, filteredPlanets, filterByName: { name: search } });
 };
