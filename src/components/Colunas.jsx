@@ -2,7 +2,7 @@ import React from 'react';
 
 const Colunas = () => (
   <tr>
-    <th>name</th>
+    <th>Name</th>
     <th>rotation_period</th>
     <th>orbital_period</th>
     <th>diameter</th>
