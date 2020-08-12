@@ -38,6 +38,8 @@ const useFilters = () => {
     },
     [filters.order],
   );
+  
+  // Source from Daniel Pantalena: https://github.com/tryber/sd-04-project-starwars-datatable-hooks/blob/a9a5b7f0700cd20013f72b6c0962ffa15efac7cf/src/components/Table/Table.js#L26
 
   const filterByNumericValues = useCallback(
     (data) =>
