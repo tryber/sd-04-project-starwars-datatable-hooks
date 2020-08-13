@@ -1,14 +1,14 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect } from 'react';
 // import TableBody from './TableBody';
 // import Provider from '../context/AppContext';
-import StarWarsContext from "../context/StarWarsContext";
-import getApi from "../sercives/ApiPlanets";
+import StarWarsContext from '../context/StarWarsContext';
+import getApi from '../sercives/ApiPlanets';
 
 function App() {
   const { data, setData } = useContext(StarWarsContext);
   useEffect(() => {
     getApi().then((array) =>
-      setData({ ...data, planetData: array.results, isFetching: false })
+      setData({ ...data, planetData: array.results, isFetching: false });
     );
   }, []);
 

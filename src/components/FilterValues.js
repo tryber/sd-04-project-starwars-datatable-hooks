@@ -1,13 +1,13 @@
-// import PropTypes from 'prop-types';
-// import React, { Component } from 'react';
+// import PropTypes from "prop-types";
+// import React, { Component } from "react";
 
 // class FilterValues extends Component {
 //   constructor(props) {
 //     super(props);
 //     this.state = {
-//       column: '',
-//       comparison: '',
-//       number: '',
+//       column: "",
+//       comparison: "",
+//       number: "",
 //     };
 //     this.onClick = this.onClick.bind(this);
 //   }
@@ -20,13 +20,17 @@
 //     const { column, comparison, number } = this.state;
 //     const { filterByNumericValuess } = this.props;
 //     filterByNumericValuess(column, comparison, number);
-//     this.setState({ column: '', comparison: '', number: '' });
+//     this.setState({ column: "", comparison: "", number: "" });
 //   }
 
 //   getCoparation() {
-//     const comparison = ['', 'maior que', 'menor que', 'igual a'];
+//     const comparison = ["", "maior que", "menor que", "igual a"];
 //     return (
-//       <select data-testid="comparison-filter" value={this.state.comparison} onChange={(event) => this.onChange(event, 'comparison')}>
+//       <select
+//         data-testid="comparison-filter"
+//         value={this.state.comparison}
+//         onChange={(event) => this.onChange(event, "comparison")}
+//       >
 //         {comparison.map((el) => (
 //           <option key={el} value={el}>
 //             {el}
@@ -39,7 +43,11 @@
 //   getColumns() {
 //     const select = this.updateColums();
 //     return (
-//       <select data-testid="column-filter" value={this.state.column} onChange={(event) => this.onChange(event, 'column')}>
+//       <select
+//         data-testid="column-filter"
+//         value={this.state.column}
+//         onChange={(event) => this.onChange(event, "column")}
+//       >
 //         {select.map((item) => (
 //           <option key={item} value={item}>
 //             {item}
@@ -52,12 +60,12 @@
 //   updateColums() {
 //     const { numericValues } = this.props;
 //     const columns = [
-//       '',
-//       'population',
-//       'orbital_period',
-//       'diameter',
-//       'rotation_period',
-//       'surface_water',
+//       "",
+//       "population",
+//       "orbital_period",
+//       "diameter",
+//       "rotation_period",
+//       "surface_water",
 //     ];
 //     const chooseColumns = numericValues.map(({ column }) => column);
 //     return columns.filter((el) => !chooseColumns.includes(el));
@@ -72,7 +80,7 @@
 //           type="number"
 //           value={this.state.number}
 //           data-testid="value-filter"
-//           onChange={(event) => this.onChange(event, 'number')}
+//           onChange={(event) => this.onChange(event, "number")}
 //         />
 //         <button onClick={this.onClick} data-testid="button-filter">
 //           Filtrar

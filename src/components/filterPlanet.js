@@ -2,8 +2,6 @@
 // import PropTypes from 'prop-types';
 // import React, { Component } from 'react';
 
-
-
 // class FilterPlanet extends Component {
 //   render() {
 //     const { filterByNames } = this.props;

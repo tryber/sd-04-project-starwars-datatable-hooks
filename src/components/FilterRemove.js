@@ -1,8 +1,6 @@
 // import React from 'react';
 // import PropTypes from 'prop-types';
 
-
-
 // function RemoveFilter({ numericValues, remove }) {
 //   const onClick = (type) => remove(type);
 

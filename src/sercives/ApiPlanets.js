@@ -1,5 +1,5 @@
 const getApi = () =>
-  fetch("https://swapi.dev/api/planets/")
+  fetch('https://swapi.dev/api/planets/')
     .then((res) => res.json())
     .then((data) => data);
 
