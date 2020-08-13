@@ -1,8 +1,8 @@
-import React, { useEffect, useContext } from "react";
-import StarWarsContext from "../context/StarWarsContext";
+import React, { useContext } from 'react';
+import StarWarsContext from '../context/StarWarsContext';
 
 function TableBody() {
-  const { data, setData } = useContext(StarWarsContext);
+  const { data } = useContext(StarWarsContext);
   const { planetData } = data;
   return (
     <div>

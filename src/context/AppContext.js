@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import StarWarsContext from "./StarWarsContext";
+import React, { useState } from 'react';
+import StarWarsContext from './StarWarsContext';
 
 const Provider = ({ children }) => {
   const initState = { isFetching: true, planetData: [] };
