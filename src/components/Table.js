@@ -4,6 +4,31 @@ import { connect } from 'react-redux';
 import filterFunc from './helpers/filterFunc';
 import sortFunc from './helpers/sortFunc'; */
 
+import React, { useContext } from 'react';
+// import PropTypes from 'prop-types';
+import StarWarsContext from '../context/StarWarsContext';
+
+const Table = () => {
+  const { data } = useContext(StarWarsContext);
+  const keys = data.length >= 1 ? Object.keys(data[0]) : [];
+  const tableHeader = keys.filter((key) => key !== 'residents');
+  return (
+    <div>
+      <thead>
+        <tr>
+          {tableHeader.map((columns) => (
+            <th key={columns}>{columns}</th>
+          ))}
+        </tr>
+      </thead>
+    </div>
+  );
+};
+
+// Table.propTypes = {};
+
+export default Table;
+
 /*
 const { data } = this.props;
 const keys = data.length >= 1 ? Object.keys(data[0]) : [];
