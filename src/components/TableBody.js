@@ -3,14 +3,14 @@ import { PlanetsContext } from '../context';
 import dataOrganization from './Function';
 
 export default function TableBody() {
-  const { planets, filterByName, filterByNumericValues } = useContext(PlanetsContext);
+  const { planets, filterByName, filterByNumericValues, order } = useContext(PlanetsContext);
   const name = filterByName.name;
 
   return (
     <tbody>
-      {dataOrganization(planets, name, filterByNumericValues).map((planet) => (
+      {dataOrganization(planets, name, filterByNumericValues, order).map((planet) => (
         <tr key={planet.name}>
-          <td>{planet.name}</td>
+          <td data-testid="planet-name">{planet.name}</td>
           <td>{planet.rotation_period}</td>
           <td>{planet.orbital_period}</td>
           <td>{planet.diameter}</td>

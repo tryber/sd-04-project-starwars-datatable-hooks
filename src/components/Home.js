@@ -3,6 +3,7 @@ import { PlanetsContext } from '../context';
 import Table from './Table';
 import FilterValues from './FilterValues';
 import RemoveFilters from './RemoveFilters';
+import Sort from './Sort';
 
 export default function Home() {
   const { setFilterByName } = useContext(PlanetsContext);
@@ -18,6 +19,7 @@ export default function Home() {
         />
       </label>
       <FilterValues />
+      <Sort />
       <Table />
       <RemoveFilters />
     </div>

@@ -8,6 +8,10 @@ const PlanetsProvider = ({ children }) => {
   const [planets, setPlanets] = useState([]);
   const [filterByName, setFilterByName] = useState({ name: '' });
   const [filterByNumericValues, setFilterByNumericValues] = useState([]);
+  const [order, setOrder] = useState({
+    column: 'Name',
+    sort: 'ASC',
+  });
   const [isLoad, setIsLoad] = useState(false);
 
   const context = {
@@ -17,6 +21,8 @@ const PlanetsProvider = ({ children }) => {
     setFilterByName,
     filterByNumericValues,
     setFilterByNumericValues,
+    order,
+    setOrder,
     isLoad,
     setIsLoad,
   };
