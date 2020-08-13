@@ -1,40 +1,21 @@
 import React, { useContext, useEffect } from 'react';
 import { AppContext } from '../context/index';
-import getSwapi from '../services/getSwapi';
 
-const filterTableByName = (search, set, data, planets) => {
-  const filteredPlanets = planets.filter(({ name }) =>
-    name.toUpperCase().includes(search.toUpperCase()),
-  );
-
-  set({ ...data, filteredPlanets, filterByName: { name: search } });
+const filterTableByName = (search, set) => {
+  set((data) => ({ ...data, filterByName: { name: search } }));
 };
 
 const Header = () => {
-  const { data, setData, isFetching } = useContext(AppContext);
+  const { setData, data } = useContext(AppContext);
 
-  async function getPlanetsData() {
-    const planets = await getSwapi();
-    setData({
-      ...data,
-      planetsData: planets.results,
-      filteredPlanets: planets.results,
-      isFetching: false,
-    });
-  }
-  useEffect(() => {
-    getPlanetsData();
-  }, []);
+  if(data.isFetching) return <p>Loading ...</p>
 
-  if (isFetching) return <p>Loading...</p>;
-
-  const { planetsData } = data;
   return (
     <div>
       <input
         type="text"
         data-testid="name-filter"
-        onChange={(e) => filterTableByName(e.target.value, setData, data, planetsData)}
+        onChange={(e) => filterTableByName(e.target.value, setData)}
       />
     </div>
   );

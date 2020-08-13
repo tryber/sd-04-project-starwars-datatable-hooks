@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
-import React, { useState, createContext } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
+import getSwapi from '../services/getSwapi';
 
 export const AppContext = createContext();
 
@@ -22,6 +23,21 @@ export default function AppProvider({ children }) {
     data,
     setData,
   };
+/* 
+  async function getPlanetsData() {
+    const planets = await getSwapi();
+    setData({
+      ...data,
+      planetsData: planets.results,
+      filteredPlanets: planets.results,
+      isFetching: false,
+    });
+  }
+ */
+  useEffect(() => {
+    console.log('useEffect');
+    getSwapi().then((res) => setData({ ...data, planetsData: res.results, isFetching: false }));
+  }, []);
 
   return <AppContext.Provider value={context}> {children} </AppContext.Provider>;
 }

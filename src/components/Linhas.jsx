@@ -1,7 +1,7 @@
 import React from 'react';
 
 const linhas = (planeta) => (
-  <tr>
+  <tr key={planeta.name}>
     <td>{planeta.name}</td>
     <td>{planeta.rotation_period}</td>
     <td>{planeta.orbital_period}</td>
