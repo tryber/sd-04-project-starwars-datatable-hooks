@@ -1,5 +1,5 @@
 function FiltersFunc(planets, name, filterByNumericValues) {
-  return filterByNumericValues.length === 1
+  return filterByNumericValues.length === 0
     ? planets.filter((planet) => planet.name.includes(name))
     : filterByNumericValues.reduce(
         (acc, { column, comparison, value }) =>

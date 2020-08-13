@@ -3,10 +3,10 @@ import { PlanetsContext } from '../context';
 
 export default function FilterValues() {
   const { filterByNumericValues, setFilterByNumericValues } = useContext(
-    PlanetsContext
+    PlanetsContext,
   );
-  const [column, setColumn] = useState('');
-  const [comparison, setComparison] = useState('');
+  const [colum, setColumn] = useState('');
+  const [compariso, setComparison] = useState('');
   const [number, setNumber] = useState('');
 
   const onChange = (event, field) => {
@@ -23,6 +23,7 @@ export default function FilterValues() {
       default:
         return null;
     }
+    return null;
   };
 
   const updateColumns = () => {
@@ -34,7 +35,7 @@ export default function FilterValues() {
       'rotation_period',
       'surface_water',
     ];
-    const chosenColumns = filterByNumericValues.map(({ column }) => column);
+    const chosenColumns = filterByNumericValues.map((it) => it.column);
     return columns.filter((item) => !chosenColumns.includes(item));
   };
 
@@ -43,7 +44,7 @@ export default function FilterValues() {
     return (
       <select
         data-testid="column-filter"
-        value={column}
+        value={colum}
         onChange={(event) => onChange(event, 'column')}
       >
         {select.map((item) => (
@@ -60,7 +61,7 @@ export default function FilterValues() {
     return (
       <select
         data-testid="comparison-filter"
-        value={comparison}
+        value={compariso}
         onChange={(event) => onChange(event, 'comparison')}
       >
         {comparison2.map((item) => (
@@ -75,8 +76,8 @@ export default function FilterValues() {
   const onClick = () => {
     setFilterByNumericValues([
       {
-        column: column,
-        comparison: comparison,
+        column: colum,
+        comparison: compariso,
         value: number,
       },
     ]);
