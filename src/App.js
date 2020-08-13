@@ -1,7 +1,7 @@
 import React from "react";
 import Provider from "./context/AppContext";
-import Table from './components/Table';
-import TableBody from './components/TableBody';
+import Table from "./components/Table";
+import TableBody from "./components/TableBody";
 
 function App() {
   return (
