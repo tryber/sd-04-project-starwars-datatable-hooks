@@ -36,7 +36,7 @@ const getColumns = (
   colum,
   setColumn,
   setComparison,
-  setNumber
+  setNumber,
 ) => {
   const select = updateColumns(filterByNumericValues);
   return (
@@ -77,7 +77,7 @@ const getComparison = (compariso, setColumn, setComparison, setNumber) => {
 
 export default function FilterValues() {
   const { filterByNumericValues, setFilterByNumericValues } = useContext(
-    PlanetsContext
+    PlanetsContext,
   );
   const [colum, setColumn] = useState('');
   const [compariso, setComparison] = useState('');
@@ -103,7 +103,7 @@ export default function FilterValues() {
         colum,
         setColumn,
         setComparison,
-        setNumber
+        setNumber,
       )}
       {getComparison(compariso, setColumn, setComparison, setNumber)}
       <input
