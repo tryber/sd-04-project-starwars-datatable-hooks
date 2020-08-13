@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { AppContext } from '../context/index';
 
 const filterTableByName = (search, set) => {
@@ -8,7 +8,7 @@ const filterTableByName = (search, set) => {
 const Header = () => {
   const { setData, data } = useContext(AppContext);
 
-  if(data.isFetching) return <p>Loading ...</p>
+  if (data.isFetching) return <p>Loading ...</p>;
 
   return (
     <div>

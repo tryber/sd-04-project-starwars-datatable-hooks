@@ -23,17 +23,7 @@ export default function AppProvider({ children }) {
     data,
     setData,
   };
-/* 
-  async function getPlanetsData() {
-    const planets = await getSwapi();
-    setData({
-      ...data,
-      planetsData: planets.results,
-      filteredPlanets: planets.results,
-      isFetching: false,
-    });
-  }
- */
+
   useEffect(() => {
     console.log('useEffect');
     getSwapi().then((res) => setData({ ...data, planetsData: res.results, isFetching: false }));
