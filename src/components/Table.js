@@ -8,8 +8,7 @@ function App() {
   const { data, setData } = useContext(StarWarsContext);
   useEffect(() => {
     getApi().then((array) =>
-      setData({ ...data, planetData: array.results, isFetching: false })
-    );
+      setData({ ...data, planetData: array.results, isFetching: false }));
   }, []);
 
   if (data.isFetching) return <p>Loading.....</p>;
