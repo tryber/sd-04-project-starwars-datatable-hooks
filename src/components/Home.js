@@ -1,11 +1,24 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { fetchPlanets } from '../actions';
+import React, { Component, useContext } from 'react';
 import Filters from './Filters';
 import Table from './Table';
+import StarWarsContext from '../context/StarWarsContext';
 
-class Home extends Component {
+const Home = () => {
+  const test = useContext(StarWarsContext);
+  const { loading, data } = test;
+  //if (loading) return <h1>Loading...</h1>;
+  console.log(data);
+  console.log(loading);
+  return (
+    <div>
+      <h3>StarWars Datatable with Filters</h3>
+    </div>
+  );
+};
+
+export default Home;
+
+/* class Home extends Component {
   componentDidMount() {
     const { planetsFetch } = this.props;
     planetsFetch();
@@ -38,4 +51,4 @@ const mapDispatchToProps = (dispatch) => ({
   planetsFetch: () => dispatch(fetchPlanets()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home); */
