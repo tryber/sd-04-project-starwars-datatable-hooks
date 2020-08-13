@@ -31,7 +31,7 @@ const onClick = (colum, sor, setOrder) => {
     {
       column: colum,
       sort: sor,
-    }
+    },
   );
 };
 
