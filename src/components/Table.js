@@ -10,7 +10,7 @@ import Filters from '../helpers/Filters';
 import './Table.css';
 
 const Table = () => {
-  const { data, fetchAPI, orderAscDesc } = useContext(StarsWarsContext);
+  const { data, fetchAPI, orderTable } = useContext(StarsWarsContext);
 
   useEffect(() => {
     fetchAPI();
@@ -27,9 +27,9 @@ const Table = () => {
       <table>
         {data.length > 0 && <TableHead />}
         <tbody>
-          {orderAscDesc(filtered).map((row) => (
+          {orderTable(filtered).map((row) => (
             <tr key={row.name}>
-              <td data-testid="planet-name" >{row.name}</td>
+              <td data-testid='planet-name'>{row.name}</td>
               <td>{row.rotation_period}</td>
               <td>{row.orbital_period}</td>
               <td>{row.diameter}</td>

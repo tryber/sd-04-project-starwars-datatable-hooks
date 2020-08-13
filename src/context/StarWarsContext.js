@@ -58,12 +58,7 @@ const StarsWarsProvider = ({ children }) => {
     });
   };
 
-/* 
-  Esta função de ordenção até a linha 90
-  foi feito com a ajuda do colega/amigo
-  Frederico Campello turma 04
-*/
-
+  // Colunas numericas
   const numericKeys = [
     'rotation_period',
     'orbital_period',
@@ -72,21 +67,49 @@ const StarsWarsProvider = ({ children }) => {
     'population',
   ];
 
-  const ascSortNumber = (filtered, col) =>
-    filtered.sort((a, b) => Number(a[col]) - Number(b[col]));
+  // Ordenando colunas
+  const orderTable = (filtered) => {
+    // Verifica se a coluna é numerica
+    if (numericKeys.includes(filters.order.column)) {
+      if (filters.order.sort === 'ASC') {
+        return filtered.sort(
+          (a, b) =>
+            Number(a[filters.order.column]) - Number(b[filters.order.column])
+        );
+      }
+      if (filters.order.sort === 'DESC') {
+        return filtered.sort(
+          (a, b) =>
+            Number(b[filters.order.column]) - Number(a[filters.order.column])
+        );
+      }
+    }
 
-  const ascSortString = (filtered, collum) =>
+    /*
+      A função sort recebe dois parametros.
+      Se retornar -1 indica que a vêm antes de b.
+      Se retornar 1 indica que b vêm antes de a.
+      Se retornar 0 são iguais, não faz nada.
+      Referência: https://www.smashingmagazine.com/2020/03/sortable-tables-react/
+    */
     filtered.sort((a, b) => {
-      if (a[collum] > b[collum]) return 1;
-      if (a[collum] < b[collum]) return -1;
+      if (
+        a[filters.order.column.toLowerCase()] <
+        b[filters.order.column.toLowerCase()]
+      ) {
+        return -1;
+      }
+
+      if (
+        a[filters.order.column.toLowerCase()] >
+        b[filters.order.column.toLowerCase()]
+      ) {
+        return 1;
+      }
+
       return 0;
     });
-
-  const orderAscDesc = (filtered) => {
-    const sorted = numericKeys.includes(filters.order.column)
-      ? ascSortNumber(filtered, filters.order.column)
-      : ascSortString(filtered, filters.order.column);
-    return filters.order.sort === 'DESC' ? sorted.reverse() : sorted;
+    return filters.order.sort === 'DESC' ? filtered.reverse() : filtered;
   };
 
   const context = {
@@ -104,7 +127,7 @@ const StarsWarsProvider = ({ children }) => {
     data,
     inputName,
     deleteFilter,
-    orderAscDesc,
+    orderTable,
     columnSort,
   };
 
