@@ -39,7 +39,7 @@ const StarsWarsProvider = ({ children }) => {
     setFilters((old) => ({
       ...old,
       filterByNumericValues: old.filterByNumericValues.filter(
-        (index) => index !== col,
+        (index) => index !== col
       ),
     }));
   };
@@ -58,37 +58,11 @@ const StarsWarsProvider = ({ children }) => {
     });
   };
 
-  function filter(text) {
-    let filterData = [...text];
-
-    if (filters) {
-      filterData = data.filter((planeta) =>
-        planeta.name.toLowerCase().includes(filters.filterByName.name),
-      );
-    }
-
-    if (filters.filterByNumericValues.length !== 0) {
-      filters.filterByNumericValues.forEach((itens) => {
-        if (itens.comparison === 'maior que') {
-          filterData = filterData.filter(
-            (item) => Number(item[itens.column]) > Number([itens.value]),
-          );
-        }
-        if (itens.comparison === 'igual a') {
-          filterData = filterData.filter(
-            (item) => Number(item[itens.column]) === Number([itens.value]),
-          );
-        }
-        if (itens.comparison === 'menor que') {
-          filterData = filterData.filter(
-            (item) => Number(item[itens.column]) < Number([itens.value]),
-          );
-        }
-      });
-    }
-
-    return filterData;
-  }
+/* 
+  Esta função de ordenção até a linha 90
+  foi feito com a ajuda do colega/amigo
+  Frederico Campello turma 04
+*/
 
   const numericKeys = [
     'rotation_period',
@@ -98,13 +72,13 @@ const StarsWarsProvider = ({ children }) => {
     'population',
   ];
 
-  const ascSortNumber = (filtered, column) =>
-    filtered.sort((a, b) => Number(a[column]) - Number(b[column]));
+  const ascSortNumber = (filtered, col) =>
+    filtered.sort((a, b) => Number(a[col]) - Number(b[col]));
 
-  const ascSortString = (filtered, _column) =>
+  const ascSortString = (filtered, collum) =>
     filtered.sort((a, b) => {
-      if (a[_column] > b[_column]) return 1;
-      if (a[_column] < b[_column]) return -1;
+      if (a[collum] > b[collum]) return 1;
+      if (a[collum] < b[collum]) return -1;
       return 0;
     });
 
@@ -125,14 +99,13 @@ const StarsWarsProvider = ({ children }) => {
     setColumn,
     setComparison,
     setValue,
-    filter,
     filters,
     fetchAPI,
     data,
     inputName,
     deleteFilter,
-    columnSort,
     orderAscDesc,
+    columnSort,
   };
 
   return (

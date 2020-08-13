@@ -1,26 +1,27 @@
 import React, { useContext, useEffect } from 'react';
 import { StarsWarsContext } from '../context/StarWarsContext';
 import FilterByName from './FilterByName';
-import Filters from './Filters';
+import FilterCompar from './FilterCompar';
 import TableHead from './TableHead';
 import RemoveFilter from './RemoveFilter';
 import RadioSort from './RadioSort';
+import Filters from '../helpers/Filters';
 
 import './Table.css';
 
 const Table = () => {
-  const { data, filter, fetchAPI, orderAscDesc } = useContext(StarsWarsContext);
+  const { data, fetchAPI, orderAscDesc } = useContext(StarsWarsContext);
 
   useEffect(() => {
     fetchAPI();
   }, []);
 
-  const filtered = filter(data);
+  const filtered = Filters(data);
   console.log(filtered);
   return (
     <div>
       <FilterByName />
-      <Filters />
+      <FilterCompar />
       <RemoveFilter />
       <RadioSort />
       <table>

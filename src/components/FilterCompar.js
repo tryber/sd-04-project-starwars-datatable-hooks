@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { StarsWarsContext } from '../context/StarWarsContext';
 import FilterCategory from './FilterCategory';
 
-const Filters = () => {
+const FilterCompar = () => {
   const {
     column,
     comparison,
@@ -40,4 +40,4 @@ const Filters = () => {
   );
 };
 
-export default Filters;
+export default FilterCompar;
