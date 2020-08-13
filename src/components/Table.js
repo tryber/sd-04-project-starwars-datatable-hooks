@@ -1,8 +1,8 @@
+/* import React from 'react';
 import PropTypes from 'prop-types';
-import React from 'react';
 import { connect } from 'react-redux';
 import filterFunc from './helpers/filterFunc';
-import sortFunc from './helpers/sortFunc';
+import sortFunc from './helpers/sortFunc'; */
 
 /*
 const { data } = this.props;
@@ -11,7 +11,7 @@ const tableHeader = keys.filter((key) => key !== 'residents');
 
 const getHeaders = (planets) => Object.keys(planets[0]).filter((header) => header !== 'residents');
  */
-
+/* 
 class Table extends React.Component {
   render() {
     const { data, name, numericValues, column, sort } = this.props;
@@ -63,3 +63,4 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps)(Table);
+ */

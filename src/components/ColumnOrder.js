@@ -1,9 +1,9 @@
-import PropTypes from 'prop-types';
+/* import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { sortColumns } from '../actions';
-
-class ColumnOrder extends Component {
+ */
+/* class ColumnOrder extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -40,16 +40,16 @@ class ColumnOrder extends Component {
       </div>
     );
   }
-
-  render() {
+ */
+/*   render() {
     const { column, sort } = this.state;
     const { data, orderColumns } = this.props;
     const keys = data.length >= 1 ? Object.keys(data[0]) : [];
     const tableHeader = keys.filter((key) => key !== 'residents');
     return (
-      <div>
+      <div> */
         {/* Seleciona Coluna */}
-        <select
+/*         <select
           data-testid="column-sort"
           onChange={(event) => this.setState({ column: event.target.value })}
         >
@@ -58,11 +58,11 @@ class ColumnOrder extends Component {
               {columns}
             </option>
           ))}
-        </select>
+        </select> */
         {/* ASC e DESC */}
-        {this.ascDesc()}
+        /* {this.ascDesc()} */
         {/* Botão Filtrar */}
-        <button
+/*         <button
           data-testid="column-sort-button"
           type="button"
           onClick={() => orderColumns(column, sort)}
@@ -73,8 +73,8 @@ class ColumnOrder extends Component {
     );
   }
 }
-
-ColumnOrder.propTypes = {
+ */
+/* ColumnOrder.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
   orderColumns: PropTypes.func.isRequired,
 };
@@ -89,4 +89,4 @@ const mapDispatchToProps = (dispatch) => ({
   orderColumns: (column, sort) => dispatch(sortColumns(column, sort)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ColumnOrder);
+export default connect(mapStateToProps, mapDispatchToProps)(ColumnOrder); */

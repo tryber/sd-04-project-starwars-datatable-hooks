@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+/* import React, { Component } from 'react';
 import FilterName from './FilterName';
 import FilterNumValues from './FilterNumValues';
 import RemoveFilter from './RemoveFilter';
@@ -19,3 +19,4 @@ export class Filters extends Component {
 }
 
 export default Filters;
+ */
