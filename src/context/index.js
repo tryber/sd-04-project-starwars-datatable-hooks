@@ -7,13 +7,7 @@ const PlanetsContext = createContext();
 const PlanetsProvider = ({ children }) => {
   const [planets, setPlanets] = useState([]);
   const [filterByName, setFilterByName] = useState({ name: '' });
-  const [filterByNumericValues, setFilterByNumericValues] = useState([
-    {
-      column: '',
-      comparison: '',
-      value: '',
-    },
-  ]);
+  const [filterByNumericValues, setFilterByNumericValues] = useState([]);
   const [isLoad, setIsLoad] = useState(false);
 
   const context = {
