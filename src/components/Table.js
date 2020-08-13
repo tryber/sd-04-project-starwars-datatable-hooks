@@ -6,11 +6,12 @@ import TableHead from './TableHead';
 import RemoveFilter from './RemoveFilter';
 import RadioSort from './RadioSort';
 import Filters from '../helpers/Filters';
+import orderTable from '../helpers/FilterSort';
 
 import './Table.css';
 
 const Table = () => {
-  const { data, fetchAPI, orderTable } = useContext(StarsWarsContext);
+  const { data, fetchAPI, filters } = useContext(StarsWarsContext);
 
   useEffect(() => {
     fetchAPI();
@@ -27,9 +28,9 @@ const Table = () => {
       <table>
         {data.length > 0 && <TableHead />}
         <tbody>
-          {orderTable(filtered).map((row) => (
+          {orderTable(filtered, filters).map((row) => (
             <tr key={row.name}>
-              <td data-testid='planet-name'>{row.name}</td>
+              <td data-testid="planet-name">{row.name}</td>
               <td>{row.rotation_period}</td>
               <td>{row.orbital_period}</td>
               <td>{row.diameter}</td>

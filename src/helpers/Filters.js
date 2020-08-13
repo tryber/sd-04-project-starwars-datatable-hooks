@@ -1,13 +1,13 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { StarsWarsContext } from '../context/StarWarsContext';
 
 function Filters(text) {
-  const { data, filters } = useContext(StarsWarsContext);  
+  const { data, filters } = useContext(StarsWarsContext);
   let filterData = [...text];
 
   if (filters) {
     filterData = data.filter((planeta) =>
-      planeta.name.toLowerCase().includes(filters.filterByName.name)
+      planeta.name.toLowerCase().includes(filters.filterByName.name),
     );
   }
 
@@ -15,17 +15,17 @@ function Filters(text) {
     filters.filterByNumericValues.forEach((itens) => {
       if (itens.comparison === 'maior que') {
         filterData = filterData.filter(
-          (item) => Number(item[itens.column]) > Number([itens.value])
+          (item) => Number(item[itens.column]) > Number([itens.value]),
         );
       }
       if (itens.comparison === 'igual a') {
         filterData = filterData.filter(
-          (item) => Number(item[itens.column]) === Number([itens.value])
+          (item) => Number(item[itens.column]) === Number([itens.value]),
         );
       }
       if (itens.comparison === 'menor que') {
         filterData = filterData.filter(
-          (item) => Number(item[itens.column]) < Number([itens.value])
+          (item) => Number(item[itens.column]) < Number([itens.value]),
         );
       }
     });
