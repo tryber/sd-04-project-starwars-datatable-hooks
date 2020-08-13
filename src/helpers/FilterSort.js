@@ -1,11 +1,15 @@
 // Colunas numericas
-const numericKeys = [
-  'rotation_period',
-  'orbital_period',
-  'diameter',
-  'surface_water',
-  'population',
-];
+const numericKeys = (filters) => {
+  const numeric =[
+    'rotation_period',
+    'orbital_period',
+    'diameter',
+    'surface_water',
+    'population',
+  ];
+
+  return numeric.includes(filters.order.column);
+};
 
 /*
     A função sort recebe dois parametros.
@@ -17,7 +21,7 @@ const numericKeys = [
 
 // Ordenando colunas
 const orderTable = (filtered, filters) => {
-  let coluna = numericKeys.includes(filters.order.column);
+  const coluna = numericKeys(filters);
   // Verifica se a coluna é numerica
   if (coluna) {
     if (filters.order.sort === 'ASC') {
