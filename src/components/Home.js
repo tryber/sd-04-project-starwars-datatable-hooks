@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { PlanetsContext } from '../context';
 import Table from './Table';
 import FilterValues from './FilterValues';
+import RemoveFilters from './RemoveFilters';
 
 export default function Home() {
   const { setFilterByName } = useContext(PlanetsContext);
@@ -18,6 +19,7 @@ export default function Home() {
       </label>
       <FilterValues />
       <Table />
+      <RemoveFilters />
     </div>
   );
 }
