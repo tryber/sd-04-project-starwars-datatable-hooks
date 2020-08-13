@@ -48,7 +48,9 @@ import { sortColumns } from '../actions';
     const tableHeader = keys.filter((key) => key !== 'residents');
     return (
       <div> */
-        {/* Seleciona Coluna */}
+{
+  /* Seleciona Coluna */
+}
 /*         <select
           data-testid="column-sort"
           onChange={(event) => this.setState({ column: event.target.value })}
@@ -59,9 +61,13 @@ import { sortColumns } from '../actions';
             </option>
           ))}
         </select> */
-        {/* ASC e DESC */}
-        /* {this.ascDesc()} */
-        {/* Botão Filtrar */}
+{
+  /* ASC e DESC */
+}
+/* {this.ascDesc()} */
+{
+  /* Botão Filtrar */
+}
 /*         <button
           data-testid="column-sort-button"
           type="button"
