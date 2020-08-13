@@ -6,35 +6,36 @@ const PlanetsContext = createContext();
 
 const PlanetsProvider = ({ children }) => {
   const [planets, setPlanets] = useState([]);
-  const [column, setColumn] = useState('');
-  const [comparison, setComparison] = useState('');
-  const [number, setNumber] = useState('');
-  const [filterByNumericValues, setFilterByNumericValues] = useState('');
-  const [isLoad, setIsLoad] = useState(false);
   const [filterByName, setFilterByName] = useState({ name: '' });
+  const [filterByNumericValues, setFilterByNumericValues] = useState([
+    {
+      column: '',
+      comparison: '',
+      value: '',
+    },
+  ]);
+  const [isLoad, setIsLoad] = useState(false);
 
   const context = {
     planets,
     setPlanets,
-    column,
-    setColumn,
-    comparison,
-    setComparison,
-    number,
-    setNumber,
+    filterByName,
+    setFilterByName,
     filterByNumericValues,
     setFilterByNumericValues,
     isLoad,
     setIsLoad,
-    filterByName,
-    setFilterByName,
   };
 
   useEffect(() => {
     getPlanets().then((data) => setPlanets(data.results));
   }, []);
 
-  return <PlanetsContext.Provider value={context}>{children}</PlanetsContext.Provider>;
+  return (
+    <PlanetsContext.Provider value={context}>
+      {children}
+    </PlanetsContext.Provider>
+  );
 };
 
 PlanetsContext.propTypes = {
