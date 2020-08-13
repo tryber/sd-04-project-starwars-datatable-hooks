@@ -3,7 +3,7 @@ import { PlanetsContext } from '../context';
 
 export default function RemoveFilters() {
   const { filterByNumericValues, setFilterByNumericValues } = useContext(
-    PlanetsContext
+    PlanetsContext,
   );
   const onClick = (filterKeys) =>
     setFilterByNumericValues(filterKeys, [
