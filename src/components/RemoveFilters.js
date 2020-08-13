@@ -3,11 +3,11 @@ import { PlanetsContext } from '../context';
 
 export default function RemoveFilters() {
   const { filterByNumericValues, setFilterByNumericValues } = useContext(
-    PlanetsContext,
+    PlanetsContext
   );
   const onClick = (filterKeys) =>
-    setFilterByNumericValues(filterKeys, [
-      filterByNumericValues.filter((item) => item !== filterKeys),
+    setFilterByNumericValues([
+      ...filterByNumericValues.filter((item) => item !== filterKeys),
     ]);
   return filterByNumericValues.map((item) => (
     <div key={item.value} data-testid="filter">

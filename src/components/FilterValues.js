@@ -85,6 +85,7 @@ export default function FilterValues() {
 
   const onClick = () => {
     setFilterByNumericValues([
+      ...filterByNumericValues,
       {
         column: colum,
         comparison: compariso,
