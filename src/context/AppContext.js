@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import StarWarsContext from './StarWarsContext';
 
 const Provider = ({ children }) => {
-  const initState = { isFetching: true, planetData: [], filterByName: { name:'' }};
+  const initState = { isFetching: true, planetData: [], filterByName: { name: '' } };
 
   const [data, setData] = useState(initState);
 

@@ -7,7 +7,7 @@ function filterByNamePlanet(name, setData) {
 }
 const FilterPlanet = () => {
   const { data, setData } = useContext(StarWarsContext);
-  console.log('data',data)
+
   return (
     <div>
       <input
