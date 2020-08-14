@@ -2,12 +2,15 @@ import React, { useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 
 function TableBody() {
-  const { data } = useContext(StarWarsContext);
+  const { data, name } = useContext(StarWarsContext);
   const { planetData } = data;
+
+  const filtarNomePlaneta = planetData.filter((planet)=> planet.name.includes(name));
+  console.log('filtro de planetas',filtarNomePlaneta)
   return (
     <div>
       <tbody>
-        {planetData.map((planet) => (
+        {filtarNomePlaneta.map((planet) => (
           <tr key={planet.name}>
             <td>{planet.name}</td>
             <td>{planet.rotation_period}</td>

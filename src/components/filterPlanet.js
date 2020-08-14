@@ -1,27 +1,28 @@
+import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
+import StarWarsContext from '../context/StarWarsContext';
 
-// import PropTypes from 'prop-types';
-// import React, { Component } from 'react';
+function filterByNamePlanet(name, setData) {
+  setData((data) => ({ ...data, filterByName: { name: name } }));
+}
+const FilterPlanet = () => {
+  const { data, setData } = useContext(StarWarsContext);
+  console.log('data',data)
+  return (
+    <div>
+      <input
+        type="text"
+        data-testid="name-filter"
+        placeholder="digite o planeta"
+        onChange={(event) => filterByNamePlanet(event.target.value, setData)}
+      />
+      <span>Busque o seu planeta queridinho</span>
+    </div>
+  );
+};
 
-// class FilterPlanet extends Component {
-//   render() {
-//     const { filterByNames } = this.props;
-//     return (
-//       <div>
-//         <input
-//           type="text"
-//           data-testid="name-filter"
-//           placeholder="preencha"
-//           onChange={
-//             (event) => filterByNames(event.target.value)
-//             }
-//         />
-//       </div>
-//     );
-//   }
-// }
+FilterPlanet.propTypes = {
+  filterByNamePlanet: PropTypes.func.isRequired,
+};
 
-// FilterPlanet.propTypes = {
-//   filterByNames: PropTypes.func.isRequired,
-// };
-
-// export default FilterPlanet;
+export default FilterPlanet;
