@@ -1,10 +1,9 @@
-import React, { useContext, useEffect } from "react";
-import StarWarsContext from "../context/StarWarsContext";
-import getApi from "../sercives/ApiPlanets";
-import FilterPlanet from "../components/filterPlanet";
+import React, { useContext, useEffect } from 'react';
+import StarWarsContext from '../context/StarWarsContext';
+import getApi from '../sercives/ApiPlanets';
+import FilterPlanet from '../components/filterPlanet';
 
 function App() {
-
   const { data, setData } = useContext(StarWarsContext);
   useEffect(() => {
     getApi().then((array) =>

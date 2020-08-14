@@ -2,11 +2,15 @@ import React, { useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 
 function TableBody() {
-  const { data, name } = useContext(StarWarsContext);
-  const { planetData } = data;
+  const { data } = useContext(StarWarsContext);
+  const {
+    planetData,
+    filterByName: { name },
+  } = data; // desestruturando da AppContext
 
-  const filtarNomePlaneta = planetData.filter((planet)=> planet.name.includes(name));
-  console.log('filtro de planetas',filtarNomePlaneta)
+  const filtarNomePlaneta = planetData.filter((planet) =>
+    planet.name.includes(name)
+  );
   return (
     <div>
       <tbody>
