@@ -4,7 +4,7 @@ import StarWarsContext from '../context/StarWarsContext';
 
 function filterByNamePlanet(name, setData) {
   setData((data) => ({ ...data, filterByName: { name } }));
-} // filterByName: { name: name } onde name é a chave e o 
+} // filterByName: { name: name } onde name é a chave e o
 // seg name é o evento passado
 
 const FilterPlanet = () => {
