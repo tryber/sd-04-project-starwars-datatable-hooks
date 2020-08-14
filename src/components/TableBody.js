@@ -8,9 +8,7 @@ function TableBody() {
     filterByName: { name },
   } = data; // desestruturando da AppContext
 
-  const filtarNomePlaneta = planetData.filter((planet) =>
-    planet.name.includes(name)
-  );
+  const filtarNomePlaneta = planetData.filter((planet) => planet.name.includes(name));
   return (
     <div>
       <tbody>

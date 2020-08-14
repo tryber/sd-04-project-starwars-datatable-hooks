@@ -3,10 +3,12 @@ import React, { useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 
 function filterByNamePlanet(name, setData) {
-  setData((data) => ({ ...data, filterByName: { name: name } }));
-}
+  setData((data) => ({ ...data, filterByName: { name } }));
+} // filterByName: { name: name } onde name é a chave e o 
+// seg name é o evento passado
+
 const FilterPlanet = () => {
-  const { data, setData } = useContext(StarWarsContext);
+  const { setData } = useContext(StarWarsContext);
 
   return (
     <div>
