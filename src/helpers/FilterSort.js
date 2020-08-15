@@ -20,17 +20,13 @@ function orderTable(filtered, filters) {
           (a, b) =>
             Number(a[filters.order.column]) - Number(b[filters.order.column]),
         );
-        return filtered;
-      }
-
-      if (filters.order.sort === 'DESC') {
+      } else {
         filtered.sort(
           (a, b) =>
             Number(b[filters.order.column]) - Number(a[filters.order.column]),
         );
-        return filtered;
       }
-      break;
+      return filtered;
     // As colunas não numericas serão ordenadas por default.
     // Ascendente do menor para o maior.
     default:
@@ -51,9 +47,9 @@ function orderTable(filtered, filters) {
 
         return 0;
       });
-      // Inverte a ordenção para Descendente, do maior para o menor.
-      return filters.order.sort === 'DESC' ? filtered.reverse() : filtered;
   }
+  // Inverte a ordenção para Descendente, do maior para o menor.
+  return filters.order.sort === 'DESC' ? filtered.reverse() : filtered;
 }
 
 export default orderTable;
