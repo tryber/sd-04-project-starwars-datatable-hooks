@@ -16,7 +16,7 @@ const loadPage = (setData, setBackupData) => {
 const App = () => {
   const { data, setData, setBackupData } = useContext(StarWarsContext);
 
-  return ( data.length === 0 ?
+  return (data.length === 0 ?
     loadPage(setData, setBackupData) :
     <Table />
   );

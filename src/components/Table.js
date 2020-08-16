@@ -4,7 +4,7 @@ import TableHead from './TableHead';
 import TableBody from './TableBody';
 
 const keysHeader = (data) => {
-  const keys = Object.keys(data[0]).filter((info) =>  info !== 'residents');
+  const keys = Object.keys(data[0]).filter((info) => info !== 'residents');
   return keys;
 };
 
