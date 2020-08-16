@@ -16,7 +16,7 @@ const funcFilterByNumericValues = (planets, name, numericValues) => (
             }
           }),
         planets,
-      );
+      )
 );
 
 export default funcFilterByNumericValues;
