@@ -12,7 +12,7 @@ const goGlobal = (column, comparison, value, set) => {
 };
 
 const FilterByNumeric = () => {
-  const { data, setData } = useContext(AppContext);
+  const { setData } = useContext(AppContext);
   // const { filterByNumericValues } = data;
   const [localColumn, setLocalColumn] = useState('');
   const [localComparison, setLocalComparison] = useState('');
@@ -36,7 +36,7 @@ const FilterByNumeric = () => {
   return (
     <div>
       <select data-testid="column-filter" onChange={(event) => setLocalColumn(event.target.value)}>
-        <option value=""></option>
+        <option></option>
         <option value="population">population</option>
         <option value="orbital_period">orbital_period</option>
         <option value="diameter">diameter</option>

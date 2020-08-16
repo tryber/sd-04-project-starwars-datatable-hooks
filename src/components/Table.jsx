@@ -9,12 +9,12 @@ import funcFilterByNumericValues from '../functions/funcFilterByNumericValues';
 // import orderFuncAsc from '../components/orderFuncAsc';
 // import orderFuncDesc from '../components/OrderFuncDesc';
 
-const filterTableByName = (search, planets) => {
-  const planetasFiltrados = planets.filter(({ name }) =>
-    name.toUpperCase().includes(search.toUpperCase()),
-  );
-  return planetasFiltrados;
-};
+// const filterTableByName = (search, planets) => {
+//   const planetasFiltrados = planets.filter(({ name }) =>
+//     name.toUpperCase().includes(search.toUpperCase()),
+//   );
+//   return planetasFiltrados;
+// };
 
 const Table = () => {
   const { data } = useContext(AppContext);
