@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
-import getPlanetsAPI from '../services';
 import PropTypes from 'prop-types';
+import getPlanetsAPI from '../services';
 
 const StarWarsContext = createContext();
 
@@ -15,8 +15,8 @@ const StarWarsProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    getPlanetsAPI().then((data) => setData(data.results));
-    getPlanetsAPI().then((data) => setBackupData(data.results));
+    getPlanetsAPI().then((resp) => setData(resp.results));
+    getPlanetsAPI().then((resp) => setBackupData(resp.results));
   }, []);
 
   return <StarWarsContext.Provider value={context}>{children}</StarWarsContext.Provider>;
