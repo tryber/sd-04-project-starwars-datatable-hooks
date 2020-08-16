@@ -18,9 +18,12 @@ const keysBody = (data) => {
 
 const Table = () => {
   const { data } = useContext(StarWarsContext);
-
-  const dataKeysHead = keysHeader(data);
-  const dataKeysBody = keysBody(data);
+  let dataKeysHead = [];
+  let dataKeysBody = [];
+  if (data.length) {
+    dataKeysHead = keysHeader(data);
+    dataKeysBody = keysBody(data);
+  }
 
   return (
     <div>
