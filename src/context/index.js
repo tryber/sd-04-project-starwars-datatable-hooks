@@ -10,7 +10,7 @@ export default function AppProvider({ children }) {
     filterByName: { name: '' },
     filteredPlanets: [],
     planetsData: [],
-    filterByNumericValues: [{ column: '', comparison: '', value: '' }],
+    filterByNumericValues: [],
     order: {
       column: 'Name',
       sort: 'ASC',

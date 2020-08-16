@@ -157,7 +157,7 @@ describe('Sua página deve ter um campo de texto que filtra a tabela para soment
     }
   });
 });
-/* 
+
 describe('Sua página deve ter um filtro para valores numéricos', () => {
   beforeAll(mockFetch);
   beforeEach(cleanup);
@@ -247,7 +247,7 @@ describe('Sua página deve ter um filtro para valores numéricos', () => {
     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(2);
   });
 });
-
+/*
 describe('Sua página não deve utilizar filtros repetidos', () => {
   beforeAll(mockFetch);
   beforeEach(cleanup);
