@@ -1,27 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext } from 'react';
+import { StarWarsContext } from './context/StarWarsContext';
+import Table from './components/Table';
+import getPlanetsAPI from './services';
 
+const setDatas = (data, setData, setBackupData) => {
+  setData(data);
+  setBackupData(data);
+};
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+const loadPage = (setData, setBackupData) => {
+  getPlanetsAPI().then((data) => setDatas(data.results, setData, setBackupData));
+  return <div>Loading...</div>;
+};
+
+const App = () => {
+  const { data, setData, setBackupData } = useContext(StarWarsContext);
+
+  return ( data.length === 0 ?
+    loadPage(setData, setBackupData) :
+    <Table />
   );
-}
+};
 
 export default App;
