@@ -16,7 +16,7 @@ const StarWarsProvider = ({ children }) => {
   return <StarWarsContext.Provider value={context}>{children}</StarWarsContext.Provider>;
 };
 
-StarWarsContext.propTypes = {
+StarWarsProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
