@@ -16,6 +16,6 @@ const TableBody = ({ keys }) => (
 
 TableBody.propTypes = {
   keys: PropTypes.arrayOf(PropTypes.array).isRequired,
-}
+};
 
 export default TableBody;

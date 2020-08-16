@@ -6,7 +6,6 @@ const StarWarsContext = createContext();
 const StarWarsProvider = ({ children }) => {
   const [data, setData] = useState([]);
   const [backupData, setBackupData] = useState([]);
-  
   const context = {
     data,
     setData,
@@ -18,7 +17,7 @@ const StarWarsProvider = ({ children }) => {
 };
 
 StarWarsContext.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export { StarWarsContext, StarWarsProvider as Provider };
