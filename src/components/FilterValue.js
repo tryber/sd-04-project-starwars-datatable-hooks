@@ -1,28 +1,27 @@
 import React, { useState, useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 
+function columnsName() {
+  const coluna = [
+    "",
+    "population",
+    "orbital_period",
+    "diameter",
+    "rotation_period",
+    "surface_water",
+  ];
+  return coluna.map((el) => <option key={el}>{el}</option>);
+}
+function valorComparation() {
+  const coparation = ["", "maior que", "igual a", "menor que"];
+  return coparation.map((el) => <option key={el}>{el}</option>);
+}
+
 const FilterValue = () => {
   const { setData } = useContext(StarWarsContext);
-  const [column, setColumn] = useState('');
-  const [comparison, setComparison] = useState('');
+  const [column, setColumn] = useState("");
+  const [comparison, setComparison] = useState("");
   const [value, setValue] = useState(0);
-
-  function columnsName() {
-    const coluna = [
-      '',
-      'population',
-      'orbital_period',
-      'diameter',
-      'rotation_period',
-      'surface_water',
-    ];
-    return coluna.map((el) => <option key={el}>{el}</option>);
-  }
-
-  function valorComparation() {
-    const coparation = ['', 'maior que', 'igual a', 'menor que'];
-    return coparation.map((el) => <option key={el}>{el}</option>);
-  }
 
   function onClick() {
     setData((data) => ({
