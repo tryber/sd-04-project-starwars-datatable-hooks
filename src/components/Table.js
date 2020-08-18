@@ -5,7 +5,7 @@ import FilterValue2 from './FilterValue';
 
 function App() {
   const { data } = useContext(StarWarsContext);
-  
+
   if (data.isFetching) return <p>Loading.....</p>;
   return (
     <table>

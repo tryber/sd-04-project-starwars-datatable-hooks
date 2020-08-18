@@ -10,12 +10,10 @@ function TableBody() {
     filterByNumericValues,
   } = data; // desestruturando da AppContext
 
-  const { column, comparison, value } = filterByNumericValues;
-
   const filterAllSelectedElement = filterFunc(
     planetData,
     name,
-    filterByNumericValues
+    filterByNumericValues,
   );
   return (
     <div>
