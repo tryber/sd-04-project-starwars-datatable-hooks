@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 import FilterPlanet from '../components/filterPlanet';
-import FilterValue2 from './FilterValue';
+import FilterValue from './FilterValue';
 
 function App() {
   const { data } = useContext(StarWarsContext);
@@ -11,7 +11,7 @@ function App() {
     <table>
       <thead>
         <FilterPlanet />
-        <FilterValue2 />
+        <FilterValue />
         <tr>
           <th>Name</th>
           <th>Rotation Period</th>
