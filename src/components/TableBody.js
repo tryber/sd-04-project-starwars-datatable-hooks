@@ -1,18 +1,26 @@
 import React, { useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
+import filterFunc from './filterFun';
 
 function TableBody() {
   const { data } = useContext(StarWarsContext);
   const {
     planetData,
     filterByName: { name },
+    filterByNumericValues,
   } = data; // desestruturando da AppContext
 
-  const filtarNomePlaneta = planetData.filter((planet) => planet.name.includes(name));
+  const { column, comparison, value } = filterByNumericValues;
+
+  const filterAllSelectedElement = filterFunc(
+    planetData,
+    name,
+    filterByNumericValues
+  );
   return (
     <div>
       <tbody>
-        {filtarNomePlaneta.map((planet) => (
+        {filterAllSelectedElement.map((planet) => (
           <tr key={planet.name}>
             <td>{planet.name}</td>
             <td>{planet.rotation_period}</td>

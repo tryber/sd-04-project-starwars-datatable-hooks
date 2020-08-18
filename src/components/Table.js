@@ -1,20 +1,17 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
-import getApi from '../sercives/ApiPlanets';
 import FilterPlanet from '../components/filterPlanet';
+import FilterValue2 from './FilterValue';
 
 function App() {
-  const { data, setData } = useContext(StarWarsContext);
-  useEffect(() => {
-    getApi().then((array) =>
-      setData({ ...data, planetData: array.results, isFetching: false }));
-  }, []);
-
+  const { data } = useContext(StarWarsContext);
+  
   if (data.isFetching) return <p>Loading.....</p>;
   return (
     <table>
       <thead>
         <FilterPlanet />
+        <FilterValue2 />
         <tr>
           <th>Name</th>
           <th>Rotation Period</th>
