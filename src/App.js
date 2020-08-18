@@ -1,9 +1,12 @@
 import React from 'react';
-import Table from './components/Table';
 import { Provider } from './context/StarWarsContext';
+import Table from './components/Table/Table';
+import Header from './components/Heads/Header';
 
 const App = () => (
   <Provider>
+    <Header />
+    <br />
     <Table />
   </Provider>
 );

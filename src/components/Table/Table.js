@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { StarWarsContext } from '../context/StarWarsContext';
+import { StarWarsContext } from '../../context/StarWarsContext';
 import TableHead from './TableHead';
 import TableBody from './TableBody';
 
@@ -12,19 +12,16 @@ const keysBody = (data) => {
   const keys = data.map((planet) => (
     Object.values(planet).filter((info, index) => index !== 9 && (info))
   ));
-  console.log(keys);
   return keys;
 };
 
 const Table = () => {
-  const { data } = useContext(StarWarsContext);
+  const { data, backupData } = useContext(StarWarsContext);
   let dataKeysHead = [];
   let dataKeysBody = [];
-  if (data.length) {
-    dataKeysHead = keysHeader(data);
-    dataKeysBody = keysBody(data);
-  }
 
+  if (backupData.length) dataKeysHead = keysHeader(backupData);
+  if (data.length) dataKeysBody = keysBody(data);
   return (
     <div>
       <table>

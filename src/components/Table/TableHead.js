@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './css/tableHead.css';
+import '../css/tableHead.css';
 
 const TableHead = ({ keys }) => (
   <thead className="table_head">
