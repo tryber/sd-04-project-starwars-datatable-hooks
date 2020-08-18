@@ -37,8 +37,8 @@ const FilterValue = () => {
   return (
     <div>
       <select
-        data-testid='column-filter'
-        type='text'
+        data-testid="column-filter"
+        type="text"
         onChange={(event) => setColumn(event.target.value)}
       >
         {columnsName()}
