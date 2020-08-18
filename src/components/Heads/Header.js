@@ -1,15 +1,10 @@
-import React, { useContext } from 'react';
-import { StarWarsContext } from '../../context/StarWarsContext';
+import React from 'react';
 import NameFilter from './NameFilter';
 
-const Header = () => {
-  const { filters } =  useContext(StarWarsContext);
-
-  return (
-    <div>
-      <NameFilter filters={filters} />
-    </div>
-  );
-};
+const Header = () => (
+  <div>
+    <NameFilter />
+  </div>
+);
 
 export default Header;

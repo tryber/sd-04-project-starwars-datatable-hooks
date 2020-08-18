@@ -11,8 +11,8 @@ const changeNameFilter = (newName, filters, setFilters) => {
   });
 };
 
-const NameFilter = ({ filters }) => {
-  const { setFilters } = useContext(StarWarsContext);
+const NameFilter = () => {
+  const { setFilters, filters } = useContext(StarWarsContext);
   return (
     <div>
       <label htmlFor="nameFilter">
@@ -21,7 +21,7 @@ const NameFilter = ({ filters }) => {
           data-testid="name-filter"
           type="text"
           id="nameFilter"
-          onChange={({ target: {value} }) =>
+          onChange={({ target: { value } }) =>
             changeNameFilter(value, filters, setFilters)
           }
         />

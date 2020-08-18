@@ -8,14 +8,14 @@ const StarWarsProvider = ({ children }) => {
   const [data, setData] = useState([]);
   const [backupData, setBackupData] = useState([]);
   const [filters, setFilters] = useState({
-      filterByName: {
-        name: '',
-      },
-      filterByNumericValues : [],
-      order: {
-        column : 'Name',
-        sort: 'ASC',
-      },
+    filterByName: {
+      name: '',
+    },
+    filterByNumericValues: [],
+    order: {
+      column: 'Name',
+      sort: 'ASC',
+    },
   });
   const context = {
     data,
@@ -28,8 +28,8 @@ const StarWarsProvider = ({ children }) => {
 
   useEffect(() => {
     getPlanetsAPI().then((resp) => {
-      setData(resp.results)
-      setBackupData(resp.results)
+      setData(resp.results);
+      setBackupData(resp.results);
     });
   }, []);
 

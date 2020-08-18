@@ -3,19 +3,17 @@ import PropTypes from 'prop-types';
 import { StarWarsContext } from '../../context/StarWarsContext';
 import '../css/tableBody.css';
 
-const renderTable = (keys) => {
-  return (
-    <tbody className="table_body">
-    {keys.map((line, index) => (
-      <tr key={`${line[index]} pai`}>
-        {line.map((info, count) => (
-          <td key={`${info} filho`}>{line[count]}</td>
-        ))}
-      </tr>
-    ))}
+const renderTable = (keys) => (
+  <tbody className="table_body">
+  {keys.map((line, index) => (
+    <tr key={`${line[index]} pai`}>
+      {line.map((info, count) => (
+        <td key={`${info} filho`}>{line[count]}</td>
+      ))}
+    </tr>
+  ))}
   </tbody>
-  );
-};
+);
 
 const aplyName = (keys, name) => {
   const newData = keys.filter((planet) => {
