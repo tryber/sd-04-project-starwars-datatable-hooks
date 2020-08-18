@@ -1,22 +1,20 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { filterRemove } from '../actions';
+import useFilters from '../hooks/useFilters';
 
-function RemoveFilter({ numericValues, remove }) {
-  const onClick = (type) => remove(type);
+export default function RemoveFilter() {
+  const { filterByNumericValues, setRemoved } = useFilters();
 
-  return numericValues.map((type) => (
+  return filterByNumericValues.map((type) => (
     <div data-testid="filter" key={type.column}>
       <span>{`${type.column} - ${type.comparison} - ${type.value} `}</span>
-      <button type="button" onClick={() => onClick(type)}>
+      <button type="button" onClick={() => setRemoved(type)}>
 X
       </button>
     </div>
   ));
 }
 
-const mapStateToProps = (state) => ({
+/* const mapStateToProps = (state) => ({
   numericValues: state.filters.filterByNumericValues,
 });
 
@@ -36,3 +34,4 @@ RemoveFilter.propTypes = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RemoveFilter);
+ */

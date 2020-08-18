@@ -1,15 +1,20 @@
-import { planets, setPlanets } from './Provider';
 import { useContext, useEffect } from 'react';
-import { useEffect, useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
-import FetchPlanets from '../services/apiPlanets';
+import getPlanets from '../services/apiPlanets';
 
 export default function usePlanets() {
-  const { planets, getPlanets } = useContext(StarWarsContext);
+  const {
+    data,
+    setData,
+    setIsFetching
+  } = useContext(StarWarsContext);
 
   useEffect(() => {
-    FetchPlanets().then(planets => setPlanets(planets));
+    getPlanets().then(planets => {
+      setData(planets.results)
+      setIsFetching(false)
+    });
   }, []);
 
-  return planets;
+  return data;
 }

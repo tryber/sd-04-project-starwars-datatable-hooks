@@ -48,9 +48,9 @@ export const filterByNumericValues = (column, comparison, value) => ({
   value,
 });
 
-export const filterRemove = (Remove) => ({
+export const filterRemove = (remove) => ({
   type: FILTER_REMOVE,
-  Remove,
+  remove,
 });
 
 export const orderColumns = (column, sort) => ({

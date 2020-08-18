@@ -1,17 +1,23 @@
-import PropTypes from 'prop-types';
 import React from 'react';
-import { connect } from 'react-redux';
-// import filterFunc from './FilterFun';
 import OrderFunctionA from './OrderFunctionA';
 import OrderFunctionD from './OrderFunctionD';
+import usePlanets from '../hooks/usePlanets';
+import useFilters from '../hooks/useFilters';
 
 
-function TableBody({
-  planets, name, numericValues, columnSort, sort,
-}) {
+export default function TableBody() {
+  const planets = usePlanets();
+
+  const {
+    filterByName: { name },
+    filterByNumericValues,
+    order: { sort, column }
+  } = useFilters();
+
   const data = sort === 'ASC'
-    ? OrderFunctionA(planets, name, numericValues, columnSort, sort)
-    : OrderFunctionD(planets, name, numericValues, columnSort, sort);
+    ? OrderFunctionA(planets, name, filterByNumericValues, column, sort)
+    : OrderFunctionD(planets, name, filterByNumericValues, column, sort);
+
   return (
     <tbody>
       {data.map((planet) => (
@@ -38,9 +44,8 @@ function TableBody({
     </tbody>
   );
 }
-
+/* 
 const mapStateToProps = (state) => ({
-  planets: state.getPlanets.data,
   name: state.filters.filterByName.name,
   sort: state.filters.order.sort,
   numericValues: state.filters.filterByNumericValues,
@@ -85,3 +90,4 @@ TableBody.propTypes = {
   columnSort: PropTypes.string.isRequired,
   sort: PropTypes.string.isRequired,
 };
+ */

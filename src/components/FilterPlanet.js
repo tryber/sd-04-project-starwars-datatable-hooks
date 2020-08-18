@@ -1,32 +1,29 @@
-
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { filterByName } from '../actions';
+import React from 'react';
+import useFilters from '../hooks/useFilters';
 
 
-class FilterPlanet extends Component {
-  render() {
-    const { filterByNames } = this.props;
-    return (
-      <div>
-        <input
-          type="text"
-          data-testid="name-filter"
-          placeholder="preencha"
-          onChange={
-            (event) => filterByNames(event.target.value)
-            }
-        />
-      </div>
-    );
-  }
+export default function FilterPlanet() {
+  const { setFilterByName } = useFilters();
+
+  return (
+    <div>
+      <input
+        type="text"
+        data-testid="name-filter"
+        placeholder="preencha"
+        onChange={
+          (event) => setFilterByName(event.target.value)
+        }
+      />
+    </div>
+  );
 }
 
+
+/*
 FilterPlanet.propTypes = {
   filterByNames: PropTypes.func.isRequired,
 };
-
 
 const mapStateToProps = (state) => ({
   name: state.filters.filterByName.name,
@@ -36,5 +33,6 @@ const mapDispatchToProps = (dispatch) => ({
   filterByNames: (planetName) => dispatch(filterByName(planetName)),
 
 });
+*/
 
-export default connect(mapStateToProps, mapDispatchToProps)(FilterPlanet);
+// export default connect(mapStateToProps, mapDispatchToProps)(FilterPlanet);

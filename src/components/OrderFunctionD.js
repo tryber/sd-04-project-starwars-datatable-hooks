@@ -1,4 +1,4 @@
-import filterFunc from './FilterFun';
+import filterFunc from './FilterFunc';
 
 const orderName = (array) => array.sort(function (a, b) {
   if (a.name < b.name) return 1;
