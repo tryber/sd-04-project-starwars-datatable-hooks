@@ -36,25 +36,25 @@ const FilterValue = () => {
   return (
     <div>
       <select
-        data-testid='column-filter'
-        type='text'
+        data-testid="column-filter"
+        type="text"
         onChange={(event) => setColumn(event.target.value)}
       >
         {columnsName()}
       </select>
       <select
-        data-testid='comparison-filter'
-        type='text'
+        data-testid="comparison-filter"
+        type="text"
         onChange={(event) => setComparison(event.target.value)}
       >
         {valorComparation()}
       </select>
       <input
-        data-testid='value-filter'
-        type='number'
+        data-testid="value-filter"
+        type="number"
         onChange={(event) => setValue(+event.target.value)}
       />
-      <button data-testid='button-filter' onClick={() => onClick()}>
+      <button data-testid="button-filter" onClick={() => onClick()}>
         Filtrar
       </button>
     </div>
