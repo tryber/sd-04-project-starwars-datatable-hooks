@@ -54,7 +54,7 @@ const FilterValue = () => {
         data-testid="value-filter"
         type="number"
         onChange={(event) => setValue(+event.target.value)}
-      ></input>
+      />
       <button data-testid="button-filter" onClick={() => onClick()}>
         Filtrar
       </button>
