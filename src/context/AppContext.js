@@ -15,8 +15,7 @@ const Provider = ({ children }) => {
 
   useEffect(() => {
     getApi().then((array) =>
-      setData({ ...data, planetData: array.results, isFetching: false })
-    );
+      setData({ ...data, planetData: array.results, isFetching: false }));
   }, []);
 
   const context = { data, setData };
