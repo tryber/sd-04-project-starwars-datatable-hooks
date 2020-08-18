@@ -44,18 +44,18 @@ const FilterValue = () => {
         {columnsName()}
       </select>
       <select
-        data-testid='comparison-filter'
-        type='text'
+        data-testid="comparison-filter"
+        type="text"
         onChange={(event) => setComparison(event.target.value)}
       >
         {valorComparation()}
       </select>
       <input
-        data-testid='value-filter'
-        type='number'
+        data-testid="value-filter"
+        type="number"
         onChange={(event) => setValue(+event.target.value)}
       ></input>
-      <button data-testid='button-filter' onClick={() => onClick()}>
+      <button data-testid="button-filter" onClick={() => onClick()}>
         Filtrar
       </button>
     </div>
