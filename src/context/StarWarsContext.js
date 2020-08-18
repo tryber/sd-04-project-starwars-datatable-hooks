@@ -17,6 +17,13 @@ const StarWarsProvider = ({ children }) => {
       sort: 'ASC',
     },
   });
+  const [columnCompare, setColumn] = useState([
+    'population',
+    'orbital_period',
+    'diameter',
+    'rotation_period',
+    'surface_water',
+  ]);
   const context = {
     data,
     setData,
@@ -24,6 +31,8 @@ const StarWarsProvider = ({ children }) => {
     setBackupData,
     filters,
     setFilters,
+    columnCompare,
+    setColumn,
   };
 
   useEffect(() => {
