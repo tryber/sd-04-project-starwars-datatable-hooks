@@ -5,13 +5,13 @@ import '../css/tableBody.css';
 
 const renderTable = (keys) => (
   <tbody className="table_body">
-  {keys.map((line, index) => (
-    <tr key={`${line[index]} pai`}>
-      {line.map((info, count) => (
-        <td key={`${info} filho`}>{line[count]}</td>
-      ))}
-    </tr>
-  ))}
+    {keys.map((line, index) => (
+      <tr key={`${line[index]} pai`}>
+        {line.map((info, count) => (
+          <td key={`${info} filho`}>{line[count]}</td>
+        ))}
+      </tr>
+    ))}
   </tbody>
 );
 
@@ -26,14 +26,14 @@ const aplyName = (keys, name) => {
 
 const TableBody = ({ keys }) => {
   const { filters } = useContext(StarWarsContext);
-  const { filterByName: { name } } = filters;
+  const {
+    filterByName: { name },
+  } = filters;
 
   if (name) {
     return aplyName(keys, name);
   }
-  return (
-    renderTable(keys)
-  );
+  return renderTable(keys);
 };
 
 TableBody.propTypes = {
