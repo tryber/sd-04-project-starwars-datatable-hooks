@@ -10,10 +10,8 @@ import axios from 'axios';
 //     ));
 // }
 
-export default function apiRequest(endpoint) {
-  return axios
-    .get(
-      `https://swapi-trybe.herokuapp.com/api/${endpoint}/`,
-    ).then((response) => response.data.results)
-    .catch((error) => (error));
-}
+export default (endpoint) => axios
+  .get(
+    `https://swapi-trybe.herokuapp.com/api/${endpoint}/`,
+  ).then((response) => response.data.results)
+  .catch((error) => (error));

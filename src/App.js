@@ -1,15 +1,15 @@
 import React from 'react';
 import './App.css';
 import Table from './pages/Table';
-import StarWarsContext from './context/StarWarsContext';
+import StoreProvider from './context/store';
 import Header from './components/Header';
 
 function App() {
   return (
-    <StarWarsContext.Provider>
+    <StoreProvider>
       <Header />
       <Table />
-    </StarWarsContext.Provider>
+    </StoreProvider>
   );
 }
 
