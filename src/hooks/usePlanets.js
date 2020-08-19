@@ -6,6 +6,7 @@ export default function usePlanets() {
   const {
     data,
     setData,
+    isFetching,
     setIsFetching
   } = useContext(StarWarsContext);
 
@@ -14,7 +15,10 @@ export default function usePlanets() {
       setData(planets.results)
       setIsFetching(false)
     });
-  }, []);
+  });
 
-  return data;
+  return {
+    data,
+    isFetching
+  };
 }
