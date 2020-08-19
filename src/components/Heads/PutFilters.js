@@ -21,30 +21,28 @@ const removeFilter = (
 
 const renderCards = (filters, setFilters, setColumn, filtersFather, columnCompare) => (
   <div className="filters-container">
-    {filters.map((filter, index) => {
-      return (
-        <div key={`filter ${filter.column}`} data-testid="filter">
-          <p>column: {filter.column}</p>
-          <p>comparison: {filter.comparison}</p>
-          <p>value: {filter.value}</p>
-          <button
-            onClick={() =>
-              removeFilter(
-                filter,
-                filters,
-                setFilters,
-                index,
-                setColumn,
-                filtersFather,
-                columnCompare,
-              )
-            }
-          >
-            X
-          </button>
-        </div>
-      );
-    })}
+    {filters.map((filter, index) => (
+      <div key={`filter ${filter.column}`} data-testid="filter">
+        <p>column: {filter.column}</p>
+        <p>comparison: {filter.comparison}</p>
+        <p>value: {filter.value}</p>
+        <button
+          onClick={() =>
+            removeFilter(
+              filter,
+              filters,
+              setFilters,
+              index,
+              setColumn,
+              filtersFather,
+              columnCompare,
+            )
+          }
+        >
+          X
+        </button>
+      </div>
+    ))}
   </div>
 );
 
