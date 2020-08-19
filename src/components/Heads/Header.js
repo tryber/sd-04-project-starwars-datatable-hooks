@@ -1,6 +1,7 @@
 import React from 'react';
 import NameFilter from './NameFilter';
 import NumericFilter from './NumericFilter';
+import PutFilters from './PutFilters';
 
 const Header = () => (
   <div>
@@ -8,6 +9,7 @@ const Header = () => (
     <br />
     <NumericFilter />
     <br />
+    <PutFilters />
   </div>
 );
 
