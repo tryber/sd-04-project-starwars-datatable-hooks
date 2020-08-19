@@ -5,7 +5,6 @@ import filterFunc from './helpers/filterFunc';
 import sortFunc from './helpers/sortFunc'; */
 
 import React, { useContext } from 'react';
-// import PropTypes from 'prop-types';
 import StarWarsContext from '../context/StarWarsContext';
 
 const Table = () => {
@@ -13,7 +12,7 @@ const Table = () => {
   const keys = data.length >= 1 ? Object.keys(data[0]) : [];
   const tableHeader = keys.filter((key) => key !== 'residents');
   return (
-    <div>
+    <table>
       <thead>
         <tr>
           {tableHeader.map((columns) => (
@@ -21,11 +20,18 @@ const Table = () => {
           ))}
         </tr>
       </thead>
-    </div>
+      <tbody>
+        {data.map((planet) => (
+          <tr key={planet.name}>
+            {tableHeader.map((columns) => (
+              <td key={planet[columns]}>{planet[columns]}</td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 };
-
-// Table.propTypes = {};
 
 export default Table;
 
@@ -35,8 +41,7 @@ const keys = data.length >= 1 ? Object.keys(data[0]) : [];
 const tableHeader = keys.filter((key) => key !== 'residents');
 
 const getHeaders = (planets) => Object.keys(planets[0]).filter((header) => header !== 'residents');
- */
-/* 
+
 class Table extends React.Component {
   render() {
     const { data, name, numericValues, column, sort } = this.props;

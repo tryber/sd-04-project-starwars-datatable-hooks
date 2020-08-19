@@ -2,8 +2,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { sortColumns } from '../actions';
- */
-/* class ColumnOrder extends Component {
+
+class ColumnOrder extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -40,16 +40,16 @@ import { sortColumns } from '../actions';
       </div>
     );
   }
- */
-/*   render() {
+
+  render() {
     const { column, sort } = this.state;
     const { data, orderColumns } = this.props;
     const keys = data.length >= 1 ? Object.keys(data[0]) : [];
     const tableHeader = keys.filter((key) => key !== 'residents');
     return (
-      <div> */
+      <div>
 {
-  /* Seleciona Coluna */
+ Seleciona Coluna
 }
 /*         <select
           data-testid="column-sort"
@@ -60,15 +60,15 @@ import { sortColumns } from '../actions';
               {columns}
             </option>
           ))}
-        </select> */
+        </select>
 {
-  /* ASC e DESC */
+  ASC e DESC
 }
-/* {this.ascDesc()} */
+{this.ascDesc()}
 {
-  /* Botão Filtrar */
+   Botão Filtrar
 }
-/*         <button
+         <button
           data-testid="column-sort-button"
           type="button"
           onClick={() => orderColumns(column, sort)}
@@ -79,8 +79,8 @@ import { sortColumns } from '../actions';
     );
   }
 }
- */
-/* ColumnOrder.propTypes = {
+
+ColumnOrder.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
   orderColumns: PropTypes.func.isRequired,
 };

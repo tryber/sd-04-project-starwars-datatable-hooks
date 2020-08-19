@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 import StarWarsContext from './StarWarsContext';
 import getPlanetsData from '../service/SWAPI';
 
@@ -9,9 +9,14 @@ const StarWarsProvider = ({ children }) => {
 
   useEffect(() => {
     getPlanetsData().then(
-      (resp) => setData(resp.results),
-      (error) => setData(console.log(error)),
-      setLoading(false),
+      (resp) => {
+        setData(resp.results);
+        setLoading(false);
+      },
+      (error) => {
+        setData(console.log(error));
+        setLoading(false);
+      },
     );
   }, []);
 
@@ -21,6 +26,6 @@ const StarWarsProvider = ({ children }) => {
 
 StarWarsProvider.propTypes = {
   children: PropTypes.node.isRequired,
-}
+};
 
 export default StarWarsProvider;
