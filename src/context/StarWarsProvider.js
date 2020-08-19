@@ -6,6 +6,16 @@ import getPlanetsData from '../service/SWAPI';
 const StarWarsProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
+  const [filters, setFilters] = useState({
+    filterByName: {
+      name: '',
+    },
+    filterByNumericValues: [],
+    order: {
+      column: 'Name',
+      sort: 'ASC',
+    },
+  });
 
   useEffect(() => {
     getPlanetsData().then(
@@ -20,7 +30,7 @@ const StarWarsProvider = ({ children }) => {
     );
   }, []);
 
-  const contextValue = { data, loading };
+  const contextValue = { data, loading, filters, setFilters };
   return <StarWarsContext.Provider value={contextValue}>{children}</StarWarsContext.Provider>;
 };
 

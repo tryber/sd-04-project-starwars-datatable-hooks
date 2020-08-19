@@ -1,3 +1,28 @@
+import React, { useContext, useState } from 'react';
+import StarWarsContext from '../context/StarWarsContext';
+
+const FilterName = () => {
+  const { setFilters } = useContext(StarWarsContext);
+  const [text, setText] = useState('');
+  function changeName(event) {
+    setText(event.target.value);
+    setFilters({ filterByName: { name: text } });
+  }
+
+  return (
+    <div>
+      <input
+        data-testid="name-filter"
+        type="text"
+        placeholder="Search"
+        onChange={(event) => changeName(event)}
+      />
+    </div>
+  );
+};
+
+export default FilterName;
+
 /* import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
