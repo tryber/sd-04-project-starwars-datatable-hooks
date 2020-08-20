@@ -25,6 +25,6 @@ export default function useFilters() {
     order,
     setOrder,
     removed,
-    setRemoved
+    setRemoved,
   };
 }

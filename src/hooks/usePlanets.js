@@ -11,14 +11,14 @@ export default function usePlanets() {
   } = useContext(StarWarsContext);
 
   useEffect(() => {
-    getPlanets().then(planets => {
-      setData(planets.results)
-      setIsFetching(false)
+    getPlanets().then((planets) => {
+      setData(planets.results);
+      setIsFetching(false);
     });
-  });
+  }, []);
 
   return {
     data,
-    isFetching
+    isFetching,
   };
 }
