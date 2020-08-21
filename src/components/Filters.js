@@ -4,18 +4,16 @@ import FilterName from './FilterName';
 // import RemoveFilter from './RemoveFilter';
 // import ColumnOrder from './ColumnOrder';
 
-const Filters = () => {
-  return (
-    <div>
-      Filtros
-      <FilterName />
-      {/*
+const Filters = () => (
+  <div>
+    Filtros
+    <FilterName />
+    {/*
         <FilterNumValues />
         <RemoveFilter />
         <ColumnOrder />
         */}
-    </div>
-  );
-};
+  </div>
+);
 
 export default Filters;
