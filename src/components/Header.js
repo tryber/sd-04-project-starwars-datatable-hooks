@@ -1,9 +1,22 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { StarWarsContext } from '../context/store';
-import { renderCompSelect } from '../helper';
+import { renderCompSelect, renderColumnSelect } from '../helper';
 
 const Header = () => {
   const { filterByName: [filterByName, setfilterByName] } = useContext(StarWarsContext);
+  const {
+    filterByNumericValues: [filterByNumericValues, setfilterByNumericValues],
+  } = useContext(StarWarsContext);
+  const [comparison, setComparison] = useState('');
+  const [column, setColumn] = useState('');
+  const [value, setValue] = useState(0);
+  const handleSumbit = (event) => {
+    event.preventDefault();
+    setfilterByNumericValues([...filterByNumericValues, { column, comparison, value }]);
+    setComparison('');
+    setColumn('');
+    setValue(0);
+  };
   return (
     <header className="App-header">
       <div>
@@ -17,15 +30,15 @@ const Header = () => {
       <div className="container small">
         <form action="">
           <div className="item">
-            {/* renderColumnSelect() */}
-            {renderCompSelect()}
+            {renderColumnSelect(column, filterByNumericValues, setColumn)}
+            {renderCompSelect(comparison, setComparison)}
           </div>
           <input
             type="number"
             data-testid="value-filter"
             name="value"
             value={value}
-            onChange={(event) => handleChange(event)}
+            onChange={(event) => setValue(event.target.value)}
           />
           <button
             type="button"

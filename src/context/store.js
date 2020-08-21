@@ -16,10 +16,12 @@ const StoreProvider = ({ children }) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filterByName, setfilterByName] = useState('');
+  const [filterByNumericValues, setfilterByNumericValues] = useState([]);
   const store = {
     data: [data, setData],
     loading: [loading, setLoading],
     filterByName: [filterByName, setfilterByName],
+    filterByNumericValues: [filterByNumericValues, setfilterByNumericValues],
   };
   return <StarWarsContext.Provider value={store}>{children}</StarWarsContext.Provider>;
 };
