@@ -4,16 +4,13 @@ import { AppContext } from '../context';
 const goGlobal = (column, comparison, value, set) => {
   set((data) => ({
     ...data,
-    filterByNumericValues: [
-      ...data.filterByNumericValues,
-      { column, comparison, value },
-    ],
+    filterByNumericValues: [...data.filterByNumericValues, { column, comparison, value }],
   }));
 };
 
-const FilterByNumeric = () => {
-  const { setData } = useContext(AppContext);
-  // const { filterByNumericValues } = data;
+const FilterByNumeric = () => { 
+  const { setData, data } = useContext(AppContext);
+  const { filterByNumericValues } = data;
   const [localColumn, setLocalColumn] = useState('');
   const [localComparison, setLocalComparison] = useState('');
   const [inputNumber, setInputNumber] = useState('');
@@ -23,9 +20,21 @@ const FilterByNumeric = () => {
     return comparisons;
   }
 
+  function listColumns() {
+    const columns = [
+      '',
+      'population',
+      'orbital_period',
+      'diameter',
+      'rotation_period',
+      'surface_water',
+    ];
+    return columns;
+  }
+
   function makeComparisonSelect() {
     /* função baseada na aula do Orlando StarWars Redux */
-    const select = listComparisons();
+    let select = listComparisons();
     return select.map((tagOption) => (
       <option value={tagOption} key={tagOption}>
         {tagOption}
@@ -33,14 +42,19 @@ const FilterByNumeric = () => {
     ));
   }
 
-  return (
+  function makeColumnsSelect() {
+    let select = listColumns();
+    return listColumns().map((coluna) => (
+      <option value={coluna} key={coluna}>
+        {coluna}
+      </option>
+    ));
+  }
+
+   return (
     <div>
       <select data-testid="column-filter" onChange={(event) => setLocalColumn(event.target.value)}>
-        <option value="population">population</option>
-        <option value="orbital_period">orbital_period</option>
-        <option value="diameter">diameter</option>
-        <option value="rotation_period">rotation_period</option>
-        <option value="surface_water">surface_water</option>
+        {makeColumnsSelect()}
       </select>
       <select
         data-testid="comparison-filter"
