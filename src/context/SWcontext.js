@@ -4,9 +4,8 @@ import PropTypes from 'prop-types';
 const SWcontext = createContext();
 
 const StarWarsProvider = ({ children }) => {
-    const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState([]);
-  
   const [error, setError] = useState('');
   const [filterByName, setFilterByName] = useState({ name: '' });
   const [filterByNumericValues, setFilterByNumericValues] = useState([]);
