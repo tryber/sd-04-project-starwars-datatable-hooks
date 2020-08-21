@@ -13,13 +13,13 @@ export const StarWarsContext = createContext();
 ]; */
 
 const StoreProvider = ({ children }) => {
-  const [teste, setTeste] = useState('ok');
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [filterByName, setfilterByName] = useState('');
   const store = {
-    teste: [teste, setTeste],
     data: [data, setData],
     loading: [loading, setLoading],
+    filterByName: [filterByName, setfilterByName],
   };
   return <StarWarsContext.Provider value={store}>{children}</StarWarsContext.Provider>;
 };
