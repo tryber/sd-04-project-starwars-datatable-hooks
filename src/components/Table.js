@@ -7,13 +7,14 @@ import sortFunc from './helpers/sortFunc'; */
 import React, { useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 import filterFunc from './helpers/filterFunc';
+import sortFunc from './helpers/sortFunc';
 
 const Table = () => {
   const { data, filters } = useContext(StarWarsContext);
   const keys = data.length >= 1 ? Object.keys(data[0]) : [];
   const tableHeader = keys.filter((key) => key !== 'residents');
-  const numericValues = '';
-  const dataPlanets = filterFunc(data, filters.filterByName.name, numericValues);
+  const dataPlanets = filterFunc(data, filters.filterByName.name, filters.filterByNumericValues);
+  const orderDataPlanets = sortFunc(dataPlanets, filters.order.column, filters.order.sort);
   return (
     <table>
       <thead>
@@ -24,7 +25,7 @@ const Table = () => {
         </tr>
       </thead>
       <tbody>
-        {dataPlanets.map((planet) => (
+        {orderDataPlanets.map((planet) => (
           <tr key={planet.name}>
             {tableHeader.map((columns) => (
               <td key={planet[columns]}>{planet[columns]}</td>

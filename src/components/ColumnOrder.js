@@ -1,3 +1,80 @@
+import React, { useContext, useState } from 'react';
+import StarWarsContext from '../context/StarWarsContext';
+
+const ColumnOrder = () => {
+  const { filters, setFilters, data } = useContext(StarWarsContext);
+  const [orderState, setOrderState] = useState({
+    column: 'Name',
+    sort: 'ASC',
+  });
+  const { column, sort } = orderState;
+  const keys = data.length >= 1 ? Object.keys(data[0]) : [];
+  const tableHeader = keys.filter((key) => key !== 'residents');
+
+  function ascDesc() {
+    return (
+      <div>
+        <label htmlFor="orderASC">
+          ASC
+          <input
+            data-testid="column-sort-input"
+            id="orderASC"
+            name="order"
+            type="radio"
+            value="ASC"
+            onChange={(event) => setOrderState({ sort: event.target.value })}
+          />
+        </label>
+        <label htmlFor="orderDESC">
+          DESC
+          <input
+            data-testid="column-sort-input"
+            id="orderDESC"
+            name="order"
+            type="radio"
+            value="DESC"
+            onChange={(event) => setOrderState({ sort: event.target.value })}
+          />
+        </label>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      {/*
+        Seleciona Coluna
+      */}
+      <select
+        data-testid="column-sort"
+        onChange={(event) => setOrderState({ column: event.target.value })}
+      >
+        {tableHeader.map((columns) => (
+          <option key={columns} value={columns.toLowerCase()}>
+            {columns}
+          </option>
+        ))}
+      </select>
+      {/*
+        ASC e DESC
+      */}
+      {ascDesc()}
+      {/*
+        Botão Filtrar
+      */}
+      <button
+        data-testid="column-sort-button"
+        type="button"
+        onClick={() => setFilters({ order: column, sort })}
+      >
+        Filtrar
+      </button>
+    </div>
+  );
+};
+
+export default ColumnOrder;
+
 /* import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';

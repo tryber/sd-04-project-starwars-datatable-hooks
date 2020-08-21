@@ -30,7 +30,7 @@ const StarWarsProvider = ({ children }) => {
     );
   }, []);
 
-  const contextValue = { data, loading, filters, setFilters };
+  const contextValue = { loading, data, filters, setFilters };
   return <StarWarsContext.Provider value={contextValue}>{children}</StarWarsContext.Provider>;
 };
 

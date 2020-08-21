@@ -1,3 +1,30 @@
+import React, { useContext, useState } from 'react';
+import StarWarsContext from '../context/StarWarsContext';
+
+const RemoveFilter = () => {
+  const { filters, setFilters } = useContext(StarWarsContext);
+  const { filterByNumericValues } = filters;
+  //const handleOnClick = (item) => removeFilterX(item);
+  const handleOnClick = (item) => (item);
+  return (
+    <div>
+      Filtros utilizados:
+      <div>
+        {filterByNumericValues.map((item) => (
+          <div key={item.value} data-testid="filter">
+            <p>{`${item.column} - ${item.comparison} - ${item.value}`}</p>
+            <button type="button" onClick={() => handleOnClick(item)}>
+              X
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default RemoveFilter;
+
 /* import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
