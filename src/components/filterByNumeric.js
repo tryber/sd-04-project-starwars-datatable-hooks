@@ -45,7 +45,6 @@ function makeColumnsSelect() {
 
 const FilterByNumeric = () => {
   const { setData, data } = useContext(AppContext);
-  const { filterByNumericValues } = data;
   const [localColumn, setLocalColumn] = useState('');
   const [localComparison, setLocalComparison] = useState('');
   const [inputNumber, setInputNumber] = useState('');

@@ -1,4 +1,4 @@
-const funcFilterByNumericValues = (planets, name, numericValues) =>
+const funcFilterByNumericValues = (planets, name, numericValues) => (
   numericValues.length === 0
     ? planets.filter((planet) => planet.name.includes(name))
     : numericValues.reduce(
@@ -16,7 +16,7 @@ const funcFilterByNumericValues = (planets, name, numericValues) =>
             }
           }),
         planets,
-      );
+      ));
 
 /* const orderBy = (data) => {
   if (!data.length) return [];
