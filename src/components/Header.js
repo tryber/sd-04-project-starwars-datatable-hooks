@@ -13,20 +13,16 @@ const Header = () => {
   const handleSumbit = (event) => {
     event.preventDefault();
     setfilterByNumericValues([...filterByNumericValues, { column, comparison, value }]);
-    setComparison('');
-    setColumn('');
-    setValue(0);
+    setColumn(''); setValue(0); setComparison('');
   };
   return (
     <header className="App-header">
-      <div>
-        <input
-          type="text"
-          value={filterByName}
-          data-testid="name-filter"
-          onChange={(event) => setfilterByName(event.target.value)}
-        />
-      </div>
+      <input
+        type="text"
+        value={filterByName}
+        data-testid="name-filter"
+        onChange={(event) => setfilterByName(event.target.value)}
+      />
       <div className="container small">
         <form action="">
           <div className="item">
