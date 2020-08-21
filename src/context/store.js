@@ -3,14 +3,14 @@ import React, { useState, createContext } from 'react';
 
 export const StarWarsContext = createContext();
 
-/* const columns = [
+export const columns = [
   '',
   'population',
   'orbital_period',
   'diameter',
   'rotation_period',
   'surface_water',
-]; */
+];
 
 const StoreProvider = ({ children }) => {
   const [data, setData] = useState([]);

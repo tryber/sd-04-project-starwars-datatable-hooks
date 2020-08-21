@@ -1,17 +1,41 @@
 import React, { useContext } from 'react';
 import { StarWarsContext } from '../context/store';
+import { renderCompSelect } from '../helper';
 
 const Header = () => {
   const { filterByName: [filterByName, setfilterByName] } = useContext(StarWarsContext);
   return (
     <header className="App-header">
-      <div className="item">
+      <div>
         <input
           type="text"
           value={filterByName}
           data-testid="name-filter"
           onChange={(event) => setfilterByName(event.target.value)}
         />
+      </div>
+      <div className="container small">
+        <form action="">
+          <div className="item">
+            {/* renderColumnSelect() */}
+            {renderCompSelect()}
+          </div>
+          <input
+            type="number"
+            data-testid="value-filter"
+            name="value"
+            value={value}
+            onChange={(event) => handleChange(event)}
+          />
+          <button
+            type="button"
+            value="Filtrar"
+            data-testid="button-filter"
+            onClick={(event) => handleSumbit(event)}
+          >
+            Filter
+          </button>
+        </form>
       </div>
     </header>
   );
