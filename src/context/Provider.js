@@ -1,6 +1,6 @@
-import StarWarsContext from './StarWarsContext';
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import StarWarsContext from './StarWarsContext';
 
 export default function Provider({ children }) {
   const [data, setData] = useState([]);

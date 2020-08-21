@@ -7,7 +7,7 @@ export default function usePlanets() {
     data,
     setData,
     isFetching,
-    setIsFetching
+    setIsFetching,
   } = useContext(StarWarsContext);
 
   useEffect(() => {
