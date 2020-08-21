@@ -9,12 +9,6 @@ function SortFilter({ keys }) {
     setLocalState({ ...localState, [name]: value });
   }
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    const { column, sort } = localState;
-    submitFilters(column, sort);
-  }
-
   function renderRadioButtons() {
     return (
       <div onChange={(e) => handleChange(e.target)} name="sort">
@@ -39,6 +33,12 @@ function SortFilter({ keys }) {
     );
   }
 
+  function handleSubmit(event) {
+    event.preventDefault();
+    const { column, sort } = localState;
+    submitFilters(column, sort);
+  }
+  
   return (
     <div>
       <select onChange={(e) => handleChange(e.target)} data-testid="column-sort" name="column">

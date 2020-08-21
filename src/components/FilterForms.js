@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react';
-import { SWContext } from '../context/SWcontext';
+import { SWcontext } from '../context/SWcontext';
 import ShowFilters from './ShowFilters';
 
 
 function FilterForms() {
-  const { submitFilterData, filterByNumericValues, options } = useContext(SWContext);
+  const { submitFilterData, filterByNumericValues, options } = useContext(SWcontext);
   const [localState, setLocalState] = useState({ column: '', comparison: '', number: '' });
   function handleChange({ name, value }) {
     setLocalState({ ...localState, [name]: value });
