@@ -10,7 +10,7 @@ export default function Provider({ children }) {
   const [order, setOrder] = useState({
     column: 'Name',
     sort: 'ASC',
-  })
+  });
 
   const contextValue = {
     data,
@@ -22,10 +22,10 @@ export default function Provider({ children }) {
     order,
     setOrder,
     isFetching,
-    setIsFetching
+    setIsFetching,
   };
 
-  return <StarWarsContext.Provider value={contextValue}>{children}</StarWarsContext.Provider>
+  return <StarWarsContext.Provider value={contextValue}>{children}</StarWarsContext.Provider>;
 }
 
 Provider.propTypes = {
