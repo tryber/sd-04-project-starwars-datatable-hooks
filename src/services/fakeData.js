@@ -50,7 +50,7 @@ const planets = [
     surface_water: '3',
     terrain: 'Glacier',
     url: 'https://swapi.dev/api/planets/3/',
-  }
+  },
 ];
 
 export default planets;
