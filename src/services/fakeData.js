@@ -14,7 +14,7 @@ const planets = [
     rotation_period: '23',
     surface_water: '1',
     terrain: 'Dessert',
-    url: 'https://swapi.dev/api/planets/1/'
+    url: 'https://swapi.dev/api/planets/1/',
   },
   {
     climate: 'Temperate',
@@ -32,7 +32,7 @@ const planets = [
     rotation_period: '23',
     surface_water: '2',
     terrain: 'Urban sprawls',
-    url: 'https://swapi.dev/api/planets/2/'
+    url: 'https://swapi.dev/api/planets/2/',
   },
   {
     climate: 'Frigid',
@@ -49,7 +49,7 @@ const planets = [
     rotation_period: '23',
     surface_water: '3',
     terrain: 'Glacier',
-    url: 'https://swapi.dev/api/planets/3/'
+    url: 'https://swapi.dev/api/planets/3/',
   }
 ];
 
