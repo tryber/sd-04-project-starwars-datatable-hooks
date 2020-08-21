@@ -1,53 +1,28 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { StarWarsContext } from '../context/store';
-import { renderCompSelect, renderColumnSelect, renderRemoveBtn } from '../helper';
+import { renderRemoveBtn } from '../helper';
+import NumFilter from './Header/NumFilter';
 
 const Header = () => {
   const { filterByName: [filterByName, setfilterByName] } = useContext(StarWarsContext);
   const {
     filterByNumericValues: [filterByNumericValues, setfilterByNumericValues],
   } = useContext(StarWarsContext);
-  const [comparison, setComparison] = useState('');
-  const [column, setColumn] = useState('');
-  const [value, setValue] = useState(0);
-  const handleSumbit = (event) => {
-    event.preventDefault();
-    setfilterByNumericValues([...filterByNumericValues, { column, comparison, value }]);
-    setColumn(''); setValue(0); setComparison('');
-  };
   return (
     <header className="App-header">
-      <input
-        type="text"
-        value={filterByName}
-        data-testid="name-filter"
-        onChange={(event) => setfilterByName(event.target.value)}
-      />
       <div className="container small">
-        <form action="">
-          <div className="item">
-            {renderColumnSelect(column, filterByNumericValues, setColumn)}
-            {renderCompSelect(comparison, setComparison)}
-          </div>
-          <input
-            type="number"
-            data-testid="value-filter"
-            name="value"
-            value={value}
-            onChange={(event) => setValue(event.target.value)}
-          />
-          <button
-            type="button"
-            value="Filtrar"
-            data-testid="button-filter"
-            onClick={(event) => handleSumbit(event)}
-          >
-            Filter
-          </button>
-        </form>
-        <div className="container-small">
-          {renderRemoveBtn(filterByNumericValues, setfilterByNumericValues)}
-        </div>
+        <input
+          type="text"
+          value={filterByName}
+          data-testid="name-filter"
+          onChange={(event) => setfilterByName(event.target.value)}
+        />
+      </div>
+      <div className="container small">
+        <NumFilter />
+      </div>
+      <div className="container-small">
+        {renderRemoveBtn(filterByNumericValues, setfilterByNumericValues)}
       </div>
     </header>
   );
