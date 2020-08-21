@@ -10,8 +10,8 @@ export const renderHeader = (data) => {
 
 export const renderTable = (data) => data.map((planet) => (
   <tr key={planet.name}>
-    {Object.values(planet).map((attr, i) => (
-      <td key={i}>{attr}</td>
+    {Object.values(planet).map((attr) => (
+      <td key={attr}>{attr}</td>
     ))}
   </tr>
 ));
