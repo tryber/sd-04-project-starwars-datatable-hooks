@@ -64,6 +64,23 @@ export const renderColumnSelect = (selected, currentFilters, handleChange) => {
     </React.Fragment>
   );
 };
+
+export const renderRemoveBtn = (currentFilters, removeNumFilter) => currentFilters.map(
+  ({ column, comparison, value }) => (
+    <div data-testid="filter" key={column}>
+      <span>{`${column} - ${comparison} - ${value} `}</span>
+      <button
+        type="button"
+        name={column}
+        onClick={(e) => {
+          removeNumFilter(currentFilters.filter(({ column }) => column !== e.target.name));
+        }}
+      >
+        X
+      </button>
+    </div>
+  ),
+);
 // FILTER FUNCS
 export const applyNameFilter = (planetName, data) => data.filter(
   (planet) => planet.name.toUpperCase().includes(planetName.toUpperCase()),

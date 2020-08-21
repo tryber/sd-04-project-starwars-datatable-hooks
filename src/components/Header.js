@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { StarWarsContext } from '../context/store';
-import { renderCompSelect, renderColumnSelect } from '../helper';
+import { renderCompSelect, renderColumnSelect, renderRemoveBtn } from '../helper';
 
 const Header = () => {
   const { filterByName: [filterByName, setfilterByName] } = useContext(StarWarsContext);
@@ -45,6 +45,9 @@ const Header = () => {
             Filter
           </button>
         </form>
+        <div className="container-small">
+          {renderRemoveBtn(filterByNumericValues, setfilterByNumericValues)}
+        </div>
       </div>
     </header>
   );
