@@ -4,7 +4,7 @@ import { SWcontext } from './SWcontext';
 
 const useData = () => {
   const { setData, setIsLoading, setError, isLoading, data } = useContext(SWcontext);
-  //useContext serve para deixar menos verboso e nestting o CONSUMO do contextAPI.
+  // useContext serve para deixar menos verboso e nestting o CONSUMO do contextAPI.
 
   useEffect(() => {
     setIsLoading(true);

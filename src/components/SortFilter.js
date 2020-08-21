@@ -38,7 +38,7 @@ function SortFilter({ keys }) {
     const { column, sort } = localState;
     submitFilters(column, sort);
   }
-  
+
   return (
     <div>
       <select onChange={(e) => handleChange(e.target)} data-testid="column-sort" name="column">

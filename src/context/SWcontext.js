@@ -18,16 +18,16 @@ const StarWarsProvider = ({ children }) => {
     'surface_water',
   ]);
 
-  const handleInput = (value) => {
-    setFilterByName({
-      name: value,
-    });
-  };
-
   const submitFilters = (column, sort) => {
     setOrder({
       column,
       sort,
+    });
+  };
+
+  const handleInput = (value) => {
+    setFilterByName({
+      name: value,
     });
   };
 
@@ -38,6 +38,7 @@ const StarWarsProvider = ({ children }) => {
   const submitFilterData = (column, comparison, value) => {
     setFilterByNumericValues([...filterByNumericValues, { column, comparison, value }]);
   };
+
   const context = {
     data,
     setData,
