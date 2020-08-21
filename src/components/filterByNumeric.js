@@ -8,50 +8,49 @@ const goGlobal = (column, comparison, value, set) => {
   }));
 };
 
-const FilterByNumeric = () => { 
+function listComparisons() {
+  const comparisons = ['', 'maior que', 'menor que', 'igual a'];
+  return comparisons;
+}
+
+function listColumns() {
+  const columns = [
+    '',
+    'population',
+    'orbital_period',
+    'diameter',
+    'rotation_period',
+    'surface_water',
+  ];
+  return columns;
+}
+
+function makeComparisonSelect() {
+  /* função baseada na aula do Orlando StarWars Redux */
+  const select = listComparisons();
+  return select.map((tagOption) => (
+    <option value={tagOption} key={tagOption}>
+      {tagOption}
+    </option>
+  ));
+}
+
+function makeColumnsSelect() {
+  return listColumns().map((coluna) => (
+    <option value={coluna} key={coluna}>
+      {coluna}
+    </option>
+  ));
+}
+
+const FilterByNumeric = () => {
   const { setData, data } = useContext(AppContext);
   const { filterByNumericValues } = data;
   const [localColumn, setLocalColumn] = useState('');
   const [localComparison, setLocalComparison] = useState('');
   const [inputNumber, setInputNumber] = useState('');
 
-  function listComparisons() {
-    const comparisons = ['', 'maior que', 'menor que', 'igual a'];
-    return comparisons;
-  }
-
-  function listColumns() {
-    const columns = [
-      '',
-      'population',
-      'orbital_period',
-      'diameter',
-      'rotation_period',
-      'surface_water',
-    ];
-    return columns;
-  }
-
-  function makeComparisonSelect() {
-    /* função baseada na aula do Orlando StarWars Redux */
-    let select = listComparisons();
-    return select.map((tagOption) => (
-      <option value={tagOption} key={tagOption}>
-        {tagOption}
-      </option>
-    ));
-  }
-
-  function makeColumnsSelect() {
-    let select = listColumns();
-    return listColumns().map((coluna) => (
-      <option value={coluna} key={coluna}>
-        {coluna}
-      </option>
-    ));
-  }
-
-   return (
+  return (
     <div>
       <select data-testid="column-filter" onChange={(event) => setLocalColumn(event.target.value)}>
         {makeColumnsSelect()}
