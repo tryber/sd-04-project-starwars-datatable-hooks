@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import StarWarsContext from './StarWarsContext';
+import PropTypes from 'prop-types';
 
 const Provider = ({ children }) => {
   const [data, setData] = useState([]);
@@ -30,4 +31,8 @@ const Provider = ({ children }) => {
   );
 };
 
-export default Provider
+export default Provider;
+
+Provider.propTypes = {
+  children: PropTypes.object.isRequired,
+}
