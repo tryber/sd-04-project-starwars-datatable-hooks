@@ -41,19 +41,17 @@ const RadioSort = () => {
         type="radio"
         id="Asc"
         name="ordem"
-        onChange={(e) => setOrder({ ...order, sort: 'ASC' })}
+        onChange={() => setOrder({ ...order, sort: 'ASC' })}
         defaultChecked
       />
-      <label hatmlFor="Asc" for="male">
-        Asc
-      </label>
+      <label htmlFor="Asc">Asc</label>
 
       <input
         data-testid="column-sort-input-desc"
         type="radio"
         id="Desc"
         name="ordem"
-        onChange={(e) => setOrder({ ...order, sort: 'DESC' })}
+        onChange={() => setOrder({ ...order, sort: 'DESC' })}
       />
       <label htmlFor="Desc">Desc</label>
       <button
@@ -66,5 +64,7 @@ const RadioSort = () => {
     </div>
   );
 };
+
+// Help do Procópio!!
 
 export default RadioSort;

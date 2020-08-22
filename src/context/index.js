@@ -25,7 +25,7 @@ export default function AppProvider({ children }) {
   };
 
   useEffect(() => {
-    console.log(data)
+    console.log(data);
   }, [data]);
 
   useEffect(() => {

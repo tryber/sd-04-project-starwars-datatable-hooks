@@ -8,9 +8,7 @@ function MakeFilterXButtons() {
 
   const onClick = (type) => {
     console.log(numericFilters, 'numeric filters');
-    const newFilters = numericFilters.filter(({ column }) => {
-      return column !== type.column;
-    });
+    const newFilters = numericFilters.filter(({ column }) => column !== type.column);
     setData({ ...data, filterByNumericValues: newFilters });
   };
 

@@ -16,7 +16,6 @@ import funcFilterByNumericValues from '../functions/funcFilterByNumericValues';
 //   return planetasFiltrados;
 // };
 
-
 const sortBy = (data, order) => {
   if (!data.length) return [];
   const planetKey = order.column.toLowerCase();
@@ -29,7 +28,6 @@ const sortBy = (data, order) => {
   return data;
 };
 
-
 const Table = () => {
   const { data } = useContext(AppContext);
   // if (isFetching) return <span>...Loading</span>;
@@ -38,7 +36,7 @@ const Table = () => {
     planetsData,
     filterByName: { name },
     filterByNumericValues,
-    order
+    order,
   } = data;
 
   const filteredByNumericValues = funcFilterByNumericValues(
@@ -46,7 +44,7 @@ const Table = () => {
     name,
     filterByNumericValues,
   );
-  
+
   return (
     <div>
       <table className="tabela">
