@@ -4,6 +4,7 @@ import Colunas from './Colunas';
 import funcFilterByNumericValues from '../functions/';
 
 //ajuda do Julio
+
 const sortBy = (data, order) => {
   console.log(order);
   if (!data.length) return [];
@@ -31,7 +32,7 @@ function Table() {
   const filteredByNumericValues = funcFilterByNumericValues(
     planetsData,
     name,
-    filterByNumericValues
+    filterByNumericValues,
   );
 
   return (
