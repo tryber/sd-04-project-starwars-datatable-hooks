@@ -158,7 +158,7 @@ const mockFetch = () => {
   });
 }); */
 
-describe('Sua página deve ter um filtro para valores numéricos', () => {
+/* describe('Sua página deve ter um filtro para valores numéricos', () => {
   beforeAll(mockFetch);
   beforeEach(cleanup);
 
@@ -246,9 +246,9 @@ describe('Sua página deve ter um filtro para valores numéricos', () => {
 
     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(2);
   });
-});
+}); 
 
-/* 
+
 describe('Sua página não deve utilizar filtros repetidos', () => {
   beforeAll(mockFetch);
   beforeEach(cleanup);
@@ -336,6 +336,7 @@ describe('Cada filtro de valores numéricos deve ter um ícone de `X` que, ao se
     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(11);
   });
 });
+*/
 
 describe('As colunas da tabela devem ser ordenáveis de forma ascendente ou descendente', () => {
   beforeAll(mockFetch);
@@ -363,4 +364,4 @@ describe('As colunas da tabela devem ser ordenáveis de forma ascendente ou desc
     const actual = planets.map(planet => planet.innerHTML);
     expect(actual).toEqual(expected);
   }); 
-}); */
+});

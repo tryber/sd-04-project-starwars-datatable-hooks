@@ -23,7 +23,7 @@ function Table() {
   const filteredByNumericValues = funcFilterByNumericValues(
     planetsData,
     name,
-    filterByNumericValues,
+    filterByNumericValues
   );
   // const {name} = filterByName;
   /*   const filteredPlanets = filterTableByName(name, planetsData);
@@ -36,7 +36,7 @@ function Table() {
       <tbody>
         {filteredByNumericValues.map((planet) => (
           <tr>
-            <td>{planet.name}</td>
+            <td data-testid="planet-name">{planet.name}</td>
             <td>{planet.rotation_period}</td>
             <td>{planet.orbital_period}</td>
             <td>{planet.diameter}</td>
