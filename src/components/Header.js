@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 import FilterByNumeric from '../components/filterByNum';
+import RadioSort from './radioSort';
 
 const filterTableByName = (search, setData) => {
   setData((data) => ({ ...data, filterByName: { name: search } }));
@@ -18,6 +19,7 @@ function Header() {
         onChange={(e) => filterTableByName(e.target.value, setData)}
       />
       <FilterByNumeric />
+      <RadioSort />
     </div>
   );
 }

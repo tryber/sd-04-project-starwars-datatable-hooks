@@ -3,12 +3,19 @@ import StarWarsContext from '../context/StarWarsContext';
 import Colunas from './Colunas';
 import funcFilterByNumericValues from '../functions/';
 
-/* const filterTableByName = (search, planets) => {
-  const planetasFiltrados = planets.filter(({ name }) =>
-    name.toUpperCase().includes(search.toUpperCase())
-  );
-  return planetasFiltrados;
-}; */
+//ajuda do Julio
+const sortBy = (data, order) => {
+  console.log(order);
+  if (!data.length) return [];
+  const planetKey = order.column.toLowerCase();
+  if (isNaN(data[0][planetKey])) {
+    data.sort((a, b) => (a[planetKey] > b[planetKey] ? 1 : -1));
+  } else {
+    data.sort((a, b) => a[planetKey] - b[planetKey]);
+  }
+  if (order.sort === 'DESC') data.reverse();
+  return data;
+};
 
 function Table() {
   const { data, isLoading } = useContext(StarWarsContext);
@@ -18,23 +25,22 @@ function Table() {
     planetsData,
     filterByName: { name },
     filterByNumericValues,
+    order,
   } = data;
 
   const filteredByNumericValues = funcFilterByNumericValues(
     planetsData,
     name,
-    filterByNumericValues,
+    filterByNumericValues
   );
-  // const {name} = filterByName;
-  /*   const filteredPlanets = filterTableByName(name, planetsData);
-   */
+
   return (
     <table>
       <thead>
         <Colunas />
       </thead>
       <tbody>
-        {filteredByNumericValues.map((planet) => (
+        {sortBy(filteredByNumericValues, order).map((planet) => (
           <tr>
             <td data-testid="planet-name">{planet.name}</td>
             <td>{planet.rotation_period}</td>
