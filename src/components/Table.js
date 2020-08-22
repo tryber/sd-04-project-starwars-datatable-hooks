@@ -23,7 +23,7 @@ function Table() {
   const filteredByNumericValues = funcFilterByNumericValues(
     planetsData,
     name,
-    filterByNumericValues
+    filterByNumericValues,
   );
   // const {name} = filterByName;
   /*   const filteredPlanets = filterTableByName(name, planetsData);
