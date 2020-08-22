@@ -18,10 +18,6 @@ const Provider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    console.log(data);
-  }, [data]);
-
-  useEffect(() => {
     (async () => {
       try {
         const getAPI = await fetch('https://swapi.dev/api/planets/');
@@ -50,6 +46,7 @@ const Provider = ({ children }) => {
 
 export default Provider;
 
-Provider.propTypes = {
+/* Provider.propTypes = {
   children: PropTypes.objectOf(PropTypes.any).isRequired,
 };
+ */

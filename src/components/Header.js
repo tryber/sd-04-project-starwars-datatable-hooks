@@ -6,9 +6,9 @@ const filterTableByName = (search, setData) => {
 };
 
 function Header() {
-  const { setData, data } = useContext(StarWarsContext);
+  const { setData, isLoading } = useContext(StarWarsContext);
 
-  if (data.isLoading) return <p>Loading...</p>;
+  if (isLoading) return <p>Loading...</p>;
   return (
     <div>
       <input

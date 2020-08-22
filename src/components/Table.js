@@ -11,7 +11,6 @@ const filterTableByName = (search, planets) => {
 
 function Table() {
   const { data, isLoading } = useContext(StarWarsContext);
-  console.log(isLoading);
   if (isLoading) return <div>loading...</div>;
 
   const {
@@ -28,7 +27,7 @@ function Table() {
         <Colunas />
       </thead>
       <tbody>
-        {filteredPlanets.map((planet) => (
+        {filteredPlanets.map((planet, index) => (
           <tr>
             <td>{planet.name}</td>
             <td>{planet.rotation_period}</td>
