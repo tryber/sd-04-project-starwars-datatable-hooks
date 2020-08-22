@@ -4,7 +4,7 @@ import Colunas from './Colunas';
 
 const filterTableByName = (search, planets) => {
   const planetasFiltrados = planets.filter(({ name }) =>
-    name.toUpperCase().includes(search.toUpperCase())
+    name.toUpperCase().includes(search.toUpperCase()),
   );
   return planetasFiltrados;
 };
