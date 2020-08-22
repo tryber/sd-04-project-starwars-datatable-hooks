@@ -28,7 +28,7 @@ const mockFetch = () => {
     }));
 }
 
-describe('Fazer uma requisição para o endpoint `/planets` da API de Star Wars e preencher uma tabela com os dados retornados, com exceção dos da coluna `residents`', () => {
+/* describe('Fazer uma requisição para o endpoint `/planets` da API de Star Wars e preencher uma tabela com os dados retornados, com exceção dos da coluna `residents`', () => {
   beforeAll(mockFetch);
   beforeEach(cleanup);
 
@@ -83,8 +83,8 @@ describe('Fazer uma requisição para o endpoint `/planets` da API de Star Wars 
     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(11);
   });
 });
-
-describe('Sua página deve ter um campo de texto que filtra a tabela para somente exibir planetas cujos nomes incluam o texto digitado', () => {
+ */
+/* describe('Sua página deve ter um campo de texto que filtra a tabela para somente exibir planetas cujos nomes incluam o texto digitado', () => {
   beforeAll(mockFetch);
   beforeEach(cleanup);
 
@@ -156,9 +156,9 @@ describe('Sua página deve ter um campo de texto que filtra a tabela para soment
       expect(await screen.findByText(planetName)).toBeInTheDocument();
     }
   });
-});
+}); */
 
-describe('Sua página deve ter um filtro para valores numéricos', () => {
+/* describe('Sua página deve ter um filtro para valores numéricos', () => {
   beforeAll(mockFetch);
   beforeEach(cleanup);
 
@@ -246,7 +246,8 @@ describe('Sua página deve ter um filtro para valores numéricos', () => {
 
     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(2);
   });
-});
+}); 
+
 
 describe('Sua página não deve utilizar filtros repetidos', () => {
   beforeAll(mockFetch);
@@ -335,6 +336,7 @@ describe('Cada filtro de valores numéricos deve ter um ícone de `X` que, ao se
     expect(await screen.findAllByRole(ROW_ROLE_SELECTOR)).toHaveLength(11);
   });
 });
+*/
 
 describe('As colunas da tabela devem ser ordenáveis de forma ascendente ou descendente', () => {
   beforeAll(mockFetch);
@@ -361,5 +363,5 @@ describe('As colunas da tabela devem ser ordenáveis de forma ascendente ou desc
     const planets = await screen.findAllByTestId(PLANET_NAME_SELECTOR);
     const actual = planets.map(planet => planet.innerHTML);
     expect(actual).toEqual(expected);
-  });
+  }); 
 });
