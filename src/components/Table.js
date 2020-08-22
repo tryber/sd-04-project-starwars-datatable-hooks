@@ -3,7 +3,7 @@ import StarWarsContext from '../context/StarWarsContext';
 import Colunas from './Colunas';
 import funcFilterByNumericValues from '../functions/';
 
-//ajuda do Julio 
+// ajuda do Julio
 
 const sortBy = (data, order) => {
   console.log(order);
