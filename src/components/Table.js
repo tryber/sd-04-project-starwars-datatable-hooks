@@ -1,25 +1,34 @@
 import React, { useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
+import Colunas from './Colunas';
+
+const filterTableByName = (search, planets) => {
+  const planetasFiltrados = planets.filter(({ name }) =>
+    name.toUpperCase().includes(search.toUpperCase())
+  );
+  return planetasFiltrados;
+};
 
 function Table() {
   const { data, isLoading } = useContext(StarWarsContext);
-  const titles = data[0] ? Object.keys(data[0]) : [];
-  if (isLoading) {
-    return <div>loading...</div>;
-  }
+  console.log(isLoading);
+  if (isLoading) return <div>loading...</div>;
+
+  const {
+    planetsData,
+    filterByName: {name}
+  } = data;
+
+ // const {name} = filterByName;
+const filteredPlanets = filterTableByName(name, planetsData);
+
   return (
     <table>
       <thead>
-        <tr>
-          {titles
-            .filter((_, index) => index !== 9)
-            .map((title) => (
-              <th>{title}</th>
-            ))}
-        </tr>
+        <Colunas />
       </thead>
       <tbody>
-        {data.map((planet) => (
+        {filteredPlanets.map((planet) => (
           <tr>
             <td>{planet.name}</td>
             <td>{planet.rotation_period}</td>
