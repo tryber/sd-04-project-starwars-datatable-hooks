@@ -3,12 +3,12 @@ import StarWarsContext from '../context/StarWarsContext';
 import Colunas from './Colunas';
 import funcFilterByNumericValues from '../functions/';
 
-const filterTableByName = (search, planets) => {
+/* const filterTableByName = (search, planets) => {
   const planetasFiltrados = planets.filter(({ name }) =>
     name.toUpperCase().includes(search.toUpperCase())
   );
   return planetasFiltrados;
-};
+}; */
 
 function Table() {
   const { data, isLoading } = useContext(StarWarsContext);
@@ -23,7 +23,7 @@ function Table() {
   const filteredByNumericValues = funcFilterByNumericValues(
     planetsData,
     name,
-    filterByNumericValues
+    filterByNumericValues,
   );
   // const {name} = filterByName;
   /*   const filteredPlanets = filterTableByName(name, planetsData);
