@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 import Colunas from './Colunas';
+import funcFilterByNumericValues from '../functions/';
 
 const filterTableByName = (search, planets) => {
   const planetasFiltrados = planets.filter(({ name }) =>
-    name.toUpperCase().includes(search.toUpperCase()),
+    name.toUpperCase().includes(search.toUpperCase())
   );
   return planetasFiltrados;
 };
@@ -16,18 +17,24 @@ function Table() {
   const {
     planetsData,
     filterByName: { name },
+    filterByNumericValues,
   } = data;
 
+  const filteredByNumericValues = funcFilterByNumericValues(
+    planetsData,
+    name,
+    filterByNumericValues
+  );
   // const {name} = filterByName;
-  const filteredPlanets = filterTableByName(name, planetsData);
-
+  /*   const filteredPlanets = filterTableByName(name, planetsData);
+   */
   return (
     <table>
       <thead>
         <Colunas />
       </thead>
       <tbody>
-        {filteredPlanets.map((planet) => (
+        {filteredByNumericValues.map((planet) => (
           <tr>
             <td>{planet.name}</td>
             <td>{planet.rotation_period}</td>
