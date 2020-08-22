@@ -18,16 +18,15 @@ const Provider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    console.log(data)
-  }, [data])
-
+    console.log(data);
+  }, [data]);
 
   useEffect(() => {
     (async () => {
       try {
         const getAPI = await fetch('https://swapi.dev/api/planets/');
         const { results } = await getAPI.json();
-        await setData({ ...data, planetsData: results});
+        await setData({ ...data, planetsData: results });
         await setIsLoading(false);
       } catch (err) {
         console.log(err);

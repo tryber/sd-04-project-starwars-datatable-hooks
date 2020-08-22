@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 
 const filterTableByName = (search, setData) => {
-  setData((data) => ({ ...data, filterByName: { name: search }}));
+  setData((data) => ({ ...data, filterByName: { name: search } }));
 };
 
 function Header() {

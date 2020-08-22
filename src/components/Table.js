@@ -16,11 +16,11 @@ function Table() {
 
   const {
     planetsData,
-    filterByName: {name}
+    filterByName: { name },
   } = data;
 
- // const {name} = filterByName;
-const filteredPlanets = filterTableByName(name, planetsData);
+  // const {name} = filterByName;
+  const filteredPlanets = filterTableByName(name, planetsData);
 
   return (
     <table>
