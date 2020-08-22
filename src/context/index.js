@@ -25,6 +25,10 @@ export default function AppProvider({ children }) {
   };
 
   useEffect(() => {
+    console.log(data)
+  }, [data]);
+
+  useEffect(() => {
     console.log('useEffect');
     getSwapi().then((res) => setData({ ...data, planetsData: res.results, isFetching: false }));
   }, []);
