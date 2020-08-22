@@ -27,7 +27,7 @@ function Table() {
         <Colunas />
       </thead>
       <tbody>
-        {filteredPlanets.map((planet, index) => (
+        {filteredPlanets.map((planet) => (
           <tr>
             <td>{planet.name}</td>
             <td>{planet.rotation_period}</td>
