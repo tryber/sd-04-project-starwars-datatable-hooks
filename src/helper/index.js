@@ -12,8 +12,8 @@ export const renderHeader = (data) => {
 
 export const renderTable = (data) => data.map((planet) => (
   <tr key={planet.name}>
-    {Object.values(planet).map((attr) => (
-      <td key={attr}>{attr}</td>
+    {Object.entries(planet).map((attr) => (
+      attr[0] === 'name' ? <td key={attr[1]} data-testid="planet-name">{attr[1]}</td> : <td key={attr[1]}>{attr[1]}</td>
     ))}
   </tr>
 ));
