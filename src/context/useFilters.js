@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import StarWarsContext from '../context/StarWarsContext';
+import StarWarsContext from './StarWarsContext';
 
 export default function useFilters() {
   const {

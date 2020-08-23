@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import useFilters from '../hooks/useFilters';
+import useFilters from '../context/useFilters';
 
 const getSelect = (name, options, state, setState) => (
   <select
@@ -7,8 +7,8 @@ const getSelect = (name, options, state, setState) => (
     value={state}
     onChange={(event) => setState(event.target.value)}
   >
-    <option disabled selected>{name}</option>
-    {options.map((option) => (<option value={option}>{option}</option>))}
+    <option disabled>{name}</option>
+    {options.map((option) => (<option key={option} value={option}>{option}</option>))}
   </select>
 );
 

@@ -1,7 +1,11 @@
 import React from 'react';
 import TableBody from './TableBody';
+import usePlanets from '../context/usePlanets'
 
 function App() {
+  const { isFetching } = usePlanets();
+  if (isFetching) return <span className="home-loading">Loading...</span>;
+
   return (
     <table>
       <thead>

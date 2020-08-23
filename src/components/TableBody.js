@@ -1,6 +1,6 @@
 import React from 'react';
 // import planets from '../services/fakeData';
-import usePlanets from '../hooks/usePlanets';
+import usePlanets from '../context/usePlanets';
 
 export default function TableBody() {
   const { data: planets } = usePlanets();

@@ -1,5 +1,5 @@
 import React from 'react';
-import useFilters from '../hooks/useFilters';
+import useFilters from '../context/useFilters';
 
 export default function FilterByName() {
   const { filterByName } = useFilters();

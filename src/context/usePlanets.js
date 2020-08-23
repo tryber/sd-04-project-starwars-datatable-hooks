@@ -1,14 +1,9 @@
 import { useContext, useEffect } from 'react';
-import StarWarsContext from '../context/StarWarsContext';
+import StarWarsContext from './StarWarsContext';
 import getPlanets from '../services/apiPlanets';
 
 export default function usePlanets() {
-  const {
-    data,
-    setData,
-    isFetching,
-    setIsFetching,
-  } = useContext(StarWarsContext);
+  const { data, setData, isFetching, setIsFetching } = useContext(StarWarsContext);
 
   useEffect(() => {
     getPlanets().then((planets) => {
