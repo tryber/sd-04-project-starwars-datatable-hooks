@@ -1,6 +1,6 @@
 import React from 'react';
 
-// Order de exibição das coluna da tabela 
+// Order de exibição das coluna da tabela
 function Header() {
   return (
     <thead>

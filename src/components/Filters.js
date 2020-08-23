@@ -161,16 +161,8 @@ const getOrdered = (state, setState, setOrder) => {
 
 // Provider do Contexto para filtros
 const Filters = () => {
-  const {
-    filters,
-    setFiltersName,
-    setFiltersNumber,
-    setColumn,
-    deleteFilters,
-    setOrder,
-  } = useContext(FiltersContext);
-  // Estado e Set_Estado dos filtros
-  const [state, setState] = useState({
+  const { filters, setFiltersName, setFiltersNumber, setColumn, deleteFilters, setOrder,} = useContext(FiltersContext);
+  const [state, setState] = useState({ // Estado e Set_Estado dos filtros
     column: '',
     comparison: '',
     value: '',
@@ -178,9 +170,7 @@ const Filters = () => {
     orderColumn: 'name',
     orderSort: 'ASC',
   });
-  // Constante receber resultados dos valores numerico dos filtros
-  const { numberValuesForFilters } = filters;
-  // Filtros e opçoes renderizados para usuarios
+  const { numberValuesForFilters } = filters;// Constante receber resultados dos valores numerico dos filtros
   return (
     <div>
       <h3>Filter results</h3>
