@@ -159,8 +159,6 @@ const getOrdered = (state, setState, setOrder) => {
   );
 };
 
-
-
 // recebe Provider do Contexto para filtros
 const Filters = () => {
   const {
