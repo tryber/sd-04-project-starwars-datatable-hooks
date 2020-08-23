@@ -1,6 +1,7 @@
 import React from 'react';
 import Table from './components/Table';
 import usePlanets from './hooks/usePlanets';
+import FilterByName from './components/FilterByName';
 
 export default function App() {
   const { isFetching } = usePlanets();
@@ -9,6 +10,7 @@ export default function App() {
   return (
     <div className="App">
       <h1 className="home-title">Star Wars DataTable</h1>
+      <FilterByName />
       <Table />
     </div>
   );

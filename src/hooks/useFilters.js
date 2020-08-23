@@ -3,28 +3,24 @@ import StarWarsContext from '../context/StarWarsContext';
 
 export default function useFilters() {
   const {
-    filterByName,
-    setFilterByName,
-    filterByNumericValues,
-    setFilterByNumericValues,
-    order,
-    setOrder,
-    removed,
-    setRemoved,
+    filters,
+    setFilters,
   } = useContext(StarWarsContext);
 
-  useEffect(() => {
+  const filterByName = (value) => {
+    setFilters((state) => ({
+      ...state,
+      filterByName: { name: value },
+    }));
+  };
+
+ /*  useEffect(() => {
     setFilterByNumericValues(filterByNumericValues.filter((e) => e !== removed));
-  }, [removed]);
+  }, [removed]); */
 
   return {
+    filters,
+    setFilters,
     filterByName,
-    setFilterByName,
-    filterByNumericValues,
-    setFilterByNumericValues,
-    order,
-    setOrder,
-    removed,
-    setRemoved,
   };
 }
