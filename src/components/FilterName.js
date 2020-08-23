@@ -1,12 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 
 const FilterName = () => {
   const { filters, setFilters } = useContext(StarWarsContext);
-  const [text, setText] = useState('');
   function changeName(event) {
-    setText(event.target.value);
-    setFilters({ ...filters, filterByName: { name: text } });
+    setFilters({ ...filters, filterByName: { name: event.target.value } });
   }
 
   return (
