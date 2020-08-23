@@ -181,13 +181,9 @@ const Filters = () => {
   return (
     <div>
       <h3>Filter results</h3>
-      <input
-        data-testid="name-filter"
-        type="text"
-        placeholder="Digit a planet name"
+      <input data-testid="name-filter" type="text" placeholder="Digit a planet name"
         value={filters.filterByName.name}
-        onChange={(event) => setFiltersName(event.target.value)}
-      />
+        onChange={(event) => setFiltersName(event.target.value)}/>
       <p>Select an option:</p>
       {selectAnOption(state, setState, filters)}
       <p>Select a condition:</p>
@@ -197,12 +193,9 @@ const Filters = () => {
       {numberValuesForFilters.map((filter, index) => (
         <div data-testid="filter">
           {`${filter.column} ${filter.comparison} ${filter.value}`}
-          <button
-            type="button"
+          <button type="button"
             onClick={() => enableOption(filter.column, index, filters, setColumn, deleteFilters)}
-          >
-            X
-          </button>
+          > X </button>
         </div>
       ))}
       {getOrdered(state, setState, setOrder)}
