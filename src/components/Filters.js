@@ -159,15 +159,7 @@ const getOrdered = (state, setState, setOrder) => {
   );
 };
 
-const [state, setState] = useState({
-  // Estado e Set_Estado dos filtros
-  column: '',
-  comparison: '',
-  value: '',
-  filters: ['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'],
-  orderColumn: 'name',
-  orderSort: 'ASC',
-});
+
 
 // recebe Provider do Contexto para filtros
 const Filters = () => {
@@ -177,8 +169,14 @@ const Filters = () => {
     setFiltersNumber,
     setColumn,
     deleteFilters,
-    setOrder,
-  } = useContext(FiltersContext);
+    setOrder } = useContext(FiltersContext);
+  const [state, setState] = useState({
+    column: '',
+    comparison: '',
+    value: '',
+    filters: ['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'],
+    orderColumn: 'name',
+    orderSort: 'ASC' });
   const { numberValuesForFilters } = filters;
   return (
     <div>
@@ -192,7 +190,6 @@ const Filters = () => {
       />
       <p>Select an option:</p>
       {selectAnOption(state, setState, filters)}
-      <p>Select a condition:</p>
       {selectACondition(state, setState)}
       {inputNumber(state, setState)}
       {filterBtn(state, setFiltersNumber, filters, setColumn)}
