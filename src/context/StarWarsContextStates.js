@@ -23,7 +23,7 @@ const StarWarsContextStates = () => {
     setIsLoading(true);
     getPlanetsApi().then(
       (results) => setPlanets(removeResidents(results)),
-      (error) => setPlanets(error)
+      (error) => setPlanets(error),
     );
   };
 
