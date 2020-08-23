@@ -1,18 +1,10 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { StarWarsContext } from '../../context/StarWarsContext';
-import '../css/tableBody.css';
+import Order from './OrderRender';
 
 const renderTable = (keys) => (
-  <tbody className="table_body">
-    {keys.map((line, index) => (
-      <tr key={`${line[index]} pai`}>
-        {line.map((info, count) => (
-          <td key={`${info} filho`}>{line[count]}</td>
-        ))}
-      </tr>
-    ))}
-  </tbody>
+  <Order keys={keys} />
 );
 
 const whatColumn = (column) => {
@@ -31,9 +23,9 @@ const compareCompative = (compareA, compareB, signal) => {
   // console.log('comp A', numberA);
   // console.log('comp B', numberB);
   // console.log('volta', (numberA < numberB));
-  if (signal === 'maior que') return (numberA > numberB);
-  else if (signal === 'menor que') return (numberA < numberB);
-  return (numberA === numberB);
+  if (signal === 'maior que') return numberA > numberB;
+  else if (signal === 'menor que') return numberA < numberB;
+  return numberA === numberB;
 };
 
 const compareData = (planet, filters) => {
@@ -57,11 +49,11 @@ const aplyName = (keys, name) => {
 };
 
 const aplyNumeric = (keys, filterByNumericValues) => {
-  const newData = keys.filter((planet) => (
+  const newData = keys.filter((planet) =>
     //  console.log('-----------------------');
     //  console.log('resp', compareData(planet, filterByNumericValues));
-    compareData(planet, filterByNumericValues)
-  ));
+    compareData(planet, filterByNumericValues),
+  );
   return renderTable(newData);
 };
 
@@ -74,7 +66,15 @@ const TableBody = ({ keys }) => {
 
   if (name) return aplyName(keys, name);
   else if (filterByNumericValues.length) return aplyNumeric(keys, filterByNumericValues);
-  return (!keys.length ? <tbody><tr><td>Loading...</td></tr></tbody> : renderTable(keys));
+  return !keys.length ? (
+    <tbody>
+      <tr>
+        <td>Loading...</td>
+      </tr>
+    </tbody>
+  ) : (
+    renderTable(keys)
+  );
 };
 
 TableBody.propTypes = {

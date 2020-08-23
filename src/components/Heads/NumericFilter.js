@@ -25,6 +25,7 @@ const NumericFilter = () => {
   const { setFilters, filters, columnCompare, setColumn } = useContext(StarWarsContext);
   return (
     <div>
+      Filtros:
       <select
         data-testid="column-filter"
         onChange={({ target: { value } }) => (filterState[0] = value)}
