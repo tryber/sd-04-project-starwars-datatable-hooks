@@ -1,6 +1,6 @@
 import React from 'react';
 import TableBody from './TableBody';
-import usePlanets from '../context/usePlanets'
+import usePlanets from '../context/usePlanets';
 
 function App() {
   const { isFetching } = usePlanets();

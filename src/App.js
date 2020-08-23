@@ -1,6 +1,5 @@
 import React from 'react';
 import Provider from './context/Provider';
-import usePlanets from './context/usePlanets';
 import Table from './components/Table';
 import FilterByName from './components/FilterByName';
 import FilterByNumericValues from './components/FilterByNumericValues';
