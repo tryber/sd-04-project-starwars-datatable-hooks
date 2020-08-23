@@ -24,7 +24,7 @@ const SortItems = () => {
       <label htmlFor="sort">ASC</label>
       <input
         type="radio"
-        data-testid="column-sort-input"
+        data-testid="column-sort-input-asc"
         name="sort"
         value="ASC"
         onClick={(event) => setLocalSort(event.target.value)}
@@ -32,7 +32,7 @@ const SortItems = () => {
       <label htmlFor="sort">DESC</label>
       <input
         type="radio"
-        data-testid="column-sort-input"
+        data-testid="column-sort-input-desc"
         name="sort"
         value="DESC"
         onClick={(event) => setLocalSort(event.target.value)}
