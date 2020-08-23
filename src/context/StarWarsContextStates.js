@@ -1,32 +1,24 @@
 import { useState } from 'react';
 import getPlanetsApi from '../services/getApi';
+import StarWarsContextStatesFilters from './StarWarsContextStatesFilters';
+
+
+const INITIAL_STATE = {
+  filterByName: {
+    name: '',
+  },
+};
 
 const StarWarsContextStates = () => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const INITIAL_STATE = {
-      filterByName: {
-        name: '',
-      },
-  };
   const [filters, setFilters] = useState(INITIAL_STATE);
 
   const setStateFilter = (filter, action) => {
-    let newFilters = filters; // caso não entre nenhuma condição
-    switch (action) {
-      case 'NAME': {
-        newFilters = {
-          ...filters,
-          filterByName: { name: filter.name },
-        };
-      }
-    }
-    setFilters(newFilters);
+    setFilters(StarWarsContextStatesFilters(filters, filter, action));
   };
 
-  const getFilterName = () => {
-    return filters.filterByName.name;
-  };
+  const getFilterName = () => filters.filterByName.name;
 
   const setPlanets = (results) => {
     setData(results);

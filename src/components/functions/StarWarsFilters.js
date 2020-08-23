@@ -1,5 +1,5 @@
-const starWarsFilter = (dataPlanets, name) => {
-  return dataPlanets.filter((planet) => planet.name.includes(name))
-};
+const starWarsFilter = (dataPlanets, name) => (
+  dataPlanets.filter((planet) => planet.name.includes(name))
+);
 
 export default starWarsFilter;
