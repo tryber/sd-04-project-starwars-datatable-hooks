@@ -8,12 +8,13 @@ const renderReturn = (keys) => (
     {keys.map((line) => (
       <tr key={`${line[0]} pai`}>
         {line.map((info, count) => {
-          if (count === 0)
+          if (count === 0) {
             return (
               <td key={`${info} filho`} data-testid="planet-name">
                 {line[count]}
               </td>
             );
+          }
           return <td key={`${info} filho`}>{line[count]}</td>;
         })}
       </tr>
@@ -24,13 +25,11 @@ const renderReturn = (keys) => (
 const numberOrder = (keys, sort) => {
   let keysOrded = keys;
   if (sort === 'ASC') {
-    keysOrded = keys.sort((planetA, planetB) => {
-      return parseFloat(planetA[2]) - parseFloat(planetB[2]);
-    });
+    keysOrded = keys.sort((planetA, planetB) => parseFloat(planetA[2]) - parseFloat(planetB[2]));
   } else {
-    keysOrded = keys.sort((planetA, planetB) => {
-      return parseFloat(planetA[2]) < parseFloat(planetB[2]) ? 1 : -1;
-    });
+    keysOrded = keys.sort((planetA, planetB) =>
+      parseFloat(planetA[2]) < parseFloat(planetB[2]) ? 1 : -1,
+    );
   }
   return keysOrded;
 };
@@ -38,13 +37,9 @@ const numberOrder = (keys, sort) => {
 const stringOrder = (keys, sort) => {
   let keysOrded = keys;
   if (sort === 'ASC') {
-    keysOrded = keys.sort((planetA, planetB) => {
-      return planetA[0] < planetB[0] ? -1 : 1;
-    });
+    keysOrded = keys.sort((planetA, planetB) => (planetA[0] < planetB[0] ? -1 : 1));
   } else {
-    keysOrded = keys.sort((planetA, planetB) => {
-      return planetA[0] > planetB[0] ? -1 : 1;
-    });
+    keysOrded = keys.sort((planetA, planetB) => (planetA[0] > planetB[0] ? -1 : 1));
   }
   return keysOrded;
 };
