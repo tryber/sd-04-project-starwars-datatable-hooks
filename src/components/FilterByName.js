@@ -11,9 +11,9 @@ export default function FilterByName() {
         type="text"
         id="name"
         data-testid="name-filter"
-        onChange={(event) => { filterByName(event.target.value) }}
+        onChange={(event) => filterByName(event.target.value)}
         placeholder="search planets by name"
       />
     </div>
   );
-};
+}

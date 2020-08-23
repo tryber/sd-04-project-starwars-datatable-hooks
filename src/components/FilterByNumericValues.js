@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import useFilters from '../hooks/useFilters';
 
 const getSelect = (name, options, state, setState) => (
-    <select
-      data-testid="column-filter"
-      value={state}
-      onChange={(event) => setState(event.target.value)}
-    >
-      <option disabled selected>{name}</option>
-      {options.map((option) => (<option value={option}>{option}</option>))}
-    </select>
-  );
+  <select
+    data-testid="column-filter"
+    value={state}
+    onChange={(event) => setState(event.target.value)}
+  >
+    <option disabled selected>{name}</option>
+    {options.map((option) => (<option value={option}>{option}</option>))}
+  </select>
+);
 
 export default function FilterByNumericValues() {
   const [column, setColumn] = useState('');
@@ -19,26 +19,26 @@ export default function FilterByNumericValues() {
   const { filterByNumericValues } = useFilters();
 
   const columns = [
-    "",
-    "population",
-    "orbital_period",
-    "diameter",
-    "rotation_period",
-    "surface_water",
+    '',
+    'population',
+    'orbital_period',
+    'diameter',
+    'rotation_period',
+    'surface_water',
   ];
 
   const comparisons = [
-    "",
-    "maior que",
-    "menor que",
-    "igual a",
+    '',
+    'maior que',
+    'menor que',
+    'igual a',
   ];
 
   return (
     <div>
       <span>Number </span>
-      {getSelect("column", columns, column, setColumn)}
-      {getSelect("comparison", comparisons, comparison, setComparison)}
+      {getSelect('column', columns, column, setColumn)}
+      {getSelect('comparison', comparisons, comparison, setComparison)}
       <input
         type="number"
         data-testid="value-filter"
@@ -53,4 +53,4 @@ export default function FilterByNumericValues() {
       </button>
     </div>
   );
-};
+}
