@@ -166,7 +166,7 @@ const [state, setState] = useState({
   value: '',
   filters: ['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'],
   orderColumn: 'name',
-  orderSort: 'ASC'
+  orderSort: 'ASC',
 });
 
 // recebe Provider do Contexto para filtros
@@ -177,7 +177,7 @@ const Filters = () => {
     setFiltersNumber,
     setColumn,
     deleteFilters,
-    setOrder
+    setOrder,
   } = useContext(FiltersContext);
   const { numberValuesForFilters } = filters;
   return (
