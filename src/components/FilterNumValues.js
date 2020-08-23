@@ -9,6 +9,23 @@ const FilterNumValues = () => {
     number: '',
   });
 
+  function updateColumns() {
+    const columns = [
+      '',
+      'population',
+      'orbital_period',
+      'diameter',
+      'rotation_period',
+      'surface_water',
+    ];
+    const chosenColumns = filters.filterByNumericValues.map(({ column }) => column);
+    return columns.filter((item) => !chosenColumns.includes(item));
+  }
+
+  function handleOnChange(event, field) {
+    setNumValues({ ...numValues, [field]: event.target.value });
+  }
+
   function getColumns() {
     const selectColumn = updateColumns();
     return (
@@ -43,15 +60,7 @@ const FilterNumValues = () => {
     );
   }
 
-  function handleOnChange(event, field) {
-    setNumValues({ ...numValues, [field]: event.target.value });
-  }
-
   function handleOnClick() {
-    // const { column, comparison, number } = numValues;
-    // const { filterByNumericValues } = filters;
-    // filterByNumericValues(column, comparison, number);
-    // filterByNumericValues({ column, comparison, number });
     setFilters({
       ...filters,
       filterByNumericValues: [
@@ -59,20 +68,6 @@ const FilterNumValues = () => {
       ],
     });
     setNumValues({ column: '', comparison: '', number: '' });
-  }
-
-  function updateColumns() {
-    const { filterByNumericValues } = filters;
-    const columns = [
-      '',
-      'population',
-      'orbital_period',
-      'diameter',
-      'rotation_period',
-      'surface_water',
-    ];
-    const chosenColumns = filterByNumericValues.map(({ column }) => column);
-    return columns.filter((item) => !chosenColumns.includes(item));
   }
 
   return (

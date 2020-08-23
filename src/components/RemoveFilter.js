@@ -1,17 +1,19 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 
 const RemoveFilter = () => {
   const { filters, setFilters } = useContext(StarWarsContext);
   const { filterByNumericValues } = filters;
-  //const handleOnClick = (item) => removeFilterX(item);
-  const handleOnClick = (item) => (item);
+  const handleOnClick = (itemFilter) => {
+    filterByNumericValues.filter((item) => item !== itemFilter);
+    setFilters({ filterByNumericValues: filterByNumericValues });
+  };
   return (
     <div>
       Filtros utilizados:
       <div>
-        {filterByNumericValues.map((item) => (
-          <div key={item.value} data-testid="filter">
+        {filterByNumericValues.map((item, index) => (
+          <div key={`${item.value}-${index}`} data-testid="filter">
             <p>{`${item.column} - ${item.comparison} - ${item.value}`}</p>
             <button type="button" onClick={() => handleOnClick(item)}>
               X
