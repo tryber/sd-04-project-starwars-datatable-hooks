@@ -3,9 +3,9 @@ const getPlanetsApi = () =>
   fetch(url).then((response) =>
     response
       .json()
-      .then((data) =>
-        response.ok ? Promise.resolve(data.results) : Promise.reject(data)
-      )
+      .then(data =>
+        response.ok ? Promise.resolve(data.results) : Promise.reject(data),
+      ),
   );
 
 export default getPlanetsApi;

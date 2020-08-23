@@ -3,12 +3,11 @@ import Proptypes from 'prop-types';
 import StartWarsContextStates from './StarWarsContextStates';
 import StarWarsContext from './StarWarsContext';
 
-const StarWarsProvider = ({ children }) => {
-  return(
+const StarWarsProvider = ({ children }) => (
   <StarWarsContext.Provider value={StartWarsContextStates()}>
     {children}
-  </StarWarsContext.Provider>)
-};
+  </StarWarsContext.Provider>
+);
 
 StarWarsProvider.propTypes = {
   children: Proptypes.node.isRequired,

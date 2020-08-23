@@ -10,8 +10,8 @@ const StarWarsContextStates = () => {
     setIsLoading(false);
   };
 
-  const removeResidents = (data) => {
-    const newData = data.map((planet) => {
+  const removeResidents = (dataPlanets) => {
+    const newData = dataPlanets.map((planet) => {
       const filterPlanet = planet;
       delete filterPlanet.residents;
       return filterPlanet;
@@ -28,8 +28,12 @@ const StarWarsContextStates = () => {
   };
 
   return {
-    data, isLoading, fetchPlanets, setData, setIsLoading
-  }
+    data,
+    isLoading,
+    fetchPlanets,
+    setData,
+    setIsLoading,
+  };
 };
 
 export default StarWarsContextStates;

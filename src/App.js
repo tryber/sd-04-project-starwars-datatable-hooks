@@ -3,11 +3,10 @@ import Home from './pages/Home';
 import StarWarsProvider from './context/StartWarsProvider';
 
 function App() {
- 
   return (
-   <StarWarsProvider>
-     <Home />
-   </StarWarsProvider>
+    <StarWarsProvider>
+      <Home />
+    </StarWarsProvider>
   );
 }
 
