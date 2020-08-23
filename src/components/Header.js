@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { StarWarsContext } from '../context/store';
 import { renderRemoveBtn } from '../helper';
 import NumFilter from './Header/NumFilter';
+import SortItems from './Header/SortItems';
 
 const Header = () => {
   const { filterByName: [filterByName, setfilterByName] } = useContext(StarWarsContext);
@@ -19,6 +20,7 @@ const Header = () => {
         />
       </div>
       <div className="container small">
+        <SortItems />
         <NumFilter />
       </div>
       <div className="container-small">

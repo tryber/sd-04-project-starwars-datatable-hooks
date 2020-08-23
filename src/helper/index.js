@@ -81,6 +81,7 @@ export const renderRemoveBtn = (currentFilters, removeNumFilter) => currentFilte
     </div>
   ),
 );
+
 // FILTER FUNCS
 export const applyNameFilter = (planetName, data) => data.filter(
   (planet) => planet.name.toUpperCase().includes(planetName.toUpperCase()),
@@ -106,4 +107,14 @@ export const applyNumFilter = (filters, data) => {
     return newData;
   }
   return data;
+};
+
+export const sortTableData = (data, column, sort) => {
+  if (sort === 'DESC') {
+    return data.sort((a, b) => Number(b[column]) - Number(a[column]));
+  }
+  if (sort === 'ASC') {
+    return data.sort((a, b) => Number(a[column]) - Number(b[column]));
+  }
+  return false;
 };
