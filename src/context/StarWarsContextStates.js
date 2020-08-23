@@ -4,6 +4,29 @@ import getPlanetsApi from '../services/getApi';
 const StarWarsContextStates = () => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const INITIAL_STATE = {
+      filterByName: {
+        name: '',
+      },
+  };
+  const [filters, setFilters] = useState(INITIAL_STATE);
+
+  const setStateFilter = (filter, action) => {
+    let newFilters = filters; // caso não entre nenhuma condição
+    switch (action) {
+      case 'NAME': {
+        newFilters = {
+          ...filters,
+          filterByName: { name: filter.name },
+        };
+      }
+    }
+    setFilters(newFilters);
+  };
+
+  const getFilterName = () => {
+    return filters.filterByName.name;
+  };
 
   const setPlanets = (results) => {
     setData(results);
@@ -23,7 +46,7 @@ const StarWarsContextStates = () => {
     setIsLoading(true);
     getPlanetsApi().then(
       (results) => setPlanets(removeResidents(results)),
-      (error) => setPlanets(error),
+      (error) => setPlanets(error)
     );
   };
 
@@ -33,6 +56,8 @@ const StarWarsContextStates = () => {
     fetchPlanets,
     setData,
     setIsLoading,
+    setStateFilter,
+    getFilterName,
   };
 };
 
