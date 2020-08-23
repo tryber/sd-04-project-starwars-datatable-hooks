@@ -8,8 +8,7 @@ function RemoveFilter() {
 
   const onClick = (type) => {
     const newFilters = numericFilters.filter(
-      ({ column }) => column !== type.column
-    );
+      ({ column }) => column !== type.column);
     setData({ ...data, filterByNumericValues: newFilters });
   };
 
