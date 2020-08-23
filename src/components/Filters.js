@@ -161,16 +161,23 @@ const getOrdered = (state, setState, setOrder) => {
 
 // Provider do Contexto para filtros
 const Filters = () => {
-  const { filters, setFiltersName, setFiltersNumber, setColumn, deleteFilters, setOrder,} = useContext(FiltersContext);
-  const [state, setState] = useState({ // Estado e Set_Estado dos filtros
+  const {
+    filters,
+    setFiltersName,
+    setFiltersNumber,
+    setColumn,
+    deleteFilters,
+    setOrder,
+  } = useContext(FiltersContext);
+  const [state, setState] = useState({// Estado e Set_Estado dos filtros
     column: '',
     comparison: '',
     value: '',
     filters: ['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'],
     orderColumn: 'name',
     orderSort: 'ASC',
-  });
-  const { numberValuesForFilters } = filters;// Constante receber resultados dos valores numerico dos filtros
+  }); // Constante receber resultados dos valores numerico dos filtros
+  const { numberValuesForFilters } = filters;
   return (
     <div>
       <h3>Filter results</h3>
