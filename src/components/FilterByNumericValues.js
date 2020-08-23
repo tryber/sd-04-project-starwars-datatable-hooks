@@ -1,6 +1,17 @@
 import React, { useState } from 'react';
 import useFilters from '../hooks/useFilters';
 
+const getSelect = (name, options, state, setState) => (
+    <select
+      data-testid="column-filter"
+      value={state}
+      onChange={(event) => setState(event.target.value)}
+    >
+      <option disabled selected>{name}</option>
+      {options.map((option) => (<option value={option}>{option}</option>))}
+    </select>
+  );
+
 export default function FilterByNumericValues() {
   const [column, setColumn] = useState('');
   const [comparison, setComparison] = useState('');
@@ -15,25 +26,14 @@ export default function FilterByNumericValues() {
     "rotation_period",
     "surface_water",
   ];
-  
+
   const comparisons = [
     "",
     "maior que",
     "menor que",
     "igual a",
   ];
-  
-  const getSelect = (name, options, state, setState) => (
-      <select
-        data-testid="column-filter"
-        value={state}
-        onChange={(event) => setState(event.target.value)}
-      >
-        <option disabled selected>{name}</option>
-        {options.map((option) => (<option value={option}>{option}</option>))}
-      </select>
-    );
-  
+
   return (
     <div>
       <span>Number </span>
