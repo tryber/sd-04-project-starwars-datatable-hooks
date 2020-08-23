@@ -14,8 +14,8 @@ function Provider ({ children }) {
     setData,
   };
 
-  return <StarWarsContext.Provider value={context}>{children}</StarWarsContext.Provider>
-};
+  return <StarWarsContext.Provider value={context}>{children}</StarWarsContext.Provider>;
+}
 
 export default Provider;
 

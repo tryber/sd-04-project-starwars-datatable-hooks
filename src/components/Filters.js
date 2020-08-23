@@ -3,14 +3,15 @@ import FiltersContext from '../context/FiltersContext';
 
 // Dropdown que seleciona o tipo da busca (População/Orbida/Diamentro/Rotação/Superficie)
 // que será usado na 'selectACondition' para filtragem
+const columnsInTable = [
+  'population',
+  'orbital_period',
+  'diameter',
+  'rotation_period',
+  'surface_water',
+];
+
 const selectAnOption = (state, setState, filters) => {
-  const columnsInTable = [
-    'population',
-    'orbital_period',
-    'diameter',
-    'rotation_period',
-    'surface_water',
-  ];
   const { column } = state;
   const { avaliableFilters } = filters;
   return (
@@ -168,7 +169,6 @@ const Filters = () => {
     deleteFilters,
     setOrder,
   } = useContext(FiltersContext);
-
   // Estado e Set_Estado dos filtros
   const [state, setState] = useState({
     column: '',
@@ -178,10 +178,8 @@ const Filters = () => {
     orderColumn: 'name',
     orderSort: 'ASC',
   });
-
   // Constante receber resultados dos valores numerico dos filtros
   const { numberValuesForFilters } = filters;
-
   // Filtros e opçoes renderizados para usuarios
   return (
     <div>
