@@ -6,7 +6,8 @@ const StarWarsContextStatesFilters = (filters, filter, action) => {
         filterByName: { name: filter.name },
       };
 
-      default: return filters;
+    default:
+      return filters;
   }
 };
 
