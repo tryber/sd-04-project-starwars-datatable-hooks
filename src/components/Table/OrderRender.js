@@ -27,9 +27,9 @@ const numberOrder = (keys, sort) => {
   if (sort === 'ASC') {
     keysOrded = keys.sort((planetA, planetB) => parseFloat(planetA[2]) - parseFloat(planetB[2]));
   } else {
-    keysOrded = keys.sort((planetA, planetB) =>
-      parseFloat(planetA[2]) < parseFloat(planetB[2]) ? 1 : -1,
-    );
+    keysOrded = keys.sort((planetA, planetB) => {
+      return parseFloat(planetA[2]) < parseFloat(planetB[2]) ? 1 : -1;
+    });
   }
   return keysOrded;
 };
