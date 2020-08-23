@@ -14,7 +14,7 @@ const Filters = () => {
             {`${column} ${comparison} ${value}`}
             <button
               type="button"
-              onClick={(event) =>
+              onClick={() =>
                 setFilterByNumericValues(
                   filterByNumericValues.filter((c) => c.column !== column),
                 )

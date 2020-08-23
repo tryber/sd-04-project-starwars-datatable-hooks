@@ -23,8 +23,9 @@ const App = () => {
     });
     setLoading(false);
   }, [loading, setData]);
-  if (loading)
-    return <p onClick={() => console.log(data)}>{console.log(data)}Loading</p>;
+  if (loading) {
+    return <p>Loading</p>;
+  }
   return (
     <div>
       <Input />

@@ -3,7 +3,7 @@ import Comparador from './comparador';
 import { StarWarsContext } from '../context/StarWarsContext';
 
 const Input = () => {
-  const { filterByName, setFilterByName } = useContext(StarWarsContext);
+  const { setFilterByName } = useContext(StarWarsContext);
   return (
     <div>
       <label htmlFor="inputText">Texto Contém</label>

@@ -1,34 +1,32 @@
 import React, { useState, useContext } from 'react';
 import { StarWarsContext } from '../context/StarWarsContext';
 
+const renderRadioButtons = (setSort) => (
+  <div name="sort">
+    <input
+      data-testid="column-sort-input"
+      name="order"
+      type="radio"
+      value="ASC"
+      defaultChecked
+      onClick={() => setSort('ASC')}
+    />
+    <label htmlFor="ASC">ASC</label>
+    <input
+      data-testid="column-sort-input"
+      name="order"
+      type="radio"
+      value="DESC"
+      onClick={() => setSort('DESC')}
+    />
+    <label htmlFor="DESC">DESC</label>
+  </div>
+);
+
 const OrderFilter = () => {
-  const { data, order, setOrder } = useContext(StarWarsContext);
+  const { data, setOrder } = useContext(StarWarsContext);
   const [sort, setSort] = useState('ASC');
   const [column, setColumn] = useState('name');
-
-  const renderRadioButtons = () => {
-    return (
-      <div name="sort">
-        <input
-          data-testid="column-sort-input"
-          name="order"
-          type="radio"
-          value="ASC"
-          defaultChecked
-          onClick={() => setSort('ASC')}
-        />
-        <label htmlFor="ASC">ASC</label>
-        <input
-          data-testid="column-sort-input"
-          name="order"
-          type="radio"
-          value="DESC"
-          onClick={() => setSort('DESC')}
-        />
-        <label htmlFor="DESC">DESC</label>
-      </div>
-    );
-  };
   if (data === []) return <p>Loading Filter</p>;
   return (
     <div>
@@ -43,10 +41,10 @@ const OrderFilter = () => {
             <option key={columnHeader}>{columnHeader}</option>
           ))}
       </select>
-      {renderRadioButtons()}
+      {renderRadioButtons(setSort)}
       <button
         type="button"
-        onClick={() => setOrder({ order: { column: column, sort: sort } })}
+        onClick={() => setOrder({ order: { column, sort } })}
         data-testid="column-sort-button"
       >
         Filter

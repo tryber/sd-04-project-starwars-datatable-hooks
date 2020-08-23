@@ -17,7 +17,6 @@ const filterPlanet = (planet, filter) => {
 
 const ordering = (column, sort, planets) => {
   const newPlanets = [...planets];
-  console.log(column);
   if (!Number(newPlanets[0][column])) {
     newPlanets.sort(function (a, b) {
       const x = a[column.toLowerCase()].toLowerCase();
