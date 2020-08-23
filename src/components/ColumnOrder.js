@@ -7,7 +7,7 @@ const ColumnOrder = () => {
     column: 'Name',
     sort: 'ASC',
   });
-  const { column, sort } = orderState;
+  // const { column, sort } = orderState;
   const keys = data.length >= 1 ? Object.keys(data[0]) : [];
   const tableHeader = keys.filter((key) => key !== 'residents');
 
@@ -22,7 +22,7 @@ const ColumnOrder = () => {
             name="order"
             type="radio"
             value="ASC"
-            onChange={(event) => setOrderState({ sort: event.target.value })}
+            onChange={(event) => setOrderState({ ...orderState, sort: event.target.value })}
           />
         </label>
         <label htmlFor="orderDESC">
@@ -33,7 +33,7 @@ const ColumnOrder = () => {
             name="order"
             type="radio"
             value="DESC"
-            onChange={(event) => setOrderState({ sort: event.target.value })}
+            onChange={(event) => setOrderState({ ...orderState, sort: event.target.value })}
           />
         </label>
       </div>
@@ -47,7 +47,7 @@ const ColumnOrder = () => {
       */}
       <select
         data-testid="column-sort"
-        onChange={(event) => setOrderState({ column: event.target.value })}
+        onChange={(event) => setOrderState({ ...orderState, column: event.target.value })}
       >
         {tableHeader.map((columns) => (
           <option key={columns} value={columns.toLowerCase()}>
@@ -65,7 +65,7 @@ const ColumnOrder = () => {
       <button
         data-testid="column-sort-button"
         type="button"
-        onClick={() => setFilters({ order: column, sort })}
+        onClick={() => setFilters({ ...filters, order: orderState.column, sort: orderState.sort })}
       >
         Filtrar
       </button>

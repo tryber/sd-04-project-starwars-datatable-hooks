@@ -44,15 +44,20 @@ const FilterNumValues = () => {
   }
 
   function handleOnChange(event, field) {
-    setNumValues({ [field]: event.target.value });
+    setNumValues({ ...numValues, [field]: event.target.value });
   }
 
   function handleOnClick() {
-    const { column, comparison, number } = numValues;
-    const { filterByNumericValues } = filters;
-    //filterByNumericValues(column, comparison, number);
-    filterByNumericValues({ column, comparison, number });
-    setFilters({ filterByNumericValues: { column, comparison, number } });
+    // const { column, comparison, number } = numValues;
+    // const { filterByNumericValues } = filters;
+    // filterByNumericValues(column, comparison, number);
+    // filterByNumericValues({ column, comparison, number });
+    setFilters({
+      ...filters,
+      filterByNumericValues: [
+        { column: numValues.column, comparison: numValues.comparison, number: numValues.number },
+      ],
+    });
     setNumValues({ column: '', comparison: '', number: '' });
   }
 
