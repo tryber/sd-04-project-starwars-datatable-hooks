@@ -159,6 +159,16 @@ const getOrdered = (state, setState, setOrder) => {
   );
 };
 
+const [state, setState] = useState({
+  // Estado e Set_Estado dos filtros
+  column: '',
+  comparison: '',
+  value: '',
+  filters: ['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'],
+  orderColumn: 'name',
+  orderSort: 'ASC'
+});
+
 // recebe Provider do Contexto para filtros
 const Filters = () => {
   const {
@@ -167,14 +177,8 @@ const Filters = () => {
     setFiltersNumber,
     setColumn,
     deleteFilters,
-    setOrder,} = useContext(FiltersContext);
-  const [state, setState] = useState({// Estado e Set_Estado dos filtros
-    column: '',
-    comparison: '',
-    value: '',
-    filters: ['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'],
-    orderColumn: 'name',
-    orderSort: 'ASC',});
+    setOrder
+  } = useContext(FiltersContext);
   const { numberValuesForFilters } = filters;
   return (
     <div>
@@ -195,8 +199,9 @@ const Filters = () => {
       {numberValuesForFilters.map((filter, index) => (
         <div data-testid="filter">
           {`${filter.column} ${filter.comparison} ${filter.value}`}
-          <button type="button"
-          onClick={() => enableOption(filter.column, index, filters, setColumn, deleteFilters)}
+          <button
+            type="button"
+            onClick={() => enableOption(filter.column, index, filters, setColumn, deleteFilters)}
           >
             X
           </button>
@@ -204,6 +209,7 @@ const Filters = () => {
       ))}
       {getOrdered(state, setState, setOrder)}
     </div>
-  ); };
+  );
+};
 
 export default Filters;
