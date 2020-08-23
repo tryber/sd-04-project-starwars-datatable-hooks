@@ -11,7 +11,6 @@ const App = () => {
   const {
     loading,
     setLoading,
-    data,
     setData,
     filterByNumericValues,
   } = useContext(StarWarsContext);
