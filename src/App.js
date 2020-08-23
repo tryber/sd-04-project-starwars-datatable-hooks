@@ -8,7 +8,13 @@ import { StarWarsContext } from './context/StarWarsContext';
 import getPlanets from './services/index';
 
 const App = () => {
-  const { loading, setLoading, data, setData, filterByNumericValues } = useContext(StarWarsContext);
+  const {
+    loading,
+    setLoading,
+    data,
+    setData,
+    filterByNumericValues,
+  } = useContext(StarWarsContext);
 
   useEffect(() => {
     setLoading(true);
@@ -22,10 +28,14 @@ const App = () => {
   return (
     <div>
       <Input />
-        <OrderFilter />
-        {(filterByNumericValues.length > 0) ? <Filters /> : <p>Nenhum filtro aplicado</p>}
-        <p>StarWars Datatable with Filters</p>
-        <Table />
+      <OrderFilter />
+      {filterByNumericValues.length > 0 ? (
+        <Filters />
+      ) : (
+        <p>Nenhum filtro aplicado</p>
+      )}
+      <p>StarWars Datatable with Filters</p>
+      <Table />
     </div>
   );
 };

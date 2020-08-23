@@ -2,15 +2,13 @@ import React, { useState, useContext } from 'react';
 import { StarWarsContext } from '../context/StarWarsContext';
 
 const OrderFilter = () => {
-  const { data, order, setOrder } = useContext(StarWarsContext)
+  const { data, order, setOrder } = useContext(StarWarsContext);
   const [sort, setSort] = useState('ASC');
-  const [column, setColumn] = useState('name')
+  const [column, setColumn] = useState('name');
 
   const renderRadioButtons = () => {
     return (
-      <div
-        name="sort"
-      >
+      <div name="sort">
         <input
           data-testid="column-sort-input"
           name="order"
@@ -30,8 +28,8 @@ const OrderFilter = () => {
         <label htmlFor="DESC">DESC</label>
       </div>
     );
-  }
-  if(data === []) return <p>Loading Filter</p>
+  };
+  if (data === []) return <p>Loading Filter</p>;
   return (
     <div>
       <select
@@ -55,6 +53,6 @@ const OrderFilter = () => {
       </button>
     </div>
   );
-}
+};
 
 export default OrderFilter;
