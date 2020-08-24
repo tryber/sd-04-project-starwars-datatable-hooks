@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import StarWarsContext from './StarWarsContext';
-import getPlanets from '../services/apiPlanets';
+import getData from '../services/apiPlanets';
 
 const INITIAL_STATE_FILTERS = {
   filterByName: { name: '' },
@@ -19,9 +19,9 @@ export default function Provider({ children }) {
   const [filters, setFilters] = useState(INITIAL_STATE_FILTERS);
 
   useEffect(() => {
-    getPlanets().then((planets) => {
-      setData(planets.results);
-      setPlanets(planets.results);
+    getData().then((data) => {
+      setData(data.results);
+      setPlanets(data.results);
       setIsFetching(false);
     });
   }, []);

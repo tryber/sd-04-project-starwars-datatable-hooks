@@ -1,6 +1,5 @@
 import React from 'react';
 import TableBody from './TableBody';
-import usePlanets from '../context/useData'
 
 const Table = () => (
   <table>
