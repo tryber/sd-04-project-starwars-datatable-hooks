@@ -5,18 +5,18 @@ const CreateTableHeader = () => (
     <th>star wars!</th>
   </tr>
 );
-const CreateTableBody = () => 
-    <tr>
-      <td data-testid="planet-name">Planet</td>
-    </tr>
+const CreateTableBody = () =>
+  <tr>
+    <td data-testid="planet-name">Planet</td>
+  </tr>;
 
-const Table = () => 
-    <div>
-      <table>
-        <thead>{CreateTableHeader()}</thead>
-        <tbody>{CreateTableBody()}</tbody>
-      </table>
-    </div>
+const Table = () =>
+  <div>
+    <table>
+      <thead>{CreateTableHeader()}</thead>
+      <tbody>{CreateTableBody()}</tbody>
+    </table>
+  </div>;
 
 
 export default Table;
