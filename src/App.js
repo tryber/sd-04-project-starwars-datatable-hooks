@@ -1,18 +1,18 @@
 import React from 'react';
-import Provider from './context/Provider';
-import Table from './components/Table';
-import FilterByName from './components/FilterByName';
-import FilterByNumericValues from './components/FilterByNumericValues';
+import './App.css';
+import Home from './components/Home';
+import StarWarsProvider from './context/StarWarsProvider';
 
-const App = () => (
-  <Provider>
+function App() {
+  return (
     <div className="App">
-      <h1 className="home-title">Star Wars DataTable</h1>
-      <FilterByName />
-      <FilterByNumericValues />
-      <Table />
+      <header className="App-header">
+        <StarWarsProvider>
+          <Home />
+        </StarWarsProvider>
+      </header>
     </div>
-  </Provider>
-);
+  );
+}
 
 export default App;

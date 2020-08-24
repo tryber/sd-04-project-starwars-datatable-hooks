@@ -1,27 +1,43 @@
-import React from 'react';
-import TableBody from './TableBody';
+import React, { useContext } from 'react';
+import StarWarsContext from '../context/StarWarsContext';
+import filterFunc from './helpers/filterFunc';
+import sortFunc from './helpers/sortFunc';
 
-const Table = () => (
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Rotation Period</th>
-        <th>Orbital period</th>
-        <th>Diameter</th>
-        <th>Climate</th>
-        <th>Gravity</th>
-        <th>Terrain</th>
-        <th>surface water</th>
-        <th>Population</th>
-        <th>Film</th>
-        <th>Created</th>
-        <th>Edited</th>
-        <th>Url</th>
-      </tr>
-    </thead>
-    <TableBody />
-  </table>
-);
+const Table = () => {
+  const { data, filters } = useContext(StarWarsContext);
+  const keys = data.length >= 1 ? Object.keys(data[0]) : [];
+  const tableHeader = keys.filter((key) => key !== 'residents');
+
+  const dataPlanets = filterFunc(data, filters.filterByName.name, filters.filterByNumericValues);
+  const orderDataPlanets = sortFunc(dataPlanets, filters.order.column, filters.order.sort);
+
+  // console.logs debugging
+  // console.log('filters:', filters);
+  // console.log('dataPlanets:', dataPlanets)
+  // console.log('orderDataPlanets:', orderDataPlanets)
+
+  return (
+    <table>
+      <thead>
+        <tr>
+          {tableHeader.map((columns) => (
+            <th key={columns}>{columns}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {orderDataPlanets.map((planet) => (
+          <tr key={planet.name}>
+            {tableHeader.map((columns) => (
+              <td key={planet[columns]} data-testid={columns === 'name' ? 'planet-name' : null}>
+                {planet[columns]}
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+};
 
 export default Table;
