@@ -1,14 +1,14 @@
 import React, { useContext, useEffect } from 'react';
 import Table from './table/Table';
-import { StarWarsContext } from '../context/StarWarsContext';
+import { StarWarsContext } from '../context/StarWarsProvider';
 import FilterBar from './filterBar/FilterBar';
-import getPlanets from '../services/api';
+import apiPlanets from '../services/fetchAPI';
 
 const Home = () => {
   const { setPlanet, setFetching, isFetching } = useContext(StarWarsContext);
 
   useEffect(() => {
-    getPlanets()
+    apiPlanets()
       .then((res) => {
         setPlanet(res.results);
         setFetching(false);
