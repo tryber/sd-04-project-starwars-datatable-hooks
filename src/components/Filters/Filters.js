@@ -6,7 +6,6 @@ function Filters() {
   return (
     <div>
       <FilterName />
-      
       <RemoveFilters />
     </div>
   );
