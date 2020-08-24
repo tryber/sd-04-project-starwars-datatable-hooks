@@ -1,11 +1,11 @@
 import React from 'react';
 import RemoveFilters from './RemoveFilters';
-import FilterNav from './FilterNav';
+import FilterName from './FilterName';
 
 function Filters() {
   return (
     <div>
-      <FilterNav />
+      <FilterName />
       
       <RemoveFilters />
     </div>
