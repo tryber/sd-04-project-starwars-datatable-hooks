@@ -23,6 +23,7 @@ function TableBody() {
 
   return (
     <tbody>
+      {console.log(data)}
       {data.map((planet) => (
         <tr key={planet.name}>
           <td>{planet.name}</td>

@@ -1,6 +1,6 @@
 import React from 'react';
 import Landpage from './components/LandPage';
-import { StarWarsProvider } from './context/StarWarsProvider';
+import StarWarsProvider from './context/StarWarsProvider';
 
 function App() {
   return (
