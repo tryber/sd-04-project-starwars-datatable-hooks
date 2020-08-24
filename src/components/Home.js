@@ -7,8 +7,8 @@ const Home = () => {
   const { loading, data } = useContext(StarWarsContext);
 
   if (loading) return <h1>Loading...</h1>;
-  console.log(data);
-  console.log(loading);
+  // console.log(data);
+  // console.log(loading);
   return (
     <div>
       <h3>StarWars Datatable with Filters</h3>
@@ -19,38 +19,3 @@ const Home = () => {
 };
 
 export default Home;
-
-/* class Home extends Component {
-  componentDidMount() {
-    const { planetsFetch } = this.props;
-    planetsFetch();
-    console.log(planetsFetch());
-  }
-
-  render() {
-    const { isFetching } = this.props;
-    if (isFetching) return <h1>Loading...</h1>;
-    return (
-      <div>
-        <h3>StarWars Datatable with Filters</h3>
-        <Filters />
-        <Table />
-      </div>
-    );
-  }
-}
-
-Home.propTypes = {
-  planetsFetch: PropTypes.func.isRequired,
-  isFetching: PropTypes.bool.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  isFetching: state.planets.isFetching,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  planetsFetch: () => dispatch(fetchPlanets()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home); */
