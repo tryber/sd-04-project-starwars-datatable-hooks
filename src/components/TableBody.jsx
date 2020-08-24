@@ -3,8 +3,8 @@ import StarWarsContext from '../context/StarWarsContext';
 import starWarsFilter from './functions/StarWarsFilters';
 
 function TableBody() {
-  const { data, getFilterName } = useContext(StarWarsContext);
-  const filterData = starWarsFilter(data, getFilterName());
+  const { data, filters } = useContext(StarWarsContext);
+  const filterData = starWarsFilter(data, filters);
   return (
     <tbody>
       {filterData.map((planet) => (

@@ -7,6 +7,7 @@ const INITIAL_STATE = {
   filterByName: {
     name: '',
   },
+  filterByNumericValues: [],
 };
 
 const StarWarsContextStates = () => {
@@ -18,7 +19,7 @@ const StarWarsContextStates = () => {
     setFilters(StarWarsContextStatesFilters(filters, filter, action));
   };
 
-  const getFilterName = () => filters.filterByName.name;
+  const getFilterNumericValues = () => filters.filterByNumericValues;
 
   const setPlanets = (results) => {
     setData(results);
@@ -49,7 +50,8 @@ const StarWarsContextStates = () => {
     setData,
     setIsLoading,
     setStateFilter,
-    getFilterName,
+    filters,
+    getFilterNumericValues,
   };
 };
 
