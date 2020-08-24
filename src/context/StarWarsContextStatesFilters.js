@@ -1,5 +1,5 @@
 const StarWarsContextStatesFilters = (filters, filter, action) => {
- console.log(filter)
+  console.log(filter);
   switch (action) {
     case 'NAME':
       return {
@@ -17,7 +17,7 @@ const StarWarsContextStatesFilters = (filters, filter, action) => {
             value: filter.value,
           },
         ],
-      }  
+      };
     default:
       return filters;
   }
