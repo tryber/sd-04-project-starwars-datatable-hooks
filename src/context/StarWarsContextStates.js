@@ -11,7 +11,7 @@ const INITIAL_STATE = {
   order: {
     column: 'Name',
     sort: 'ASC',
-  }
+  },
 };
 
 const StarWarsContextStates = () => {

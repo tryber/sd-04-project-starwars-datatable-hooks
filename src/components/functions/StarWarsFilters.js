@@ -23,10 +23,7 @@ const orderPlanet = (columnFilter, sort, planets) => {
   return sort === 'ASC' ? sortPlanets : sortPlanets.reverse();
 };
 
-const starWarsFilterNumericValue = (
-  accumulator,
-  { column, comparison, value }
-) =>
+const starWarsFilterNumericValue = (accumulator, { column, comparison, value }) =>
   accumulator.filter((planet) => {
     switch (comparison) {
       case 'maior que':
@@ -49,7 +46,7 @@ const starWarsFilter = (dataPlanets, filters) => {
       : filterByNumericValues.reduce(starWarsFilterNumericValue, dataPlanets);
 
   const planetsFilter = resultPlanets.filter((planet) =>
-    planet.name.includes(name)
+    planet.name.includes(name),
   );
   return orderPlanet(column, sort, planetsFilter);
 };
