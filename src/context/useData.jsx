@@ -11,14 +11,14 @@ const useData = () => {
     setLoading(true);
     getAPI().then((json) => {
       console.log(json.results);
-      setIsLoading(false);
+      setLoading(false);
     },
     (error) => {
       console.log(error);
-      setIsLoading(false);
+      setLoading(false);
     },
   );
-}, []);
+  }, []);
   if (loading) {
     return <p>Loading</p>;
   }
