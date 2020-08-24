@@ -2,12 +2,25 @@ import React, { useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 import filterFunc from './filterFun';
 
+const orderDescAndAsc = (data, order) => {
+  if (!data.length) return [];
+  const planetKey = order.column.toLowerCase();
+  if (!Number(data[0][planetKey])) {
+    data.sort((a, b) => (a[planetKey] > b[planetKey] ? 1 : -1));
+  } else {
+    data.sort((a, b) => a[planetKey] - b[planetKey]);
+  }
+  if (order.sort === "DESC") data.reverse();
+  return data;
+};
+
 function TableBody() {
   const { data } = useContext(StarWarsContext);
   const {
     planetData,
     filterByName: { name },
     filterByNumericValues,
+    order,
   } = data; // desestruturando da AppContext
 
   const filterAllSelectedElement = filterFunc(
@@ -18,9 +31,9 @@ function TableBody() {
   return (
     <div>
       <tbody>
-        {filterAllSelectedElement.map((planet) => (
+        {orderDescAndAsc(filterAllSelectedElement,order).map((planet) => (
           <tr key={planet.name}>
-            <td>{planet.name}</td>
+            <td data-testid="planet-name">{planet.name}</td>
             <td>{planet.rotation_period}</td>
             <td>{planet.orbital_period}</td>
             <td>{planet.diameter}</td>

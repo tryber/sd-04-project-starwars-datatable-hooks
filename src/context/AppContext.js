@@ -9,6 +9,10 @@ const Provider = ({ children }) => {
     planetData: [],
     filterByName: { name: '' },
     filterByNumericValues: [],
+    order: {
+      column: 'Name',
+      sort: 'ASC',
+      }, 
   };
 
   const [data, setData] = useState(initState);
