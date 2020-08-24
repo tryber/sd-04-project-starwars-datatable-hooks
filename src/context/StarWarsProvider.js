@@ -34,7 +34,7 @@ const StarWarsProvider = ({ children }) => {
     return getPlanets().then((json) => {
       console.log(json);
       successPlanets(json.results);
-    })
+    });
   };
 
   const filterByName = (name) =>
