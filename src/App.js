@@ -1,25 +1,19 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Provider from './context/AppContext';
+import Table from './components/Table';
+import TableBody from './components/TableBody';
+import RemoveFilter from './components/RemoveFilter';
+import OrderDescAsc from './components/OrderDescAsc';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider>
+      <h1>Star Wars com Hooks que é melhor que Redux</h1>
+      <OrderDescAsc />
+      <RemoveFilter />
+      <Table />
+      <TableBody />
+    </Provider>
   );
 }
 
