@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 
-function ascDesc() {
+function ascDesc(orderState, setOrderState) {
   return (
     <div>
       <label htmlFor="orderASC">
@@ -51,7 +51,7 @@ const ColumnOrder = () => {
           </option>
         ))}
       </select>
-      {ascDesc()}
+      {ascDesc(orderState, setOrderState)}
       <button
         data-testid="column-sort-button"
         type="button"

@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 
-function updateColumns() {
+function updateColumns(filters) {
   const columns = [
     '',
     'population',
@@ -28,7 +28,7 @@ const FilterNumValues = () => {
   }
 
   function getColumns() {
-    const selectColumn = updateColumns();
+    const selectColumn = updateColumns(filters);
     return (
       <select
         data-testid="column-filter"
