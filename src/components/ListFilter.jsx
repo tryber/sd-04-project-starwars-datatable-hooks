@@ -14,6 +14,7 @@ function ListFilter() {
         <div data-testid="filter" key={column}>
           {column} {comparison} {value}
           <Button
+            testid="list-filter"
             onClick={() => {
               setStateFilter({ column }, 'REMOVEFILTER');
             }}

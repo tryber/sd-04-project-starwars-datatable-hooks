@@ -24,6 +24,11 @@ const StarWarsContextStatesFilters = (filters, filter, action) => {
           ({ column }) => column !== filter.column,
         ), // filterByNumericValues, sem a  coluna clicada para excluir
       };
+    case 'ORDERFILTER':
+      return {
+        ...filters,
+        order: { column: filter.column, sort: filter.sort },
+      };
     default:
       return filters;
   }

@@ -8,6 +8,10 @@ const INITIAL_STATE = {
     name: '',
   },
   filterByNumericValues: [],
+  order: {
+    column: 'Name',
+    sort: 'ASC',
+  }
 };
 
 const StarWarsContextStates = () => {
