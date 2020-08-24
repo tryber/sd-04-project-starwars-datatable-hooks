@@ -20,9 +20,32 @@ export default function useFilters() {
 
   useEffect(() => {
     const name = filters.filterByName.name;
-    if (name !== '') {
+    const numbers = filters.filterByNumericValues;
+
+    if (numbers.length === 0) {
       setPlanets(data.filter((planet) => planet.name.toLowerCase().includes(name.toLowerCase())));
     } else setPlanets(data);
+
+    if (numbers.length > 0) {
+      setPlanets(
+        numbers.reduce(
+          (acc, { column, comparison, number }) =>
+            acc.filter((planet) => {
+              switch (comparison) {
+                case 'maior que':
+                  return Number(planet[column]) > Number(number);
+                case 'menor que':
+                  return Number(planet[column]) < Number(number);
+                case 'igual a':
+                  return Number(planet[column]) === Number(number);
+                default:
+                  return [];
+              }
+            }),
+          planets,
+        )
+      );
+    }
   }, [filters]);
 
   const filterByNumericValues = (column, comparison, number) => {
