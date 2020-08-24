@@ -93,4 +93,4 @@ StarWarsProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default StarWarsProvider;
+export {StarWarsProvider};
