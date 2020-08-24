@@ -9,5 +9,5 @@ function App() {
     </StarWarsProvider>
   );
 }
-
+// Código reutilizado do projeto de Redux
 export default App;

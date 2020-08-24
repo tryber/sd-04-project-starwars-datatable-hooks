@@ -1,16 +1,19 @@
 import React, { useState, useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
+import columns from './columns'
+import { getRadios }  from './help';
 
 function Order() {
   const [columnSort, setColumnSort] = useState('Name');
   const [inputSort, setInputSort] = useState('ASC');
+
   const { orderColumns } = useContext(StarWarsContext);
 
-  const searchChange = (event) => setInputSort(event.target.value);
-  const onOrderChange = (event) => setColumnSort(event.target.value);
+  const onInputChange = (event) => setInputSort(event.target.value);
+  const onColumnChange = (event) => setColumnSort(event.target.value);
   const onClick = () => orderColumns(columnSort, inputSort);
 
-  getColumns = () => {
+  const getColumns = () => {
     const columns = [
       'Name',
       'population',
@@ -21,8 +24,7 @@ function Order() {
     ];
     return (
       <select
-        className="select is-info"
-        onChange={(event) => onOrderChange(event, 'columnSort')}
+        onChange={(event) => onColumnChange(event)}
         data-testid="column-sort"
         value={columnSort}
       >
@@ -30,50 +32,22 @@ function Order() {
           <option key={option} value={option}>
             {option}
           </option>
-        ))};
+        ))}
       </select>
-    );
-  };
-
-  getRadios = () => {
-    return (
-      <div>
-        <input
-          defaultChecked
-          data-testid="column-sort-input"
-          type="radio"
-          id="ASC"
-          name="order"
-          value="ASC"
-          onChange={(event) => onOrderChange(event, 'inputSort')}
-        />
-        <label htmlFor='ASC'>ASC</label>
-        <input
-          data-testid="column-sort-input"
-          type="radio"
-          id="DESC"
-          name="order"
-          value="DESC"
-          onChange={(event) => onOrderChange(event, 'inputSort')}
-        />
-        <label htmlFor="DESC">DESC</label>
-      </div>
     );
   };
 
   return (
     <div>
-      <div>
-        {getColumns()}
-        {getRadios(searchChange)}
-        <button
-          data-testid='column-sort-button'
-          type='button'
-          onClick={onClick}
-        >
-          Ordenar
-        </button>
-      </div>
+      {getColumns()}
+      {getRadios(onInputChange)}
+      <button
+        data-testid="column-sort-button"
+        type="button"
+        onClick={onClick}
+      >
+        Ordenar
+      </button>
     </div>
   );
 }
