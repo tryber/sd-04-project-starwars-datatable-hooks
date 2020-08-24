@@ -19,9 +19,9 @@ export default function Provider({ children }) {
   const [filters, setFilters] = useState(INITIAL_STATE_FILTERS);
 
   useEffect(() => {
-    getData().then((data) => {
-      setData(data.results);
-      setPlanets(data.results);
+    getData().then((json) => {
+      setData(json.results);
+      setPlanets(json.results);
       setIsFetching(false);
     });
   }, []);

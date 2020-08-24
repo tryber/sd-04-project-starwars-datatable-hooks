@@ -22,9 +22,8 @@ export default function useFilters() {
     const name = filters.filterByName.name;
     if (name !== '') {
       setPlanets(data.filter((planet) => planet.name.toLowerCase().includes(name.toLowerCase())));
-    }
-    else setPlanets(data);
-  }, [filters])
+    } else setPlanets(data);
+  }, [filters]);
 
   const filterByNumericValues = (column, comparison, number) => {
     setFilters((state) => ({
