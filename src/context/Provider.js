@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { useState } from 'react';
 
 import StarWarsContext from './StarWarsContext';
@@ -29,5 +30,9 @@ const StarWarsProvider = ({ children }) => {
   };
   return <StarWarsContext.Provider value={context}>{children}</StarWarsContext.Provider>;
 };
+
+StarWarsProvider.propTypes = {
+  children: PropTypes.element.isRequired,
+}
 
 export default StarWarsProvider;

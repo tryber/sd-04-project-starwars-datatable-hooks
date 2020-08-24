@@ -6,7 +6,9 @@ const RemoveFilters = () => {
   const { filterByNumericValues, setfilterByNumericValues } = useContext(StarWarsContext);
   const handleRemoveFilter = (item) => {
     // console.log(item)
-    setfilterByNumericValues([...filterByNumericValues.filter(({ column }) => column !== item.column)]);
+    setfilterByNumericValues([
+      ...filterByNumericValues.filter(({ column }) => column !== item.column),
+    ]);
   };
   return filterByNumericValues.map((item) => (
     <div data-testid="filter" key={item.value}>

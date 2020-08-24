@@ -21,8 +21,7 @@ const TableBody = () => {
       },
     );
   }, [setData, setLoading]);
-  // let filteredPlanets = [];
-  let planets = filterFunc(data, filterByName.name, filterByNumericValues);
+  const planets = filterFunc(data, filterByName.name, filterByNumericValues);
   return (data) ? (
     <tbody>
       {planets.map((planet) => (

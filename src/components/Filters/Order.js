@@ -14,47 +14,28 @@ const Order = () => {
   };
   const handleSubmit = () => {
     const { column, sort } = localState;
-    // console.log(column, sort);
     sortFunc(data, column, sort);
     setOrder({ column, sort });
-    // console.log(data);
   };
-  const columns = [
-    'Name',
-    'population',
-    'orbital_period',
-    'diameter',
-    'rotation_period',
-    'surface_water',
-  ];
+  const columns = ['Name', 'population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'];
   return (
     <div>
       <select
-        name="column"
-        data-testid="column-sort"
-        value={order.column}
-        onChange={(event) => handleChange(event)}
+        name="column" data-testid="column-sort"
+        value={order.column} onChange={(event) => handleChange(event)}
       >
         {columns.map((column) => (
-          <option key={column} value={column}>
-            {column}
-          </option>
+          <option key={column} value={column}>{column}</option>
         ))}
       </select>
       <input
-        type="radio"
-        data-testid="column-sort-input-asc"
-        name="sort"
-        value="ASC"
-        onClick={(event) => handleChange(event)}
+        type="radio" data-testid="column-sort-input-asc"
+        name="sort" value="ASC" onClick={(event) => handleChange(event)}
       />
       <label htmlFor="sort">ASC</label>
       <input
-        type="radio"
-        data-testid="column-sort-input-desc"
-        name="sort"
-        value="DESC"
-        onClick={(event) => handleChange(event)}
+        type="radio" data-testid="column-sort-input-desc"
+        name="sort" value="DESC" onClick={(event) => handleChange(event)}
       />
       <label htmlFor="sort">DESC</label>
       <button type="button" data-testid="column-sort-button" onClick={() => handleSubmit()}>
