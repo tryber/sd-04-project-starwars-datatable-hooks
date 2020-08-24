@@ -6,41 +6,35 @@ import getPlanets from '../services/api';
 const StarWarsProvider = ({ children }) => {
   const [data, setData] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [filters, setFilters] = useState({
-    filterByName: { name: '' },
+    filterByName: { name: "" },
     filterByNumericValues: [],
     order: {
-      column: 'Name',
-      sort: 'ASC',
+      column: "Name",
+      sort: "ASC",
     },
   });
-  useEffect(() => {requestFetch()},[])
+  useEffect(() => {
+    requestFetch();
+  }, []);
 
   const resquestPlanets = () => setIsFetching(true);
 
   const successPlanets = (result) => {
     setData(result);
     setIsFetching(false);
-    console.log(result)
+    console.log(result);
   };
-
-  const failurePlanets = (err) => {
-    setError(err);
-    setIsFetching(false);
-  };
-
+  
   const requestFetch = () => {
     resquestPlanets();
     console.log("bla");
 
-    return getPlanets().then(
-      (json) => {
-        console.log(json)
-        successPlanets(json.results)
-      } 
-      
-    );/* 
+    return getPlanets().then((json) => {
+      console.log(json);
+      successPlanets(json.results);
+    }); /* 
     (err) => failurePlanets(err), */
   };
 
