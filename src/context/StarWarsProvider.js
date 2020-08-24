@@ -1,7 +1,34 @@
-  import StarWarsContext from './StarWarsContext';
-  
-  const StarWarsProvider = ({ children }) => {  const [data, setPlanet] = useState([]);
+import React, { createContext, useState } from 'react';
+import PropTypes from 'prop-types';
+
+const StarWarsContext = createContext();
+
+const generalFilter = {
+  filterByName: {
+    name: '',
+  },
+  filterByNumericValues: [],
+  order: {
+    column: 'Name',
+    sort: 'ASC',
+  },
+
+  options: [
+    'Column',
+    'population',
+    'orbital_period',
+    'diameter',
+    'rotation_period',
+    'surface_water',
+  ],
+};
+
+const ProviderSW = ({ children }) => {
+
+  const [data, setPlanet] = useState([]);
+
   const [isFetching, setIsFetching] = useState(true);
+
   const [filter, setFilter] = useState(generalFilter);
 
   const setFetching = () => {
@@ -15,7 +42,7 @@
   const changeFilterColumn = (column, comparison, value) => {
     setFilter({
       ...filter,
-     filterByNumericValues: [...filter.filterByNumericValues, { column, comparison, value}],
+      filterByNumericValues: [...filter.filterByNumericValues, { column, comparison, value }],
     });
   };
 
@@ -35,7 +62,7 @@
 
   const contextValue = {
     data,
-    isFetching,    
+    isFetching,
     filter,
     setPlanet,
     setFetching,
@@ -45,12 +72,11 @@
     changeOrder,
   };
 
-  return <StarWarsContext.Provider value={contextValue}>{children}
-</StarWarsContext.Provider>;
+  return <StarWarsContext.Provider value={contextValue}>{children}</StarWarsContext.Provider>;
 };
 
-StarWarsProvider.propTypes = {
+ProviderSW.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default { StarWarsProvider, StarWarsContext };
+export { ProviderSW, StarWarsContext };
