@@ -1,7 +1,7 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 import columns from './columns';
-import { getColumns, getComparar }  from './help';
+import { getColumns, getComparar } from './help';
 
 function NumericFilter() {
   const [number, setNumber] = useState('');

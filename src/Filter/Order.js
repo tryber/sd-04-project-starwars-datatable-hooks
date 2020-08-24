@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
-import columns from './columns'
-import { getRadios }  from './help';
+import { getRadios } from './help';
 
 function Order() {
   const [columnSort, setColumnSort] = useState('Name');
