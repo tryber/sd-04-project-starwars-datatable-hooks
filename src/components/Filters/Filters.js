@@ -6,6 +6,7 @@ function Filters() {
   return (
     <div>
       <FilterNav />
+      
       <RemoveFilters />
     </div>
   );
