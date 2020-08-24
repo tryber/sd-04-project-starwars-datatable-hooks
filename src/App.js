@@ -1,12 +1,13 @@
 import React from 'react';
-import Provider from './context/AppContext';
 import './App.css';
+import { StarWarsProvider } from './context/StarWarsContext'
+import UseData from './context/UseData';
 
 function App() {
   return (
-    <Provider>
-
-    </Provider>
+    <StarWarsProvider>
+      <UseData />
+    </StarWarsProvider>
   );
 }
 

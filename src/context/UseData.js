@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react';
-import { StarWarsContext } from '../context/StarWarsContext';
+import { StarWarsContext } from './StarWarsContext.js';
 import getAPI from '../service/getAPI';
 
-const useData = () => {
+const UseData = () => {
   const { loading, setLoading } = useContext(
     StarWarsContext,
   );
@@ -11,14 +11,9 @@ const useData = () => {
     setLoading(true);
     getAPI().then((json) => {
       console.log(json.results);
-      setLoading(false);
-    },
-    (error) => {
-      console.log(error);
-      setLoading(false);
-    },
-  );
-  }, []);
+    });
+    setLoading(false);
+  }, [loading, setLoading]);
   if (loading) {
     return <p>Loading</p>;
   }
@@ -30,4 +25,4 @@ const useData = () => {
   );
 };
 
-export default useData;
+export default UseData;
