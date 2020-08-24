@@ -23,10 +23,7 @@ const arrayComparation = ['', 'maior que', 'menor que', 'igual a'];
 
 const FilterValues = () => {
   const [stateLocal, setStateLocal] = useState(StateLocal);
-
-  const { setStateFilter, getFilterNumericValues } = useContext(
-    starWarsContext
-  );
+  const { setStateFilter, getFilterNumericValues } = useContext(starWarsContext);
 
   const onChange = (event) => {
     const { value, name } = event.target;
@@ -40,9 +37,7 @@ const FilterValues = () => {
   };
 
   const updatesColumns = () => {
-    const invisibleColumns = getFilterNumericValues().map(
-      ({ column }) => column
-    );
+    const invisibleColumns = getFilterNumericValues().map(({ column }) => column);
     return arrayColumn.filter((item) => !invisibleColumns.includes(item));
   };
 
@@ -56,7 +51,6 @@ const FilterValues = () => {
       >
         {updatesColumns()}
       </Select>
-
       <Select
         testid="comparison-filter"
         value={stateLocal.comparison}

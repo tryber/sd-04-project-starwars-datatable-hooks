@@ -1,6 +1,6 @@
 const starWarsFilterNumericValue = (
   accumulator,
-  { column, comparison, value }
+  { column, comparison, value, }
 ) =>
   accumulator.filter((planet) => {
     switch (comparison) {
