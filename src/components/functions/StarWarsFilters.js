@@ -1,7 +1,4 @@
-const starWarsFilterNumericValue = (
-  accumulator,
-  { column, comparison, value, }
-) =>
+const starWarsFilterNumericValue = (accumulator, { column, comparison, value }) =>
   accumulator.filter((planet) => {
     switch (comparison) {
       case 'maior que':
