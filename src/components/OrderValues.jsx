@@ -7,7 +7,7 @@ function createInputDesc() {
   return (
     <div>
       <input
-        data-testid="column-sort-input"
+        data-testid="column-sort-input-desc"
         id="DESC"
         value="DESC"
         name="sort"
@@ -21,7 +21,7 @@ function createInputAsc() {
   return (
     <div>
       <input
-        data-testid="column-sort-input"
+        data-testid="column-sort-input-asc"
         id="ASC"
         value="ASC"
         name="sort"
