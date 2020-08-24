@@ -55,7 +55,9 @@ const ColumnOrder = () => {
       <button
         data-testid="column-sort-button"
         type="button"
-        onClick={() => setFilters({ ...filters, order: orderState.column, sort: orderState.sort })}
+        onClick={() =>
+          setFilters({ ...filters, order: { column: orderState.column, sort: orderState.sort } })
+        }
       >
         Filtrar
       </button>
