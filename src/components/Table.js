@@ -17,7 +17,8 @@ const filterPlanet = (planet, filter) => {
 
 const ordering = (column, sort, planets) => {
   const newPlanets = [...planets];
-  if (!Number(newPlanets[0][column])) {
+
+  if (newPlanets[0] === undefined || !Number(newPlanets[0][column.toLowerCase()])) {
     newPlanets.sort(function (a, b) {
       const x = a[column.toLowerCase()].toLowerCase();
       const y = b[column.toLowerCase()].toLowerCase();
@@ -54,18 +55,34 @@ const CreateTableBody = (data, filteredData) =>
     <tr key={planet.name}>
       {Object.keys(data[0])
         .filter((header) => header !== 'residents')
-        .map((column) => (
-          <td key={planet[column]}>{planet[column]}</td>
-        ))}
+        .map((column) => {
+          if (column === 'name') {
+            return (
+              <td data-testid="planet-name" key={planet[column]}>
+                {planet[column]}
+              </td>
+            );
+          }
+          return <td key={planet[column]}>{planet[column]}</td>;
+        })}
     </tr>
   ));
 const Table = () => {
   const { data, filterByName, filterByNumericValues, order } = useContext(
     StarWarsContext,
   );
+  const filteringData = (dataReally, filterByNameReally) => {
+    if (dataReally[0].name === undefined) {
+      return [];
+    }
+    const newArr = [...data].filter((planet) => (
+      planet.name.includes(filterByNameReally)
+    ));
+    return newArr;
+  };
   let filteredData = !filterByName
     ? [...data]
-    : [...data].filter((planet) => planet.name.includes(filterByName));
+    : filteringData(data, filterByName);
   if (filterByNumericValues.length > 0) {
     filterByNumericValues.forEach((filtro) => {
       filteredData = filteredData.filter((planet) =>

@@ -1,43 +1,11 @@
-import React, { useEffect, useContext } from 'react';
+import React from 'react';
 import './App.css';
-import Table from './components/Table';
-import Input from './components/Input';
-import Filters from './components/Filters';
-import OrderFilter from './components/orderFilter';
-import { StarWarsContext } from './context/StarWarsContext';
-import getPlanets from './services/index';
+import Teste from './components/Teste';
 
-const App = () => {
-  const {
-    loading,
-    setLoading,
-    setData,
-    filterByNumericValues,
-  } = useContext(StarWarsContext);
-
-  useEffect(() => {
-    setLoading(true);
-    getPlanets().then((json) => {
-      setData(json.results);
-    });
-    setLoading(false);
-  }, [loading, setData]);
-  if (loading) {
-    return <p>Loading</p>;
-  }
-  return (
-    <div>
-      <Input />
-      <OrderFilter />
-      {filterByNumericValues.length > 0 ? (
-        <Filters />
-      ) : (
-        <p>Nenhum filtro aplicado</p>
-      )}
-      <p>StarWars Datatable with Filters</p>
-      <Table />
-    </div>
-  );
-};
+const App = () => (
+  <StarWarsProvider>
+    <Teste />
+  </StarWarsProvider>
+);
 
 export default App;

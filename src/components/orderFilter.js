@@ -4,7 +4,7 @@ import { StarWarsContext } from '../context/StarWarsContext';
 const renderRadioButtons = (setSort) => (
   <div name="sort">
     <input
-      data-testid="column-sort-input"
+      data-testid="column-sort-input-asc"
       name="order"
       type="radio"
       value="ASC"
@@ -13,7 +13,7 @@ const renderRadioButtons = (setSort) => (
     />
     <label htmlFor="ASC">ASC</label>
     <input
-      data-testid="column-sort-input"
+      data-testid="column-sort-input-desc"
       name="order"
       type="radio"
       value="DESC"

@@ -24,15 +24,9 @@ const StarWarsProvider = ({ children }) => {
     order,
     setOrder,
   };
-  return (
-    <StarWarsContext.Provider value={context}>
-      {children}
-    </StarWarsContext.Provider>
-  );
+  return <StarWarsContext.Provider value={context}>{children}</StarWarsContext.Provider>;
 };
-
 StarWarsProvider.propTypes = {
   children: PropTypes.element.isRequired,
 };
-
 export { StarWarsContext, StarWarsProvider };

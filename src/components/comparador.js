@@ -94,8 +94,8 @@ const Comparador = () => {
   const newOptions = filterMethod(options.first, filterByNumericValues);
   return (
     <div>
-      {renderSelect(newOptions, 'column-filter', 'column', column)}
-      {renderSecondSelect(options.second, 'comparison-filter', 'comparison')}
+      {renderSelect(newOptions, 'column-filter', 'column', column, setColumn, setComparison, setValue)}
+      {renderSecondSelect(options.second, 'comparison-filter', 'comparison', comparison, setColumn, setComparison, setValue)}
       <input
         data-testid="value-filter"
         type="text"
