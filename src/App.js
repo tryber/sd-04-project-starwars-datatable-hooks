@@ -1,26 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
+import StarWarsProvider from './context/Provider';
+import ByName from './components/Filters/FilterByName';
+import ByValue from './components/Filters/FilterByValue';
+import Table from './components/Table';
+import RemoveFilters from './components/Filters/RemoveFilters';
+import Order from './components/Filters/Order';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => (
+  <StarWarsProvider>
+    <ByName />
+    <ByValue />
+    <RemoveFilters />
+    <Order />
+    <Table />
+  </StarWarsProvider>
+);
 
 export default App;
