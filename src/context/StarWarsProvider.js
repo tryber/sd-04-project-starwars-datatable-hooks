@@ -95,4 +95,3 @@ StarWarsProvider.propTypes = {
 };
 
 export default StarWarsProvider;
-//teste
