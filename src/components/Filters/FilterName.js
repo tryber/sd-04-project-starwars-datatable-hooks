@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import StarWarsContext from '../../context/StarWarsContext';
 
-function FilterNav() {
+function FilterName() {
   const [text, setText] = useState('');
   const { filterByName } = useContext(StarWarsContext);
   const onTextChange = (event) => {
@@ -22,4 +22,4 @@ function FilterNav() {
   );
 }
 
-export default FilterNav;
+export default FilterName;

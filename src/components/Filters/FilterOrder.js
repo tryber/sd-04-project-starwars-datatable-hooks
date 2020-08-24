@@ -1,59 +1,52 @@
-import React from 'react';
-import updateColumn from './orderColumn';
+import React, { useState, useContext } from 'react';
+import { getRadios } from './selectors';
+import StarWarsContext from '../../context/StarWarsContext';
 
-export const getColumns = (changeColumn, numericValues, column) => {
-  const select = updateColumn(numericValues);
-  return (
-    <select
-      onChange={(event) => changeColumn(event)}
-      data-testid="column-filter"
-      value={column}
-    >
-      {select.map((option) => (
-        <option key={option} value={option}>
-          {option}
-        </option>
-      ))}
-    </select>
-  );
-};
+function FilterOrder() {
+  const [columnSort, setColumnSort] = useState('Name');
+  const [inputSort, setInputSort] = useState('ASC');
+  const { orderColumns } = useContext(StarWarsContext);
 
-export const getRadios = (onInputChange) => (
-  <div>
-    <input
-      defaultChecked
-      data-testid="column-sort-input-asc"
-      type="radio"
-      id="ASC"
-      name="order"
-      value="ASC"
-      onChange={(event) => onInputChange(event)}
-    />
-    <label htmlFor="ASC">ASC</label>
-    <input
-      data-testid="column-sort-input-desc"
-      type="radio"
-      id="DESC"
-      name="order"
-      value="DESC"
-      onChange={(event) => onInputChange(event)}
-    />
-    <label htmlFor="DESC">DESC</label>
-  </div>
-);
-export const getComparation = (onComparationChange, comparation) => {
-  const comparationValues = ['', 'maior que', 'menor que', 'igual a'];
+  const onInputChange = (event) => setInputSort(event.target.value);
+  const onColumnChange = (event) => setColumnSort(event.target.value);
+  const onClick = () => orderColumns(columnSort, inputSort);
+  const getColumns = () => {
+    const columns = [
+      'Name',
+      'population',
+      'orbital_period',
+      'diameter',
+      'rotation_period',
+      'surface_water',
+    ];
+    return (
+      <select
+        onChange={(event) => onColumnChange(event)}
+        data-testid="column-sort"
+        value={columnSort}
+      >
+        {columns.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
+    );
+  };
+
   return (
-    <select
-      onChange={(event) => onComparationChange(event)}
-      data-testid="comparison-filter"
-      value={comparation}
-    >
-      {comparationValues.map((option) => (
-        <option key={option} value={option}>
-          {option}
-        </option>
-      ))}
-    </select>
+    <div>
+      {getColumns()}
+      {getRadios(onInputChange)}
+      <button
+        data-testid="column-sort-button"
+        type="button"
+        onClick={onClick}
+      >
+        Ordenar
+        </button>
+    </div>
   );
-};
+}
+
+export default FilterOrder;
