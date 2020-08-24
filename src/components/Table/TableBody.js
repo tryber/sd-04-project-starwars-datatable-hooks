@@ -4,7 +4,7 @@ import StarWarsContext from '../../context/StarWarsContext';
 
 const TableBody = () => {
   // const filteredPlanets = filterFunc(data, name, numericValues);
-  const { data, setData, setLoading } = useContext(StarWarsContext);
+  const { data, setData, setLoading, filterByName } = useContext(StarWarsContext);
   useEffect(() => {
     setLoading(true);
     getPlanets().then(
@@ -18,9 +18,10 @@ const TableBody = () => {
       },
     );
   }, [setData, setLoading]);
-  const planets = data;
-  console.log(planets);
-
+  let planets = data;
+  if (filterByName.name !== '') {
+    planets = planets.filter((planet) => planet.name.includes(filterByName.name));
+  }
   return data ? (
     <tbody>
       {planets.map((planet) => (
