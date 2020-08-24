@@ -1,9 +1,9 @@
 import React from 'react';
+import useFilters from '../context/useFilters';
 // import planets from '../services/fakeData';
-import usePlanets from '../context/usePlanets';
 
 export default function TableBody() {
-  const { data: planets } = usePlanets();
+  const { planets } = useFilters();
 
   return (
     <tbody>

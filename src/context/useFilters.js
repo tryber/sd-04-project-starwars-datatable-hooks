@@ -1,11 +1,15 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import StarWarsContext from './StarWarsContext';
 
 export default function useFilters() {
   const {
+    data,
+    planets,
+    setPlanets,
     filters,
     setFilters,
   } = useContext(StarWarsContext);
+
 
   const filterByName = (value) => {
     setFilters((state) => ({
@@ -13,6 +17,14 @@ export default function useFilters() {
       filterByName: { name: value },
     }));
   };
+
+  useEffect(() => {
+    const name = filters.filterByName.name;
+    if (name !== '') {
+      setPlanets(data.filter((planet) => planet.name.toLowerCase().includes(name.toLowerCase())));
+    } 
+    else setPlanets(data);
+  }, [filters])
 
   const filterByNumericValues = (column, comparison, number) => {
     setFilters((state) => ({
@@ -29,6 +41,7 @@ export default function useFilters() {
   };
 
   return {
+    planets,
     filters,
     setFilters,
     filterByName,
