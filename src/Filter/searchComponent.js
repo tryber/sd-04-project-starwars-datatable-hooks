@@ -15,7 +15,7 @@ function Search() {
       <input
         data-testid="name-filter"
         type="text"
-        value = {text}
+        value={text}
         onChange={(event) => onTextChange(event)}
         placeholder="Faça sua pesquisa"
       />
