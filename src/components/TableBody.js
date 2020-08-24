@@ -10,7 +10,7 @@ const orderDescAndAsc = (data, order) => {
   } else {
     data.sort((a, b) => a[planetKey] - b[planetKey]);
   }
-  if (order.sort === "DESC") data.reverse();
+  if (order.sort === 'DESC') data.reverse();
   return data;
 };
 
@@ -31,7 +31,7 @@ function TableBody() {
   return (
     <div>
       <tbody>
-        {orderDescAndAsc(filterAllSelectedElement,order).map((planet) => (
+        {orderDescAndAsc(filterAllSelectedElement, order).map((planet) => (
           <tr key={planet.name}>
             <td data-testid="planet-name">{planet.name}</td>
             <td>{planet.rotation_period}</td>

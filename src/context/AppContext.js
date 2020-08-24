@@ -12,7 +12,7 @@ const Provider = ({ children }) => {
     order: {
       column: 'Name',
       sort: 'ASC',
-      }, 
+    }
   };
 
   const [data, setData] = useState(initState);
