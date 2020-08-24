@@ -24,5 +24,5 @@ const filter = (planets, name, numericValues) => (
       )
   );
 
-  export default filter;
+export default filter;
   

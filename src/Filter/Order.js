@@ -21,9 +21,9 @@ function Order() {
     ];
     return (
       <select
-        className='select is-info'
+        className="select is-info"
         onChange={(event) => onOrderChange(event, 'columnSort')}
-        data-testid='column-sort'
+        data-testid="column-sort"
         value={columnSort}
       >
         {columns.map((option) => (
@@ -40,23 +40,23 @@ function Order() {
       <div>
         <input
           defaultChecked
-          data-testid='column-sort-input'
-          type='radio'
-          id='ASC'
-          name='order'
-          value='ASC'
+          data-testid="column-sort-input"
+          type="radio"
+          id="ASC"
+          name="order"
+          value="ASC"
           onChange={(event) => onOrderChange(event, 'inputSort')}
         />
         <label htmlFor='ASC'>ASC</label>
         <input
-          data-testid='column-sort-input'
-          type='radio'
-          id='DESC'
-          name='order'
-          value='DESC'
+          data-testid="column-sort-input"
+          type="radio"
+          id="DESC"
+          name="order"
+          value="DESC"
           onChange={(event) => onOrderChange(event, 'inputSort')}
         />
-        <label htmlFor='DESC'>DESC</label>
+        <label htmlFor="DESC">DESC</label>
       </div>
     );
   };
