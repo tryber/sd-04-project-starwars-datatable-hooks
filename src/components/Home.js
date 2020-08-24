@@ -7,7 +7,7 @@ const Home = () => {
   const { loading, data } = useContext(StarWarsContext);
 
   if (loading) return <h1>Loading...</h1>;
-  // console.log(data);
+  console.log(data);
   // console.log(loading);
   return (
     <div>

@@ -27,7 +27,7 @@ const Table = () => {
       </thead>
       <tbody>
         {orderDataPlanets.map((planet) => (
-          <tr key={planet.name} data-testid='planet-name'>
+          <tr key={planet.name} data-testid="planet-name">
             {tableHeader.map((columns) => (
               <td key={planet[columns]}>{planet[columns]}</td>
             ))}

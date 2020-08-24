@@ -1,6 +1,19 @@
 import React, { useContext, useState } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 
+function updateColumns() {
+  const columns = [
+    '',
+    'population',
+    'orbital_period',
+    'diameter',
+    'rotation_period',
+    'surface_water',
+  ];
+  const chosenColumns = filters.filterByNumericValues.map(({ column }) => column);
+  return columns.filter((item) => !chosenColumns.includes(item));
+}
+
 const FilterNumValues = () => {
   const { filters, setFilters } = useContext(StarWarsContext);
   const [numValues, setNumValues] = useState({
@@ -9,18 +22,6 @@ const FilterNumValues = () => {
     number: '',
   });
 
-  function updateColumns() {
-    const columns = [
-      '',
-      'population',
-      'orbital_period',
-      'diameter',
-      'rotation_period',
-      'surface_water',
-    ];
-    const chosenColumns = filters.filterByNumericValues.map(({ column }) => column);
-    return columns.filter((item) => !chosenColumns.includes(item));
-  }
 
   function handleOnChange(event, field) {
     setNumValues({ ...numValues, [field]: event.target.value });
