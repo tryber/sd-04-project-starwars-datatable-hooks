@@ -2,12 +2,14 @@ import React from 'react';
 import RemoveFilters from './RemoveFilters';
 import FilterName from './FilterName';
 import FilterOrder from './FilterOrder';
+import FilterValues from './FilterValues';
 
 function Filters() {
   return (
     <div>
-      <FilterName />
       <FilterOrder />
+      <FilterName />
+      <FilterValues />
       <RemoveFilters />
     </div>
   );
