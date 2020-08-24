@@ -9,14 +9,14 @@ const LandPage = () => {
   useEffect(() => {
     getPlanets();
   }, []);
-  
+
   return (
     <div>
-    {isFetching? <p>Loading...</p> :<Table />};
+      {isFetching ? <p>Loading...</p> : <Table />};
       <h1>StarWars Datatable with Filters</h1>
       <Filter />
     </div>
   );
-}
+};
 
 export default LandPage;
