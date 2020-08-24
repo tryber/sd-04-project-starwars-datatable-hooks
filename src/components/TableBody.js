@@ -15,7 +15,7 @@ function TableBody() {
   } = useContext(StarWarsContext);
 
   useEffect(() => {
-    const filtrar = sort === "ASC"
+    const filtrar = sort === 'ASC'
         ? Increscent(planets, name, numericValues, columnSort)
         : Decrease(planets, name, numericValues, columnSort);
     setPlanets(filtrar);

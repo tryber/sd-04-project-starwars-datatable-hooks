@@ -33,7 +33,7 @@ const StarWarsProvider = ({ children }) => {
 
     return getPlanets().then(
       (json) => successPlanets(json.results),
-      (err) => failurePlanets(err)
+      (err) => failurePlanets(err),
     );
   };
 
