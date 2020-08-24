@@ -14,6 +14,40 @@ function updateColumns(filters) {
   return columns.filter((item) => !chosenColumns.includes(item));
 }
 
+function getColumns(handleOnChange, filters, numValues) {
+  const selectColumn = updateColumns(filters);
+  return (
+    <select
+      data-testid="column-filter"
+      value={numValues.column}
+      onChange={(event) => handleOnChange(event, 'column')}
+    >
+      {selectColumn.map((item) => (
+        <option key={item} value={item}>
+          {item}
+        </option>
+      ))}
+    </select>
+  );
+}
+
+function getComparison(handleOnChange, numValues) {
+  const comparison = ['', 'maior que', 'menor que', 'igual a'];
+  return (
+    <select
+      data-testid="comparison-filter"
+      value={numValues.comparison}
+      onChange={(event) => handleOnChange(event, 'comparison')}
+    >
+      {comparison.map((item) => (
+        <option key={item} value={item}>
+          {item}
+        </option>
+      ))}
+    </select>
+  );
+}
+
 const FilterNumValues = () => {
   const { filters, setFilters } = useContext(StarWarsContext);
   const [numValues, setNumValues] = useState({
@@ -22,43 +56,8 @@ const FilterNumValues = () => {
     number: '',
   });
 
-
   function handleOnChange(event, field) {
     setNumValues({ ...numValues, [field]: event.target.value });
-  }
-
-  function getColumns() {
-    const selectColumn = updateColumns(filters);
-    return (
-      <select
-        data-testid="column-filter"
-        value={numValues.column}
-        onChange={(event) => handleOnChange(event, 'column')}
-      >
-        {selectColumn.map((item) => (
-          <option key={item} value={item}>
-            {item}
-          </option>
-        ))}
-      </select>
-    );
-  }
-
-  function getComparison() {
-    const comparison = ['', 'maior que', 'menor que', 'igual a'];
-    return (
-      <select
-        data-testid="comparison-filter"
-        value={numValues.comparison}
-        onChange={(event) => handleOnChange(event, 'comparison')}
-      >
-        {comparison.map((item) => (
-          <option key={item} value={item}>
-            {item}
-          </option>
-        ))}
-      </select>
-    );
   }
 
   function handleOnClick() {
@@ -74,8 +73,8 @@ const FilterNumValues = () => {
 
   return (
     <div>
-      {getColumns()}
-      {getComparison()}
+      {getColumns(handleOnChange, filters, numValues)}
+      {getComparison(handleOnChange, numValues)}
       <input
         data-testid="value-filter"
         type="number"
