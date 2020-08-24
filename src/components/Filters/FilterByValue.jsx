@@ -6,9 +6,9 @@ const renderColumns = (thisState, filterColumn, filterByNumericValues, handleCha
   const options = filterColumn(filterByNumericValues);
   return (
     <select
-    data-testid="column-filter" name="column" value={thisState.column}
+      data-testid="column-filter" name="column" value={thisState.column}
       onChange={(event) => handleChange(event)}
-      >
+    >
       {options.map((item) => (
         <option key={item} value={item}>{item}</option>
         ))}
@@ -40,7 +40,8 @@ const FilterValue = () => {
       setfilterByNumericValues([
         ...filterByNumericValues,
         {
-          column: thisState.column, comparison: thisState.comparison,
+          column: thisState.column,
+          comparison: thisState.comparison,
           value: thisState.value,
         },
       ]);

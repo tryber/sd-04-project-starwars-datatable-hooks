@@ -7,16 +7,14 @@ import RemoveFilters from './components/Filters/RemoveFilters';
 import Order from './components/Filters/Order';
 import './App.css';
 
-const App = () => {
-  return (
-    <StarWarsProvider>
-      <ByName />
-      <ByValue />
-      <RemoveFilters />
-      <Order />
-      <Table />
-    </StarWarsProvider>
-  );
-};
+const App = () => (
+  <StarWarsProvider>
+    <ByName />
+    <ByValue />
+    <RemoveFilters />
+    <Order />
+    <Table />
+  </StarWarsProvider>
+);
 
 export default App;
