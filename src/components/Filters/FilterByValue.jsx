@@ -3,36 +3,30 @@ import React, { useContext, useState } from 'react';
 import StarWarsContext from '../../context/StarWarsContext';
 
 const FilterValue = () => {
-  const { columns, handleFilter } = useContext(StarWarsContext);
-  const [thisState, setThisState] = useState({ column: '', comparison: '', value: '' });
+  const { filterByNumericValues, setfilterByNumericValues } = useContext(StarWarsContext);
+  const [thisState, setThisState] = useState({});
   const handleChange = (event) => {
     setThisState({ ...thisState, [event.target.name]: event.target.value });
   };
 
-  // const handleSubmit = () => {
-  //   const { column, comparison, value } = thisState;
-  //   const { filterByValues } = thisState;
-  //   if (column !== '' && comparison !== '' && value !== '') {
-  //     handleFilter(column, comparison, value);
-  //   }
-  //   setThisState({ column: '', comparison: '', value: '' });
-  // };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // const { column, comparison, value } = thisState;
+    // const { filterByNumericValues } = thisState;
+    if (thisState.column) {
+      setfilterByNumericValues([
+        ...filterByNumericValues,
+        {
+          column: thisState.column,
+          comparison: thisState.comparison,
+          value: thisState.value,
+        },
+      ]);
+    }
+  };
 
-  // const filterColumn = () => {
-  //   const columns = [
-  //     '',
-  //     'population',
-  //     'orbital_period',
-  //     'diameter',
-  //     'rotation_period',
-  //     'surface_water',
-  //   ];
-  //   const selectedFilter = columns.map(({ column }) => column);
-  //   return columns.filter((column) => !selectedFilter.includes(column));
-  // };
-
-  const renderColumns = () => {
-    const options = [
+  const filterColumn = (filterByNumericValues) => {
+    const columns = [
       '',
       'population',
       'orbital_period',
@@ -40,11 +34,17 @@ const FilterValue = () => {
       'rotation_period',
       'surface_water',
     ];
+    const selectedFilter = filterByNumericValues.map(({ column }) => column);
+    return columns.filter((column) => !selectedFilter.includes(column));
+  };
+
+  const renderColumns = () => {
+    const options = filterColumn(filterByNumericValues);
     return (
       <select
         data-testid="column-filter"
         name="column"
-        value={thisState}
+        value={thisState.column}
         onChange={(event) => handleChange(event)}
       >
         {options.map((item) => (
@@ -62,7 +62,7 @@ const FilterValue = () => {
       <select
         data-testid="comparison-filter"
         name="comparison"
-        value={thisState}
+        value={thisState.comparison}
         onChange={(event) => handleChange(event)}
       >
         {comparison.map((item) => (
@@ -82,10 +82,10 @@ const FilterValue = () => {
         type="number"
         data-testid="value-filter"
         name="value"
-        value={thisState}
+        value={thisState.value}
         onChange={(event) => handleChange(event)}
       />
-      <button type="button" data-testid="button-filter" onClick={() => console.log('aa')}>
+      <button type="button" data-testid="button-filter" onClick={(e) => handleSubmit(e)}>
         filter
       </button>
     </div>

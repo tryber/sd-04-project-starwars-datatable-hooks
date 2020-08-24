@@ -1,10 +1,13 @@
-import React, { Component } from 'react';
 import Proptypes from 'prop-types';
+import React, { useContext } from 'react';
+import StarWarsContext from '../../context/StarWarsContext';
 
-const RemoveFilters = ({ removeFilter, numericValues }) => {
-  const handleRemoveFilter = (item) => removeFilter(item);
-  const { numericValues } = this.props;
-  return numericValues.map((item) => (
+const RemoveFilters = () => {
+  const { filterByNumericValues } = useContext(
+    StarWarsContext,
+  );
+  const handleRemoveFilter = (item) => item.parentNode.remove();
+  return filterByNumericValues.map((item) => (
     <div data-testid="filter" key={item.value}>
       <span>{`${item.column} ${item.comparison} ${item.value}`}</span>
       <button type="button" onClick={() => handleRemoveFilter(item)}>

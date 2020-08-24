@@ -1,10 +1,12 @@
 import React, { useContext, useEffect } from 'react';
 import getPlanets from '../../services/SWAPI';
 import StarWarsContext from '../../context/StarWarsContext';
+import filterFunc from '../functions/filterFunc';
 
 const TableBody = () => {
-  // const filteredPlanets = filterFunc(data, name, numericValues);
-  const { data, setData, setLoading, filterByName } = useContext(StarWarsContext);
+  const { data, setData, setLoading, filterByName, filterByNumericValues } = useContext(
+    StarWarsContext,
+  );
   useEffect(() => {
     setLoading(true);
     getPlanets().then(
@@ -18,11 +20,9 @@ const TableBody = () => {
       },
     );
   }, [setData, setLoading]);
-  let planets = data;
-  if (filterByName.name !== '') {
-    planets = planets.filter((planet) => planet.name.includes(filterByName.name));
-  }
-  return data ? (
+  // let filteredPlanets = [];
+  let planets = filterFunc(data, filterByName.name, filterByNumericValues);
+  return (data) ? (
     <tbody>
       {planets.map((planet) => (
         <tr key={planet.name}>
