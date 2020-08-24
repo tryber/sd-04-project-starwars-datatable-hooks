@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import getPlanets from '../../services/SWAPI';
 import StarWarsContext from '../../context/StarWarsContext';
 import filterFunc from '../functions/filterFunc';
+import sortFunc from '../functions/sortFunc';
 
 const TableBody = () => {
   const { data, setData, setLoading, filterByName, filterByNumericValues } = useContext(
@@ -11,7 +12,7 @@ const TableBody = () => {
     setLoading(true);
     getPlanets().then(
       (datajson) => {
-        setData(datajson.results);
+        setData(sortFunc(datajson.results, 'Name', 'ASC'));
         setLoading(false);
       },
       (error) => {
@@ -26,7 +27,7 @@ const TableBody = () => {
     <tbody>
       {planets.map((planet) => (
         <tr key={planet.name}>
-          <td>{planet.name}</td>
+          <td data-testid="planet-name">{planet.name}</td>
           <td>{planet.rotation_period}</td>
           <td>{planet.orbital_period}</td>
           <td>{planet.diameter}</td>

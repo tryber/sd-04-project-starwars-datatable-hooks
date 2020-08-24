@@ -3,10 +3,11 @@ import React, { useContext } from 'react';
 import StarWarsContext from '../../context/StarWarsContext';
 
 const RemoveFilters = () => {
-  const { filterByNumericValues } = useContext(
-    StarWarsContext,
-  );
-  const handleRemoveFilter = (item) => item.parentNode.remove();
+  const { filterByNumericValues, setfilterByNumericValues } = useContext(StarWarsContext);
+  const handleRemoveFilter = (item) => {
+    // console.log(item)
+    setfilterByNumericValues([...filterByNumericValues.filter(({ column }) => column !== item.column)]);
+  };
   return filterByNumericValues.map((item) => (
     <div data-testid="filter" key={item.value}>
       <span>{`${item.column} ${item.comparison} ${item.value}`}</span>

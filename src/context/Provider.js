@@ -7,6 +7,10 @@ const StarWarsProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [filterByName, setFilterByName] = useState({ name: '' });
   const [filterByNumericValues, setfilterByNumericValues] = useState([]);
+  const [order, setOrder] = useState({
+    column: 'Name',
+    sort: 'ASC',
+  });
   const handleSearch = (text) => {
     setFilterByName({ name: text });
   };
@@ -20,8 +24,9 @@ const StarWarsProvider = ({ children }) => {
     handleSearch,
     filterByNumericValues,
     setfilterByNumericValues,
+    order,
+    setOrder,
   };
-
   return <StarWarsContext.Provider value={context}>{children}</StarWarsContext.Provider>;
 };
 
