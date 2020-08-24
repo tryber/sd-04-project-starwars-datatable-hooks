@@ -9,9 +9,17 @@ function TableBody() {
     <tbody>
       {filterData.map((planet) => (
         <tr key={planet.name}>
-          {Object.keys(planet).map((information) => (
-            <td key={information}>{planet[information]}</td>
-          ))}
+          {Object.keys(planet).map((information) => {
+            const testid =
+              information === 'name'
+                ? 'planet-name'
+                : `planet-name-${information}`;
+            return (
+              <td data-testid={testid} key={information}>
+                {planet[information]}
+              </td>
+            );
+          })}
         </tr>
       ))}
     </tbody>
