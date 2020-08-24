@@ -3,6 +3,7 @@ import Table from '../components/Table';
 import StarWarsContext from '../context/StarWarsContext';
 import FilterName from '../components/FilterName';
 import FilterValues from '../components/FilterValues';
+import ListFilter from '../components/ListFilter';
 
 function Home() {
   const { isLoading, fetchPlanets } = useContext(StarWarsContext);
@@ -14,6 +15,7 @@ function Home() {
     <div>
       <FilterName />
       <FilterValues />
+      <ListFilter />
       <Table />
     </div>
   );

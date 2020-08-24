@@ -1,5 +1,4 @@
 const StarWarsContextStatesFilters = (filters, filter, action) => {
-  console.log(filter);
   switch (action) {
     case 'NAME':
       return {
@@ -17,6 +16,13 @@ const StarWarsContextStatesFilters = (filters, filter, action) => {
             value: filter.value,
           },
         ],
+      };
+    case 'REMOVEFILTER':
+      return {
+        ...filters,
+        filterByNumericValues: filters.filterByNumericValues.filter(
+          ({ column }) => column !== filter.column,
+        ), // filterByNumericValues, sem a  coluna clicada para excluir
       };
     default:
       return filters;
