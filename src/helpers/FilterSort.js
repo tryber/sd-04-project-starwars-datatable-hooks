@@ -20,7 +20,7 @@ function orderTable(filtered, filters) {
           (a, b) =>
             Number(a[filters.order.column]) - Number(b[filters.order.column]),
         );
-      } else {
+      } else { // filto === 'DESC'
         filtered.sort(
           (a, b) =>
             Number(b[filters.order.column]) - Number(a[filters.order.column]),
