@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import getAPI from '../service/StarWarsAPI';
 
 const StarsWarsContext = createContext();
-
+// teste
 const StarsWarsProvider = ({ children }) => {
   // Estado de controle requisição API
   const [value, setValue] = useState(0);
@@ -39,7 +39,7 @@ const StarsWarsProvider = ({ children }) => {
     setFilters((old) => ({
       ...old,
       filterByNumericValues: old.filterByNumericValues.filter(
-        (index) => index !== col,
+        (index) => index !== col
       ),
     }));
   };
